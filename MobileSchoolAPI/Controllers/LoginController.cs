@@ -14,7 +14,7 @@ namespace MobileSchoolAPI.Controllers
 		// GET api/values
 		SchoolContext db = new SchoolContext();
 
-		/// <summary>
+		/// <summary>	
 		/// To Confirm Login UserName and Password
 		/// If passed then Json object return else Error message 
 		/// </summary>
