@@ -14,14 +14,21 @@ namespace MobileSchoolAPI.Controllers
 		// GET api/values
 		SchoolContext db = new SchoolContext();
 
-		[HttpGet]
+		/// <summary>
+		/// To Confirm Login UserName and Password
+		/// If passed then Json object return else Error message 
+		/// </summary>
+		/// <param name="UserName"></param>
+		/// <param name="Password"></param>
+		/// <returns></returns>
+		[HttpPost]
 		public object Confirm(string UserName,string Password)
 		{
 			try
 			{
-				string passdecrypt = CryptIt.Decrypt(Password);
+				string passecrypt = CryptIt.Encrypt(Password);
 				var logindetail =	db.TBLUSERLOGINs.
-									Where(r => r.UserName == UserName && r.Password == passdecrypt && r.STATUS=="ACTIVE")
+									Where(r => r.UserName == UserName && r.Password == passecrypt && r.STATUS=="ACTIVE")
 									.FirstOrDefault();
 				if (logindetail == null)
 					return new Error() { IsError = true, Message = "User Name & Passowrd is Incorrect" };
