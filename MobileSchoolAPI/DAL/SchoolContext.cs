@@ -13,6 +13,8 @@ namespace MobileSchoolAPI.Models
 		}
 
 		public virtual DbSet<TBLUSERLOGIN> TBLUSERLOGINs { get; set; }
+		public virtual DbSet<VWSTUDENTINFO> VWSTUDENTINFO { get; set; }
+		 
 
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
