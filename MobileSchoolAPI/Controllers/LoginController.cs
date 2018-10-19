@@ -37,7 +37,7 @@ namespace MobileSchoolAPI.Controllers
 			}
 			catch (Exception ex)
 			{
-				//return new Error() { IsError = true, Message = ex.Message };
+				return new Error() { IsError = true, Message = ex.Message };
 			}
 
 
