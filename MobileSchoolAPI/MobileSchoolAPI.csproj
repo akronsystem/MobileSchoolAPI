@@ -154,6 +154,7 @@
     <Compile Include="BusinessLayer\DashboardManager.cs" />
     <Compile Include="BusinessLayer\LoginManager.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
+>>>>>>> 9bb421765ad3ca53f27b99a662fbdf818478e105
     <Compile Include="Models\CryptIt.cs" />
     <Compile Include="Models\Error.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -161,10 +162,17 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="DAL\SchoolContext.cs" />
+    <Compile Include="Models\Model1.cs" />
+    <Compile Include="Models\Model2.cs" />
     <Compile Include="Models\TBLUSERLOGIN.cs" />
+<<<<<<< HEAD
+    <Compile Include="Models\VIEWATTENDANCE.cs" />
+    <Compile Include="Models\VIEWCLASSTEACHER.cs" />
+=======
     <Compile Include="Models\VWSTUDENTINFO.cs" />
     <Compile Include="ParamModel\ParamDashboardStudentInfo.cs" />
     <Compile Include="ParamModel\ParamLogin.cs" />
+>>>>>>> 9bb421765ad3ca53f27b99a662fbdf818478e105
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
