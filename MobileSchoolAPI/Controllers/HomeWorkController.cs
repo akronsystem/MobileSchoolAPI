@@ -1,4 +1,5 @@
-﻿using MobileSchoolAPI.Models;
+﻿using MobileSchoolAPI.BusinessLayer;
+using MobileSchoolAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,29 +14,19 @@ namespace MobileSchoolAPI.Controllers
         SchoolContext db = new SchoolContext();
         [HttpPost]
 
-        public object ViewHomework(int standardid, int divisionid)
+        public object ViewHomework([FromBody] PARAMHOMEWORK obj)
         {
-            try
-            {
-               
-                var homework = db.VIEWHOMEWORKs.Where(r => r.STANDARDID == standardid && r.DIVISIONID == divisionid && r.DISPLAY == 1 && r.ACADEMICYEAR == "2018-2019").
-                  
-                                     FirstOrDefault();
-                if (homework == null)
-                {
-                    return new Error() { IsError = true, Message = "Homework not found" };
-                }
-                else
-                {
-                    return homework;
-                }
 
-            }
-            catch (Exception E)
-            {
-                return new Error() { IsError = true, Message = E.Message };
-            }
+            GETHOMEWORK objhome = new GETHOMEWORK();
+           return objhome.GetHomework(obj);
+           
+        }
 
+
+        public object ViewDivision([FromBody]PARAMSTD objstd)
+        {
+            GETHOMEWORK objhome = new GETHOMEWORK();
+            return objhome.GetStandard(objstd);
         }
     }
 }
