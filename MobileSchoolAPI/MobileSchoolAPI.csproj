@@ -151,10 +151,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+ 
     <Compile Include="BusinessLayer\ClassTeacherData.cs" />
     <Compile Include="BusinessLayer\GETHOMEWORK.cs" />
     <Compile Include="Controllers\ClassTeacherController.cs" />
     <Compile Include="Controllers\HomeWorkController.cs" />
+ 
     <Compile Include="Models\CryptIt.cs" />
     <Compile Include="Models\Error.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -167,11 +169,13 @@
     <Compile Include="Models\PARAMHOMEWORK.cs" />
     <Compile Include="Models\PARAMSTD.cs" />
     <Compile Include="Models\TBLUSERLOGIN.cs" />
+ 
     <Compile Include="Models\VIEWATTENDANCE.cs" />
     <Compile Include="Models\VIEWATTENDANCECHECK.cs" />
     <Compile Include="Models\VIEWCLASSTEACHER.cs" />
     <Compile Include="Models\VIEWDIVISIONLIST.cs" />
     <Compile Include="Models\VIEWHOMEWORK.cs" />
+ 
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -193,6 +197,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Dashboard\" />
     <Folder Include="Views\Login\" />
   </ItemGroup>
   <PropertyGroup>
