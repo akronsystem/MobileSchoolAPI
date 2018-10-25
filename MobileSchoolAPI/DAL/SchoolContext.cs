@@ -11,11 +11,21 @@ namespace MobileSchoolAPI.Models
 			: base("name=SchoolContext")
 		{
 		}
+ 
+		public virtual DbSet<TBLUSERLOGIN> TBLUSERLOGINs { get; set; }
 
-		public virtual DbSet<TBLUSERLOGIN> TBLUSERLOGINs { get; set; }	 	 
-		public virtual DbSet<VWSTUDENTINFO> VWSTUDENTINFO { get; set; }	    
-																			  
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+    public virtual DbSet<VIEWHOMEWORK> VIEWHOMEWORKs { get; set; }
+
+    public virtual DbSet<VIEWCLASSTEACHER> VIEWCLASSTEACHERs { get; set; }
+
+    public virtual DbSet<VIEWATTENDANCECHECK> VIEWATTENDANCECHECKs { get; set; }
+
+
+    public virtual DbSet<VIEWDIVISIONLIST> VIEWDIVISIONLISTs { get; set; }
+    public virtual DbSet<VIEWATTENDANCE> VIEWATTENDANCEs { get; set; }
+
+ 
+    protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
 			modelBuilder.Entity<TBLUSERLOGIN>()
 				.Property(e => e.EmpCode)
