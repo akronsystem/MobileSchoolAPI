@@ -14,7 +14,7 @@ namespace MobileSchoolAPI.BusinessLayer
             try
             {
 
-                var getstudent = db.VIEWGETSTUDENTATTs.Where(r => r.STANDARDID == OBJ.STANDARDID && r.DIVISIONID == OBJ.DIVISIONID).ToList();
+                var getstudent = db.VIEWGETSTUDENTATTs.Where(r => r.DIVISIONID == OBJ.DIVISIONID).ToList();
 
                 if (getstudent == null)
                     return new Error() { IsError = true, Message = "STUDENT NOT FOUND." };
