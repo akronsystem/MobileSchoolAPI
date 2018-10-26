@@ -9,5 +9,7 @@ namespace MobileSchoolAPI.Models
     {
         public int standardid { get; set; }
         public int divisionid { get; set; }
+
+
     }
 }

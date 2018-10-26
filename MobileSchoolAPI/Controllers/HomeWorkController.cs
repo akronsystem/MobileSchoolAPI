@@ -28,5 +28,13 @@ namespace MobileSchoolAPI.Controllers
             GETHOMEWORK objhome = new GETHOMEWORK();
             return objhome.GetStandard(objstd);
         }
+
+
+        public object ViewDivisionByEmp([FromBody]PARAMEMP objemp)
+        {
+            GETHOMEWORK objhome = new GETHOMEWORK();
+            return objhome.GetStdByEmp(objemp);
+
+        }
     }
 }

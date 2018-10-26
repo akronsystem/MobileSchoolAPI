@@ -59,6 +59,29 @@ namespace MobileSchoolAPI.BusinessLayer
             }
         }
 
+
+        public object GetStdByEmp(PARAMEMP emp)
+        {
+            try
+            {
+                var Division = db.VIEWDIVISIONLISTBYEMPs.Where(r => r.EMPLOYEEID == emp.EmployeeId);
+
+                if (Division == null)
+                {
+                    return new Error() { IsError = true, Message = "Division Not Found" };
+                }
+                else
+                {
+                    return Division;
+                }
+            }
+            catch (Exception E)
+            {
+                return new Error() { IsError = true, Message = E.Message };
+
+            }
+        }
+
        
     }
 }

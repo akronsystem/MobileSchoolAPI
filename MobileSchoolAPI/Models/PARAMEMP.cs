@@ -5,11 +5,9 @@ using System.Web;
 
 namespace MobileSchoolAPI.Models
 {
-    public class PARAMSTD
+    public class PARAMEMP
     {
-
-        public int STANDARDID { get; set; }
-
+        public int EmployeeId{ get; set; }
         public string USERID { get; set; }
         public string PASSWORD { get; set; }
     }
