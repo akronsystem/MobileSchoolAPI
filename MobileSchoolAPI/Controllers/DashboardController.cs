@@ -1,4 +1,5 @@
-﻿using MobileSchoolAPI.Models;
+﻿using MobileSchoolAPI.BUSINESSLAYER;
+using MobileSchoolAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,18 +11,22 @@ namespace MobileSchoolAPI.Controllers
 {
     public class DashboardController : ApiController
     {
-		SchoolContext db = new SchoolContext();
+        [HttpPost]
+        public object getStudentinfo([FromBody]StudinfoParameters pobj)
+        {
+            STUDENTINFO_BUSINESS obj = new STUDENTINFO_BUSINESS();
+           var result= obj.objmethod(pobj);
+            
+            return result;
+        }
 
-		[HttpGet]
-		public object GetStudentInfo(int StudentId,string token)
-		{
-			var student = db.VWSTUDENTINFO.FirstOrDefault(r => r.STUDENTID == StudentId);
-			if(student==null)
-				return new Error() { IsError = true, Message = "Studnet Info Not Found" };
+        [HttpPost]
+        public object getTEACHERinfo([FromBody]TeacherInfoParameters pobj)
+        {
+            GetTeacherInfoBusiness obj = new GetTeacherInfoBusiness();
+            var result = obj.objmethod(pobj);
 
-			return student;
-
-		}
-
+            return result;
+        }
     }
 }

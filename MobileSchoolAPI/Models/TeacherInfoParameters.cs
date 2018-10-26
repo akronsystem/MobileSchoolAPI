@@ -5,9 +5,8 @@ using System.Web;
 
 namespace MobileSchoolAPI.Models
 {
-    public class PARAMHOMEWORK
+    public class TeacherInfoParameters
     {
-        public int standardid { get; set; }
-        public int divisionid { get; set; }
+        public int EMPLOYEEID { get; set; }
     }
 }
