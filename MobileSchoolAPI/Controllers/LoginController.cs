@@ -1,6 +1,6 @@
 ﻿using MobileSchoolAPI.BusinessLayer;
 using MobileSchoolAPI.Models;
-using MobileSchoolAPI.ParamModel;
+//using MobileSchoolAPI.ParamModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,23 +23,23 @@ namespace MobileSchoolAPI.Controllers
 		/// <param name="UserName"></param>
 		/// <Class1.csparam name="Password"></param>
 		/// <returns></returns>
-		[HttpPost]
-		public object Confirm([FromBody]ParamLogin userLogin)
-		{
-			try
-			{
-				LoginManager objLogin = new LoginManager();
-				var logindetail = objLogin.GetLoginDetails(userLogin);
-				if (logindetail == null)
-					return new Error() { IsError = true, Message = "User Name & Passowrd is Incorrect" };
-				else
-					return logindetail;
-			}
-			catch (Exception ex)
-			{
-				return new Error() { IsError = true, Message = ex.Message };
-			}   
-		}
+		//[HttpPost]
+		//public object Confirm([FromBody]ParamLogin userLogin)
+		//{
+		//	try
+		//	{
+		//		LoginManager objLogin = new LoginManager();
+		//		var logindetail = objLogin.GetLoginDetails(userLogin);
+		//		if (logindetail == null)
+		//			return new Error() { IsError = true, Message = "User Name & Passowrd is Incorrect" };
+		//		else
+		//			return logindetail;
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		return new Error() { IsError = true, Message = ex.Message };
+		//	}   
+		//}
 
 		[HttpGet]
 		public object Test(int a,int b)
