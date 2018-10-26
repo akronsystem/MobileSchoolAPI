@@ -23,7 +23,7 @@ namespace MobileSchoolAPI.BUSINESSLAYER
             {
                 return result;
             }
-            return result;
+            
         }
     }
 }

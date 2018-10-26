@@ -1,10 +1,6 @@
-<<<<<<< HEAD
 ﻿using MobileSchoolAPI.BusinessLayer;
 using MobileSchoolAPI.Models;
-//using MobileSchoolAPI.ParamModel;
-=======
-﻿using MobileSchoolAPI.Models;
->>>>>>> 9f4aadd178ab2b1f0954397a0170cdc7f401be82
+using MobileSchoolAPI.ParamModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,34 +23,14 @@ namespace MobileSchoolAPI.Controllers
 		/// <param name="UserName"></param>
 		/// <param name="Password"></param>
 		/// <returns></returns>
-<<<<<<< HEAD
-		//[HttpPost]
-		//public object Confirm([FromBody]ParamLogin userLogin)
-		//{
-		//	try
-		//	{
-		//		LoginManager objLogin = new LoginManager();
-		//		var logindetail = objLogin.GetLoginDetails(userLogin);
-		//		if (logindetail == null)
-		//			return new Error() { IsError = true, Message = "User Name & Passowrd is Incorrect" };
-		//		else
-		//			return logindetail;
-		//	}
-		//	catch (Exception ex)
-		//	{
-		//		return new Error() { IsError = true, Message = ex.Message };
-		//	}   
-		//}
-=======
+
 		[HttpPost]
-		public object Confirm(string UserName,string Password)
+		public object Confirm([FromBody]ParamLogin userLogin)
 		{
 			try
 			{
-				string passecrypt = CryptIt.Encrypt(Password);
-				var logindetail =	db.TBLUSERLOGINs.
-									Where(r => r.UserName == UserName && r.Password == passecrypt && r.STATUS=="ACTIVE")
-									.FirstOrDefault();
+				LoginManager objLogin = new LoginManager();
+				var logindetail = objLogin.GetLoginDetails(userLogin);
 				if (logindetail == null)
 					return new Error() { IsError = true, Message = "User Name & Passowrd is Incorrect" };
 				else
@@ -64,9 +40,8 @@ namespace MobileSchoolAPI.Controllers
 			{
 				return new Error() { IsError = true, Message = ex.Message };
 			}
-
->>>>>>> 9f4aadd178ab2b1f0954397a0170cdc7f401be82
-
 		}
+
+		  
 	}
 }

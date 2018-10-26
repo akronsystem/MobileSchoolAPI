@@ -150,15 +150,16 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-<<<<<<< HEAD
+    <Compile Include="BusinessLayer\ClassTeacherData.cs" />
+    <Compile Include="BusinessLayer\GETHOMEWORK.cs" />
     <Compile Include="BusinessLayer\GETSTUDENTATTBL.cs" />
+    <Compile Include="BusinessLayer\LoginManager.cs" />
     <Compile Include="Controllers\ATTENDANCEController.cs" />
-=======
     <Compile Include="BUSINESSLAYER\GetTeacherInfoBusiness.cs" />
     <Compile Include="BUSINESSLAYER\STUDENTINFO_BUSINESS.cs" />
+    <Compile Include="Controllers\ClassTeacherController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
-    <Compile Include="Model1.cs" />
->>>>>>> 9f4aadd178ab2b1f0954397a0170cdc7f401be82
+    <Compile Include="Controllers\HomeWorkController.cs" />
     <Compile Include="Models\CryptIt.cs" />
     <Compile Include="Models\Error.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -166,23 +167,30 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="DAL\SchoolContext.cs" />
-<<<<<<< HEAD
     <Compile Include="Models\GETSTUDENTPARAM.cs" />
-    <Compile Include="Models\Model1.cs" />
-    <Compile Include="Models\Model2.cs" />
-    <Compile Include="Models\TBLUSERLOGIN.cs" />
+    <Compile Include="Models\TBLLOGIN.cs" />
     <Compile Include="Models\VIEWATTENDANCE.cs" />
+    <Compile Include="Models\VIEWATTENDANCECHECK.cs" />
+    <Compile Include="Models\VIEWCLASSTEACHER.cs" />
+    <Compile Include="Models\VIEWDIVISIONLIST.cs" />
+    <Compile Include="Models\VIEWDIVISIONLISTBYEMP.cs" />
     <Compile Include="Models\VIEWGETSTUDENTATT.cs" />
-=======
     <Compile Include="Models\StudinfoParameters.cs" />
-    <Compile Include="Models\TBLUSERLOGIN.cs" />
     <Compile Include="Models\TeacherInfoParameters.cs" />
->>>>>>> 9f4aadd178ab2b1f0954397a0170cdc7f401be82
+    <Compile Include="Models\VIEWHOMEWORK.cs" />
+    <Compile Include="Models\VWSTUDENTINFO.cs" />
+    <Compile Include="ParamModel\ParamAttendance.cs" />
+    <Compile Include="ParamModel\ParamClassTeacher.cs" />
+    <Compile Include="ParamModel\ParamDashboardStudentInfo.cs" />
+    <Compile Include="ParamModel\PARAMEMP.cs" />
+    <Compile Include="ParamModel\PARAMHOMEWORK.cs" />
+    <Compile Include="ParamModel\ParamLogin.cs" />
+    <Compile Include="ParamModel\PARAMSTD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="STUDENTINFO.cs" />
-    <Compile Include="TBLSTUDENTADMISSION.cs" />
-    <Compile Include="VW_EMPLOYEE.cs" />
-    <Compile Include="VW_STUDENT_INFO.cs" />
+    <Compile Include="Models\STUDENTINFO.cs" />
+    <Compile Include="Models\TBLSTUDENTADMISSION.cs" />
+    <Compile Include="Models\VW_EMPLOYEE.cs" />
+    <Compile Include="Models\VW_STUDENT_INFO.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
