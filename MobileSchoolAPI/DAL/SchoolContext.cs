@@ -24,8 +24,12 @@ namespace MobileSchoolAPI.Models
     public virtual DbSet<VIEWDIVISIONLIST> VIEWDIVISIONLISTs { get; set; }
     public virtual DbSet<VIEWATTENDANCE> VIEWATTENDANCEs { get; set; }
 
- 
-    protected override void OnModelCreating(DbModelBuilder modelBuilder)
+    public virtual DbSet<VIEWATTENDANCE> VIEWEMP { get; set; }
+    
+        public virtual DbSet<VIEWDIVISIONLISTBYEMP> VIEWDIVISIONLISTBYEMPs { get; set; }
+
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
 			modelBuilder.Entity<TBLUSERLOGIN>()
 				.Property(e => e.EmpCode)
