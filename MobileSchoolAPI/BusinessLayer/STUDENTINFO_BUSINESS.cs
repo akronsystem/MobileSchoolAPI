@@ -6,24 +6,30 @@ using System.Web;
 
 namespace MobileSchoolAPI.BUSINESSLAYER
 {
-    
+
     public class STUDENTINFO_BUSINESS
     {
         SchoolContext db = new SchoolContext();
-        public object objmethod(StudinfoParameters probj)
+        public object objmethod(int probj)
         {
-
-            var result = db.VW_STUDENT_INFO.Where(r => r.STUDENTID == probj.STUDENTID);
-
-            if (result == null)
+            try
             {
-                return "not found";
+
+                var result = db.VW_STUDENT_INFO.Where(r => r.STUDENTID == probj).ToList();
+
+                if (result == null)
+                {
+                    return "not found";
+                }
+                else
+                {
+                    return result;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return result;
+                return new Error() { IsError = true, Message = ex.Message };
             }
-            
         }
     }
 }

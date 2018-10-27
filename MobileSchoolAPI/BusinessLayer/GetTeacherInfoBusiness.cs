@@ -9,10 +9,9 @@ namespace MobileSchoolAPI.BUSINESSLAYER
     public class GetTeacherInfoBusiness
     {
         SchoolContext db = new SchoolContext();
-        public object objmethod(TeacherInfoParameters probj)
+        public object objmethod(int probj)
         {
-
-            var result = db.VW_EMPLOYEE.Where(r => r.EMPLOYEEID == probj.EMPLOYEEID);
+            var result = db.VW_EMPLOYEE.Where(r => r.EMPLOYEEID == probj);
            
             if (result == null)
             {
