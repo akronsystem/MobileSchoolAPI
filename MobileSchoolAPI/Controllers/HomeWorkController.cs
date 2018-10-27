@@ -1,5 +1,6 @@
 ﻿using MobileSchoolAPI.BusinessLayer;
 using MobileSchoolAPI.Models;
+using MobileSchoolAPI.ParamModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +36,12 @@ namespace MobileSchoolAPI.Controllers
             GETHOMEWORK objhome = new GETHOMEWORK();
             return objhome.GetStdByEmp(objemp);
 
+        }
+
+        public object ShowHomeWork([FromBody]ParamHOMEWORKBYUSER objhome)
+        {
+            GETHOMEWORK obj = new GETHOMEWORK();
+            return obj.ViewHomeWorkbyUser(objhome);
         }
     }
 }
