@@ -8,7 +8,7 @@ namespace MobileSchoolAPI.Models
 {
     public class StudinfoParameters
     {
-  [Key]
+         [Key]
         public int STUDENTID { get; set; }
 
         
