@@ -45,7 +45,7 @@ namespace MobileSchoolAPI.BusinessLayer
 
                 List<Result> lt = new List<Result>();
 
-                var  ATTENDANCEDATA =db.VIEWATTENDANCECHECKs.Where(r => r.MONTH == PA.MONTH && r.STANDARDID == PA.STANDARDID && r.DIVISIONID == PA.DIVISIONID).ToList();
+                var  ATTENDANCEDATA =db.VIEWATTENDANCECHECKs.Where(r => r.MONTH == PA.MONTH  && r.DIVISIONID == PA.DIVISIONID).ToList();
 
                 int flag = 0;
                 foreach (var item in li)

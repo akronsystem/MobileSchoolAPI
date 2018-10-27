@@ -26,8 +26,13 @@ namespace MobileSchoolAPI.Models
 
 		public virtual DbSet<VIEWATTENDANCECHECK> VIEWATTENDANCECHECKs { get; set; }
 
+        public virtual DbSet<VWATTENDANCEBYDATESTUDENT> VWATTENDANCEBYDATESTUDENTs { get; set; }
 
-		protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        public virtual DbSet<VWATTENDANCEEMPLOYEE> VWATTENDANCEEMPLOYEEs { get; set; }
+
+        public virtual DbSet<VW_GET_USER_TYPE> VW_GET_USER_TYPE { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
 			modelBuilder.Entity<TBLUSERLOGIN>()
 				.Property(e => e.EmpCode)
