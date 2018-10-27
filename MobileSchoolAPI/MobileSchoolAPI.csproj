@@ -154,12 +154,14 @@
     <Compile Include="BusinessLayer\GETHOMEWORK.cs" />
     <Compile Include="BusinessLayer\GETSTUDENTATTBL.cs" />
     <Compile Include="BusinessLayer\LoginManager.cs" />
+    <Compile Include="BusinessLayer\UserWiseAttendance.cs" />
     <Compile Include="Controllers\ATTENDANCEController.cs" />
     <Compile Include="BUSINESSLAYER\GetTeacherInfoBusiness.cs" />
     <Compile Include="BUSINESSLAYER\STUDENTINFO_BUSINESS.cs" />
     <Compile Include="Controllers\ClassTeacherController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeWorkController.cs" />
+    <Compile Include="Controllers\UserWiseAttendanceController.cs" />
     <Compile Include="Models\CryptIt.cs" />
     <Compile Include="Models\Error.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -168,6 +170,7 @@
     </Compile>
     <Compile Include="DAL\SchoolContext.cs" />
     <Compile Include="Models\GETSTUDENTPARAM.cs" />
+    <Compile Include="Models\Model1.cs" />
     <Compile Include="Models\TBLLOGIN.cs" />
     <Compile Include="Models\VIEWATTENDANCE.cs" />
     <Compile Include="Models\VIEWATTENDANCECHECK.cs" />
@@ -178,10 +181,14 @@
     <Compile Include="Models\StudinfoParameters.cs" />
     <Compile Include="Models\TeacherInfoParameters.cs" />
     <Compile Include="Models\VIEWHOMEWORK.cs" />
+    <Compile Include="Models\VWATTENDANCEBYDATESTUDENT.cs" />
+    <Compile Include="Models\VWATTENDANCEEMPLOYEE.cs" />
     <Compile Include="Models\VWSTUDENTINFO.cs" />
+    <Compile Include="Models\VW_GET_USER_TYPE.cs" />
     <Compile Include="ParamModel\ParamAttendance.cs" />
     <Compile Include="ParamModel\ParamClassTeacher.cs" />
     <Compile Include="ParamModel\ParamDashboardStudentInfo.cs" />
+    <Compile Include="ParamModel\ParamDateWiseAttendance.cs" />
     <Compile Include="ParamModel\PARAMEMP.cs" />
     <Compile Include="ParamModel\PARAMHOMEWORK.cs" />
     <Compile Include="ParamModel\ParamLogin.cs" />

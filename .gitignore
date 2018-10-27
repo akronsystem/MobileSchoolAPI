@@ -264,6 +264,4 @@ MobileSchoolAPI/MobileSchoolAPI.csproj
 MobileSchoolAPI/MobileSchoolAPI.csproj
 MobileSchoolAPI/Web.config
 MobileSchoolAPI/Web.config
-MobileSchoolAPI/DAL/SchoolContext.cs
-MobileSchoolAPI/MobileSchoolAPI.csproj
-MobileSchoolAPI/MobileSchoolAPI.csproj
+MobileSchoolAPI/Web.config
