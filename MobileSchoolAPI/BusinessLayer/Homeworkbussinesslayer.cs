@@ -38,7 +38,7 @@ namespace MobileSchoolAPI.BusinessLayer
             // return getstudent;
             for (int i = 0; i < getstudent.Count; i++)
             {
-                SMSSend(objHomework.HOMEWORK, getstudent[i].Gmobile);
+                SMSSend(objHomework.HOMEWORK, getstudent[i].gmobileno);
             }
             return "sms send successfully";
             
