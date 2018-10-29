@@ -23,6 +23,6 @@ namespace MobileSchoolAPI.Models
         public string STANDARDID { get; set; }
 
         public int? DIVISIONID { get; set; }
-        public string gmobileno { get; set; }
+        public string gmobile { get; set; }
     }
 }

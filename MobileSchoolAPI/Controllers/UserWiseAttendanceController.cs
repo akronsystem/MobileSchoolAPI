@@ -26,7 +26,7 @@ namespace MobileSchoolAPI.Controllers
                 UserWiseAttendance objUA = new UserWiseAttendance();
                 var Result = objUA.GetAttendanceByUser(PA);
 
-                return Result;
+                return new Result() { Date = PA.AttendanceDate, Message = Convert.ToString( Result) };
             }
             catch (Exception ex)
             {

@@ -38,14 +38,14 @@ namespace MobileSchoolAPI.BusinessLayer
             // return getstudent;
             for (int i = 0; i < getstudent.Count; i++)
             {
-                SMSSend(objHomework.HOMEWORK, getstudent[i].gmobileno);
+                SMSSend(objHomework.HOMEWORK, getstudent[i].gmobile);
             }
             return "sms send successfully";
             
         }
         public object SaveAttendance(AttendanceParameterscs atteobj)
         {
-            TBLATTENDENCEMASTER objmster = new TBLATTENDENCEMASTER();
+			TBLATTENDENCEMASTER objmster = new TBLATTENDENCEMASTER();
             TBLATTENDENCE objDetail = new TBLATTENDENCE();
             objmster.ATTEDANCEDATE = atteobj.ATTEDANCEDATE;
             objmster.STANDARDID = atteobj.STANDARDID;

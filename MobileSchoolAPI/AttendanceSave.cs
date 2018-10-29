@@ -12,7 +12,6 @@ namespace MobileSchoolAPI
         {
         }
 
-        public virtual DbSet<TBLATTENDENCEMASTER> TBLATTENDENCEMASTERs { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
