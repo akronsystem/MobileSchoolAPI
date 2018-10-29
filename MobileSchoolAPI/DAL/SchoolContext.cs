@@ -42,8 +42,8 @@ namespace MobileSchoolAPI.Models
 		public virtual DbSet<TBLATTENDENCEMASTER> TBLATTENDENCEMASTERs { get; set; }
 		public virtual DbSet<TBLHOMEWORK> TBLHOMEWORKs { get; set; }
 		public virtual DbSet<TBLATTENDENCE> TBLATTENDENCEs { get; set; }
-
-		protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        public virtual DbSet<VIEWDIVISIONWISESUBJECT> VIEWDIVISIONWISESUBJECTs { get; set; }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
 			modelBuilder.Entity<TBLUSERLOGIN>()
 				.Property(e => e.EmpCode)

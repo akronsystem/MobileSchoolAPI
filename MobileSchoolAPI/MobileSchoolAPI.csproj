@@ -155,6 +155,7 @@
     <Compile Include="BusinessLayer\GetDivisionInfoBusiness.cs" />
     <Compile Include="BusinessLayer\GETHOMEWORK.cs" />
     <Compile Include="BusinessLayer\GETSTUDENTATTBL.cs" />
+    <Compile Include="BusinessLayer\GetSubjectListBusiness.cs" />
     <Compile Include="BusinessLayer\GetUserIdBusiness.cs" />
     <Compile Include="BusinessLayer\Homeworkbussinesslayer.cs" />
     <Compile Include="BusinessLayer\LoginManager.cs" />
@@ -166,9 +167,11 @@
     <Compile Include="Controllers\ClassTeacherController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\DivisionListController.cs" />
+    <Compile Include="Controllers\GetSubjectList.cs" />
     <Compile Include="Controllers\HomeWorkConController.cs" />
     <Compile Include="Controllers\HomeWorkController.cs" />
     <Compile Include="Controllers\PARAMHOMEWORKBYUSER.cs" />
+    <Compile Include="Controllers\SubjectListController.cs" />
     <Compile Include="Controllers\UserWiseAttendanceController.cs" />
     <Compile Include="Models\AttendanceParameterscs.cs" />
     <Compile Include="Models\CryptIt.cs" />
@@ -195,6 +198,7 @@
     <Compile Include="Models\VIEWCLASSTEACHER.cs" />
     <Compile Include="Models\VIEWDIVISIONLIST.cs" />
     <Compile Include="Models\VIEWDIVISIONLISTBYEMP.cs" />
+    <Compile Include="Models\VIEWDIVISIONWISESUBJECT.cs" />
     <Compile Include="Models\VIEWEMPDIVISION.cs" />
     <Compile Include="Models\VIEWGETSTUDENTATT.cs" />
     <Compile Include="Models\StudinfoParameters.cs" />
@@ -211,6 +215,7 @@
     <Compile Include="ParamModel\ParamDashboardStudentInfo.cs" />
     <Compile Include="ParamModel\ParamDateWiseAttendance.cs" />
     <Compile Include="ParamModel\ParamDIVISIONLIST.cs" />
+    <Compile Include="ParamModel\ParamDIVISIONWISESUBJECT.cs" />
     <Compile Include="ParamModel\PARAMEMP.cs" />
     <Compile Include="ParamModel\PARAMHOMEWORK.cs" />
     <Compile Include="ParamModel\ParamHOMEWORKBYUSER.cs" />
