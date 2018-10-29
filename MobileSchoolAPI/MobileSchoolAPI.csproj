@@ -155,7 +155,11 @@
     <Compile Include="BusinessLayer\GetDivisionInfoBusiness.cs" />
     <Compile Include="BusinessLayer\GETHOMEWORK.cs" />
     <Compile Include="BusinessLayer\GETSTUDENTATTBL.cs" />
+<<<<<<< HEAD
     <Compile Include="BusinessLayer\GETTERMLISTBL.cs" />
+=======
+    <Compile Include="BusinessLayer\GetSubjectListBusiness.cs" />
+>>>>>>> 48f628d0224ace07a7c5f5a3a93c26f3442ecc6d
     <Compile Include="BusinessLayer\GetUserIdBusiness.cs" />
     <Compile Include="BusinessLayer\Homeworkbussinesslayer.cs" />
     <Compile Include="BusinessLayer\LoginManager.cs" />
@@ -167,10 +171,15 @@
     <Compile Include="Controllers\ClassTeacherController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\DivisionListController.cs" />
+    <Compile Include="Controllers\GetSubjectList.cs" />
     <Compile Include="Controllers\HomeWorkConController.cs" />
     <Compile Include="Controllers\HomeWorkController.cs" />
     <Compile Include="Controllers\PARAMHOMEWORKBYUSER.cs" />
+<<<<<<< HEAD
     <Compile Include="Controllers\TERMLISTController.cs" />
+=======
+    <Compile Include="Controllers\SubjectListController.cs" />
+>>>>>>> 48f628d0224ace07a7c5f5a3a93c26f3442ecc6d
     <Compile Include="Controllers\UserWiseAttendanceController.cs" />
     <Compile Include="Models\AttendanceParameterscs.cs" />
     <Compile Include="Models\CryptIt.cs" />
@@ -198,6 +207,7 @@
     <Compile Include="Models\VIEWCLASSTEACHER.cs" />
     <Compile Include="Models\VIEWDIVISIONLIST.cs" />
     <Compile Include="Models\VIEWDIVISIONLISTBYEMP.cs" />
+    <Compile Include="Models\VIEWDIVISIONWISESUBJECT.cs" />
     <Compile Include="Models\VIEWEMPDIVISION.cs" />
     <Compile Include="Models\VIEWGETSTUDENTATT.cs" />
     <Compile Include="Models\StudinfoParameters.cs" />
@@ -215,6 +225,7 @@
     <Compile Include="ParamModel\ParamDashboardStudentInfo.cs" />
     <Compile Include="ParamModel\ParamDateWiseAttendance.cs" />
     <Compile Include="ParamModel\ParamDIVISIONLIST.cs" />
+    <Compile Include="ParamModel\ParamDIVISIONWISESUBJECT.cs" />
     <Compile Include="ParamModel\PARAMEMP.cs" />
     <Compile Include="ParamModel\PARAMHOMEWORK.cs" />
     <Compile Include="ParamModel\ParamHOMEWORKBYUSER.cs" />
