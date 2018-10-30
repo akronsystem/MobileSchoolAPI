@@ -43,6 +43,13 @@ namespace MobileSchoolAPI.Models
 		public virtual DbSet<TBLHOMEWORK> TBLHOMEWORKs { get; set; }
 		public virtual DbSet<TBLATTENDENCE> TBLATTENDENCEs { get; set; }
         public virtual DbSet<VIEWDIVISIONWISESUBJECT> VIEWDIVISIONWISESUBJECTs { get; set; }
+
+
+        public virtual DbSet<TBLNOTIFICATION> TBLNOTIFICATIONs { get; set; }
+        public virtual DbSet<TBLNOTIFICATIONDETAIL> TBLNOTIFICATIONDETAILs { get; set; }
+
+        public virtual DbSet<VIEWNOTIFICATION> VIEWNOTIFICATIONs { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
 			modelBuilder.Entity<TBLUSERLOGIN>()
