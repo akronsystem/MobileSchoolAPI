@@ -1,15 +1,14 @@
-namespace MobileSchoolAPI
+namespace MobileSchoolAPI.Models
 {
     using System;
     using System.Data.Entity;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
-    using MobileSchoolAPI.Models;
 
-    public partial class STUDENTINFO : DbContext
+    public partial class Model1 : DbContext
     {
-        public STUDENTINFO()
-            : base("name=STUDENTINFO")
+        public Model1()
+            : base("name=Model1")
         {
         }
 
