@@ -7,10 +7,7 @@ namespace MobileSchoolAPI.Models
 {
     public class homeworkparameters
     {
-        public string standard
-        {
-            get;set;
-        }
+        
         public int division
         {
             get; set;

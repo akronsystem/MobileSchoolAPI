@@ -48,10 +48,10 @@ namespace MobileSchoolAPI.BusinessLayer
 			TBLATTENDENCEMASTER objmster = new TBLATTENDENCEMASTER();
             TBLATTENDENCE objDetail = new TBLATTENDENCE();
             objmster.ATTEDANCEDATE = atteobj.ATTEDANCEDATE;
-            objmster.STANDARDID = atteobj.STANDARDID;
+            
             objmster.DIVISIONID = atteobj.DIVISIONID;
-            objmster.DISPLAY = atteobj.DISPLAY;
-            objmster.EDUCATIONYEAR = atteobj.EDUCATIONYEAR;
+            objmster.DISPLAY = 1;
+          
             objmster.CREATEDON = DateTime.Now;
 
             db.TBLATTENDENCEMASTERs.Add(objmster);
@@ -76,9 +76,11 @@ namespace MobileSchoolAPI.BusinessLayer
 
 
             }
-        
-            return "Attendance Save successfully";
 
+            return new Result
+            {
+                Message = "Homework assign successfully"
+            };
         }
 
         internal void Students()
