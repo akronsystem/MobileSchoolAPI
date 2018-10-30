@@ -155,7 +155,11 @@
     <Compile Include="BusinessLayer\GetDivisionInfoBusiness.cs" />
     <Compile Include="BusinessLayer\GETHOMEWORK.cs" />
     <Compile Include="BusinessLayer\GETSTUDENTATTBL.cs" />
+<<<<<<< HEAD
+    <Compile Include="BusinessLayer\GETTERMLISTBL.cs" />
+=======
     <Compile Include="BusinessLayer\GetSubjectListBusiness.cs" />
+>>>>>>> 48f628d0224ace07a7c5f5a3a93c26f3442ecc6d
     <Compile Include="BusinessLayer\GetUserIdBusiness.cs" />
     <Compile Include="BusinessLayer\Homeworkbussinesslayer.cs" />
     <Compile Include="BusinessLayer\LoginManager.cs" />
@@ -173,7 +177,11 @@
     <Compile Include="Controllers\HomeWorkController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\PARAMHOMEWORKBYUSER.cs" />
+<<<<<<< HEAD
+    <Compile Include="Controllers\TERMLISTController.cs" />
+=======
     <Compile Include="Controllers\SubjectListController.cs" />
+>>>>>>> 48f628d0224ace07a7c5f5a3a93c26f3442ecc6d
     <Compile Include="Controllers\UserWiseAttendanceController.cs" />
     <Compile Include="Models\AttendanceParameterscs.cs" />
     <Compile Include="Models\CryptIt.cs" />
@@ -187,6 +195,7 @@
     <Compile Include="Models\GetUserId.cs" />
     <Compile Include="Models\Homework.cs" />
     <Compile Include="Models\homeworkparameters.cs" />
+    <Compile Include="Models\Model1.cs" />
     <Compile Include="Models\Result.cs" />
     <Compile Include="Models\Smsparameters.cs" />
     <Compile Include="Models\StudentForSms.cs" />
@@ -211,6 +220,7 @@
     <Compile Include="Models\VIEWNOTIFICATION.cs" />
     <Compile Include="Models\VIEWSTUDENTDIVISION.cs" />
     <Compile Include="Models\VIEWSTUDENTHOMEWORK.cs" />
+    <Compile Include="Models\VIEW_TERMMASTER.cs" />
     <Compile Include="Models\VWATTENDANCEBYDATESTUDENT.cs" />
     <Compile Include="Models\VWATTENDANCEEMPLOYEE.cs" />
     <Compile Include="Models\VWSTUDENTINFO.cs" />

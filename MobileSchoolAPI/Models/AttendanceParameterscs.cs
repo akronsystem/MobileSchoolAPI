@@ -9,16 +9,16 @@ namespace MobileSchoolAPI.Models
     {
        
 
-        public string EDUCATIONYEAR { get; set; }
 
-        public long STANDARDID { get; set; }
+
+       
 
         public DateTime ATTEDANCEDATE { get; set; }
 
         public long DIVISIONID { get; set; }
 
-        public int DISPLAY { get; set; }
-        public DateTime CREATEDON { get; set; }
+       
+       
         public string Absentno { get; set; }
         
     }
