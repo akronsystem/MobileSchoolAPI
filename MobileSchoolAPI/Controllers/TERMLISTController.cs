@@ -10,7 +10,7 @@ namespace MobileSchoolAPI.Controllers
 {
     public class TERMLISTController : ApiController
     {
-        [HttpPost]
+        [HttpGet]
 
         public object GETTERMLIST()
         {
