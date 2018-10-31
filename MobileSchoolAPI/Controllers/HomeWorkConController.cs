@@ -15,17 +15,21 @@ namespace MobileSchoolAPI.Controllers
 
 
         [HttpPost]
-        public object Homew([FromBody]homeworkparameters hobj)
+        public object HomeworkSave([FromBody]homeworkparameters hobj)
         {
 
             Homeworkbussinesslayer bhobj = new Homeworkbussinesslayer();
 
 
             bhobj.Savehomework(hobj);
-          //  bhobj.StudentsMethod(hobj);
+            //  bhobj.StudentsMethod(hobj);
 
 
-            return "Homework assign successfully";
+
+            return new Result
+            {
+                Message = "Homework assign successfully"
+            };
 
 
         }
@@ -40,8 +44,10 @@ namespace MobileSchoolAPI.Controllers
             //  bhobj.StudentsMethod(hobj);
 
 
-            return "Attendance Save Successfully";
-
+            return new Result
+            {
+                Message = "Homework assign successfully"
+            };
 
         }
     }

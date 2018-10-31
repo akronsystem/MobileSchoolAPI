@@ -268,3 +268,10 @@ MobileSchoolAPI/Web.config
 MobileSchoolAPI/MobileSchoolAPI.csproj
 MobileSchoolAPI/MobileSchoolAPI.csproj
 MobileSchoolAPI/MobileSchoolAPI.csproj
+MobileSchoolAPI/DAL/SchoolContext.cs
+MobileSchoolAPI/MobileSchoolAPI.csproj
+MobileSchoolAPI/DAL/SchoolContext.cs
+MobileSchoolAPI/BusinessLayer/Homeworkbussinesslayer.cs
+MobileSchoolAPI/BusinessLayer/Homeworkbussinesslayer.cs
+*.cs
+MobileSchoolAPI/DAL/SchoolContext.cs
