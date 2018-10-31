@@ -16,6 +16,7 @@ namespace MobileSchoolAPI.BusinessLayer
             TBLHOMEWORK objHomework = new TBLHOMEWORK();
             
           //  objHomework.STANDARDID = obj.standard;
+         
             objHomework.DIVISIONID = obj.division;
             objHomework.SUBJECTID = obj.subject;
             objHomework.TERMID = obj.term;

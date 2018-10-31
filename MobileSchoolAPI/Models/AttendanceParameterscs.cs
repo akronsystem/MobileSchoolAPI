@@ -12,7 +12,13 @@ namespace MobileSchoolAPI.Models
 
 
        
+        public int Userid
+        { get; set; }
+        public string Password
+        {
+            get;set;
 
+        }
         public DateTime ATTEDANCEDATE { get; set; }
 
         public long DIVISIONID { get; set; }
