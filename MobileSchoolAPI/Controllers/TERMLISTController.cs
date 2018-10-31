@@ -1,4 +1,5 @@
 ﻿using MobileSchoolAPI.BusinessLayer;
+using MobileSchoolAPI.Result;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,8 @@ namespace MobileSchoolAPI.Controllers
         {
             GETTERMLISTBL OBJTERM = new GETTERMLISTBL();
             var GETTERMVAR = OBJTERM.TERMLISTBL();
-            return GETTERMVAR;
+            //return GETTERMVAR;
+            return new STUDENTLISTRESULT() { IsSuccess = "TERM LIST", StudentResult = Convert.ToString(GETTERMVAR) };
         }
     }
 }
