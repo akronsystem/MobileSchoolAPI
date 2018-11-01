@@ -77,7 +77,7 @@ namespace MobileSchoolAPI.BusinessLayer
 
             }
 
-            return new Result
+            return new Results
             {
                 Message = "Homework assign successfully"
             };
