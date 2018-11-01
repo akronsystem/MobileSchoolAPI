@@ -154,9 +154,9 @@
     <Compile Include="BusinessLayer\DashboardManager.cs" />
     <Compile Include="BusinessLayer\GetDivisionInfoBusiness.cs" />
     <Compile Include="BusinessLayer\GETHOMEWORK.cs" />
-    <Compile Include="BusinessLayer\GETSTUDENTATTBL.cs" /> 
-    <Compile Include="BusinessLayer\GETTERMLISTBL.cs" /> 
-    <Compile Include="BusinessLayer\GetSubjectListBusiness.cs" /> 
+    <Compile Include="BusinessLayer\GETSTUDENTATTBL.cs" />
+    <Compile Include="BusinessLayer\GETTERMLISTBL.cs" />
+    <Compile Include="BusinessLayer\GetSubjectListBusiness.cs" />
     <Compile Include="BusinessLayer\GetUserIdBusiness.cs" />
     <Compile Include="BusinessLayer\Homeworkbussinesslayer.cs" />
     <Compile Include="BusinessLayer\LoginManager.cs" />
@@ -173,12 +173,14 @@
     <Compile Include="Controllers\HomeWorkConController.cs" />
     <Compile Include="Controllers\HomeWorkController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
-    <Compile Include="Controllers\PARAMHOMEWORKBYUSER.cs" /> 
-    <Compile Include="Controllers\TERMLISTController.cs" /> 
-    <Compile Include="Controllers\SubjectListController.cs" /> 
+    <Compile Include="Controllers\PARAMHOMEWORKBYUSER.cs" />
+    <Compile Include="Controllers\TERMLISTController.cs" />
+    <Compile Include="Controllers\SubjectListController.cs" />
     <Compile Include="Controllers\UserWiseAttendanceController.cs" />
     <Compile Include="Models\AttendanceParameterscs.cs" />
     <Compile Include="Models\CryptIt.cs" />
+    <Compile Include="Models\DivisionListByUserResult.cs" />
+    <Compile Include="Models\DivisionListResult.cs" />
     <Compile Include="Models\Error.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Global.asax.cs">
@@ -189,7 +191,6 @@
     <Compile Include="Models\GetUserId.cs" />
     <Compile Include="Models\Homework.cs" />
     <Compile Include="Models\homeworkparameters.cs" />
-    <Compile Include="Models\Model1.cs" />
     <Compile Include="Models\Result.cs" />
     <Compile Include="Models\Smsparameters.cs" />
     <Compile Include="Models\StudentForSms.cs" />
@@ -238,6 +239,10 @@
     <Compile Include="Models\TBLSTUDENTADMISSION.cs" />
     <Compile Include="Models\VW_EMPLOYEE.cs" />
     <Compile Include="Models\VW_STUDENT_INFO.cs" />
+    <Compile Include="ResultHomework\Homework.cs" />
+    <Compile Include="ResultModel\AttendanceResult.cs" />
+    <Compile Include="ResultModel\ClassTeacherResult.cs" />
+    <Compile Include="ResultModel\StudentListResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

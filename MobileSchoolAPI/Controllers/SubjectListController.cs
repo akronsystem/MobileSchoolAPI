@@ -1,4 +1,5 @@
 ﻿using MobileSchoolAPI.BusinessLayer;
+using MobileSchoolAPI.Models;
 using MobileSchoolAPI.ParamModel;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,8 @@ namespace MobileSchoolAPI.Controllers
 
 
             GetSubjectListBusiness obj = new GetSubjectListBusiness();
-            return obj.GetSubjectList(objsub);
+			return new DivisionListResult() { IsSuccess = "true", SubjectList = obj.GetSubjectList(objsub) };
+			//return obj.GetSubjectList(objsub);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using MobileSchoolAPI.BusinessLayer;
 using MobileSchoolAPI.Models;
+using MobileSchoolAPI.ResultModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,8 +26,8 @@ namespace MobileSchoolAPI.Controllers
         {
             GETSTUDENTATTBL GETOBJ = new GETSTUDENTATTBL();
            var GETSTUDENTRESULT= GETOBJ.GETSTUDENT(OBJ);
-            return GETSTUDENTRESULT;
-        }
+			return new STUDENTLISTRESULT() { IsSuccess = "True", StudentResult = GETOBJ.GETSTUDENT(OBJ) };
+		}
 
     }
 }
