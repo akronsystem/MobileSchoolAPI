@@ -15,6 +15,8 @@ namespace MobileSchoolAPI.BusinessLayer
         public object GetSubjectList(ParamDIVISIONWISESUBJECT objdiv)
         {
             try
+
+
             {
                 var SubjectList = db.VIEWDIVISIONWISESUBJECTs.Where(r => r.DIVISIONID == objdiv.divisionid &&  r.DISPLAY == 1).ToList();
                 if (SubjectList.Count == 0)

@@ -16,6 +16,7 @@ namespace MobileSchoolAPI.Controllers
         {
 
 
+
             GetSubjectListBusiness obj = new GetSubjectListBusiness();
             //return obj.GetSubjectList(objsub);
 
