@@ -27,7 +27,6 @@ namespace MobileSchoolAPI.Models
 		public virtual DbSet<VIEWATTENDANCECHECK> VIEWATTENDANCECHECKs { get; set; }
         public virtual DbSet<VW_GET_USER_TYPE> VW_GET_USER_TYPE { get; set; }
 
-
         public virtual DbSet<VWATTENDANCEBYDATESTUDENT> VWATTENDANCEBYDATESTUDENTs { get; set; }
 
         public virtual DbSet<VWATTENDANCEEMPLOYEE> VWATTENDANCEEMPLOYEEs { get; set; }
@@ -37,13 +36,20 @@ namespace MobileSchoolAPI.Models
 		public virtual DbSet<VWSTUDENTINFO> VWSTUDENTINFO { get; set; }
 		public virtual DbSet<VIEWSTUDENTHOMEWORK> VIEWSTUDENTHOMEWORKs { get; set;  }
 
-
-
 		public virtual DbSet<TBLATTENDENCEMASTER> TBLATTENDENCEMASTERs { get; set; }
 		public virtual DbSet<TBLHOMEWORK> TBLHOMEWORKs { get; set; }
 		public virtual DbSet<TBLATTENDENCE> TBLATTENDENCEs { get; set; }
 
-		protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        public virtual DbSet<VIEW_TERMMASTER> VIEW_TERMMASTER { get; set; }
+
+        public virtual DbSet<VIEWDIVISIONWISESUBJECT> VIEWDIVISIONWISESUBJECTs { get; set; }
+
+        public virtual DbSet<TBLNOTIFICATION> TBLNOTIFICATIONs { get; set; }
+        public virtual DbSet<TBLNOTIFICATIONDETAIL> TBLNOTIFICATIONDETAILs { get; set; }
+
+        public virtual DbSet<VIEWNOTIFICATION> VIEWNOTIFICATIONs { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
 			modelBuilder.Entity<TBLUSERLOGIN>()
 				.Property(e => e.EmpCode)
