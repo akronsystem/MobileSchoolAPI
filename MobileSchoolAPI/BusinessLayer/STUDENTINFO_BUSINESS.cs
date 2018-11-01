@@ -15,7 +15,7 @@ namespace MobileSchoolAPI.BUSINESSLAYER
             try
             {
 
-                var result = db.VW_STUDENT_INFO.Where(r => r.ID == probj).ToList();
+                var result = db.VW_STUDENT_INFO.Where(r => r.ID == probj && r.UserType == "STUDENT").FirstOrDefault();
 
                 if (result == null)
                 {
