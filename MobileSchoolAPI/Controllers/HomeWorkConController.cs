@@ -25,8 +25,10 @@ namespace MobileSchoolAPI.Controllers
             //  bhobj.StudentsMethod(hobj);
 
 
-
-            return "Homework assign successfully";
+            return new Results
+            {
+           Message= "Homework assign successfully"
+        };
             
 
 
@@ -42,7 +44,7 @@ namespace MobileSchoolAPI.Controllers
             //  bhobj.StudentsMethod(hobj);
 
 
-            return new Result
+            return new Results
             {
                 Message = "Homework assign successfully"
             };
