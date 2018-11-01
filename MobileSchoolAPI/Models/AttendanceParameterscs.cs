@@ -8,9 +8,6 @@ namespace MobileSchoolAPI.Models
     public class AttendanceParameterscs
     {
        
-
-
-
        
         public int Userid
         {

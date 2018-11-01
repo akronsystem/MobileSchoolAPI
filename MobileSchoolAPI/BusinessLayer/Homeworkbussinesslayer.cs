@@ -13,6 +13,7 @@ namespace MobileSchoolAPI.BusinessLayer
         public object Savehomework(homeworkparameters obj)
         {
            
+
             TBLHOMEWORK objHomework = new TBLHOMEWORK();
             
           //  objHomework.STANDARDID = obj.standard;

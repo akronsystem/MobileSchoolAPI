@@ -7,6 +7,8 @@ namespace MobileSchoolAPI.Models
 {
     public class homeworkparameters
     {
+
+
         public int Userid
         {
             get;
