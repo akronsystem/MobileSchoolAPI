@@ -5,7 +5,7 @@ using System.Web;
 
 namespace MobileSchoolAPI.Models
 {
-	public class Result
+	public class Results
 	{
 		public int ResultType { get; set; }
 		public DateTime Date { get; set; }
