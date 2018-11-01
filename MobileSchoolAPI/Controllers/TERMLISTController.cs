@@ -12,7 +12,6 @@ namespace MobileSchoolAPI.Controllers
     public class TERMLISTController : ApiController
     {
         [HttpGet]
-
         public object GETTERMLIST()
         {
             GETTERMLISTBL OBJTERM = new GETTERMLISTBL();
