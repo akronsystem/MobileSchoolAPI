@@ -9,6 +9,7 @@ namespace MobileSchoolAPI.Models
     public partial class VW_STUDENT_INFO
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        
         public long ID { get; set; }
 
         [StringLength(200)]
