@@ -1,4 +1,4 @@
-namespace MobileSchoolAPI.Models
+namespace MobileSchoolAPI
 {
     using System;
     using System.Collections.Generic;

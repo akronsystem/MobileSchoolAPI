@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-
+using MobileSchoolAPI.Models;
 namespace MobileSchoolAPI.BUSINESSLAYER
 {
     public class GetTeacherInfoBusiness
@@ -11,7 +11,7 @@ namespace MobileSchoolAPI.BUSINESSLAYER
         SchoolContext db = new SchoolContext();
         public object objmethod(int probj)
         {
-            var result = db.VW_EMPLOYEE.Where(r => r.EMPLOYEEID == probj);
+            var result = db.VW_EMPLOYEE.Where(r => r.ID == probj);
            
             if (result == null)
             {

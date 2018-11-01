@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-
+using MobileSchoolAPI.Models;
 namespace MobileSchoolAPI.BUSINESSLAYER
 {
 
@@ -15,7 +15,7 @@ namespace MobileSchoolAPI.BUSINESSLAYER
             try
             {
 
-                var result = db.VW_STUDENT_INFO.Where(r => r.STUDENTID == probj).ToList();
+                var result = db.VW_STUDENT_INFO.Where(r => r.ID == probj && r.UserType == "STUDENT").FirstOrDefault();
 
                 if (result == null)
                 {
