@@ -17,7 +17,10 @@ namespace MobileSchoolAPI.Controllers
         public object getStdDivList([FromBody]ParamDIVISIONLIST objdiv)
         {
             GetDivisionInfoBusiness obj = new GetDivisionInfoBusiness();
-            return obj.GetDivision(objdiv);
+            //return obj.GetDivision(objdiv);
+
+            return new DivisionListByUserResult() { IsSuccess = "true", DivisionList = obj.GetDivision(objdiv) };
+
         }
 
     }

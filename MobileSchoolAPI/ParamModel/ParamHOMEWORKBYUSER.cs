@@ -7,8 +7,10 @@ namespace MobileSchoolAPI.ParamModel
 {
     public class ParamHOMEWORKBYUSER
     {
-
-        public int userid { get; set; }
         public int divisionid { get; set; }
+        public int userid { get; set; }
+      
+
+        public String password { get; set; }
     }
 }
