@@ -17,7 +17,7 @@ namespace MobileSchoolAPI.Controllers
             GETTERMLISTBL OBJTERM = new GETTERMLISTBL();
             var GETTERMVAR = OBJTERM.TERMLISTBL();
             //return GETTERMVAR;
-            return new STUDENTLISTRESULT() { IsSuccess = "TERM LIST", StudentResult = Convert.ToString(GETTERMVAR) };
+            return new STUDENTLISTRESULT() { IsSuccess = "True", StudentResult = OBJTERM.TERMLISTBL() };
         }
     }
 }
