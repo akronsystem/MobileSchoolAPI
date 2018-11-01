@@ -1,6 +1,6 @@
 using MobileSchoolAPI.BusinessLayer;
 using MobileSchoolAPI.Models;
- 
+using MobileSchoolAPI.ResultModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +19,12 @@ namespace MobileSchoolAPI.Controllers
         {
             ClassTeacherData obVIEW = new ClassTeacherData();
            var result= obVIEW.GetClassTeacher(objPC);
-            return result;
+            return new ClassTeacherResult()
+            {
+                IsSuccess = "true",
+                ClassTeacherList = result
+                
+            };
         }
 
         /// FOR SELECTING ATTENDANCE ON DATE

@@ -1,4 +1,5 @@
 ﻿using MobileSchoolAPI.BusinessLayer;
+using MobileSchoolAPI.Models;
 using MobileSchoolAPI.ParamModel;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,9 @@ namespace MobileSchoolAPI.Controllers
         public object ViewNotification([FromBody]ParamNotificationView obj)
         {
             NotificationBusiness objnote = new NotificationBusiness();
-            return objnote.ViewNotification(obj);
+            // return objnote.ViewNotification(obj);
+            return new DivisionListResult() { IsSuccess = "true", Notification = objnote.ViewNotification(obj) };
+
 
         }
 
