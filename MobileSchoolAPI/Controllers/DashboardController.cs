@@ -12,23 +12,7 @@ namespace MobileSchoolAPI.Controllers
 {
     public class DashboardController : ApiController
     {
-        //[HttpPost]
-        //public object getStudentinfo([FromBody]StudinfoParameters pobj)
-        //{
-        //    STUDENTINFO_BUSINESS obj = new STUDENTINFO_BUSINESS();
-        //   var result= obj.objmethod(pobj);
-
-        //    return result;
-        //}
-
-        //[HttpPost]
-        //public object getTEACHERinfo([FromBody]TeacherInfoParameters pobj)
-        //{
-        //    GetTeacherInfoBusiness obj = new GetTeacherInfoBusiness();
-        //    var result = obj.objmethod(pobj);
-
-        //    return result;
-        //}
+        
         [HttpPost]
         public object GetDashboard([FromBody]GetUserId UserId)
         {
