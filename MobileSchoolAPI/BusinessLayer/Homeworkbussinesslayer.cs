@@ -16,8 +16,8 @@ namespace MobileSchoolAPI.BusinessLayer
             TBLHOMEWORK objHomework = new TBLHOMEWORK();
             
           //  objHomework.STANDARDID = obj.standard;
-         
-            objHomework.DIVISIONID = obj.division;
+        
+            objHomework.DIVISIONID =obj.division;
             objHomework.SUBJECTID = obj.subject;
             objHomework.TERMID = obj.term;
             objHomework.HOMEWORK =obj.homeworkdescription;
@@ -27,19 +27,23 @@ namespace MobileSchoolAPI.BusinessLayer
 
             db.TBLHOMEWORKs.Add(objHomework);
             //db.SaveChanges();
-
-
-         
-            var getstudent = db.VIEWGETSTUDENTATTs.Where(r => r.DIVISIONID == objHomework.DIVISIONID).ToList();
-            if (getstudent == null)
+            
+            string[] divid = objHomework.DIVISIONID.ToString().Split(',');
+            for (int d = 0; d < divid.Length; d++)
             {
-                return new Error();
+                int singledivision = Convert.ToInt32(divid[d]);
+                var getstudent = db.VIEWGETSTUDENTATTs.Where(r => r.DIVISIONID == singledivision).ToList();
 
-            }
-            // return getstudent;
-            for (int i = 0; i < getstudent.Count; i++)
-            {
-                SMSSend(objHomework.HOMEWORK, getstudent[i].gmobile);
+                if (getstudent == null)
+                {
+                    return new Error();
+
+                }
+                // return getstudent;
+                for (int i = 0; i < getstudent.Count; i++)
+                {
+                    SMSSend(objHomework.HOMEWORK, getstudent[i].gmobile);
+                }
             }
             return "sms send successfully";
             

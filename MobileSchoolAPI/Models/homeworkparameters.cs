@@ -17,14 +17,15 @@ namespace MobileSchoolAPI.Models
             get;
             set;
         }
-        public string stnadrdid
+
+        public string STANDARDID
         {
             get;
             set;
 
         }
 
-        public int division
+        public string division
         {
             get; set;
         }
@@ -41,8 +42,8 @@ namespace MobileSchoolAPI.Models
         {
             get; set;
         }
+
         
-        
-     
+
     }
 }

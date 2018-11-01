@@ -22,7 +22,7 @@ namespace MobileSchoolAPI.Models
 
         public long? STANDARDID { get; set; }
 
-        public long? DIVISIONID { get; set; }
+        public string DIVISIONID { get; set; }
 
         public long? TERMID { get; set; }
 

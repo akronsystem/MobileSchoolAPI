@@ -42,13 +42,13 @@ namespace MobileSchoolAPI.Models
 		public virtual DbSet<TBLATTENDENCEMASTER> TBLATTENDENCEMASTERs { get; set; }
 		public virtual DbSet<TBLHOMEWORK> TBLHOMEWORKs { get; set; }
 		public virtual DbSet<TBLATTENDENCE> TBLATTENDENCEs { get; set; }
-<<<<<<< HEAD
+
 
         public virtual DbSet<VIEW_TERMMASTER> VIEW_TERMMASTER { get; set; }
 
-=======
+
         public virtual DbSet<VIEWDIVISIONWISESUBJECT> VIEWDIVISIONWISESUBJECTs { get; set; }
-<<<<<<< HEAD
+
 
 
         public virtual DbSet<TBLNOTIFICATION> TBLNOTIFICATIONs { get; set; }
@@ -56,9 +56,7 @@ namespace MobileSchoolAPI.Models
 
         public virtual DbSet<VIEWNOTIFICATION> VIEWNOTIFICATIONs { get; set; }
 
-=======
->>>>>>> 48f628d0224ace07a7c5f5a3a93c26f3442ecc6d
->>>>>>> 946f438a1af4d7af747d561290af9c8aa9a43e1e
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
 			modelBuilder.Entity<TBLUSERLOGIN>()

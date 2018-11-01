@@ -13,10 +13,14 @@ namespace MobileSchoolAPI.Models
 
        
         public int Userid
-        { get; set; }
+        {
+            get;
+            set;
+        }
         public string Password
         {
-            get;set;
+            get;
+            set;
 
         }
         public DateTime ATTEDANCEDATE { get; set; }
