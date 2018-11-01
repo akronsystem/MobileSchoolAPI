@@ -27,7 +27,7 @@ namespace MobileSchoolAPI.Controllers
             GETSTUDENTATTBL GETOBJ = new GETSTUDENTATTBL();
            var GETSTUDENTRESULT= GETOBJ.GETSTUDENT(OBJ);
             //return GETSTUDENTRESULT;
-            return new STUDENTLISTRESULT() { IsSuccess = "STUDENT LIST", StudentResult = Convert.ToString(GETSTUDENTRESULT) };
+            return new STUDENTLISTRESULT() { IsSuccess = "True", StudentResult = GETOBJ.GETSTUDENT(OBJ) };
         }
 
     }

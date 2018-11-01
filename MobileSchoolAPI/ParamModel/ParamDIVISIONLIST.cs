@@ -8,5 +8,6 @@ namespace MobileSchoolAPI.ParamModel
     public class ParamDIVISIONLIST
     {
         public int userid { get; set; }
+        public string password { get; set; }
     }
 }

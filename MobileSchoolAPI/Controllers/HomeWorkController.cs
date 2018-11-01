@@ -19,7 +19,9 @@ namespace MobileSchoolAPI.Controllers
         {
 
             GETHOMEWORK objhome = new GETHOMEWORK();
-           return objhome.GetHomework(obj);
+            // return objhome.GetHomework(obj);
+
+            return new DivisionListResult() { IsSuccess = "true", HomeWork = objhome.GetHomework(obj) };
            
         }
 
@@ -27,21 +29,27 @@ namespace MobileSchoolAPI.Controllers
         public object ViewDivision([FromBody]PARAMSTD objstd)
         {
             GETHOMEWORK objhome = new GETHOMEWORK();
-            return objhome.GetStandard(objstd);
+            // return objhome.GetStandard(objstd);
+            return new DivisionListResult() { IsSuccess = "true", DivisionListByUser = objhome.GetStandard(objstd) };
+
+
         }
 
 
         public object ViewDivisionByEmp([FromBody]PARAMEMP objemp)
         {
             GETHOMEWORK objhome = new GETHOMEWORK();
-            return objhome.GetStdByEmp(objemp);
+            //return objhome.GetStdByEmp(objemp);
+            return new DivisionListResult() { IsSuccess = "true", DivisionListByUser = objhome.GetStdByEmp(objemp) };
 
         }
 
         public object ShowHomeWork([FromBody]ParamHOMEWORKBYUSER objhome)
         {
             GETHOMEWORK obj = new GETHOMEWORK();
-            return obj.ViewHomeWorkbyUser(objhome);
+            //return obj.ViewHomeWorkbyUser(objhome);
+            return new DivisionListResult() { IsSuccess = "true", HomeWork = obj.ViewHomeWorkbyUser(objhome) };
+
         }
     }
 }
