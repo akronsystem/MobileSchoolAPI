@@ -39,10 +39,10 @@ namespace MobileSchoolAPI.Models
 		public virtual DbSet<TBLATTENDENCEMASTER> TBLATTENDENCEMASTERs { get; set; }
 		public virtual DbSet<TBLHOMEWORK> TBLHOMEWORKs { get; set; }
 		public virtual DbSet<TBLATTENDENCE> TBLATTENDENCEs { get; set; }
-
+         
         public virtual DbSet<VIEW_TERMMASTER> VIEW_TERMMASTER { get; set; }
 
-        //public virtual DbSet<VIEWDIVISIONWISESUBJECT> VIEWDIVISIONWISESUBJECTs { get; set; }
+        public virtual DbSet<VIEWDIVISIONWISESUBJECT> VIEWDIVISIONWISESUBJECTs { get; set; }
 
         public virtual DbSet<TBLNOTIFICATION> TBLNOTIFICATIONs { get; set; }
         public virtual DbSet<TBLNOTIFICATIONDETAIL> TBLNOTIFICATIONDETAILs { get; set; }
