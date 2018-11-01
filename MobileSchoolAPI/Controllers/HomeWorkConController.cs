@@ -26,10 +26,8 @@ namespace MobileSchoolAPI.Controllers
 
 
 
-            return new Result
-            {
-                Message = "Homework assign successfully"
-            };
+            return "Homework assign successfully";
+            
 
 
         }
