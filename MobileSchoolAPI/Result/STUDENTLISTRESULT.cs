@@ -8,6 +8,6 @@ namespace MobileSchoolAPI.Result
     public class STUDENTLISTRESULT
     {
         public string IsSuccess { get; set; }
-        public string StudentResult { get; set; }
+        public object StudentResult { get; set; }
     }
 }
