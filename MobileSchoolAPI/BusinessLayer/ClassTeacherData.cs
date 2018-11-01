@@ -25,7 +25,7 @@ namespace MobileSchoolAPI.BusinessLayer
                                     Where(r => r.EMPLOYEEID == PC.EMPLOYEEID && r.DISPLAY == 1 && r.ACADEMICYEAR == "2018-2019")
                                     .FirstOrDefault();
                 if (ClassTeacher == null)
-                    return new Error() { IsError = true, Message = "No Class is Assigned To This Teacher" };
+                    return new Error() { Message = "No Class is Assigned To This Teacher" };
                 else
                     return ClassTeacher;
             }

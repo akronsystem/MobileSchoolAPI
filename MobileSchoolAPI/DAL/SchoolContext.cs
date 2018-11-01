@@ -42,7 +42,7 @@ namespace MobileSchoolAPI.Models
 
         public virtual DbSet<VIEW_TERMMASTER> VIEW_TERMMASTER { get; set; }
 
-        public virtual DbSet<VIEWDIVISIONWISESUBJECT> VIEWDIVISIONWISESUBJECTs { get; set; }
+        //public virtual DbSet<VIEWDIVISIONWISESUBJECT> VIEWDIVISIONWISESUBJECTs { get; set; }
 
         public virtual DbSet<TBLNOTIFICATION> TBLNOTIFICATIONs { get; set; }
         public virtual DbSet<TBLNOTIFICATIONDETAIL> TBLNOTIFICATIONDETAILs { get; set; }
