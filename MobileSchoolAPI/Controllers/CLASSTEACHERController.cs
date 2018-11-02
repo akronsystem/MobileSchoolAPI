@@ -14,13 +14,7 @@ namespace MobileSchoolAPI.Controllers
     public class ClassTeacherController : ApiController
     {
         SchoolContext db = new SchoolContext();
-        [HttpPost]
-        public object GetClassTeacher([FromBody]ParamClassTeacher objPC)
-        {
-            ClassTeacherData obVIEW = new ClassTeacherData();
-           var result= obVIEW.GetClassTeacher(objPC);
-            return result;
-        }
+        
 
         /// FOR SELECTING ATTENDANCE ON DATE
         /// 

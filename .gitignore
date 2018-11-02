@@ -268,3 +268,4 @@ MobileSchoolAPI/Web.config
 MobileSchoolAPI/MobileSchoolAPI.csproj
 MobileSchoolAPI/MobileSchoolAPI.csproj
 MobileSchoolAPI/MobileSchoolAPI.csproj
+*.config
