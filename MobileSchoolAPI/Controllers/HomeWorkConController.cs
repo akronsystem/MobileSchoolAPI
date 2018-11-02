@@ -42,11 +42,10 @@ namespace MobileSchoolAPI.Controllers
 
             bhobj.SaveAttendance(atteobj);
             //  bhobj.StudentsMethod(hobj);
-
-
+             
             return new Results
             {
-                Message = "Homework assign successfully"
+                Message = "Attendance save successfully"
             };
 
         }
