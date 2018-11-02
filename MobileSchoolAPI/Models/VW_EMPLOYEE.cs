@@ -1,4 +1,4 @@
-namespace MobileSchoolAPI
+namespace MobileSchoolAPI.Models
 {
     using System;
     using System.Collections.Generic;
@@ -9,20 +9,33 @@ namespace MobileSchoolAPI
     public partial class VW_EMPLOYEE
     {
         [Key]
-        public long EMPLOYEEID { get; set; }
+        [Column(Order = 0)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public long ID { get; set; }
 
         [StringLength(50)]
-        public string EMPLOYEENAME { get; set; }
+        public string NAME { get; set; }
 
-        public long? DEPARTMENTID { get; set; }
+        public DateTime? DOB { get; set; }
+
+        [StringLength(90)]
+        public string EMAIL { get; set; }
 
         [StringLength(11)]
-        public string MOBILENO { get; set; }
+        public string MOBILE { get; set; }
+
+        [StringLength(10)]
+        public string GENDER { get; set; }
 
         [StringLength(50)]
         public string IMAGEPATH { get; set; }
 
         [StringLength(50)]
-        public string EMPCODE { get; set; }
+        public string UserType { get; set; }
+
+        [Key]
+        [Column(Order = 1)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public long UserId { get; set; }
     }
 }

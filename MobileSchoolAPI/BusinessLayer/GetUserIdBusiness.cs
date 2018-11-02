@@ -21,17 +21,18 @@ namespace MobileSchoolAPI.BusinessLayer
                 if (getusertype.UserType == "STUDENT")
                 {
                     STUDENTINFO_BUSINESS obj = new STUDENTINFO_BUSINESS();
-                    result = obj.objmethod(int.Parse(getusertype.EmpCode));
-                    
+                    result = obj.objmethod(int.Parse(getusertype.EmpCode), UserId.UserId);
+                }
+                else if (getusertype.UserType == "Alumini")
+                {
+                    return "ALUMINI USER";
                 }
                 else
                 {
                     GetTeacherInfoBusiness obj = new GetTeacherInfoBusiness();
-                    result = obj.objmethod(int.Parse(getusertype.EmpCode));
-
+                    result = obj.objmethod(int.Parse(getusertype.EmpCode), UserId.UserId);
                 }
                 return result;
-
             }
             catch (Exception ex)
             {
