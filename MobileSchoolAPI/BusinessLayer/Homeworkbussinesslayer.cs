@@ -27,7 +27,7 @@ namespace MobileSchoolAPI.BusinessLayer
             objHomework.ACADEMICYEAR = "2018-2019";
 
             db.TBLHOMEWORKs.Add(objHomework);
-            //db.SaveChanges();
+            db.SaveChanges();
             
             string[] divid = objHomework.DIVISIONID.ToString().Split(',');
             for (int d = 0; d < divid.Length; d++)

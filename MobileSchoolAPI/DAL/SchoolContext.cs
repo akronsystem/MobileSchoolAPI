@@ -55,7 +55,8 @@ namespace MobileSchoolAPI.Models
         public virtual DbSet<TBLNOTIFICATIONDETAIL> TBLNOTIFICATIONDETAILs { get; set; }
 
         public virtual DbSet<VIEWNOTIFICATION> VIEWNOTIFICATIONs { get; set; }
-
+        public virtual DbSet<Vw_STANDARDLIST> Vw_STANDARDLIST { get; set; }
+        public virtual DbSet<Vw_STUDSTANDARD> Vw_STUDSTANDARD { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
