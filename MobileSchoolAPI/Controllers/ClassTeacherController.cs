@@ -1,6 +1,6 @@
 using MobileSchoolAPI.BusinessLayer;
 using MobileSchoolAPI.Models;
- 
+using MobileSchoolAPI.ResultModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +25,7 @@ namespace MobileSchoolAPI.Controllers
             int days = DateTime.DaysInMonth(year, objPA.MONTH);
             ClassTeacherData objCT = new ClassTeacherData();                
             var result = objCT.GetAttendanceStatus(objPA);
-            return result; 
+            return new MonthlyAttendanceResult() { IsSuccess = "true", DateWiseStatus = result }; 
      
         }
     }

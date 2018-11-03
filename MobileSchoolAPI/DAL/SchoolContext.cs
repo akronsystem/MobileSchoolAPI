@@ -31,7 +31,8 @@ namespace MobileSchoolAPI.Models
         public virtual DbSet<VWATTENDANCEBYDATESTUDENT> VWATTENDANCEBYDATESTUDENTs { get; set; }
 
         public virtual DbSet<VWATTENDANCEEMPLOYEE> VWATTENDANCEEMPLOYEEs { get; set; }
-		public virtual DbSet<VIEWEMPDIVISION> VIEWEMPDIVISIONs { get; set; }
+
+        public virtual DbSet<VIEWEMPDIVISION> VIEWEMPDIVISIONs { get; set; }
 																			  
 		public virtual DbSet<VIEWSTUDENTDIVISION> VIEWSTUDENTDIVISIONs { get; set; }
 		public virtual DbSet<VWSTUDENTINFO> VWSTUDENTINFO { get; set; }
@@ -55,6 +56,11 @@ namespace MobileSchoolAPI.Models
         public virtual DbSet<TBLNOTIFICATIONDETAIL> TBLNOTIFICATIONDETAILs { get; set; }
 
         public virtual DbSet<VIEWNOTIFICATION> VIEWNOTIFICATIONs { get; set; }
+
+        public virtual DbSet<VIewAttendaceClasswiseCheck> VIewAttendaceClasswiseChecks { get; set; }
+
+        public virtual DbSet<VIEWCHECKHOLIDAY> VIEWCHECKHOLIDAYs { get; set; }
+
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
