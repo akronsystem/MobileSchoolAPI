@@ -12,6 +12,8 @@ namespace MobileSchoolAPI.Models
         [Key]
         [Column(Order = 0)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
+
+        public Int64 UserId { get; set; }
         public long STANDARDID { get; set; }
 
         [StringLength(251)]
@@ -21,5 +23,7 @@ namespace MobileSchoolAPI.Models
         [Column(Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public long DIVISIONID { get; set; }
+
+     
     }
 }

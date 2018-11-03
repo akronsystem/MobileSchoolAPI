@@ -6,23 +6,21 @@ namespace MobileSchoolAPI.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("VIEWDIVISIONWISESUBJECT")]
-    public partial class VIEWDIVISIONWISESUBJECT
+    [Table("VIEWDIVISIONWISESUBJECTSTUDENT")]
+    public partial class VIEWDIVISIONWISESUBJECTSTUDENT
     {
         [Key]
         [Column(Order = 0)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public long SUBJECTID { get; set; }
+        public long DIVISIONID { get; set; }
+
+        public long? DISPLAY { get; set; }
 
         public string SUBJECTNAME { get; set; }
 
         [Key]
         [Column(Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public long DIVISIONID { get; set; }
-
-        public long? DISPLAY { get; set; }
-
-        public Int64 UserId { get; set; }
+        public long UserId { get; set; }
     }
 }
