@@ -19,6 +19,14 @@ namespace MobileSchoolAPI.Controllers
             GetDivisionInfoBusiness obj = new GetDivisionInfoBusiness();
 			return new DivisionListByUserResult() { IsSuccess = "true", DivisionList = obj.GetDivision(objdiv) };
 		}
+        public object ViewDivision([FromBody]PARAMSTD objstd)
+        {
+            GETHOMEWORK objhome = new GETHOMEWORK();
+            // return objhome.GetStandard(objstd);
+            return new DivisionListResult() { IsSuccess = "true", DivisionListByUser = objhome.GetStandard(objstd) };
+
+
+        }
 
     }
 }

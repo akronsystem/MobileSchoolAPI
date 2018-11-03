@@ -44,17 +44,36 @@ namespace MobileSchoolAPI.BusinessLayer
         {
             try
             {
+                var GETTYPE = db.VW_GET_USER_TYPE.Where(r => r.UserId == obj.USERID).ToList();
 
-                var Division = db.VIEWDIVISIONLISTs.Where(r => r.STANDARDID == obj.STANDARDID);
-
-                if (Division == null)
+                if (GETTYPE[0].UserType != "STUDENT")
                 {
-                    return new Error() { IsError = true, Message = "Division Not Found" };
+                    var Division = db.VIEWDIVISIONLISTs.Where(r => r.STANDARDID == obj.STANDARDID && r.UserId == obj.USERID);
+
+                    if (Division == null)
+                    {
+                        return new Error() { IsError = true, Message = "Division Not Found" };
+                    }
+                    else
+                    {
+                        return Division;
+                    }
                 }
                 else
                 {
-                    return Division;
+                    var Division = db.VIEWDIVISIONLISTBYSTUDENTs.Where(r => r.STANDARDID == obj.STANDARDID && r.UserId == obj.USERID);
+
+                    if (Division == null)
+                    {
+                        return new Error() { IsError = true, Message = "Division Not Found" };
+                    }
+                    else
+                    {
+                        return Division;
+                    }
                 }
+
+               
             }
             catch (Exception E)
             {
@@ -94,13 +113,13 @@ namespace MobileSchoolAPI.BusinessLayer
         {
             try
             {
-                var EmpHomework = db.VIEWHOMEWORKs.Where(r => r.UserId == obj.userid && r.DIVISIONID==obj.divisionid).ToList();
+                var EmpHomework = db.VIEWHOMEWORKs.Where(r => r.UserId == obj.userid && r.HOMEWORKDATE==obj.homeworkdate).ToList();
 
 
 
                 if (EmpHomework.Count() == 0)
                 {
-                    var StudentHomework = db.VIEWSTUDENTHOMEWORKs.Where(r => r.UserId == obj.userid && r.DIVISIONID == obj.divisionid).ToList();
+                    var StudentHomework = db.VIEWSTUDENTHOMEWORKs.Where(r => r.UserId == obj.userid && r.HOMEWORKDATE == obj.homeworkdate).ToList();
 
                     if (StudentHomework.Count() == 0)
                     {

@@ -53,5 +53,7 @@ namespace MobileSchoolAPI.Models
         public string SUBJECTNAME { get; set; }
 
         public long? DISPLAY { get; set; }
+
+        
     }
 }

@@ -206,7 +206,9 @@
     <Compile Include="Models\VIEWCLASSTEACHER.cs" />
     <Compile Include="Models\VIEWDIVISIONLIST.cs" />
     <Compile Include="Models\VIEWDIVISIONLISTBYEMP.cs" />
+    <Compile Include="Models\VIEWDIVISIONLISTBYSTUDENT.cs" />
     <Compile Include="Models\VIEWDIVISIONWISESUBJECT.cs" />
+    <Compile Include="Models\VIEWDIVISIONWISESUBJECTSTUDENT.cs" />
     <Compile Include="Models\VIEWEMPDIVISION.cs" />
     <Compile Include="Models\VIEWGETSTUDENTATT.cs" />
     <Compile Include="Models\StudinfoParameters.cs" />
