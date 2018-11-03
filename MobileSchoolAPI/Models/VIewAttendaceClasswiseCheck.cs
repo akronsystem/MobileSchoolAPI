@@ -6,8 +6,8 @@ namespace MobileSchoolAPI.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("VWATTENDANCEEMPLOYEE")]
-    public partial class VWATTENDANCEEMPLOYEE
+    [Table("VIewAttendaceClasswiseCheck")]
+    public partial class VIewAttendaceClasswiseCheck
     {
         [Key]
         [Column(Order = 0)]
@@ -16,9 +16,13 @@ namespace MobileSchoolAPI.Models
 
         public DateTime? ATTEDANCEDATE { get; set; }
 
-        public int? ATTMONTH { get; set; }
-
         public int? DISPLAY { get; set; }
+
+        [StringLength(15)]
+        public string ACADEMICYEAR { get; set; }
+
+        [StringLength(20)]
+        public string EDUCATIONYEAR { get; set; }
 
         [Key]
         [Column(Order = 1)]
