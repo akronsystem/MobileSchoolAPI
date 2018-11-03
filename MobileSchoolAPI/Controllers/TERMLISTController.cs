@@ -1,4 +1,5 @@
 ﻿using MobileSchoolAPI.BusinessLayer;
+using MobileSchoolAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,13 +11,14 @@ namespace MobileSchoolAPI.Controllers
 {
     public class TERMLISTController : ApiController
     {
-        [HttpPost]
+        [HttpGet]
 
         public object GETTERMLIST()
         {
             GETTERMLISTBL OBJTERM = new GETTERMLISTBL();
             var GETTERMVAR = OBJTERM.TERMLISTBL();
-            return GETTERMVAR;
+            return new TermListResult() { IsSuccess="true",TermList=GETTERMVAR};
+           
         }
     }
 }
