@@ -55,15 +55,15 @@ namespace MobileSchoolAPI.Models
         public virtual DbSet<TBLNOTIFICATION> TBLNOTIFICATIONs { get; set; }
         public virtual DbSet<TBLNOTIFICATIONDETAIL> TBLNOTIFICATIONDETAILs { get; set; }
 
-        public virtual DbSet<VIEWNOTIFICATION> VIEWNOTIFICATIONs { get; set; }
-
+        public virtual DbSet<VIEWNOTIFICATION> VIEWNOTIFICATIONs { get; set; } 
         public virtual DbSet<VIewAttendaceClasswiseCheck> VIewAttendaceClasswiseChecks { get; set; }
 
         public virtual DbSet<VIEWCHECKHOLIDAY> VIEWCHECKHOLIDAYs { get; set; }
-
-
-
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+ 
+        public virtual DbSet<VIEWDIVISIONLISTBYSTUDENT> VIEWDIVISIONLISTBYSTUDENTs { get; set; }
+        public virtual DbSet<VIEWDIVISIONWISESUBJECTSTUDENT> VIEWDIVISIONWISESUBJECTSTUDENTs { get; set; }
+ 
+    protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
 			modelBuilder.Entity<TBLUSERLOGIN>()
 				.Property(e => e.EmpCode)
