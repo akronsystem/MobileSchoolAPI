@@ -29,5 +29,25 @@ namespace MobileSchoolAPI.Controllers
 			return new STUDENTLISTRESULT() { IsSuccess = "True", StudentResult = GETOBJ.GETSTUDENT(OBJ) };
 		}
 
+
+
+
+        public object AttendanceSave([FromBody]AttendanceParameterscs atteobj)
+        {
+
+            Homeworkbussinesslayer bhobj = new Homeworkbussinesslayer();
+
+
+            bhobj.SaveAttendance(atteobj);
+            //  bhobj.StudentsMethod(hobj);
+
+            return new Results
+            {
+                IsSuccess="true",
+                Message = "Attendance save successfully"
+            };
+
+        }
+
     }
 }

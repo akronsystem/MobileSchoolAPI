@@ -30,5 +30,31 @@ namespace MobileSchoolAPI.Controllers
 			return new DivisionListResult() { IsSuccess = "true", HomeWork = obj.ViewHomeWorkbyUser(objhome) };
 
 		}
-	}
+
+
+
+        [HttpPost]
+        public object HomeworkSave([FromBody]homeworkparameters hobj)
+        {
+
+            Homeworkbussinesslayer bhobj = new Homeworkbussinesslayer();
+
+
+            bhobj.Savehomework(hobj);
+            //  bhobj.StudentsMethod(hobj);
+
+
+            return new Results
+            {
+
+                IsSuccess = "true",
+                Message = "Homework assign successfully"
+            };
+
+
+
+        }
+
+       
+    }
 }
