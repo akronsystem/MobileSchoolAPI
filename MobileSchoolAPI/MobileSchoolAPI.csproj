@@ -170,7 +170,6 @@
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\DivisionListController.cs" />
     <Compile Include="Controllers\GetSubjectList.cs" />
-    <Compile Include="Controllers\HomeWorkConController.cs" />
     <Compile Include="Controllers\HomeWorkController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\PARAMHOMEWORKBYUSER.cs" />
