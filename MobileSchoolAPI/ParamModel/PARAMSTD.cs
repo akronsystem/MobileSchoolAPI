@@ -10,7 +10,7 @@ namespace MobileSchoolAPI.Models
 
         public int STANDARDID { get; set; }
 
-        public string USERID { get; set; }
+        public Int64 USERID { get; set; }
         public string PASSWORD { get; set; }
     }
 }

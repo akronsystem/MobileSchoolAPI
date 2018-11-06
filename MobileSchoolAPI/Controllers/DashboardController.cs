@@ -35,8 +35,7 @@ namespace MobileSchoolAPI.Controllers
             GetUserIdBusiness GUIobj = new GetUserIdBusiness();
             var result = GUIobj.GetUserId(UserId);
 
-         
-           
+          
             return result;
         }
     }

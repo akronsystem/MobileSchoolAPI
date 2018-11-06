@@ -10,8 +10,8 @@ namespace MobileSchoolAPI.Models
         public int MONTH { get; set; }
         //public int STANDARDID { get; set; }
 
-        public int DIVISIONID { get; set; }
-        public string UserId { get; set; }
+       // public int DIVISIONID { get; set; }
+        public int UserId { get; set; }
         public string Password { get; set; }
     }
 }

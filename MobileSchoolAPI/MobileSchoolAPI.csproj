@@ -170,7 +170,6 @@
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\DivisionListController.cs" />
     <Compile Include="Controllers\GetSubjectList.cs" />
-    <Compile Include="Controllers\HomeWorkConController.cs" />
     <Compile Include="Controllers\HomeWorkController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\PARAMHOMEWORKBYUSER.cs" />
@@ -206,7 +205,9 @@
     <Compile Include="Models\VIEWCLASSTEACHER.cs" />
     <Compile Include="Models\VIEWDIVISIONLIST.cs" />
     <Compile Include="Models\VIEWDIVISIONLISTBYEMP.cs" />
+    <Compile Include="Models\VIEWDIVISIONLISTBYSTUDENT.cs" />
     <Compile Include="Models\VIEWDIVISIONWISESUBJECT.cs" />
+    <Compile Include="Models\VIEWDIVISIONWISESUBJECTSTUDENT.cs" />
     <Compile Include="Models\VIEWEMPDIVISION.cs" />
     <Compile Include="Models\VIEWGETSTUDENTATT.cs" />
     <Compile Include="Models\StudinfoParameters.cs" />

@@ -10,21 +10,22 @@ namespace MobileSchoolAPI.BUSINESSLAYER
     public class STUDENTINFO_BUSINESS
     {
         SchoolContext db = new SchoolContext();
-        public object objmethod(int probj)
+        public object objmethod(int probj,long UserId)
         {
             try
             {
 
-                var result = db.VW_STUDENT_INFO.Where(r => r.STUDENTID == probj).ToList();
+                var result = db.VW_STUDENT_INFO.Where(r => r.ID == probj && r.UserId== UserId).FirstOrDefault();
 
                 if (result == null)
                 {
-                    return "not found";
+                    return new Error() { IsError = true, Message = "USER Not Found" };
                 }
                 else
                 {
                     return result;
                 }
+                //return result;
             }
             catch (Exception ex)
             {

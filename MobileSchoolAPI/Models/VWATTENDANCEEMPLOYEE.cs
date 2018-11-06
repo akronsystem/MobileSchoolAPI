@@ -10,11 +10,19 @@ namespace MobileSchoolAPI.Models
     public partial class VWATTENDANCEEMPLOYEE
     {
         [Key]
+        [Column(Order = 0)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public long UserId { get; set; }
 
         public DateTime? ATTEDANCEDATE { get; set; }
 
+        public int? ATTMONTH { get; set; }
+
         public int? DISPLAY { get; set; }
+
+        [Key]
+        [Column(Order = 1)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public long ATTEDANCEMID { get; set; }
     }
 }

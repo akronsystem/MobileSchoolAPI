@@ -13,7 +13,9 @@ namespace MobileSchoolAPI.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public long UserId { get; set; }
 
-        public long? DIVISIONID { get; set; }
+        
+        public int ATTMONTH { get; set; }
+
 
         public DateTime? ATTEDANCEDATE { get; set; }
 

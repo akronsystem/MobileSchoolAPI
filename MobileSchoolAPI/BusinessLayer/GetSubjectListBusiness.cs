@@ -16,12 +16,23 @@ namespace MobileSchoolAPI.BusinessLayer
         {
             try
             {
-                var SubjectList = db.VIEWDIVISIONWISESUBJECTs.Where(r => r.DIVISIONID == objdiv.divisionid &&  r.DISPLAY == 1).ToList();
+                var SubjectList = db.VIEWDIVISIONWISESUBJECTs.Where(r => r.DIVISIONID == objdiv.divisionid &&  r.DISPLAY == 1 && r.UserId==objdiv.userid).ToList();
                 if (SubjectList.Count == 0)
                 {
-                    
+                var StudSubjectList = db.VIEWDIVISIONWISESUBJECTSTUDENTs.Where(r => r.DIVISIONID == objdiv.divisionid &&  r.DISPLAY == 1 && r.UserId==objdiv.userid).ToList();
+                    if (StudSubjectList.Count == 0)
+                    {
                         return new Error() { IsError = true, Message = "Subject Not Found" };
-                   
+
+                    }
+                    else
+                    {
+                        return StudSubjectList;
+
+                    }
+
+
+
                 }
                 else
                 {

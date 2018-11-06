@@ -17,7 +17,7 @@ namespace MobileSchoolAPI.Controllers
         [HttpPost]
         public object getStdDivList([FromBody]ParamDIVISIONLIST objdiv)
         {
-            GetDivisionInfoBusiness obj = new GetDivisionInfoBusiness();
+            GetDivisionInfoBusiness obj = new GetDivisionInfoBusiness(); 
             return new DivisionListByUserResult() { IsSuccess = "true", DivisionList = obj.GetDivision(objdiv) };
         }
         [HttpPost]
@@ -25,7 +25,16 @@ namespace MobileSchoolAPI.Controllers
         {
             GetStandardList objstd = new GetStandardList();
             var result = objstd.GetStdList(objdiv);
-            return new StdListResult() { IsSuccess = "true", StandardList = result };
+            return new StdListResult() { IsSuccess = "true", StandardList = result };  
+		}
+        public object ViewDivision([FromBody]PARAMSTD objstd)
+        {
+            GETHOMEWORK objhome = new GETHOMEWORK();
+            // return objhome.GetStandard(objstd);
+            return new DivisionListResult() { IsSuccess = "true", DivisionListByUser = objhome.GetStandard(objstd) };
+
+
+        } 
 
         }
     }
