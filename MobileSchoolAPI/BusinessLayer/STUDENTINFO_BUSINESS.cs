@@ -15,11 +15,11 @@ namespace MobileSchoolAPI.BUSINESSLAYER
             try
             {
 
-                var result = db.VW_STUDENT_INFO.Where(r => r.ID == probj && r.UserId== UserId).ToList();
+                var result = db.VW_STUDENT_INFO.Where(r => r.ID == probj && r.UserId== UserId).FirstOrDefault();
 
-                if (result.Count == 0)
+                if (result == null)
                 {
-                    return "Record Not Found";
+                    return new Error() { IsError = true, Message = "USER Not Found" };
                 }
                 else
                 {

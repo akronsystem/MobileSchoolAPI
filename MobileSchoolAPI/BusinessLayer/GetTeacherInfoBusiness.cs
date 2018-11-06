@@ -11,11 +11,11 @@ namespace MobileSchoolAPI.BUSINESSLAYER
         SchoolContext db = new SchoolContext();
         public object objmethod(int probj,long UserId)
         {
-            var result = db.VW_EMPLOYEE.Where(r => r.ID == probj && r.UserId == UserId).ToList();
+            var result = db.VW_EMPLOYEE.Where(r => r.ID == probj && r.UserId == UserId).FirstOrDefault();
 
-            if (result.Count == 0)
+            if (result == null)
             {
-                return "Record Not Found";
+                return new Error() { IsError = true, Message = "USER Not Found" };
             }
             else
             {
