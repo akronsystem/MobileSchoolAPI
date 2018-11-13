@@ -6,7 +6,7 @@ using System.Web;
 
 namespace MobileSchoolAPI.BusinessLayer
 {
-    public class GETTERMLISTBL
+    public class GetTermListBusiness
     {
         SchoolContext db = new SchoolContext();
 
@@ -15,10 +15,12 @@ namespace MobileSchoolAPI.BusinessLayer
             try
             {
                 var getlist = db.VIEW_TERMMASTER.ToList();
+
                 if (getlist == null)
                     return new Error() { IsError = true, Message = "TERM LIST NOT FOUND." };
                 else
                     return getlist;
+
             }
             catch (Exception ex)
             {
