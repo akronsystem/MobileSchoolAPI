@@ -16,5 +16,11 @@ namespace MobileSchoolAPI.Models
 
         [StringLength(50)]
         public string UserType { get; set; }
+
+        [StringLength(50)]
+        public string UserName { get; set; }
+
+        [StringLength(100)]
+        public string Password { get; set; }
     }
 }
