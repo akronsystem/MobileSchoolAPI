@@ -25,11 +25,14 @@ namespace MobileSchoolAPI.Models
 		public virtual DbSet<VIEWDIVISIONLISTBYEMP> VIEWDIVISIONLISTBYEMPs { get; set; }
 		public virtual DbSet<VIEWCLASSTEACHER> VIEWCLASSTEACHERs { get; set; }
 
-		public virtual DbSet<VIEWATTENDANCECHECK> VIEWATTENDANCECHECKs { get; set; }
+        public virtual DbSet<VWATTENDANCEBYDATESTUDENT> VWATTENDANCEBYDATESTUDENTs { get; set; }
+
+        public virtual DbSet<VIEWATTENDANCECHECK> VIEWATTENDANCECHECKs { get; set; }
         public virtual DbSet<VW_GET_USER_TYPE> VW_GET_USER_TYPE { get; set; }
 
 
-        public virtual DbSet<VWATTENDANCEBYDATESTUDENT> VWATTENDANCEBYDATESTUDENTs { get; set; }
+
+
 
         public virtual DbSet<VWATTENDANCEEMPLOYEE> VWATTENDANCEEMPLOYEEs { get; set; }
 
