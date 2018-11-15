@@ -30,7 +30,7 @@ namespace MobileSchoolAPI.Controllers
 		{
 			try
 			{
-
+                //edit
                 LoginManager objLogin = new LoginManager();
 				var logindetail = objLogin.GetLoginDetails(userLogin);
 
