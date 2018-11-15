@@ -142,7 +142,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -200,8 +202,11 @@
     <Compile Include="Models\TBLNOTIFICATION.cs" />
     <Compile Include="Models\TBLNOTIFICATIONDETAIL.cs" />
     <Compile Include="Models\TBLUSERLOGIN.cs" />
+    <Compile Include="Models\TermListResult.cs" />
+    <Compile Include="Models\VIewAttendaceClasswiseCheck.cs" />
     <Compile Include="Models\VIEWATTENDANCE.cs" />
     <Compile Include="Models\VIEWATTENDANCECHECK.cs" />
+    <Compile Include="Models\VIEWCHECKHOLIDAY.cs" />
     <Compile Include="Models\VIEWCLASSTEACHER.cs" />
     <Compile Include="Models\VIEWDIVISIONLIST.cs" />
     <Compile Include="Models\VIEWDIVISIONLISTBYEMP.cs" />
@@ -243,6 +248,7 @@
     <Compile Include="ResultHomework\Homework.cs" />
     <Compile Include="ResultModel\AttendanceResult.cs" />
     <Compile Include="ResultModel\ClassTeacherResult.cs" />
+    <Compile Include="ResultModel\MonthlyAttendanceResult.cs" />
     <Compile Include="ResultModel\StudentListResult.cs" />
   </ItemGroup>
   <ItemGroup>

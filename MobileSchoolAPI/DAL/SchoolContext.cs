@@ -10,6 +10,7 @@ namespace MobileSchoolAPI.Models
 		public SchoolContext()
 			: base("name=SchoolContext")
 		{
+			
 		}
 
 		public virtual DbSet<TBLUSERLOGIN> TBLUSERLOGINs { get; set; }	   

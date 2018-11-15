@@ -21,7 +21,8 @@ namespace MobileSchoolAPI.Controllers
         /// <param name="UserName"></param>
         /// <param name="Password"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPost]  
+
         public object ATTENDANCESTUDENT([FromBody]GETSTUDENTPARAM OBJ)  
         {
             GETSTUDENTATTBL GETOBJ = new GETSTUDENTATTBL();

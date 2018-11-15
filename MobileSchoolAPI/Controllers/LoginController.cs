@@ -31,6 +31,7 @@ namespace MobileSchoolAPI.Controllers
 			{
 				LoginManager objLogin = new LoginManager();
 				var logindetail = objLogin.GetLoginDetails(userLogin);
+
 				if (logindetail == null)
 					return new Error() { IsError = true, Message = "User Name & Passowrd is Incorrect" };
 				else
