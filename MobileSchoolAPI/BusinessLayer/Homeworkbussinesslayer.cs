@@ -27,8 +27,19 @@ namespace MobileSchoolAPI.BusinessLayer
             objHomework.ACADEMICYEAR = "2018-2019";
 
             db.TBLHOMEWORKs.Add(objHomework);
-            //db.SaveChanges();
-            
+            db.SaveChanges();
+
+            TBLNOTIFICATION objnotification = new TBLNOTIFICATION();
+            objnotification.TITLE = obj.homeworkdescription;
+            objnotification.NOTIFICATIONDATE = DateTime.Now;
+            objnotification.NOTIFICATIONTIME = DateTime.Now.ToString("h:mm tt");
+            objnotification.DIVISIONID =int.Parse(obj.division);
+            objnotification.ACADEMICYEAR = "2018-2019";
+            objnotification.NOTIFICATIONTYPE = "Homework";
+            db.TBLNOTIFICATIONs.Add(objnotification);
+            db.SaveChanges();
+
+
             string[] divid = objHomework.DIVISIONID.ToString().Split(',');
             for (int d = 0; d < divid.Length; d++)
             {
