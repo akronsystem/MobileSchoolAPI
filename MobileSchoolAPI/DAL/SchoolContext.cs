@@ -57,10 +57,11 @@ namespace MobileSchoolAPI.Models
 
 
         public virtual DbSet<TBLNOTIFICATION> TBLNOTIFICATIONs { get; set; }
-        public virtual DbSet<TBLNOTIFICATIONDETAIL> TBLNOTIFICATIONDETAILs { get; set; }
-
-        public virtual DbSet<VIEWNOTIFICATION> VIEWNOTIFICATIONs { get; set; } 
-        public virtual DbSet<VIewAttendaceClasswiseCheck> VIewAttendaceClasswiseChecks { get; set; }
+        public virtual DbSet<TBLNOTIFICATIONDETAIL> TBLNOTIFICATIONDETAILs { get; set; } 
+        public virtual DbSet<VIEWNOTIFICATION> VIEWNOTIFICATIONs { get; set; }
+        public virtual DbSet<Vw_STANDARDLIST> Vw_STANDARDLIST { get; set; }
+        public virtual DbSet<Vw_STUDSTANDARD> Vw_STUDSTANDARD { get; set; }  
+        public virtual DbSet<VIewAttendaceClasswiseCheck> VIewAttendaceClasswiseChecks { get; set; } 
 
         public virtual DbSet<VIEWCHECKHOLIDAY> VIEWCHECKHOLIDAYs { get; set; }
  
