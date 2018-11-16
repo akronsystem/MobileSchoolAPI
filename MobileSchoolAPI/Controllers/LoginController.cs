@@ -1,4 +1,5 @@
 ﻿using MobileSchoolAPI.BusinessLayer;
+using MobileSchoolAPI.BUSINESSLAYER;
 using MobileSchoolAPI.Models;
 using MobileSchoolAPI.ParamModel;
 using System;
@@ -37,15 +38,23 @@ namespace MobileSchoolAPI.Controllers
 				var logindetail = objLogin.GetLoginDetails(userLogin);
                 
 
-                if(logindetail.UserType=="STUDENT")
+                if (logindetail.UserType=="STUDENT")
                 {
+                    //VWSTUDENTINFO
+                    STUDENTINFO_BUSINESS StudBL = new STUDENTINFO_BUSINESS();
+                    var result = StudBL.getStudLogo(int.Parse(logindetail.EmpCode), logindetail.UserId);
+                    
                     StudentBaseUrl = ConfigurationManager.AppSettings["StxavierBaseUrlStudent"];
-                    logindetail.BaseUrl=StudentBaseUrl+logindetail.IMAGEPATH;
+                    logindetail.BaseUrl=StudentBaseUrl+result;
                 }
                 else
                 {
+                    //VW_EMPLOYEE
+                    GetTeacherInfoBusiness TeacherBL = new GetTeacherInfoBusiness();
+                    var result=TeacherBL.getTeacherLogo(int.Parse(logindetail.EmpCode), logindetail.UserId);
+
                     TeacherBaseUrl = ConfigurationManager.AppSettings["StxavierBaseUrlTeacher"];
-                    logindetail.BaseUrl = TeacherBaseUrl + logindetail.IMAGEPATH;
+                    logindetail.BaseUrl = TeacherBaseUrl + result;
                 }
 				if (logindetail == null)
 					return new Error() { IsError = true, Message = "User Name & Passowrd is Incorrect" };
