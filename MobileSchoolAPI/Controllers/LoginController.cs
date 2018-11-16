@@ -30,10 +30,12 @@ namespace MobileSchoolAPI.Controllers
 		{
 			try
 			{
-				LoginManager objLogin = new LoginManager();
-				var logindetail = objLogin.GetLoginDetails(userLogin);
                 string TeacherBaseUrl = "";
                 string StudentBaseUrl = "";
+
+                LoginManager objLogin = new LoginManager();
+				var logindetail = objLogin.GetLoginDetails(userLogin);
+                
 
                 if(logindetail.UserType=="STUDENT")
                 {
