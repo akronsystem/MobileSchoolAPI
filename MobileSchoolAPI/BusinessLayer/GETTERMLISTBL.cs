@@ -6,7 +6,7 @@ using System.Web;
 
 namespace MobileSchoolAPI.BusinessLayer
 {
-    public class GetTermListBusiness
+    public class GETTERMLISTBL
     {
         SchoolContext db = new SchoolContext();
 

@@ -5,7 +5,7 @@ using System.Web;
 using System.ComponentModel.DataAnnotations;
 namespace MobileSchoolAPI.Models
 {
-    public class GetUserIdParameter
+    public class GetUserId
     {
         [Key]
         public long UserId { get; set; }

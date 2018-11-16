@@ -14,7 +14,7 @@ namespace MobileSchoolAPI.Controllers
     {
         
         [HttpPost]
-        public object GetDashboard([FromBody]GetUserIdParameter UserId)
+        public object GetDashboard([FromBody]GetUserId UserId)
         {
             GetUserIdBusiness GetUserIdobj = new GetUserIdBusiness();
             var result = GetUserIdobj.getUserInfo(UserId);

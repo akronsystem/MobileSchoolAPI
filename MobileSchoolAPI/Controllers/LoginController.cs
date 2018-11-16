@@ -3,6 +3,7 @@ using MobileSchoolAPI.Models;
 using MobileSchoolAPI.ParamModel;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -31,7 +32,19 @@ namespace MobileSchoolAPI.Controllers
 			{
 				LoginManager objLogin = new LoginManager();
 				var logindetail = objLogin.GetLoginDetails(userLogin);
+                string TeacherBaseUrl = "";
+                string StudentBaseUrl = "";
 
+                if(logindetail.UserType=="STUDENT")
+                {
+                    StudentBaseUrl = ConfigurationManager.AppSettings["StxavierBaseUrlStudent"];
+                    logindetail.BaseUrl=StudentBaseUrl+logindetail.IMAGEPATH;
+                }
+                else
+                {
+                    TeacherBaseUrl = ConfigurationManager.AppSettings["StxavierBaseUrlTeacher"];
+                    logindetail.BaseUrl = TeacherBaseUrl + logindetail.IMAGEPATH;
+                }
 				if (logindetail == null)
 					return new Error() { IsError = true, Message = "User Name & Passowrd is Incorrect" };
 				else

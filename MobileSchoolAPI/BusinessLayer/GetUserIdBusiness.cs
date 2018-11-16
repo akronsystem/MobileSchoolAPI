@@ -11,7 +11,7 @@ namespace MobileSchoolAPI.BusinessLayer
     {
         SchoolContext db = new SchoolContext();
 
-        public object getUserInfo(GetUserIdParameter UserId)
+        public object getUserInfo(GetUserId UserId)
         {
             try
             {
@@ -23,7 +23,7 @@ namespace MobileSchoolAPI.BusinessLayer
 
                     if (getUserType.UserType == "STUDENT")
                     {
-                        GetStudentInfoBusiness GetStudobj = new GetStudentInfoBusiness();
+                        STUDENTINFO_BUSINESS GetStudobj = new STUDENTINFO_BUSINESS();
                         result = GetStudobj.getStudInfo(int.Parse(getUserType.EmpCode), UserId.UserId);
                     }
                     else if (getUserType.UserType == "Alumini")

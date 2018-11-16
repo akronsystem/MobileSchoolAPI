@@ -7,7 +7,7 @@ using System.Web;
 namespace MobileSchoolAPI.BUSINESSLAYER
 {
 
-    public class GetStudentInfoBusiness
+    public class STUDENTINFO_BUSINESS
     {
         SchoolContext db = new SchoolContext();
         public object getStudInfo(int empcode,long UserId)
