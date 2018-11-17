@@ -44,54 +44,98 @@ namespace MobileSchoolAPI.BusinessLayer
                 List<DateTime> li = GetDates(year, PA.MONTH);
                 CheckUsernamePassword objUP = new CheckUsernamePassword();
                 bool iStrue = objUP.ValidateUsernamePassword(PA.UserId, PA.Password);
-                if (iStrue)
-                {
-                    List<Result> lt = new List<Result>();
-                    var USERTYPE = db.VW_GET_USER_TYPE.Where(r => r.UserId == PA.UserId).ToList();
+				if (iStrue == false)
+				{
+					return new Error() { IsError = true, Message = "UserId and Password Do Not Match" };  
+				}
+                List<Result> lt = new List<Result>();
+                var USERTYPE = db.VW_GET_USER_TYPE.Where(r => r.UserId == PA.UserId).ToList();
 
-                    if (USERTYPE[0].UserType == "STUDENT")
+                if (USERTYPE[0].UserType == "STUDENT")
+                {
+                    var ATTENDANCEDATA = db.VWATTENDANCEBYDATESTUDENTs.Where(r => r.ATTMONTH == PA.MONTH && r.UserId == PA.UserId).ToList();
+                    //var HOLIDAYDATA = db.VIEWCHECKHOLIDAYs.Where(r => r.HOLIDAYDATE == PA.MONTH && r.DISPLAY == 1).ToList();
+
+                    int flag = 0;
+                    foreach (var item in li)
                     {
-                        var ATTENDANCEDATA = db.VWATTENDANCEBYDATESTUDENTs.Where(r => r.ATTMONTH == PA.MONTH && r.UserId == PA.UserId).ToList();
+                        var checkattendace = db.VIewAttendaceClasswiseChecks.Where(r => r.UserId == PA.UserId && r.ATTEDANCEDATE == item && r.DISPLAY == 1 && r.EDUCATIONYEAR == "2018-2019" && r.ACADEMICYEAR == "2018-2019").ToList();
+                        if (checkattendace.Count == 0)
+                        {
+                            Result ddl = new Result();
+                            ddl.Date = item.ToString("dd/MM/yyyy");
+                            ddl.Status = "Attendance is not marked by class teacher for this date.";
+                            lt.Add(ddl);
+                        }
+                        else
+                        {
+                            flag = 0;
+                            foreach (var att in ATTENDANCEDATA)
+                            {
+
+                                if (att.ATTEDANCEDATE == item)
+                                {
+                                    Result ddl = new Result();
+                                    ddl.Date = item.ToString("dd/MM/yyyy");
+                                    ddl.Status = "Absent";
+                                    lt.Add(ddl);
+                                    flag = 1;
+                                }
+
+
+                            }
+
+                            if (flag == 0)
+                            {
+
+                                Result ddl = new Result();
+                                ddl.Date = item.ToString("dd/MM/yyyy");
+                                ddl.Status = "Present";
+                                lt.Add(ddl);
+
+                            }
+                        }
+                    }
+                    if (lt == null)
+                        return new Error() { IsError = true, Message = "No Attendance Is Found Of This Date" };
+                    else
+                        return lt;
+                }
+
+                else
+                {
+                    if (USERTYPE[0].UserType == "CLASS TEACHER")
+                    {
+                        var ATTENDANCEDATAEMP = db.VWATTENDANCEEMPLOYEEs.Where(r => r.ATTMONTH == PA.MONTH && r.UserId == PA.UserId && r.DISPLAY == 1).ToList();
                         //var HOLIDAYDATA = db.VIEWCHECKHOLIDAYs.Where(r => r.HOLIDAYDATE == PA.MONTH && r.DISPLAY == 1).ToList();
 
                         int flag = 0;
                         foreach (var item in li)
                         {
-                            var checkattendace = db.VIewAttendaceClasswiseChecks.Where(r => r.UserId == PA.UserId && r.ATTEDANCEDATE == item && r.DISPLAY == 1 && r.EDUCATIONYEAR == "2018-2019" && r.ACADEMICYEAR == "2018-2019").ToList();
-                            if (checkattendace.Count == 0)
+                            flag = 0;
+                            foreach (var att in ATTENDANCEDATAEMP)
                             {
-                                Result ddl = new Result();
-                                ddl.Date = item.ToString("dd/MM/yyyy");
-                                ddl.Status = "Attendance is not marked by class teacher for this date.";
-                                lt.Add(ddl);
-                            }
-                            else
-                            {
-                                flag = 0;
-                                foreach (var att in ATTENDANCEDATA)
+
+                                if (att.ATTEDANCEDATE == item)
                                 {
-
-                                    if (att.ATTEDANCEDATE == item)
-                                    {
-                                        Result ddl = new Result();
-                                        ddl.Date = item.ToString("dd/MM/yyyy");
-                                        ddl.Status = "Absent";
-                                        lt.Add(ddl);
-                                        flag = 1;
-                                    }
-
-
-                                }
-
-                                if (flag == 0)
-                                {
-
                                     Result ddl = new Result();
                                     ddl.Date = item.ToString("dd/MM/yyyy");
-                                    ddl.Status = "Present";
+                                    ddl.Status = "Attendance Marked";
                                     lt.Add(ddl);
-
+                                    flag = 1;
                                 }
+
+
+                            }
+
+                            if (flag == 0)
+                            {
+
+                                Result ddl = new Result();
+                                ddl.Date = item.ToString("dd/MM/yyyy");
+                                ddl.Status = "Attendance Not Marked";
+                                lt.Add(ddl);
+
                             }
                         }
                         if (lt == null)
@@ -99,59 +143,12 @@ namespace MobileSchoolAPI.BusinessLayer
                         else
                             return lt;
                     }
-
                     else
                     {
-                        if (USERTYPE[0].UserType == "CLASS TEACHER")
-                        {
-                            var ATTENDANCEDATAEMP = db.VWATTENDANCEEMPLOYEEs.Where(r => r.ATTMONTH == PA.MONTH && r.UserId == PA.UserId && r.DISPLAY == 1).ToList();
-                            //var HOLIDAYDATA = db.VIEWCHECKHOLIDAYs.Where(r => r.HOLIDAYDATE == PA.MONTH && r.DISPLAY == 1).ToList();
-
-                            int flag = 0;
-                            foreach (var item in li)
-                            {
-                                flag = 0;
-                                foreach (var att in ATTENDANCEDATAEMP)
-                                {
-
-                                    if (att.ATTEDANCEDATE == item)
-                                    {
-                                        Result ddl = new Result();
-                                        ddl.Date = item.ToString("dd/MM/yyyy");
-                                        ddl.Status = "Attendance Marked";
-                                        lt.Add(ddl);
-                                        flag = 1;
-                                    }
-
-
-                                }
-
-                                if (flag == 0)
-                                {
-
-                                    Result ddl = new Result();
-                                    ddl.Date = item.ToString("dd/MM/yyyy");
-                                    ddl.Status = "Attendance Not Marked";
-                                    lt.Add(ddl);
-
-                                }
-                            }
-                            if (lt == null)
-                                return new Error() { IsError = true, Message = "No Attendance Is Found Of This Date" };
-                            else
-                                return lt;
-                        }
-                        else
-                        {
-                            return " User Is Not Class Teacher";
-                        }
+                        return " User Is Not Class Teacher";
                     }
-                }
-               
-               else
-                {
-                    return "UserId and Password Do Not Match";
-                }
+                }	 
+                 
 
             }
             catch (Exception ex)

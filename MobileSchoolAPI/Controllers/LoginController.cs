@@ -36,7 +36,7 @@ namespace MobileSchoolAPI.Controllers
 
                 string baseUrl  = ConfigurationManager.AppSettings["BaseUrl"];
                 string imgPath  = logindetail.IMAGEPATH;
-                logindetail.BaseURL = baseUrl + imgPath;
+                logindetail.BaseURL = baseUrl  ;
 
 				if (logindetail == null)
 					return new Error() { IsError = true, Message = "User Name & Password is Incorrect" };
