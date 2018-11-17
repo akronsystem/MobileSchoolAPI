@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.27130.2003
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileSchoolAPI", "MobileSchoolAPI\MobileSchoolAPI.csproj", "{FE7C8523-99C4-477E-B1A9-9357BBB3ADDE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileAppUnitTest", "MobileAppUnitTest\MobileAppUnitTest.csproj", "{80667335-07C8-47D8-8DF5-802A12E821C1}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{FE7C8523-99C4-477E-B1A9-9357BBB3ADDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE7C8523-99C4-477E-B1A9-9357BBB3ADDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE7C8523-99C4-477E-B1A9-9357BBB3ADDE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{80667335-07C8-47D8-8DF5-802A12E821C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{80667335-07C8-47D8-8DF5-802A12E821C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{80667335-07C8-47D8-8DF5-802A12E821C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{80667335-07C8-47D8-8DF5-802A12E821C1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

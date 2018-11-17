@@ -45,7 +45,7 @@ namespace MobileSchoolAPI.Controllers
                     var result = StudBL.getStudLogo(int.Parse(logindetail.EmpCode), logindetail.UserId);
                     
                     StudentBaseUrl = ConfigurationManager.AppSettings["StxavierBaseUrlStudent"];
-                    logindetail.BaseUrl=StudentBaseUrl+result;
+                    logindetail.BaseURL = StudentBaseUrl+result;
                 }
                 else
                 {
@@ -54,7 +54,7 @@ namespace MobileSchoolAPI.Controllers
                     var result=TeacherBL.getTeacherLogo(int.Parse(logindetail.EmpCode), logindetail.UserId);
  
                     TeacherBaseUrl = ConfigurationManager.AppSettings["StxavierBaseUrlTeacher"];
-                    logindetail.BaseUrl = TeacherBaseUrl + result;
+                    logindetail.BaseURL = TeacherBaseUrl + result;
                 } 
                 string baseUrl  = ConfigurationManager.AppSettings["BaseUrl"];
                 string imgPath  = logindetail.IMAGEPATH;

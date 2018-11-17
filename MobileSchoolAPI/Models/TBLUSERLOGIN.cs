@@ -49,7 +49,7 @@ namespace MobileSchoolAPI.Models
  
         //ADDED NOTMAPPED FIELD
         [NotMapped]
-        public string BaseUrl { get; set; }
+        public string BaseURL { get; set; }
  
     }
 }

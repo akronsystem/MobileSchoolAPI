@@ -217,8 +217,6 @@
     <Compile Include="Models\VIEWDIVISIONWISESUBJECTSTUDENT.cs" />
     <Compile Include="Models\VIEWEMPDIVISION.cs" />
     <Compile Include="Models\VIEWGETSTUDENTATT.cs" />
-    <Compile Include="Models\StudinfoParameters.cs" />
-    <Compile Include="Models\TeacherInfoParameters.cs" />
     <Compile Include="Models\VIEWHOMEWORK.cs" />
     <Compile Include="Models\VIEWNOTIFICATION.cs" />
     <Compile Include="Models\VIEWSTUDENTDIVISION.cs" />
@@ -227,6 +225,7 @@
     <Compile Include="Models\VWATTENDANCEBYDATESTUDENT.cs" />
     <Compile Include="Models\VWATTENDANCEEMPLOYEE.cs" />
     <Compile Include="Models\VWSTUDENTINFO.cs" />
+    <Compile Include="Models\Vw_ATTENDANCECHECK.cs" />
     <Compile Include="Models\VW_GET_USER_TYPE.cs" />
     <Compile Include="Models\Vw_STANDARDLIST.cs" />
     <Compile Include="Models\Vw_STUDSTANDARD.cs" />
