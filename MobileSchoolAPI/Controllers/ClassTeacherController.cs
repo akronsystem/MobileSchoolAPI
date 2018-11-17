@@ -25,8 +25,9 @@ namespace MobileSchoolAPI.Controllers
             int days = DateTime.DaysInMonth(year, objPA.MONTH);
             ClassTeacherData objCT = new ClassTeacherData();                
             var result = objCT.GetAttendanceStatus(objPA);
-            return new MonthlyAttendanceResult() { IsSuccess = "true", DateWiseStatus = result }; 
-     
+            return result;
+           // return new MonthlyAttendanceResult() { IsSuccess = "true", DateWiseStatus = result }; 
+
         }
     }
 }
