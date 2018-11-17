@@ -9,20 +9,35 @@ namespace MobileSchoolAPI.BUSINESSLAYER
     public class GetTeacherInfoBusiness
     {
         SchoolContext db = new SchoolContext();
-        public object objmethod(int probj,long UserId)
+        public object getTeacherInfo(int empcode, long UserId)
         {
-            var result = db.VW_EMPLOYEE.Where(r => r.ID == probj && r.UserId == UserId).FirstOrDefault();
+            var result = db.VW_EMPLOYEE.Where(r => r.ID == empcode && r.UserId == UserId).FirstOrDefault();
 
             if (result == null)
             {
-                return new Error() { IsError = true, Message = "USER Not Found" };
+                return new Error() { IsError = true, Message = "User Not Found" };
             }
             else
             {
                 return result;
             }
-         //   return result;
+       
             
+        }
+        public object getTeacherLogo(int empcode, long UserId)
+        {
+            var result = db.VW_EMPLOYEE.Where(r => r.ID == empcode && r.UserId == UserId).FirstOrDefault();
+
+            if (result == null)
+            {
+                return new Error() { IsError = true, Message = "User Not Found" };
+            }
+            else
+            {
+                return result.IMAGEPATH;
+            }
+
+
         }
     }
 }

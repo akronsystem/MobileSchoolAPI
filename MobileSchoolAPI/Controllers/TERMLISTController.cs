@@ -9,16 +9,16 @@ using System.Web.Http;
 
 namespace MobileSchoolAPI.Controllers
 {
-    public class TERMLISTController : ApiController
+    public class TermListController : ApiController
     {
         [HttpGet]
 
-        public object GETTERMLIST()
+        public object getTermList()
         {
-            GETTERMLISTBL OBJTERM = new GETTERMLISTBL();
-            var GETTERMVAR = OBJTERM.TERMLISTBL();
-            return new TermListResult() { IsSuccess="true",TermList=GETTERMVAR};
-           
+            GETTERMLISTBL ObjTerm = new GETTERMLISTBL();
+            var GetTermVar = ObjTerm.TERMLISTBL();
+            return new TermListResult(){ IsSuccess="true",TermList= GetTermVar};
+            
         }
     }
 }
