@@ -27,7 +27,7 @@ namespace MobileSchoolAPI.Controllers
 		{
 			GETHOMEWORK obj = new GETHOMEWORK();
 			//return obj.ViewHomeWorkbyUser(objhome);
-			return new DivisionListResult() { IsSuccess = "true", HomeWork = obj.ViewHomeWorkbyUser(objhome) };
+			return new DivisionListResult() { IsSuccess = true, HomeWork = obj.ViewHomeWorkbyUser(objhome) };
 
 		}
 
