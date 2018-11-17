@@ -30,10 +30,10 @@ namespace MobileSchoolAPI.Controllers
 		public object Confirm([FromBody]ParamLogin userLogin)
 		{
 			try
-			{
+			{ 
                 string TeacherBaseUrl = "";
                 string StudentBaseUrl = "";
-
+ 
                 LoginManager objLogin = new LoginManager();
 				var logindetail = objLogin.GetLoginDetails(userLogin);
                 
@@ -52,12 +52,16 @@ namespace MobileSchoolAPI.Controllers
                     //VW_EMPLOYEE
                     GetTeacherInfoBusiness TeacherBL = new GetTeacherInfoBusiness();
                     var result=TeacherBL.getTeacherLogo(int.Parse(logindetail.EmpCode), logindetail.UserId);
-
+ 
                     TeacherBaseUrl = ConfigurationManager.AppSettings["StxavierBaseUrlTeacher"];
                     logindetail.BaseUrl = TeacherBaseUrl + result;
-                }
+                } 
+                string baseUrl  = ConfigurationManager.AppSettings["BaseUrl"];
+                string imgPath  = logindetail.IMAGEPATH;
+                logindetail.BaseURL = baseUrl  ;
+ 
 				if (logindetail == null)
-					return new Error() { IsError = true, Message = "User Name & Passowrd is Incorrect" };
+					return new Error() { IsError = true, Message = "User Name & Password is Incorrect" };
 				else
 					return logindetail;
 			}
@@ -66,7 +70,6 @@ namespace MobileSchoolAPI.Controllers
 				return new Error() { IsError = true, Message = ex.Message };
 			}
 		}
-
-		  
+        
 	}
 }

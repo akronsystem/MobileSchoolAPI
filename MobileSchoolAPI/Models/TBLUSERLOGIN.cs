@@ -46,9 +46,10 @@ namespace MobileSchoolAPI.Models
 
         [StringLength(50)]
         public string ISPASSWORDCHANGED { get; set; }
-
+ 
         //ADDED NOTMAPPED FIELD
         [NotMapped]
         public string BaseUrl { get; set; }
+ 
     }
 }
