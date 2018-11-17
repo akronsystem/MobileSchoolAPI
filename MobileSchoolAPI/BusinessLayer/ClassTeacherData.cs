@@ -1,4 +1,5 @@
 ﻿using MobileSchoolAPI.Models;
+using MobileSchoolAPI.ResultModel;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -46,7 +47,8 @@ namespace MobileSchoolAPI.BusinessLayer
                 bool iStrue = objUP.ValidateUsernamePassword(PA.UserId, PA.Password);
 				if (iStrue == false)
 				{
-					return new Error() { IsError = true, Message = "UserId and Password Do Not Match" };  
+                    return new MonthlyAttendanceResult() { IsSuccess = "false", DateWiseStatus = "UserId and Password Do Not Match" };
+                    
 				}
                 List<Result> lt = new List<Result>();
                 var USERTYPE = db.VW_GET_USER_TYPE.Where(r => r.UserId == PA.UserId).ToList();
@@ -99,7 +101,7 @@ namespace MobileSchoolAPI.BusinessLayer
                     if (lt == null)
                         return new Error() { IsError = true, Message = "No Attendance Is Found Of This Date" };
                     else
-                        return lt;
+                        return new MonthlyAttendanceResult() { IsSuccess = "true", DateWiseStatus = lt };
                 }
 
                 else
@@ -141,7 +143,9 @@ namespace MobileSchoolAPI.BusinessLayer
                         if (lt == null)
                             return new Error() { IsError = true, Message = "No Attendance Is Found Of This Date" };
                         else
-                            return lt;
+                            // return lt;
+                            return new MonthlyAttendanceResult() { IsSuccess = "true", DateWiseStatus = lt };
+
                     }
                     else
                     {
