@@ -64,40 +64,54 @@ namespace MobileSchoolAPI.BusinessLayer
         {
 			TBLATTENDENCEMASTER objmster = new TBLATTENDENCEMASTER();
             TBLATTENDENCE objDetail = new TBLATTENDENCE();
-            objmster.ATTEDANCEDATE = atteobj.ATTEDANCEDATE;
-            
-            objmster.DIVISIONID = atteobj.DIVISIONID;
-            objmster.DISPLAY = 1;
-          
-            objmster.CREATEDON = DateTime.Now;
 
-            db.TBLATTENDENCEMASTERs.Add(objmster);
-              db.SaveChanges();
-
-
-            string absentno = atteobj.Absentno;
-           string[] sbno= absentno.Split(',');
-            objDetail.ATTEDANCEMID = objmster.ATTEDANCEMID;
-            for (int i = 0; i < sbno.Count(); i++)
+            var checkatt = db.Vw_ATTENDANCECHECK.Where(r => r.DIVISIONID == atteobj.DIVISIONID && r.ATTEDANCEDATE == atteobj.ATTEDANCEDATE);
+            if (checkatt.Count() == 0)
             {
-                string abno = sbno[i].ToString();
-                var getstudent = db.VIEWGETSTUDENTATTs.Where(r => r.DIVISIONID == atteobj.DIVISIONID && r.ROLLNO== abno).ToList();
+
+                objmster.ATTEDANCEDATE = atteobj.ATTEDANCEDATE;
+
+                objmster.DIVISIONID = atteobj.DIVISIONID;
+                objmster.DISPLAY = 1;
+
+                objmster.CREATEDON = DateTime.Now;
+
+                db.TBLATTENDENCEMASTERs.Add(objmster);
+                db.SaveChanges();
+
+
+                string absentno = atteobj.Absentno;
+                string[] sbno = absentno.Split(',');
                 objDetail.ATTEDANCEMID = objmster.ATTEDANCEMID;
-                objDetail.ROLLNO = sbno[i].ToString();
-                objDetail.NAME = getstudent[0].STUDENTNAME;
-                objDetail.STUDENTID = getstudent[0].STUDENTID;
-                objDetail.STATUS = "A";
+                for (int i = 0; i < sbno.Count(); i++)
+                {
+                    string abno = sbno[i].ToString();
+                    var getstudent = db.VIEWGETSTUDENTATTs.Where(r => r.DIVISIONID == atteobj.DIVISIONID && r.ROLLNO == abno).ToList();
+                    objDetail.ATTEDANCEMID = objmster.ATTEDANCEMID;
+                    objDetail.ROLLNO = sbno[i].ToString();
+                    objDetail.NAME = getstudent[0].STUDENTNAME;
+                    objDetail.STUDENTID = getstudent[0].STUDENTID;
+                    objDetail.STATUS = "A";
 
-                db.TBLATTENDENCEs.Add(objDetail);
-               db.SaveChanges();
+                    db.TBLATTENDENCEs.Add(objDetail);
+                    db.SaveChanges();
 
-
+                    return new Results
+                    {
+                        IsSuccess = "true",
+                        Message = "Attendance Save successfully"
+                    };
+                }
             }
+            
+                return new Results
+                {
+                    IsSuccess="false",
+                    Message = "Attedance already taken for this Date "
+                };
+ 
 
-            return new Results
-            {
-                Message = "Homework assign successfully"
-            };
+          
         }
 
         internal void Students()
