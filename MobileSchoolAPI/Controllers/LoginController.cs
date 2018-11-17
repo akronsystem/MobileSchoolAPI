@@ -42,23 +42,21 @@ namespace MobileSchoolAPI.Controllers
                 {
                     //VWSTUDENTINFO
                     STUDENTINFO_BUSINESS StudBL = new STUDENTINFO_BUSINESS();
-                    var result = StudBL.getStudLogo(int.Parse(logindetail.EmpCode), logindetail.UserId);
+                    //var result = StudBL.getStudLogo(int.Parse(logindetail.EmpCode), logindetail.UserId);
                     
                     StudentBaseUrl = ConfigurationManager.AppSettings["StxavierBaseUrlStudent"];
-                    logindetail.BaseURL = StudentBaseUrl+result;
+                    logindetail.BaseURL = StudentBaseUrl;
                 }
                 else
                 {
                     //VW_EMPLOYEE
                     GetTeacherInfoBusiness TeacherBL = new GetTeacherInfoBusiness();
-                    var result=TeacherBL.getTeacherLogo(int.Parse(logindetail.EmpCode), logindetail.UserId);
+					// var result=TeacherBL.getTeacherLogo(int.Parse(logindetail.EmpCode), logindetail.UserId);
  
                     TeacherBaseUrl = ConfigurationManager.AppSettings["StxavierBaseUrlTeacher"];
-                    logindetail.BaseURL = TeacherBaseUrl + result;
+					logindetail.BaseURL = TeacherBaseUrl;
                 } 
-                string baseUrl  = ConfigurationManager.AppSettings["BaseUrl"];
-                string imgPath  = logindetail.IMAGEPATH;
-                logindetail.BaseURL = baseUrl  ;
+                 
  
 				if (logindetail == null)
 					return new Error() { IsError = true, Message = "User Name & Password is Incorrect" };

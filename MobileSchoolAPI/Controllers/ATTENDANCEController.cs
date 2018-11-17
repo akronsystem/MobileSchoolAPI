@@ -39,11 +39,10 @@ namespace MobileSchoolAPI.Controllers
             Homeworkbussinesslayer bhobj = new Homeworkbussinesslayer();
 
 
-            var result= bhobj.SaveAttendance(atteobj);
-            //  bhobj.StudentsMethod(hobj);
+			var result= bhobj.SaveAttendance(atteobj);
+			//  bhobj.StudentsMethod(hobj);
 
-            return new STUDENTLISTRESULT() { IsSuccess = "True", StudentResult = bhobj.SaveAttendance(atteobj) };
-
+			return result;
         }
 
     }

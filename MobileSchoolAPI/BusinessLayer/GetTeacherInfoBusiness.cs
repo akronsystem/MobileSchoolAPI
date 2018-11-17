@@ -30,7 +30,7 @@ namespace MobileSchoolAPI.BUSINESSLAYER
 
             if (result == null)
             {
-                return new Error() { IsError = true, Message = "User Not Found" };
+                return new Error() { IsError = true, Message = "Logo Not Found" };
             }
             else
             {

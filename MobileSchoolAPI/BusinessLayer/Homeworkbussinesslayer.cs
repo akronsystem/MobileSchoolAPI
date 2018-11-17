@@ -66,9 +66,9 @@ namespace MobileSchoolAPI.BusinessLayer
             TBLATTENDENCE objDetail = new TBLATTENDENCE();
 
 
-            var checkatt = db.Vw_ATTENDANCECHECK.Where(r => r.DIVISIONID == atteobj.DIVISIONID && r.ATTEDANCEDATE == atteobj.ATTEDANCEDATE);
+            var checkatt = db.Vw_ATTENDANCECHECK.FirstOrDefault(r => r.DIVISIONID == atteobj.DIVISIONID && r.ATTEDANCEDATE == atteobj.ATTEDANCEDATE);
             //Duplicate Attendance Check
-            if (checkatt.Count() == 0)
+            if (checkatt== null)
             {
 
                 objmster.ATTEDANCEDATE = atteobj.ATTEDANCEDATE;
@@ -100,7 +100,7 @@ namespace MobileSchoolAPI.BusinessLayer
 
                     return new Results
                     {
-                        IsSuccess = "true",
+                        IsSuccess = "True",
                         Message = "Attendance Save successfully"
                     };
                 }
@@ -108,7 +108,7 @@ namespace MobileSchoolAPI.BusinessLayer
             
                 return new Results
                 {
-                    IsSuccess="false",
+                    IsSuccess="False",
                     Message = "Attedance already taken for this Date "
                 };
  
