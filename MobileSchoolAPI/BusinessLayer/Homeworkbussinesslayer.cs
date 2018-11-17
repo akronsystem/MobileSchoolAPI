@@ -65,7 +65,9 @@ namespace MobileSchoolAPI.BusinessLayer
 			TBLATTENDENCEMASTER objmster = new TBLATTENDENCEMASTER();
             TBLATTENDENCE objDetail = new TBLATTENDENCE();
 
+
             var checkatt = db.Vw_ATTENDANCECHECK.Where(r => r.DIVISIONID == atteobj.DIVISIONID && r.ATTEDANCEDATE == atteobj.ATTEDANCEDATE);
+            //Duplicate Attendance Check
             if (checkatt.Count() == 0)
             {
 
