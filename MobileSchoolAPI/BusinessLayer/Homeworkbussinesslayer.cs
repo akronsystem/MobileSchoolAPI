@@ -54,7 +54,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 // return getstudent;
                 for (int i = 0; i < getstudent.Count; i++)
                 {
-                    SMSSend(objHomework.HOMEWORK, getstudent[i].gmobile);
+                    SMSSend(objHomework.HOMEWORK, getstudent[i].GMOBILE);
                 }
             }
             return "sms send successfully";
@@ -88,7 +88,10 @@ namespace MobileSchoolAPI.BusinessLayer
                 for (int i = 0; i < sbno.Count(); i++)
                 {
                     string abno = sbno[i].ToString();
-                    var getstudent = db.VIEWGETSTUDENTATTs.Where(r => r.DIVISIONID == atteobj.DIVISIONID && r.ROLLNO == abno).ToList();
+
+                    int rollno = Convert.ToInt32(abno);
+
+                    var getstudent = db.VIEWGETSTUDENTATTs.Where(r => r.DIVISIONID == atteobj.DIVISIONID && r.ROLL_NO == rollno).ToList();
                     objDetail.ATTEDANCEMID = objmster.ATTEDANCEMID;
                     objDetail.ROLLNO = sbno[i].ToString();
                     objDetail.NAME = getstudent[0].STUDENTNAME;
@@ -100,7 +103,7 @@ namespace MobileSchoolAPI.BusinessLayer
 
                     return new Results
                     {
-                        IsSuccess = "True",
+                        IsSuccess = true,
                         Message = "Attendance Save successfully"
                     };
                 }
@@ -108,7 +111,7 @@ namespace MobileSchoolAPI.BusinessLayer
             
                 return new Results
                 {
-                    IsSuccess="False",
+                    IsSuccess=false,
                     Message = "Attedance already taken for this Date "
                 };
  

@@ -19,7 +19,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 if (getstudent == null)
                     return new Error() { IsError = true, Message = "STUDENT NOT FOUND." };
                 else
-                    return getstudent;
+                    return getstudent.OrderBy(r => r.ROLL_NO).ToList();
 
 
                 //var attendance = db.VIEWATTENDANCEs.

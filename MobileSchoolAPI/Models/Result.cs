@@ -7,7 +7,7 @@ namespace MobileSchoolAPI.Models
 {
 	public class Results
 	{ 	
-        public string IsSuccess
+        public bool IsSuccess
         {
             get;set;
         }
