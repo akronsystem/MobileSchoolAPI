@@ -29,44 +29,44 @@ namespace MobileSchoolAPI.Controllers
 		[HttpPost]
 		public object Confirm([FromBody]ParamLogin userLogin)
 		{
-			try
-			{ 
+            try
+            {
                 string TeacherBaseUrl = "";
                 string StudentBaseUrl = "";
- 
-                LoginManager objLogin = new LoginManager();
-				var logindetail = objLogin.GetLoginDetails(userLogin);
-                
 
-                if (logindetail.UserType=="STUDENT")
-                {
-                    //VWSTUDENTINFO
-                    STUDENTINFO_BUSINESS StudBL = new STUDENTINFO_BUSINESS();
-                    //var result = StudBL.getStudLogo(int.Parse(logindetail.EmpCode), logindetail.UserId);
-                    
-                    StudentBaseUrl = ConfigurationManager.AppSettings["StxavierBaseUrlStudent"];
-                    logindetail.BaseURL = StudentBaseUrl;
-                }
+                LoginManager objLogin = new LoginManager();
+                var logindetail = objLogin.GetLoginDetails(userLogin);
+                if (logindetail == null)
+                    return new Error() { IsError = true, Message = "User Name & Password is Incorrect" };
                 else
                 {
-                    //VW_EMPLOYEE
-                    GetTeacherInfoBusiness TeacherBL = new GetTeacherInfoBusiness();
-					// var result=TeacherBL.getTeacherLogo(int.Parse(logindetail.EmpCode), logindetail.UserId);
- 
-                    TeacherBaseUrl = ConfigurationManager.AppSettings["StxavierBaseUrlTeacher"];
-					logindetail.BaseURL = TeacherBaseUrl;
-                } 
-                 
- 
-				if (logindetail == null)
-					return new Error() { IsError = true, Message = "User Name & Password is Incorrect" };
-				else
-					return logindetail;
-			}
-			catch (Exception ex)
-			{
-				return new Error() { IsError = true, Message = ex.Message };
-			}
+
+                    if (logindetail.UserType == "STUDENT")
+                    {
+                        //VWSTUDENTINFO
+                        STUDENTINFO_BUSINESS StudBL = new STUDENTINFO_BUSINESS();
+                        //var result = StudBL.getStudLogo(int.Parse(logindetail.EmpCode), logindetail.UserId);
+
+                        StudentBaseUrl = ConfigurationManager.AppSettings["StxavierBaseUrlStudent"];
+                        logindetail.BaseURL = StudentBaseUrl;
+                    }
+                    else
+                    {
+                        //VW_EMPLOYEE
+                        GetTeacherInfoBusiness TeacherBL = new GetTeacherInfoBusiness();
+                        // var result=TeacherBL.getTeacherLogo(int.Parse(logindetail.EmpCode), logindetail.UserId);
+
+                        TeacherBaseUrl = ConfigurationManager.AppSettings["StxavierBaseUrlTeacher"];
+                        logindetail.BaseURL = TeacherBaseUrl;
+                    }
+                    return logindetail;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return new Error() { IsError = true, Message = ex.Message };
+            }
 		}
         
 	}
