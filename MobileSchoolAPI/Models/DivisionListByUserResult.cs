@@ -7,7 +7,7 @@ namespace MobileSchoolAPI.Models
 {
     public class DivisionListByUserResult
     {
-        public string IsSuccess { get; set; }
+        public bool IsSuccess { get; set; }
 
         public object DivisionList { get; set; }
     }

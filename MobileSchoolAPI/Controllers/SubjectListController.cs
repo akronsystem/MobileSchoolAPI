@@ -17,7 +17,7 @@ namespace MobileSchoolAPI.Controllers
 
 
             GetSubjectListBusiness obj = new GetSubjectListBusiness();
-			return new DivisionListResult() { IsSuccess = "true", SubjectList = obj.GetSubjectList(objsub) };
+			return new DivisionListResult() { IsSuccess = true, SubjectList = obj.GetSubjectList(objsub) };
 			//return obj.GetSubjectList(objsub);
         }
     }
