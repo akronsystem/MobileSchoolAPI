@@ -127,13 +127,14 @@ namespace MobileSchoolAPI.BusinessLayer
                     }
                     else
                     {
-                        return StudentHomework;
+                         return new DivisionListResult() { IsSuccess = true, HomeWork = StudentHomework }; ;
                     }
                    
                 }
                 else
                 {
-                    return EmpHomework;
+                    return new DivisionListResult() { IsSuccess = true, HomeWork = EmpHomework }; ;
+
                 }
             }
             catch (Exception E)

@@ -16,7 +16,7 @@ namespace MobileSchoolAPI.BusinessLayer
 
                 var getstudent = db.VIEWGETSTUDENTATTs.Where(r => r.DIVISIONID == OBJ.DIVISIONID).ToList();
 
-                if (getstudent == null)
+                if (getstudent.Count() == 0)
                     return new Error() { IsError = true, Message = "STUDENT NOT FOUND." };
                 else
                     return getstudent.OrderBy(r => r.ROLL_NO).ToList();

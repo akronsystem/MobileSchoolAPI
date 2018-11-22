@@ -26,9 +26,10 @@ namespace MobileSchoolAPI.Controllers
 		public object ShowHomeWork([FromBody]ParamHOMEWORKBYUSER objhome)
 		{
 			GETHOMEWORK obj = new GETHOMEWORK();
-			//return obj.ViewHomeWorkbyUser(objhome);
-			return new DivisionListResult() { IsSuccess = true, HomeWork = obj.ViewHomeWorkbyUser(objhome) };
-
+            var homemworkresult=obj.ViewHomeWorkbyUser(objhome);
+            //return obj.ViewHomeWorkbyUser(objhome);
+            //return new DivisionListResult() { IsSuccess = true, HomeWork = obj.ViewHomeWorkbyUser(objhome) };
+            return homemworkresult;
 		}
 
 
@@ -47,7 +48,7 @@ namespace MobileSchoolAPI.Controllers
             return new Results
             {
 
-                IsSuccess = "true",
+                IsSuccess = true,
                 Message = "Homework assign successfully"
             };
 

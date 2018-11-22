@@ -70,42 +70,53 @@ namespace MobileSchoolAPI.BusinessLayer
             //Duplicate Attendance Check
             if (checkatt== null)
             {
-
-                objmster.ATTEDANCEDATE = atteobj.ATTEDANCEDATE;
-
-                objmster.DIVISIONID = atteobj.DIVISIONID;
-                objmster.DISPLAY = 1;
-
-                objmster.CREATEDON = DateTime.Now;
-
-                db.TBLATTENDENCEMASTERs.Add(objmster);
-                db.SaveChanges();
-
-
-                string absentno = atteobj.Absentno;
-                string[] sbno = absentno.Split(',');
-                objDetail.ATTEDANCEMID = objmster.ATTEDANCEMID;
-                for (int i = 0; i < sbno.Count(); i++)
+                try
                 {
-                    string abno = sbno[i].ToString();
+                    objmster.ATTEDANCEDATE = atteobj.ATTEDANCEDATE;
 
-                    int rollno = Convert.ToInt32(abno);
+                    objmster.DIVISIONID = atteobj.DIVISIONID;
+                    objmster.DISPLAY = 1;
 
-                    var getstudent = db.VIEWGETSTUDENTATTs.Where(r => r.DIVISIONID == atteobj.DIVISIONID && r.ROLL_NO == rollno).ToList();
-                    objDetail.ATTEDANCEMID = objmster.ATTEDANCEMID;
-                    objDetail.ROLLNO = sbno[i].ToString();
-                    objDetail.NAME = getstudent[0].STUDENTNAME;
-                    objDetail.STUDENTID = getstudent[0].STUDENTID;
-                    objDetail.STATUS = "A";
+                    objmster.CREATEDON = DateTime.Now;
 
-                    db.TBLATTENDENCEs.Add(objDetail);
+                    db.TBLATTENDENCEMASTERs.Add(objmster);
                     db.SaveChanges();
 
-                    return new Results
+
+                    string absentno = atteobj.Absentno;
+                    string[] sbno = absentno.Split(',');
+                    objDetail.ATTEDANCEMID = objmster.ATTEDANCEMID;
+                    for (int i = 0; i < sbno.Count(); i++)
                     {
-                        IsSuccess = true,
-                        Message = "Attendance Save successfully"
-                    };
+                        string abno = sbno[i].ToString();
+
+                        int rollno = Convert.ToInt32(abno);
+
+                        var getstudent = db.VIEWGETSTUDENTATTs.Where(r => r.DIVISIONID == atteobj.DIVISIONID && r.ROLL_NO == rollno).ToList();
+                        if(getstudent.Count==0)
+                        {
+                            return new Results() { IsSuccess = false, Message = "No students found for this division " };
+
+                        }
+                        objDetail.ATTEDANCEMID = objmster.ATTEDANCEMID;
+                        objDetail.ROLLNO = sbno[i].ToString();
+                        objDetail.NAME = getstudent[0].STUDENTNAME;
+                        objDetail.STUDENTID = getstudent[0].STUDENTID;
+                        objDetail.STATUS = "A";
+
+                        db.TBLATTENDENCEs.Add(objDetail);
+                        db.SaveChanges();
+
+                        return new Results
+                        {
+                            IsSuccess = true,
+                            Message = "Attendance Save successfully"
+                        };
+                    }
+                }
+                catch(Exception e)
+                {
+                    return new Error() { IsError = true, Message = e.Message };
                 }
             }
             
