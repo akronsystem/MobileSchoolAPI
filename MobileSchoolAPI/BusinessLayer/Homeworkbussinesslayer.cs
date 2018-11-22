@@ -70,7 +70,31 @@ namespace MobileSchoolAPI.BusinessLayer
             //Duplicate Attendance Check
             if (checkatt== null)
             {
+
                 try
+
+
+                objmster.ATTEDANCEDATE = atteobj.ATTEDANCEDATE;
+
+                objmster.DIVISIONID = atteobj.DIVISIONID;
+                objmster.DISPLAY = 1;
+                objmster.EDUCATIONYEAR = "2018-2019";
+                var std = db.vw_FETCHSTANDARDBYDIVISION.Where(r => r.DIVISIONID == atteobj.DIVISIONID && r.DISPLAY == 1 && r.ACADEMICYEAR == "2018-2019").ToList();
+
+                objmster.STANDARDID =Convert.ToInt32( std[0].STANDARDID);
+                objmster.CREATEDON = DateTime.Now;
+
+                objmster.CREATEDID = atteobj.Userid;
+
+                db.TBLATTENDENCEMASTERs.Add(objmster);
+                db.SaveChanges();
+
+
+                string absentno = atteobj.Absentno;
+                string[] sbno = absentno.Split(',');
+                objDetail.ATTEDANCEMID = objmster.ATTEDANCEMID;
+                for (int i = 0; i < sbno.Count(); i++)
+
                 {
                     objmster.ATTEDANCEDATE = atteobj.ATTEDANCEDATE;
 

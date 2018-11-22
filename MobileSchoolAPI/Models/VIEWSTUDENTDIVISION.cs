@@ -31,6 +31,6 @@ namespace MobileSchoolAPI.Models
         [StringLength(50)]
         public string ACADEMICYEAR { get; set; }
 
-        public Int64 DISPLAY { get; set; }
+        public long? DISPLAY { get; set; }
     }
 }

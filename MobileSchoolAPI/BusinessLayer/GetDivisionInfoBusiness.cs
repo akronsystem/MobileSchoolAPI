@@ -26,12 +26,14 @@ namespace MobileSchoolAPI.BusinessLayer
                     }
                     else
                     {
-                        return StudentDivision;
+                        return new DivisionListByUserResult() { IsSuccess = true, DivisionList = StudentDivision };
+                       
                     }
                 }
                 else
                 {
-                    return EmpDivision;
+                    return new DivisionListByUserResult() { IsSuccess = true, DivisionList = EmpDivision };
+                   
                 }
             }
             catch (Exception E)

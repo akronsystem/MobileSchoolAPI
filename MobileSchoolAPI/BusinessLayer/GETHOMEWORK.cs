@@ -48,28 +48,31 @@ namespace MobileSchoolAPI.BusinessLayer
 
                 if (GETTYPE[0].UserType != "STUDENT")
                 {
-                    var Division = db.VIEWDIVISIONLISTs.Where(r => r.STANDARDID == obj.STANDARDID && r.UserId == obj.USERID);
+                    var Division = db.VIEWDIVISIONLISTs.Where(r => r.STANDARDID == obj.STANDARDID && r.UserId == obj.USERID && r.ACADEMICYEAR=="2018-2019").ToList();
 
-                    if (Division == null)
+                    if (Division.Count==0)
                     {
                         return new Error() { IsError = true, Message = "Division Not Found" };
                     }
                     else
                     {
-                        return Division;
+                        return new DivisionListResult() { IsSuccess = true, DivisionListByUser = Division };
+                     
                     }
                 }
                 else
                 {
-                    var Division = db.VIEWDIVISIONLISTBYSTUDENTs.Where(r => r.STANDARDID == obj.STANDARDID && r.UserId == obj.USERID);
+                    var Division = db.VIEWDIVISIONLISTBYSTUDENTs.Where(r => r.STANDARDID == obj.STANDARDID && r.UserId == obj.USERID && r.ACADEMICYEAR=="2018-2019").ToList();
 
-                    if (Division == null)
+                    if (Division.Count == 0)
                     {
                         return new Error() { IsError = true, Message = "Division Not Found" };
                     }
                     else
                     {
-                        return Division;
+                        return new DivisionListResult() { IsSuccess = true, DivisionListByUser = Division };
+
+                       
                     }
                 }
 
