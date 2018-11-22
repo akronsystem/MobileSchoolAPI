@@ -78,6 +78,8 @@ namespace MobileSchoolAPI.BusinessLayer
 
                 objmster.CREATEDON = DateTime.Now;
 
+                objmster.CREATEDID = atteobj.Userid;
+
                 db.TBLATTENDENCEMASTERs.Add(objmster);
                 db.SaveChanges();
 
