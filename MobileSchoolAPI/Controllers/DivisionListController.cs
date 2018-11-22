@@ -18,20 +18,20 @@ namespace MobileSchoolAPI.Controllers
         public object getStdDivList([FromBody]ParamDIVISIONLIST objdiv)
         {
             GetDivisionInfoBusiness obj = new GetDivisionInfoBusiness(); 
-            return new DivisionListByUserResult() { IsSuccess = true, DivisionList = obj.GetDivision(objdiv) };
+            return obj.GetDivision(objdiv) ;
         }
         [HttpPost]
         public object GetStandard([FromBody]ParamDIVISIONLIST objdiv)
         {
             GetStandardList objstd = new GetStandardList();
-            var result = objstd.GetStdList(objdiv);
-            return new StdListResult() { IsSuccess = true, StandardList = result };  
+           return objstd.GetStdList(objdiv);
+           
 		}
         public object ViewDivision([FromBody]PARAMSTD objstd)
         {
             GETHOMEWORK objhome = new GETHOMEWORK();
-            // return objhome.GetStandard(objstd);
-            return new DivisionListResult() { IsSuccess = true, DivisionListByUser = objhome.GetStandard(objstd) };
+            return objhome.GetStandard(objstd);
+          
 
 
         } 

@@ -21,8 +21,8 @@ namespace MobileSchoolAPI.Models
 
         public virtual DbSet<VW_EMPLOYEE> VW_EMPLOYEE { get; set; }	   
 		public virtual DbSet<VIEWHOMEWORK> VIEWHOMEWORKs { get; set; }
-		public virtual DbSet<VIEWDIVISIONLIST> VIEWDIVISIONLISTs { get; set; }
-		public virtual DbSet<VIEWDIVISIONLISTBYEMP> VIEWDIVISIONLISTBYEMPs { get; set; }
+        public virtual DbSet<VIEWDIVISIONLIST> VIEWDIVISIONLISTs { get; set; }
+        public virtual DbSet<VIEWDIVISIONLISTBYEMP> VIEWDIVISIONLISTBYEMPs { get; set; }
 		public virtual DbSet<VIEWCLASSTEACHER> VIEWCLASSTEACHERs { get; set; }
 
         public virtual DbSet<VWATTENDANCEBYDATESTUDENT> VWATTENDANCEBYDATESTUDENTs { get; set; }
@@ -37,9 +37,9 @@ namespace MobileSchoolAPI.Models
         public virtual DbSet<VWATTENDANCEEMPLOYEE> VWATTENDANCEEMPLOYEEs { get; set; }
 
         public virtual DbSet<VIEWEMPDIVISION> VIEWEMPDIVISIONs { get; set; }
-																			  
-		public virtual DbSet<VIEWSTUDENTDIVISION> VIEWSTUDENTDIVISIONs { get; set; }
-		public virtual DbSet<VWSTUDENTINFO> VWSTUDENTINFO { get; set; }
+
+        public virtual DbSet<VIEWSTUDENTDIVISION> VIEWSTUDENTDIVISIONs { get; set; }
+        public virtual DbSet<VWSTUDENTINFO> VWSTUDENTINFO { get; set; }
 		public virtual DbSet<VIEWSTUDENTHOMEWORK> VIEWSTUDENTHOMEWORKs { get; set;  }
 
 
@@ -64,7 +64,7 @@ namespace MobileSchoolAPI.Models
         public virtual DbSet<VIewAttendaceClasswiseCheck> VIewAttendaceClasswiseChecks { get; set; } 
 
         public virtual DbSet<VIEWCHECKHOLIDAY> VIEWCHECKHOLIDAYs { get; set; }
- 
+
         public virtual DbSet<VIEWDIVISIONLISTBYSTUDENT> VIEWDIVISIONLISTBYSTUDENTs { get; set; }
         public virtual DbSet<VIEWDIVISIONWISESUBJECTSTUDENT> VIEWDIVISIONWISESUBJECTSTUDENTs { get; set; }
         public virtual DbSet<Vw_ATTENDANCECHECK> Vw_ATTENDANCECHECK { get; set; }

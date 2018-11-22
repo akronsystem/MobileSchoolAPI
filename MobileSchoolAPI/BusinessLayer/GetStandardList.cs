@@ -1,5 +1,6 @@
 ﻿using MobileSchoolAPI.Models;
 using MobileSchoolAPI.ParamModel;
+using MobileSchoolAPI.ResultModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,13 +18,30 @@ namespace MobileSchoolAPI.BusinessLayer
             if(UserType[0].UserType=="STUDENT")
             {
                 var STDLIST = db.Vw_STUDSTANDARD.Where(r => r.USERID == Stdobj.userid && r.ACADEMICYEAR=="2018-2019" ).ToList();
-                return STDLIST;
+
+
+                if (STDLIST.Count == 0)
+                {
+                    return new Error() { IsError = true, Message = "Standard is not assigned for this user" };
+                }
+                else
+                {
+                    return new StdListResult() { IsSuccess = true, StandardList = STDLIST };
+                }
+              
 
             }
             else
             {
                 var STDLIST = db.Vw_STANDARDLIST.Where(r => r.UserId == Stdobj.userid && r.ACADEMICYEAR == "2018-2019" && r.DISPLAY==1).ToList();
-                return STDLIST;
+                if (STDLIST.Count == 0)
+                {
+                    return new Error() { IsError = true, Message = "Standard is not assigned for this user" };
+                }
+                else
+                {
+                    return new StdListResult() { IsSuccess = true, StandardList = STDLIST };
+                }
             }
            
             

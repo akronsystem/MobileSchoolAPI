@@ -27,7 +27,8 @@ namespace MobileSchoolAPI.BusinessLayer
                     }
                     else
                     {
-                        return StudSubjectList;
+                        return new DivisionListResult() { IsSuccess = true, SubjectList = StudSubjectList };
+                       
 
                     }
 
@@ -36,7 +37,8 @@ namespace MobileSchoolAPI.BusinessLayer
                 }
                 else
                 {
-                    return SubjectList;
+                    return new DivisionListResult() { IsSuccess = true, SubjectList = SubjectList };
+                    
                 }
             }
             catch (Exception E)
