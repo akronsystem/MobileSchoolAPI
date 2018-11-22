@@ -15,7 +15,7 @@ namespace MobileSchoolAPI.Models
         [StringLength(20)]
         public string EDUCATIONYEAR { get; set; }
 
-        public long? STANDARDID { get; set; }
+        public int? STANDARDID { get; set; }
 
         public long? SUBJECTID { get; set; }
 
