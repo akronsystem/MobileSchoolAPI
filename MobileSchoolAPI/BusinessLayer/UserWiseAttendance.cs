@@ -1,5 +1,6 @@
 ﻿using MobileSchoolAPI.Models;
 using MobileSchoolAPI.ParamModel;
+using MobileSchoolAPI.ResultModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,26 +17,30 @@ namespace MobileSchoolAPI.BusinessLayer
             try
             {
                 var usertype= objSc.VW_GET_USER_TYPE.Where(r => r.UserId == obj.UserId).ToList();
+                if(usertype.Count()==0)
+                {
+                    return new AttendanceResult() { IsSuccess = false, UserWiseAttendanceList = "User Not Found" };
+                }
 
                 if (usertype[0].UserType == "STUDENT")
                 {
                     var checkattendace = objSc.VIewAttendaceClasswiseChecks.Where(r => r.UserId == obj.UserId && r.ATTEDANCEDATE == obj.AttendanceDate && r.DISPLAY == 1 && r.EDUCATIONYEAR == "2018-2019" && r.ACADEMICYEAR == "2018-2019").ToList();
                     if (checkattendace.Count() == 0)
                     {
-                        return "Status : Attendance Is Not Marked By Class Teacher For This Date";
+                        return  new AttendanceResult() { IsSuccess = true, UserWiseAttendanceList = "Status : Attendance Is Not Marked By Class Teacher For This Date" };
                     }
                     else
                     { 
                         var StudentAttendance = objSc.VWATTENDANCEBYDATESTUDENTs.Where(r => r.UserId == obj.UserId && r.ATTEDANCEDATE == obj.AttendanceDate).ToList();
                         if (StudentAttendance.Count() == 0)
                         {
-                            return "Status : Present";
+                            return new AttendanceResult() { IsSuccess = true, UserWiseAttendanceList = "Status : Present" };
                             //EMPLOYEE logic
                             // return new Error() { IsError = true, Message = "Attendance not found" };
                         }
                         else
                         {
-                            return "Status : Absent";
+                            return new AttendanceResult() { IsSuccess = true, UserWiseAttendanceList = "Status : Absent" };
                         }
                     }
 
@@ -48,17 +53,22 @@ namespace MobileSchoolAPI.BusinessLayer
                     {
                         if (EMPATTENDANCE.Count() == 0)
                         {
-                            return "Status : Attendance Not Completed";
+                            return new AttendanceResult() { IsSuccess = true, UserWiseAttendanceList = "Status : Attendance Not Completed" };
 
                         }
                         else
                         {
-                            return "Status : Attendance Completed";
+                            return new AttendanceResult() { IsSuccess = true, UserWiseAttendanceList = "Status : Attendance Completed" };
                         }
                     }
                     else
                     {
-                        return "Status : User is not class Teacher";
+                        return new AttendanceResult()
+                        {
+                            IsSuccess = true,
+                            UserWiseAttendanceList = "Status : User is not class Teacher"
+
+                        };
                     }
                 }
                            

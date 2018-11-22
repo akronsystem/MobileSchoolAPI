@@ -17,7 +17,8 @@ namespace MobileSchoolAPI.Controllers
         {
             GETTERMLISTBL ObjTerm = new GETTERMLISTBL();
             var GetTermVar = ObjTerm.TERMLISTBL();
-            return new TermListResult(){ IsSuccess="true",TermList= GetTermVar};
+            return GetTermVar;
+            //return new TermListResult(){ IsSuccess="true",TermList= GetTermVar};
             
         }
     }

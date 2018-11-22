@@ -26,12 +26,12 @@ namespace MobileSchoolAPI.Controllers
             {
                 UserWiseAttendance objUA = new UserWiseAttendance();
                 var Result = objUA.GetAttendanceByUser(PA);
-
-				return new AttendanceResult()
-				{
-					IsSuccess = "true",
-					UserWiseAttendanceList = Result
-				};
+                return Result;
+				//return new AttendanceResult()
+				//{
+				//	IsSuccess = true,
+				//	UserWiseAttendanceList = Result
+				//};
 			}
             catch (Exception ex)
             {

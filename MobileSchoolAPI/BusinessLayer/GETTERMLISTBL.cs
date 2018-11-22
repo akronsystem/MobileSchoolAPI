@@ -19,7 +19,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 if (getlist == null)
                     return new Error() { IsError = true, Message = "TERM LIST NOT FOUND." };
                 else
-                    return getlist;
+                    return new TermListResult(){ IsSuccess = "true",TermList = getlist}; ;
 
             }
             catch (Exception ex)
