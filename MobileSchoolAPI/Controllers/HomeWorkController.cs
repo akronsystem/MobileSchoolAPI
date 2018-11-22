@@ -47,7 +47,7 @@ namespace MobileSchoolAPI.Controllers
             return new Results
             {
 
-                IsSuccess = "true",
+                IsSuccess = true,
                 Message = "Homework assign successfully"
             };
 
