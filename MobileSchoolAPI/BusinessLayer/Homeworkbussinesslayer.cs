@@ -75,7 +75,10 @@ namespace MobileSchoolAPI.BusinessLayer
 
                 objmster.DIVISIONID = atteobj.DIVISIONID;
                 objmster.DISPLAY = 1;
+                objmster.EDUCATIONYEAR = "2018-2019";
+                var std = db.vw_FETCHSTANDARDBYDIVISION.Where(r => r.DIVISIONID == atteobj.DIVISIONID && r.DISPLAY == 1 && r.ACADEMICYEAR == "2018-2019").ToList();
 
+                objmster.STANDARDID =Convert.ToInt32( std[0].STANDARDID);
                 objmster.CREATEDON = DateTime.Now;
 
                 objmster.CREATEDID = atteobj.Userid;
