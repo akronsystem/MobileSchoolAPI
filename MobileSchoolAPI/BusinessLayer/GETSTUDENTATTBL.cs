@@ -1,4 +1,5 @@
 ﻿using MobileSchoolAPI.Models;
+using MobileSchoolAPI.ResultModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,9 @@ namespace MobileSchoolAPI.BusinessLayer
                 if (getstudent.Count() == 0)
                     return new Error() { IsError = true, Message = "STUDENT NOT FOUND." };
                 else
-                    return getstudent.OrderBy(r => r.ROLL_NO).ToList();
+                    //return getstudent.OrderBy(r => r.ROLL_NO).ToList();
+
+                return new STUDENTLISTRESULT() { IsSuccess = true, StudentResult = getstudent.OrderBy(r => r.ROLL_NO).ToList() };
 
 
                 //var attendance = db.VIEWATTENDANCEs.
