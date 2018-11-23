@@ -16,8 +16,7 @@ namespace MobileSchoolAPI.Controllers
     public class LoginController : ApiController
     {
 		// GET api/values
-		SchoolContext db = new SchoolContext();
-
+		 
 		/// <summary>	
 		/// To Confirm Login UserName and Password
 		/// If passed then Json object return else Error message 

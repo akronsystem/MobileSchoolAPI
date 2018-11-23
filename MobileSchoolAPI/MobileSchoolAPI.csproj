@@ -179,6 +179,9 @@
     <Compile Include="Controllers\TERMLISTController.cs" />
     <Compile Include="Controllers\SubjectListController.cs" />
     <Compile Include="Controllers\UserWiseAttendanceController.cs" />
+    <Compile Include="DAL\ConcreateContext.cs" />
+    <Compile Include="DAL\NKVSchoolContext.cs" />
+    <Compile Include="DAL\SchoolMainContext.cs" />
     <Compile Include="Models\AttendanceParameterscs.cs" />
     <Compile Include="Models\CheckUsernamePassword.cs" />
     <Compile Include="Models\CryptIt.cs" />
@@ -226,6 +229,7 @@
     <Compile Include="Models\VWATTENDANCEEMPLOYEE.cs" />
     <Compile Include="Models\VWSTUDENTINFO.cs" />
     <Compile Include="Models\Vw_ATTENDANCECHECK.cs" />
+    <Compile Include="Models\vw_FETCHSTANDARDBYDIVISION.cs" />
     <Compile Include="Models\VW_GET_USER_TYPE.cs" />
     <Compile Include="Models\Vw_STANDARDLIST.cs" />
     <Compile Include="Models\Vw_STUDSTANDARD.cs" />
