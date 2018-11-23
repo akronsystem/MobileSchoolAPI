@@ -54,6 +54,12 @@ namespace MobileSchoolAPI.BusinessLayer
                 // return getstudent;
                 for (int i = 0; i < getstudent.Count; i++)
                 {
+                    TBLNOTIFICATIONDETAIL objnotidetails = new TBLNOTIFICATIONDETAIL();
+                    objnotidetails.NOTIFICATIONID = objnotification.NOTIFICATIONID;
+                    objnotidetails.STUDENTID = getstudent[i].STUDENTID;
+                    objnotidetails.STATUS = 0;
+                    db.TBLNOTIFICATIONDETAILs.Add(objnotidetails);
+                    db.SaveChanges();
                     SMSSend(objHomework.HOMEWORK, getstudent[i].GMOBILE);
                 }
             }
@@ -62,83 +68,99 @@ namespace MobileSchoolAPI.BusinessLayer
         }
         public object SaveAttendance(AttendanceParameterscs atteobj)
         {
-			TBLATTENDENCEMASTER objmster = new TBLATTENDENCEMASTER();
+            TBLATTENDENCEMASTER objmster = new TBLATTENDENCEMASTER();
             TBLATTENDENCE objDetail = new TBLATTENDENCE();
 
 
             var checkatt = db.Vw_ATTENDANCECHECK.FirstOrDefault(r => r.DIVISIONID == atteobj.DIVISIONID && r.ATTEDANCEDATE == atteobj.ATTEDANCEDATE);
             //Duplicate Attendance Check
-            if (checkatt== null)
+            if (checkatt == null)
             {
 
                 try
-                { 
+                {
 
-                objmster.ATTEDANCEDATE = atteobj.ATTEDANCEDATE;
+                    objmster.ATTEDANCEDATE = atteobj.ATTEDANCEDATE;
 
-                objmster.DIVISIONID = atteobj.DIVISIONID;
-                objmster.DISPLAY = 1;
-                objmster.EDUCATIONYEAR = "2018-2019";
-                var std = db.vw_FETCHSTANDARDBYDIVISION.Where(r => r.DIVISIONID == atteobj.DIVISIONID && r.DISPLAY == 1 && r.ACADEMICYEAR == "2018-2019").ToList();
+                    objmster.DIVISIONID = atteobj.DIVISIONID;
+                    objmster.DISPLAY = 1;
+                    objmster.EDUCATIONYEAR = "2018-2019";
+                    var std = db.vw_FETCHSTANDARDBYDIVISION.Where(r => r.DIVISIONID == atteobj.DIVISIONID && r.DISPLAY == 1 && r.ACADEMICYEAR == "2018-2019").ToList();
 
-                objmster.STANDARDID =Convert.ToInt32( std[0].STANDARDID);
-                objmster.CREATEDON = DateTime.Now;
+                    objmster.STANDARDID = Convert.ToInt32(std[0].STANDARDID);
+                    objmster.CREATEDON = DateTime.Now;
 
-                objmster.CREATEDID = atteobj.Userid;
+                    objmster.CREATEDID = atteobj.Userid;
 
-                db.TBLATTENDENCEMASTERs.Add(objmster);
-                db.SaveChanges();
+                    db.TBLATTENDENCEMASTERs.Add(objmster);
+                    db.SaveChanges();
 
 
-                string absentno = atteobj.Absentno;
-                string[] sbno = absentno.Split(',');
-                objDetail.ATTEDANCEMID = objmster.ATTEDANCEMID;
-                    for (int i = 0; i < sbno.Count(); i++)
+                    TBLNOTIFICATION objnotification = new TBLNOTIFICATION();
+                    objnotification.TITLE = "Daily Attendance";
+                    objnotification.NOTIFICATIONDATE = DateTime.Now;
+                    objnotification.NOTIFICATIONTIME = DateTime.Now.ToString("h:mm tt");
+                    objnotification.DIVISIONID = atteobj.DIVISIONID;
+                    objnotification.ACADEMICYEAR = "2018-2019";
+                    objnotification.NOTIFICATIONTYPE = "Attendance";
+                    db.TBLNOTIFICATIONs.Add(objnotification);
+                    db.SaveChanges();
 
+                    string absentno = atteobj.Absentno;
+                    string[] sbno = absentno.Split(',');
+                    objDetail.ATTEDANCEMID = objmster.ATTEDANCEMID;
+                    for (int i = 0; i < sbno.Length; i++)
                     {
-                        
-                            string abno = sbno[i].ToString();
 
-                            int rollno = Convert.ToInt32(abno);
+                        string abno = sbno[i].ToString();
 
-                            var getstudent = db.VIEWGETSTUDENTATTs.Where(r => r.DIVISIONID == atteobj.DIVISIONID && r.ROLL_NO == rollno).ToList();
-                            if (getstudent.Count == 0)
-                            {
-                                return new Results() { IsSuccess = false, Message = "No students found for this division " };
+                        int rollno = Convert.ToInt32(abno);
 
-                            }
-                            objDetail.ATTEDANCEMID = objmster.ATTEDANCEMID;
-                            objDetail.ROLLNO = sbno[i].ToString();
-                            objDetail.NAME = getstudent[0].STUDENTNAME;
-                            objDetail.STUDENTID = getstudent[0].STUDENTID;
-                            objDetail.STATUS = "A";
+                        var getstudent = db.VIEWGETSTUDENTATTs.Where(r => r.DIVISIONID == atteobj.DIVISIONID && r.ROLL_NO == rollno).ToList();
+                        if (getstudent.Count == 0)
+                        {
+                            return new Results() { IsSuccess = false, Message = "No students found for this division " };
 
-                            db.TBLATTENDENCEs.Add(objDetail);
-                            db.SaveChanges();
-
-                            return new Results
-                            {
-                                IsSuccess = true,
-                                Message = "Attendance Save successfully"
-                            };
                         }
+                        objDetail.ATTEDANCEMID = objmster.ATTEDANCEMID;
+                        objDetail.ROLLNO = sbno[i].ToString();
+                        objDetail.NAME = getstudent[0].STUDENTNAME;
+                        objDetail.STUDENTID = getstudent[0].STUDENTID;
+                        objDetail.STATUS = "A";
+
+                        db.TBLATTENDENCEs.Add(objDetail);
+                        db.SaveChanges();
+
+                        TBLNOTIFICATIONDETAIL objnotidetails = new TBLNOTIFICATIONDETAIL();
+                        objnotidetails.NOTIFICATIONID = objnotification.NOTIFICATIONID;
+                        objnotidetails.STUDENTID = getstudent[0].STUDENTID;
+                        objnotidetails.STATUS = 0;
+                        db.TBLNOTIFICATIONDETAILs.Add(objnotidetails);
+                        db.SaveChanges();
                     }
+
+                    return new Results
+                    {
+                        IsSuccess = true,
+                        Message = "Attendance Save successfully"
+                    };
+                }
                 catch (Exception e)
                 {
                     return new Error() { IsError = true, Message = e.Message };
                 }
-            
-               
-            }
-            
-                return new Results
-                {
-                    IsSuccess=false,
-                    Message = "Attedance already taken for this Date "
-                };
- 
 
-          
+
+            }
+
+            return new Results
+            {
+                IsSuccess = false,
+                Message = "Attedance already taken for this Date "
+            };
+
+
+
         }
 
         internal void Students()
