@@ -72,7 +72,7 @@ namespace MobileSchoolAPI.BusinessLayer
             {
 
                 try
-
+                { 
 
                 objmster.ATTEDANCEDATE = atteobj.ATTEDANCEDATE;
 
@@ -93,55 +93,42 @@ namespace MobileSchoolAPI.BusinessLayer
                 string absentno = atteobj.Absentno;
                 string[] sbno = absentno.Split(',');
                 objDetail.ATTEDANCEMID = objmster.ATTEDANCEMID;
-                for (int i = 0; i < sbno.Count(); i++)
-
-                {
-                    objmster.ATTEDANCEDATE = atteobj.ATTEDANCEDATE;
-
-                    objmster.DIVISIONID = atteobj.DIVISIONID;
-                    objmster.DISPLAY = 1;
-
-                    objmster.CREATEDON = DateTime.Now;
-
-                    db.TBLATTENDENCEMASTERs.Add(objmster);
-                    db.SaveChanges();
-
-
-                    string absentno = atteobj.Absentno;
-                    string[] sbno = absentno.Split(',');
-                    objDetail.ATTEDANCEMID = objmster.ATTEDANCEMID;
                     for (int i = 0; i < sbno.Count(); i++)
+
                     {
-                        string abno = sbno[i].ToString();
+                        
+                            string abno = sbno[i].ToString();
 
-                        int rollno = Convert.ToInt32(abno);
+                            int rollno = Convert.ToInt32(abno);
 
-                        var getstudent = db.VIEWGETSTUDENTATTs.Where(r => r.DIVISIONID == atteobj.DIVISIONID && r.ROLL_NO == rollno).ToList();
-                        if(getstudent.Count==0)
-                        {
-                            return new Results() { IsSuccess = false, Message = "No students found for this division " };
+                            var getstudent = db.VIEWGETSTUDENTATTs.Where(r => r.DIVISIONID == atteobj.DIVISIONID && r.ROLL_NO == rollno).ToList();
+                            if (getstudent.Count == 0)
+                            {
+                                return new Results() { IsSuccess = false, Message = "No students found for this division " };
 
+                            }
+                            objDetail.ATTEDANCEMID = objmster.ATTEDANCEMID;
+                            objDetail.ROLLNO = sbno[i].ToString();
+                            objDetail.NAME = getstudent[0].STUDENTNAME;
+                            objDetail.STUDENTID = getstudent[0].STUDENTID;
+                            objDetail.STATUS = "A";
+
+                            db.TBLATTENDENCEs.Add(objDetail);
+                            db.SaveChanges();
+
+                            return new Results
+                            {
+                                IsSuccess = true,
+                                Message = "Attendance Save successfully"
+                            };
                         }
-                        objDetail.ATTEDANCEMID = objmster.ATTEDANCEMID;
-                        objDetail.ROLLNO = sbno[i].ToString();
-                        objDetail.NAME = getstudent[0].STUDENTNAME;
-                        objDetail.STUDENTID = getstudent[0].STUDENTID;
-                        objDetail.STATUS = "A";
-
-                        db.TBLATTENDENCEs.Add(objDetail);
-                        db.SaveChanges();
-
-                        return new Results
-                        {
-                            IsSuccess = true,
-                            Message = "Attendance Save successfully"
-                        };
                     }
-                }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     return new Error() { IsError = true, Message = e.Message };
                 }
+            
+               
             }
             
                 return new Results
