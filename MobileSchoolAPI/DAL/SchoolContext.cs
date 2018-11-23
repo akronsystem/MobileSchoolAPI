@@ -64,11 +64,11 @@ namespace MobileSchoolAPI.Models
         public virtual DbSet<VIewAttendaceClasswiseCheck> VIewAttendaceClasswiseChecks { get; set; } 
 
         public virtual DbSet<VIEWCHECKHOLIDAY> VIEWCHECKHOLIDAYs { get; set; }
-
+        public virtual DbSet<vw_FETCHSTANDARDBYDIVISION> vw_FETCHSTANDARDBYDIVISION { get; set; }
         public virtual DbSet<VIEWDIVISIONLISTBYSTUDENT> VIEWDIVISIONLISTBYSTUDENTs { get; set; }
         public virtual DbSet<VIEWDIVISIONWISESUBJECTSTUDENT> VIEWDIVISIONWISESUBJECTSTUDENTs { get; set; }
         public virtual DbSet<Vw_ATTENDANCECHECK> Vw_ATTENDANCECHECK { get; set; }
-        public virtual DbSet<vw_FETCHSTANDARDBYDIVISION> vw_FETCHSTANDARDBYDIVISION { get; set; }
+      
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
