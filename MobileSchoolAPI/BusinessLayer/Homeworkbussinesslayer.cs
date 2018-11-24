@@ -29,15 +29,15 @@ namespace MobileSchoolAPI.BusinessLayer
             db.TBLHOMEWORKs.Add(objHomework);
             db.SaveChanges(); 
 
-            TBLNOTIFICATION objnotification = new TBLNOTIFICATION();
-            objnotification.TITLE = obj.homeworkdescription;
-            objnotification.NOTIFICATIONDATE = DateTime.Now;
-            objnotification.NOTIFICATIONTIME = DateTime.Now.ToString("h:mm tt");
-            objnotification.DIVISIONID =int.Parse(obj.division);
-            objnotification.ACADEMICYEAR = "2018-2019";
-            objnotification.NOTIFICATIONTYPE = "Homework";
-            db.TBLNOTIFICATIONs.Add(objnotification);
-            db.SaveChanges();
+            //TBLNOTIFICATION objnotification = new TBLNOTIFICATION();
+            //objnotification.TITLE = obj.homeworkdescription;
+            //objnotification.NOTIFICATIONDATE = DateTime.Now;
+            //objnotification.NOTIFICATIONTIME = DateTime.Now.ToString("h:mm tt");
+            //objnotification.DIVISIONID =int.Parse(obj.division);
+            //objnotification.ACADEMICYEAR = "2018-2019";
+            //objnotification.NOTIFICATIONTYPE = "Homework";
+            //db.TBLNOTIFICATIONs.Add(objnotification);
+            //db.SaveChanges();
 
  
             string[] divid = objHomework.DIVISIONID.ToString().Split(',');
@@ -54,12 +54,12 @@ namespace MobileSchoolAPI.BusinessLayer
                 // return getstudent;
                 for (int i = 0; i < getstudent.Count; i++)
                 {
-                    TBLNOTIFICATIONDETAIL objnotidetails = new TBLNOTIFICATIONDETAIL();
-                    objnotidetails.NOTIFICATIONID = objnotification.NOTIFICATIONID;
-                    objnotidetails.STUDENTID = getstudent[i].STUDENTID;
-                    objnotidetails.STATUS = 0;
-                    db.TBLNOTIFICATIONDETAILs.Add(objnotidetails);
-                    db.SaveChanges();
+                    //TBLNOTIFICATIONDETAIL objnotidetails = new TBLNOTIFICATIONDETAIL();
+                    //objnotidetails.NOTIFICATIONID = objnotification.NOTIFICATIONID;
+                    //objnotidetails.STUDENTID = getstudent[i].STUDENTID;
+                    //objnotidetails.STATUS = 0;
+                    //db.TBLNOTIFICATIONDETAILs.Add(objnotidetails);
+                    //db.SaveChanges();
                     SMSSend(objHomework.HOMEWORK, getstudent[i].GMOBILE);
                 }
             }
