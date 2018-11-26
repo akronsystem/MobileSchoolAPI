@@ -44,8 +44,21 @@ namespace MobileSchoolAPI.Controllers
                         //VWSTUDENTINFO
                         STUDENTINFO_BUSINESS StudBL = new STUDENTINFO_BUSINESS();
                         var result = StudBL.getStudLogo(int.Parse(logindetail.EmpCode), logindetail.UserId);
-                        logindetail.IMAGEPATH = (string)result;
-                        StudentBaseUrl = ConfigurationManager.AppSettings["StxavierBaseUrlStudent"];
+                        if (result == null)
+                        {
+                        }
+                        else
+                        {
+                            logindetail.IMAGEPATH = (string)result;
+                        }
+                        if (logindetail.UserName.StartsWith("NKV"))
+                        {
+                            StudentBaseUrl = ConfigurationManager.AppSettings["NkvsBaseUrlStudent"];
+                        }
+                        else if(logindetail.UserName.StartsWith("SXS"))
+                        {
+                            StudentBaseUrl = ConfigurationManager.AppSettings["StxavierBaseUrlStudent"];
+                        }
                         logindetail.BaseURL = StudentBaseUrl;
                     }
                     else
@@ -53,8 +66,23 @@ namespace MobileSchoolAPI.Controllers
                         //VW_EMPLOYEE
                         GetTeacherInfoBusiness TeacherBL = new GetTeacherInfoBusiness();
                         var result=TeacherBL.getTeacherLogo(int.Parse(logindetail.EmpCode), logindetail.UserId);
-                        logindetail.IMAGEPATH=(string)result;
-                        TeacherBaseUrl = ConfigurationManager.AppSettings["StxavierBaseUrlTeacher"];
+                        if (result==null)
+                        {
+                        }
+                        else
+                        {
+                            logindetail.IMAGEPATH = (string)result;
+                        }
+                        if (logindetail.UserName.StartsWith("NKV"))
+                        {
+                            TeacherBaseUrl = ConfigurationManager.AppSettings["NkvsBaseUrlTeacher"];
+
+                        }
+                        else if(logindetail.UserName.StartsWith("SXS"))
+                        {
+                            TeacherBaseUrl = ConfigurationManager.AppSettings["StxavierBaseUrlTeacher"];
+
+                        }
                         logindetail.BaseURL = TeacherBaseUrl;
                     }
                     return logindetail;
