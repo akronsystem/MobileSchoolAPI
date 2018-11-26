@@ -9,7 +9,7 @@ namespace MobileSchoolAPI.ParamModel
     {
         public int UserId { get; set; }
        // public int DivisionId { get; set; }
-
+       public string Password { get; set; }
         public DateTime AttendanceDate { get; set; }
     }
 }

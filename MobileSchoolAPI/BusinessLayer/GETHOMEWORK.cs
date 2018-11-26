@@ -10,33 +10,33 @@ namespace MobileSchoolAPI.BusinessLayer
 {
     public class GETHOMEWORK
     {
-        SchoolContext db = new SchoolContext();
+      
 
-        public object GetHomework(PARAMHOMEWORK obj)
-        {
-            try
-            {
+        //public object GetHomework(PARAMHOMEWORK obj)
+        //{
+        //    try
+        //    {
+        //        SchoolMainContext db = new ConcreateContext().GetContext(obj.user, obj.PASSWORD);
+        //        var homework = db.VIEWHOMEWORKs.Where(r => r.STANDARDID == obj.standardid && r.DIVISIONID == obj.divisionid && r.DISPLAY == 1 && r.ACADEMICYEAR == "2018-2019").
 
-                var homework = db.VIEWHOMEWORKs.Where(r => r.STANDARDID == obj.standardid && r.DIVISIONID == obj.divisionid && r.DISPLAY == 1 && r.ACADEMICYEAR == "2018-2019").
+        //                             FirstOrDefault();
 
-                                     FirstOrDefault();
+        //        if (homework == null)
+        //        {
+        //            return new Error() { IsError = true, Message = "Homework not found" };
+        //        }
+        //        else
+        //        {
+        //            return homework;
+        //        }
 
-                if (homework == null)
-                {
-                    return new Error() { IsError = true, Message = "Homework not found" };
-                }
-                else
-                {
-                    return homework;
-                }
+        //    }
+        //    catch (Exception E)
+        //    {
+        //        return new Error() { IsError = true, Message = E.Message };
+        //    }
 
-            }
-            catch (Exception E)
-            {
-                return new Error() { IsError = true, Message = E.Message };
-            }
-
-        }
+        //}
 
 
 
@@ -44,6 +44,8 @@ namespace MobileSchoolAPI.BusinessLayer
         {
             try
             {
+                SchoolMainContext db = new ConcreateContext().GetContext(obj.USERID, obj.PASSWORD);
+
                 var GETTYPE = db.VW_GET_USER_TYPE.Where(r => r.UserId == obj.USERID).ToList();
 
                 if (GETTYPE[0].UserType != "STUDENT")
@@ -84,38 +86,40 @@ namespace MobileSchoolAPI.BusinessLayer
             }
         }
 
-        internal object ViewHomeWorkbyUser(PARAMHOMEWORKBYUSER objhome)
-        {
-            throw new NotImplementedException();
-        }
+        //internal object ViewHomeWorkbyUser(PARAMHOMEWORKBYUSER objhome)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public object GetStdByEmp(PARAMEMP emp)
-        {
-            try
-            {
-                var Division = db.VIEWDIVISIONLISTBYEMPs.Where(r => r.EMPLOYEEID == emp.EmployeeId);
+        //public object GetStdByEmp(PARAMEMP emp)
+        //{
+        //    try
+        //    {
+        //        var Division = db.VIEWDIVISIONLISTBYEMPs.Where(r => r.EMPLOYEEID == emp.EmployeeId);
 
-                if (Division == null)
-                {
-                    return new Error() { IsError = true, Message = "Division Not Found" };
-                }
-                else
-                {
-                    return Division;
-                }
-            }
-            catch (Exception E)
-            {
-                return new Error() { IsError = true, Message = E.Message };
+        //        if (Division == null)
+        //        {
+        //            return new Error() { IsError = true, Message = "Division Not Found" };
+        //        }
+        //        else
+        //        {
+        //            return Division;
+        //        }
+        //    }
+        //    catch (Exception E)
+        //    {
+        //        return new Error() { IsError = true, Message = E.Message };
 
-            }
-        }
+        //    }
+        //}
 
 
         public object ViewHomeWorkbyUser(ParamHOMEWORKBYUSER obj)
         {
             try
             {
+
+                SchoolMainContext db = new ConcreateContext().GetContext(obj.userid, obj.password);
                 var EmpHomework = db.VIEWHOMEWORKs.Where(r => r.UserId == obj.userid && r.HOMEWORKDATE==obj.homeworkdate).ToList();
 
 

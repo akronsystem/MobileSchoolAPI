@@ -8,7 +8,7 @@ namespace MobileSchoolAPI.Models
     public class GetUserId
     {
         [Key]
-        public long UserId { get; set; }
+        public int UserId { get; set; }
 
         public string PASSWORD { get; set; }
     }

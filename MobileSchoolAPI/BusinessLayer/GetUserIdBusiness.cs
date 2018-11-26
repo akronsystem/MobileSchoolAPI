@@ -9,12 +9,13 @@ namespace MobileSchoolAPI.BusinessLayer
 {
     public class GetUserIdBusiness
     {
-        SchoolContext db = new SchoolContext();
+       
 
         public object getUserInfo(GetUserId UserId)
         {
             try
             {
+                SchoolMainContext db = new ConcreateContext().GetContext(UserId.UserId, UserId.PASSWORD);
                 object result = "";
                 var getUserType = db.VW_GET_USER_TYPE.Where(r => r.UserId == UserId.UserId).FirstOrDefault();
 
