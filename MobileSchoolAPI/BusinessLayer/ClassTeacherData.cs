@@ -10,37 +10,39 @@ namespace MobileSchoolAPI.BusinessLayer
 {
     public class ClassTeacherData
     {
-        SchoolContext db = new SchoolContext();
+        
 
         /// <summary>
         ///  TO RETURN CLASS TEACHER DATA
         /// </summary>
         /// <param name="PC"></param>
         /// <returns></returns>
-        public object GetClassTeacher(ParamClassTeacher PC)
-        {
-            try
-            {
+        //public object GetClassTeacher(ParamClassTeacher PC)
+        //{
+        //    try
+        //    {
+                
 
-                var ClassTeacher = db.VIEWCLASSTEACHERs.
-                                    Where(r => r.EMPLOYEEID == PC.EMPLOYEEID && r.DISPLAY == 1 && r.ACADEMICYEAR == "2018-2019")
-                                    .FirstOrDefault();
-                if (ClassTeacher == null)
-                    return new Error() { IsError = true, Message = "No Class is Assigned To This Teacher" };
-                else
-                    return ClassTeacher;
-            }
-            catch (Exception ex)
-            {
-                return new Error() { IsError = true, Message = ex.Message };
-            }
-        }
+        //        var ClassTeacher = db.VIEWCLASSTEACHERs.
+        //                            Where(r => r.EMPLOYEEID == PC.EMPLOYEEID && r.DISPLAY == 1 && r.ACADEMICYEAR == "2018-2019")
+        //                            .FirstOrDefault();
+        //        if (ClassTeacher == null)
+        //            return new Error() { IsError = true, Message = "No Class is Assigned To This Teacher" };
+        //        else
+        //            return ClassTeacher;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return new Error() { IsError = true, Message = ex.Message };
+        //    }
+        //}
 
 
         public object GetAttendanceStatus(ParamAttendance PA)
         {
             try
             {
+                
                 int year = DateTime.Now.Year;
                 List<DateTime> li = GetDates(year, PA.MONTH);
                 CheckUsernamePassword objUP = new CheckUsernamePassword();
@@ -51,6 +53,7 @@ namespace MobileSchoolAPI.BusinessLayer
                     
 				}
                 List<Result> lt = new List<Result>();
+                SchoolMainContext db = new ConcreateContext().GetContext(PA.UserId, PA.Password);
                 var USERTYPE = db.VW_GET_USER_TYPE.Where(r => r.UserId == PA.UserId).ToList();
 
                 if (USERTYPE[0].UserType == "STUDENT")
