@@ -9,11 +9,11 @@ namespace MobileSchoolAPI.BusinessLayer
 {
     public class Homeworkbussinesslayer
     {
-        SchoolContext db = new SchoolContext();
+        
         public object Savehomework(homeworkparameters obj)
         {
-           
 
+            SchoolMainContext db = new ConcreateContext().GetContext(obj.Userid, obj.Password);
             TBLHOMEWORK objHomework = new TBLHOMEWORK();
             
           //  objHomework.STANDARDID = obj.standard;
@@ -68,6 +68,7 @@ namespace MobileSchoolAPI.BusinessLayer
         }
         public object SaveAttendance(AttendanceParameterscs atteobj)
         {
+            SchoolMainContext db = new ConcreateContext().GetContext(atteobj.Userid, atteobj.Password);
             TBLATTENDENCEMASTER objmster = new TBLATTENDENCEMASTER();
             TBLATTENDENCE objDetail = new TBLATTENDENCE();
 
@@ -96,15 +97,15 @@ namespace MobileSchoolAPI.BusinessLayer
                     db.SaveChanges();
 
 
-                    TBLNOTIFICATION objnotification = new TBLNOTIFICATION();
-                    objnotification.TITLE = "Daily Attendance";
-                    objnotification.NOTIFICATIONDATE = DateTime.Now;
-                    objnotification.NOTIFICATIONTIME = DateTime.Now.ToString("h:mm tt");
-                    objnotification.DIVISIONID = atteobj.DIVISIONID;
-                    objnotification.ACADEMICYEAR = "2018-2019";
-                    objnotification.NOTIFICATIONTYPE = "Attendance";
-                    db.TBLNOTIFICATIONs.Add(objnotification);
-                    db.SaveChanges();
+                    //TBLNOTIFICATION objnotification = new TBLNOTIFICATION();
+                    //objnotification.TITLE = "Daily Attendance";
+                    //objnotification.NOTIFICATIONDATE = DateTime.Now;
+                    //objnotification.NOTIFICATIONTIME = DateTime.Now.ToString("h:mm tt");
+                    //objnotification.DIVISIONID = atteobj.DIVISIONID;
+                    //objnotification.ACADEMICYEAR = "2018-2019";
+                    //objnotification.NOTIFICATIONTYPE = "Attendance";
+                    //db.TBLNOTIFICATIONs.Add(objnotification);
+                    //db.SaveChanges();
 
                     string absentno = atteobj.Absentno;
                     string[] sbno = absentno.Split(',');
@@ -132,11 +133,11 @@ namespace MobileSchoolAPI.BusinessLayer
                         db.SaveChanges();
 
                         TBLNOTIFICATIONDETAIL objnotidetails = new TBLNOTIFICATIONDETAIL();
-                        objnotidetails.NOTIFICATIONID = objnotification.NOTIFICATIONID;
-                        objnotidetails.STUDENTID = getstudent[0].STUDENTID;
-                        objnotidetails.STATUS = 0;
-                        db.TBLNOTIFICATIONDETAILs.Add(objnotidetails);
-                        db.SaveChanges();
+                       // objnotidetails.NOTIFICATIONID = objnotification.NOTIFICATIONID;
+                       // objnotidetails.STUDENTID = getstudent[0].STUDENTID;
+                       // objnotidetails.STATUS = 0;
+                       // db.TBLNOTIFICATIONDETAILs.Add(objnotidetails);
+                      //  db.SaveChanges();
                     }
 
                     return new Results
