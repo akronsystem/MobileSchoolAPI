@@ -9,13 +9,14 @@ namespace MobileSchoolAPI.BusinessLayer
 {
     public class GetSubjectListBusiness
     {
-        SchoolContext db = new SchoolContext();
+       
 
 
         public object GetSubjectList(ParamDIVISIONWISESUBJECT objdiv)
         {
             try
             {
+                SchoolMainContext db = new ConcreateContext().GetContext(objdiv.userid, objdiv.password);
                 var SubjectList = db.VIEWDIVISIONWISESUBJECTs.Where(r => r.DIVISIONID == objdiv.divisionid &&  r.DISPLAY == 1 && r.UserId==objdiv.userid).ToList();
                 if (SubjectList.Count == 0)
                 {

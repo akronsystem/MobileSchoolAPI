@@ -56,11 +56,11 @@ namespace MobileSchoolAPI
 		public virtual DbSet<VIEW_TERMMASTER> VIEW_TERMMASTER { get; set; }
 
 
-		public virtual DbSet<VIEWDIVISIONWISESUBJECT> VIEWDIVISIONWISESUBJECTs { get; set; }
+        public virtual DbSet<VIEWDIVISIONWISESUBJECT> VIEWDIVISIONWISESUBJECTs { get; set; }
 
 
 
-		public virtual DbSet<TBLNOTIFICATION> TBLNOTIFICATIONs { get; set; }
+        public virtual DbSet<TBLNOTIFICATION> TBLNOTIFICATIONs { get; set; }
 		public virtual DbSet<TBLNOTIFICATIONDETAIL> TBLNOTIFICATIONDETAILs { get; set; }
 		public virtual DbSet<VIEWNOTIFICATION> VIEWNOTIFICATIONs { get; set; }
 		public virtual DbSet<Vw_STANDARDLIST> Vw_STANDARDLIST { get; set; }
@@ -70,8 +70,8 @@ namespace MobileSchoolAPI
 		public virtual DbSet<VIEWCHECKHOLIDAY> VIEWCHECKHOLIDAYs { get; set; }
 		public virtual DbSet<vw_FETCHSTANDARDBYDIVISION> vw_FETCHSTANDARDBYDIVISION { get; set; }
 		public virtual DbSet<VIEWDIVISIONLISTBYSTUDENT> VIEWDIVISIONLISTBYSTUDENTs { get; set; }
-		public virtual DbSet<VIEWDIVISIONWISESUBJECTSTUDENT> VIEWDIVISIONWISESUBJECTSTUDENTs { get; set; }
-		public virtual DbSet<Vw_ATTENDANCECHECK> Vw_ATTENDANCECHECK { get; set; }
+        public virtual DbSet<VIEWDIVISIONWISESUBJECTSTUDENT> VIEWDIVISIONWISESUBJECTSTUDENTs { get; set; }
+        public virtual DbSet<Vw_ATTENDANCECHECK> Vw_ATTENDANCECHECK { get; set; }
 
 
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)

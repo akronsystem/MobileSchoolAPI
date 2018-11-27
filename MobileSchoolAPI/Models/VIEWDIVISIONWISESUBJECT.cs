@@ -23,6 +23,9 @@ namespace MobileSchoolAPI.Models
 
         public long? DISPLAY { get; set; }
 
-        public Int64 UserId { get; set; }
+        [Key]
+        [Column(Order = 2)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public long UserId { get; set; }
     }
 }
