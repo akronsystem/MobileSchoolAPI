@@ -13,7 +13,7 @@ namespace MobileSchoolAPI.BusinessLayer
 
         public object GetStdList(ParamDIVISIONLIST Stdobj)
         {
-            SchoolContext db = new SchoolContext();
+            SchoolMainContext db = new ConcreateContext().GetContext(Stdobj.userid, Stdobj.password);
             var UserType = db.VW_GET_USER_TYPE.Where(r => r.UserId == Stdobj.userid).ToList();
             if(UserType[0].UserType=="STUDENT")
             {

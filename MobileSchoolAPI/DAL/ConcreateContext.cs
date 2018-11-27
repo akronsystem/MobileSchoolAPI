@@ -27,9 +27,9 @@ namespace MobileSchoolAPI
 				return new SchoolContext();
 			var contxt1 = new NKVSchoolContext().TBLUSERLOGINs.FirstOrDefault(r => r.UserId == UserId && r.Password == password);
 			if (contxt1 != null)
-				return new SchoolContext();
+				return new NKVSchoolContext();
 
-			return new SchoolContext();
+            return new SchoolContext();
 		}
 	}
 }

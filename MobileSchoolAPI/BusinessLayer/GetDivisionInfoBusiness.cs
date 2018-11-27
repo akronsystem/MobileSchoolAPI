@@ -9,13 +9,14 @@ namespace MobileSchoolAPI.BusinessLayer
 {
     public class GetDivisionInfoBusiness
     {
-        SchoolContext db = new SchoolContext();
+       
 
 
         public object GetDivision(ParamDIVISIONLIST objdiv)
         {
             try
             {
+                SchoolMainContext db = new ConcreateContext().GetContext(objdiv.userid, objdiv.password);
                 var EmpDivision = db.VIEWEMPDIVISIONs.Where(r=>r.UserId==objdiv.userid && r.ACADEMICYEAR=="2018-2019" && r.DISPLAY==1).ToList();
                 if (EmpDivision.Count == 0)
                 {

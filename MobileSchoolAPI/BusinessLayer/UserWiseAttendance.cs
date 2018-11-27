@@ -16,6 +16,7 @@ namespace MobileSchoolAPI.BusinessLayer
         {
             try
             {
+                SchoolMainContext db = new ConcreateContext().GetContext(obj.UserId, obj.Password);
                 var usertype= objSc.VW_GET_USER_TYPE.Where(r => r.UserId == obj.UserId).ToList();
                 if(usertype.Count()==0)
                 {

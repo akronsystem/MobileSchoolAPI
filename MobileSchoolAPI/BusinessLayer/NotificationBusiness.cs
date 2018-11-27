@@ -9,10 +9,12 @@ namespace MobileSchoolAPI.BusinessLayer
 {
     public class NotificationBusiness
     {
-        SchoolContext db = new SchoolContext();
+        
 
        public object SaveNotification(ParamNotification objnote)
         {
+            SchoolMainContext db = new ConcreateContext().GetContext(objnote.userid, objnote.password);
+
             TBLNOTIFICATION objmaster = new TBLNOTIFICATION();
             TBLNOTIFICATIONDETAIL objdetail = new TBLNOTIFICATIONDETAIL();
 
@@ -49,6 +51,7 @@ namespace MobileSchoolAPI.BusinessLayer
         {
             try
             {
+                SchoolMainContext db = new ConcreateContext().GetContext(obj.userid, obj.password);
                 var Notification = db.VIEWNOTIFICATIONs.Where(r => r.UserId == obj.userid).ToList();
                 if (Notification.Count == 0)
                 {
@@ -76,7 +79,7 @@ namespace MobileSchoolAPI.BusinessLayer
         {
             try
             {
-
+                SchoolMainContext db = new ConcreateContext().GetContext(obj.userid, obj.password);
                 TBLNOTIFICATIONDETAIL objdetail = db.TBLNOTIFICATIONDETAILs.First(r => r.NOTIFICATIONID == obj.notificationid && r.STUDENTID == obj.studentid);
 
                 objdetail.STATUS = obj.status;
