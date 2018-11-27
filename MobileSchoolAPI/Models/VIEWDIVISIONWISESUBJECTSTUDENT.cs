@@ -22,5 +22,18 @@ namespace MobileSchoolAPI.Models
         [Column(Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public long UserId { get; set; }
+
+        [StringLength(100)]
+        public string STANDARDID { get; set; }
+
+        [Key]
+        [Column(Order = 2)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public long STANDARDSUBJECTID { get; set; }
+
+        [Key]
+        [Column(Order = 3)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public long SUBJECTID { get; set; }
     }
 }
