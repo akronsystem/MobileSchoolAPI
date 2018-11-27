@@ -12,16 +12,8 @@ namespace MobileSchoolAPI.Controllers
 {
 	public class HomeWorkController : ApiController
 	{
-		SchoolContext db = new SchoolContext();
+		
 		[HttpPost]
-
-		
-
-
-		
-
-
-		
 
 		public object ShowHomeWork([FromBody]ParamHOMEWORKBYUSER objhome)
 		{
