@@ -9,11 +9,12 @@ namespace MobileSchoolAPI.BusinessLayer
 {
     public class GETSTUDENTATTBL
     {
-        SchoolContext db = new SchoolContext();
+       
         public object GETSTUDENT (GETSTUDENTPARAM OBJ)
         {
             try
             {
+                SchoolMainContext db = new ConcreateContext().GetContext(OBJ.USERID, OBJ.PASSWORD);
 
                 var getstudent = db.VIEWGETSTUDENTATTs.Where(r => r.DIVISIONID == OBJ.DIVISIONID).ToList();
 

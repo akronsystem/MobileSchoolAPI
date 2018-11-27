@@ -11,12 +11,13 @@ namespace MobileSchoolAPI.Controllers
 {
     public class TermListController : ApiController
     {
-        [HttpGet]
+        [HttpPost]
 
-        public object getTermList()
+        public object getTermList(TERMLISTCS tobj)
         {
             GETTERMLISTBL ObjTerm = new GETTERMLISTBL();
-            var GetTermVar = ObjTerm.TERMLISTBL();
+           
+            var GetTermVar = ObjTerm.TERMLISTBL(tobj);
             return GetTermVar;
             //return new TermListResult(){ IsSuccess="true",TermList= GetTermVar};
             
