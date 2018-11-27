@@ -39,23 +39,50 @@ namespace MobileSchoolAPI.Controllers
                     return new Error() { IsError = true, Message = "User Name & Password is Incorrect" };
                 else
                 {
-
                     if (logindetail.UserType == "STUDENT")
                     {
                         //VWSTUDENTINFO
                         STUDENTINFO_BUSINESS StudBL = new STUDENTINFO_BUSINESS();
-                        //var result = StudBL.getStudLogo(int.Parse(logindetail.EmpCode), logindetail.UserId);
-
-                        StudentBaseUrl = ConfigurationManager.AppSettings["StxavierBaseUrlStudent"];
+                        var result = StudBL.getStudLogo(int.Parse(logindetail.EmpCode), logindetail.UserId);
+                        if (result == null)
+                        {
+                        }
+                        else
+                        {
+                            logindetail.IMAGEPATH = (string)result;
+                        }
+                        if (logindetail.UserName.StartsWith("NKV"))
+                        {
+                            StudentBaseUrl = ConfigurationManager.AppSettings["NkvsBaseUrlStudent"];
+                        }
+                        else if(logindetail.UserName.StartsWith("SXS"))
+                        {
+                            StudentBaseUrl = ConfigurationManager.AppSettings["StxavierBaseUrlStudent"];
+                        }
                         logindetail.BaseURL = StudentBaseUrl;
                     }
                     else
                     {
                         //VW_EMPLOYEE
                         GetTeacherInfoBusiness TeacherBL = new GetTeacherInfoBusiness();
-                        // var result=TeacherBL.getTeacherLogo(int.Parse(logindetail.EmpCode), logindetail.UserId);
+                        var result=TeacherBL.getTeacherLogo(int.Parse(logindetail.EmpCode), logindetail.UserId);
+                        if (result==null)
+                        {
+                        }
+                        else
+                        {
+                            logindetail.IMAGEPATH = (string)result;
+                        }
+                        if (logindetail.UserName.StartsWith("NKV"))
+                        {
+                            TeacherBaseUrl = ConfigurationManager.AppSettings["NkvsBaseUrlTeacher"];
 
-                        TeacherBaseUrl = ConfigurationManager.AppSettings["StxavierBaseUrlTeacher"];
+                        }
+                        else if(logindetail.UserName.StartsWith("SXS"))
+                        {
+                            TeacherBaseUrl = ConfigurationManager.AppSettings["StxavierBaseUrlTeacher"];
+
+                        }
                         logindetail.BaseURL = TeacherBaseUrl;
                     }
                     return logindetail;

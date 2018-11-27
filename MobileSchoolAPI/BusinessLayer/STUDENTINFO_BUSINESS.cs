@@ -42,7 +42,8 @@ namespace MobileSchoolAPI.BUSINESSLAYER
                
                 if (result == null)
                 {
-                    return new Error() { IsError = true, Message = "Logo Not Found" };
+                    //return new Error() { IsError = true, Message = "Logo Not Found" };
+                    return "";
                 }
                 else
                 {
