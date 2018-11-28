@@ -164,11 +164,11 @@
     <Compile Include="BusinessLayer\Homeworkbussinesslayer.cs" />
     <Compile Include="BusinessLayer\LoginManager.cs" />
     <Compile Include="BusinessLayer\NotificationBusiness.cs" />
+    <Compile Include="BusinessLayer\TERMLISTCS.cs" />
     <Compile Include="BusinessLayer\UserWiseAttendance.cs" />
     <Compile Include="Controllers\ATTENDANCEController.cs" />
     <Compile Include="BUSINESSLAYER\GetTeacherInfoBusiness.cs" />
     <Compile Include="BUSINESSLAYER\STUDENTINFO_BUSINESS.cs" />
-    <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\ClassTeacherController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\DivisionListController.cs" />

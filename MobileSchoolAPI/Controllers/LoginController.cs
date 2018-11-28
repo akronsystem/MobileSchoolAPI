@@ -43,7 +43,7 @@ namespace MobileSchoolAPI.Controllers
                     {
                         //VWSTUDENTINFO
                         STUDENTINFO_BUSINESS StudBL = new STUDENTINFO_BUSINESS();
-                        var result = StudBL.getStudLogo(int.Parse(logindetail.EmpCode), logindetail.UserId);
+                        var result = StudBL.getStudLogo(int.Parse(logindetail.EmpCode),Convert.ToInt16( logindetail.UserId),logindetail.Password);
                         if (result == null)
                         {
                         }
@@ -65,7 +65,7 @@ namespace MobileSchoolAPI.Controllers
                     {
                         //VW_EMPLOYEE
                         GetTeacherInfoBusiness TeacherBL = new GetTeacherInfoBusiness();
-                        var result=TeacherBL.getTeacherLogo(int.Parse(logindetail.EmpCode), logindetail.UserId);
+                        var result=TeacherBL.getTeacherLogo(int.Parse(logindetail.EmpCode),Convert.ToInt16( logindetail.UserId),logindetail.Password);
                         if (result==null)
                         {
                         }

@@ -8,9 +8,10 @@ namespace MobileSchoolAPI.BUSINESSLAYER
 {
     public class GetTeacherInfoBusiness
     {
-        SchoolContext db = new SchoolContext();
-        public object getTeacherInfo(int empcode, long UserId)
+        
+        public object getTeacherInfo(int empcode, int UserId,string Password)
         {
+            SchoolMainContext db = new ConcreateContext().GetContext(UserId, Password);
             var result = db.VW_EMPLOYEE.Where(r => r.ID == empcode && r.UserId == UserId).FirstOrDefault();
 
             if (result == null)
@@ -24,8 +25,9 @@ namespace MobileSchoolAPI.BUSINESSLAYER
        
             
         }
-        public object getTeacherLogo(int empcode, long UserId)
+        public object getTeacherLogo(int empcode, int UserId,string Password)
         {
+            SchoolMainContext db = new ConcreateContext().GetContext(UserId, Password);
             var result = db.VW_EMPLOYEE.Where(r => r.ID == empcode && r.UserId == UserId).FirstOrDefault();
 
             if (result == null)

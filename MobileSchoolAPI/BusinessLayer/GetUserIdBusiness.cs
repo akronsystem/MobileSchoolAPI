@@ -25,7 +25,7 @@ namespace MobileSchoolAPI.BusinessLayer
                     if (getUserType.UserType == "STUDENT")
                     {
                         STUDENTINFO_BUSINESS GetStudobj = new STUDENTINFO_BUSINESS();
-                        result = GetStudobj.getStudInfo(int.Parse(getUserType.EmpCode), UserId.UserId);
+                        result = GetStudobj.getStudInfo(int.Parse(getUserType.EmpCode), UserId.UserId,UserId.PASSWORD);
                     }
                     else if (getUserType.UserType == "Alumini")
                     {
@@ -34,7 +34,7 @@ namespace MobileSchoolAPI.BusinessLayer
                     else
                     {
                         GetTeacherInfoBusiness GetTeacherobj = new GetTeacherInfoBusiness();
-                        result = GetTeacherobj.getTeacherInfo(int.Parse(getUserType.EmpCode), UserId.UserId);
+                        result = GetTeacherobj.getTeacherInfo(int.Parse(getUserType.EmpCode), UserId.UserId, UserId.PASSWORD);
                     }
                     return result;
                 }
