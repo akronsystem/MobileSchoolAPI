@@ -15,14 +15,17 @@ namespace MobileSchoolAPI.BusinessLayer
 
             SchoolMainContext db = new ConcreateContext().GetContext(obj.Userid, obj.Password);
             TBLHOMEWORK objHomework = new TBLHOMEWORK();
-            
-          //  objHomework.STANDARDID = obj.standard;
-        
-            objHomework.DIVISIONID =obj.division;
+            var getUserType = db.VW_GET_USER_TYPE.Where(r => r.UserId == obj.Userid).FirstOrDefault();
+          
+          
+            objHomework.STANDARDID =Convert.ToInt64(obj.STANDARDID);
+            objHomework.CREATEDID = int.Parse(getUserType.EmpCode);
+            objHomework.DIVISIONID =obj.division.ToString();
             objHomework.SUBJECTID = obj.subject;
             objHomework.TERMID = obj.term;
             objHomework.HOMEWORK =obj.homeworkdescription;
-            objHomework.HOMEWORKDATE = DateTime.Now;
+            objHomework.HOMEWORKDATE =Convert.ToDateTime( DateTime.Now.ToShortDateString());
+            objHomework.TIME = DateTime.Now.ToShortTimeString();
             objHomework.DISPLAY = 1;
             objHomework.ACADEMICYEAR = "2018-2019";
 
