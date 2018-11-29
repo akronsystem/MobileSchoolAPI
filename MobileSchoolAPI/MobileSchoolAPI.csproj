@@ -193,6 +193,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="DAL\SchoolContext.cs" />
+    <Compile Include="Models\FCMNotification.cs" />
     <Compile Include="Models\GETSTUDENTPARAM.cs" />
     <Compile Include="Models\GetUserId.cs" />
     <Compile Include="Models\Homework.cs" />
