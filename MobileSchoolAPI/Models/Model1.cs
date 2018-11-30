@@ -12,7 +12,7 @@ namespace MobileSchoolAPI.Models
         {
         }
 
-        public virtual DbSet<VIEWATTENDANCE> VIEWATTENDANCEs { get; set; }
+        public virtual DbSet<VIEWGETSTUDENTATT> VIEWGETSTUDENTATTs { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

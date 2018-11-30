@@ -10,6 +10,15 @@ namespace MobileSchoolAPI.Models
     public partial class VIEWHOMEWORK
     {
         [Key]
+        [Column(Order = 0)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public long UserId { get; set; }
+
+        [StringLength(50)]
+        public string UserType { get; set; }
+
+        [Key]
+        [Column(Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public long HOMEWORKID { get; set; }
 
@@ -44,5 +53,7 @@ namespace MobileSchoolAPI.Models
         public string SUBJECTNAME { get; set; }
 
         public long? DISPLAY { get; set; }
+
+        
     }
 }

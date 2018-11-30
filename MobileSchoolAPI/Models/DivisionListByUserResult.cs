@@ -5,8 +5,10 @@ using System.Web;
 
 namespace MobileSchoolAPI.Models
 {
-    public class TeacherInfoParameters
+    public class DivisionListByUserResult
     {
-        public int EMPLOYEEID { get; set; }
+        public bool IsSuccess { get; set; }
+
+        public object DivisionList { get; set; }
     }
 }

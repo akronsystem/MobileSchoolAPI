@@ -5,32 +5,12 @@ namespace MobileSchoolAPI.Models
 	using System.ComponentModel.DataAnnotations.Schema;
 	using System.Linq;
 
-	public partial class SchoolContext : DbContext
+	public partial class SchoolContext : SchoolMainContext
 	{
 		public SchoolContext()
 			: base("name=SchoolContext")
 		{
-		}
-
-		public virtual DbSet<TBLUSERLOGIN> TBLUSERLOGINs { get; set; }
-<<<<<<< HEAD
-        public virtual DbSet<VIEWATTENDANCE> VIEWATTENDANCEs { get; set; }
-
-        public virtual DbSet<VIEWGETSTUDENTATT> VIEWGETSTUDENTATTs { get; set; }
-=======
-        public virtual DbSet<VW_STUDENT_INFO> VW_STUDENT_INFO { get; set; }
-
-        public virtual DbSet<VW_EMPLOYEE> VW_EMPLOYEE { get; set; }
->>>>>>> 9f4aadd178ab2b1f0954397a0170cdc7f401be82
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-		{
-			modelBuilder.Entity<TBLUSERLOGIN>()
-				.Property(e => e.EmpCode)
-				.IsUnicode(false);
-
-			modelBuilder.Entity<TBLUSERLOGIN>()
-				.Property(e => e.ISPASSWORDCHANGED)
-				.IsUnicode(false);
-		}
+			
+		}	 
 	}
 }

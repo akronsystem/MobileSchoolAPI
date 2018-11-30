@@ -1,5 +1,6 @@
 ﻿using MobileSchoolAPI.BusinessLayer;
 using MobileSchoolAPI.Models;
+using MobileSchoolAPI.ResultModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,12 +21,29 @@ namespace MobileSchoolAPI.Controllers
         /// <param name="UserName"></param>
         /// <param name="Password"></param>
         /// <returns></returns>
-        [HttpPost]
-        public object ATTENDANCESTUDENT([FromBody]GETSTUDENTPARAM OBJ)
+        [HttpPost]  
+
+        public object ATTENDANCESTUDENT([FromBody]GETSTUDENTPARAM OBJ)  
         {
             GETSTUDENTATTBL GETOBJ = new GETSTUDENTATTBL();
            var GETSTUDENTRESULT= GETOBJ.GETSTUDENT(OBJ);
             return GETSTUDENTRESULT;
+			//return new STUDENTLISTRESULT() { IsSuccess = true, StudentResult = GETOBJ.GETSTUDENT(OBJ) };
+		}
+
+
+
+
+        public object AttendanceSave([FromBody]AttendanceParameterscs atteobj)
+        {
+
+            Homeworkbussinesslayer bhobj = new Homeworkbussinesslayer();
+
+
+			var result= bhobj.SaveAttendance(atteobj);
+			//  bhobj.StudentsMethod(hobj);
+
+			return result;
         }
 
     }

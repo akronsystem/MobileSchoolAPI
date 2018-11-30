@@ -5,14 +5,14 @@ namespace MobileSchoolAPI.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
 
-    public partial class Model2 : DbContext
+    public partial class Homework : DbContext
     {
-        public Model2()
-            : base("name=Model2")
+        public Homework()
+            : base("name=Homework")
         {
         }
 
-        public virtual DbSet<VIEWGETSTUDENTATT> VIEWGETSTUDENTATTs { get; set; }
+        public virtual DbSet<TBLHOMEWORK> TBLHOMEWORKs { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

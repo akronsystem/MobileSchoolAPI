@@ -5,14 +5,13 @@ namespace MobileSchoolAPI
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
 
-    public partial class STUDENTINFO : DbContext
+    public partial class AttendanceSave : DbContext
     {
-        public STUDENTINFO()
-            : base("name=STUDENTINFO")
+        public AttendanceSave()
+            : base("name=AttendanceSave")
         {
         }
 
-        public virtual DbSet<VW_STUDENT_INFO> VW_STUDENT_INFO { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

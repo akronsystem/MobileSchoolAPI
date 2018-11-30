@@ -21,5 +21,13 @@ namespace MobileSchoolAPI.Models
         [Column(Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public long DIVISIONID { get; set; }
+
+        [Key]
+        [Column(Order = 2)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public long UserId { get; set; }
+
+        [StringLength(50)]
+        public string ACADEMICYEAR { get; set; }
     }
 }

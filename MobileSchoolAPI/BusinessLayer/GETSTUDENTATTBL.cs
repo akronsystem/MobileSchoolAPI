@@ -1,4 +1,5 @@
 ﻿using MobileSchoolAPI.Models;
+using MobileSchoolAPI.ResultModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,18 +9,21 @@ namespace MobileSchoolAPI.BusinessLayer
 {
     public class GETSTUDENTATTBL
     {
-        SchoolContext db = new SchoolContext();
+       
         public object GETSTUDENT (GETSTUDENTPARAM OBJ)
         {
             try
             {
+                SchoolMainContext db = new ConcreateContext().GetContext(OBJ.USERID, OBJ.PASSWORD);
 
-                var getstudent = db.VIEWGETSTUDENTATTs.Where(r => r.STANDARDID == OBJ.STANDARDID && r.DIVISIONID == OBJ.DIVISIONID).ToList();
+                var getstudent = db.VIEWGETSTUDENTATTs.Where(r => r.DIVISIONID == OBJ.DIVISIONID).ToList();
 
-                if (getstudent == null)
+                if (getstudent.Count() == 0)
                     return new Error() { IsError = true, Message = "STUDENT NOT FOUND." };
                 else
-                    return getstudent;
+                    //return getstudent.OrderBy(r => r.ROLL_NO).ToList();
+
+                return new STUDENTLISTRESULT() { IsSuccess = true, StudentResult = getstudent.OrderBy(r => r.ROLL_NO).ToList() };
 
 
                 //var attendance = db.VIEWATTENDANCEs.

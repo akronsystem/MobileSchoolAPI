@@ -1,12 +1,10 @@
-<<<<<<< HEAD
 ﻿using MobileSchoolAPI.BusinessLayer;
+using MobileSchoolAPI.BUSINESSLAYER;
 using MobileSchoolAPI.Models;
-//using MobileSchoolAPI.ParamModel;
-=======
-﻿using MobileSchoolAPI.Models;
->>>>>>> 9f4aadd178ab2b1f0954397a0170cdc7f401be82
+using MobileSchoolAPI.ParamModel;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -18,8 +16,7 @@ namespace MobileSchoolAPI.Controllers
     public class LoginController : ApiController
     {
 		// GET api/values
-		SchoolContext db = new SchoolContext();
-
+		 
 		/// <summary>	
 		/// To Confirm Login UserName and Password
 		/// If passed then Json object return else Error message 
@@ -27,46 +24,76 @@ namespace MobileSchoolAPI.Controllers
 		/// <param name="UserName"></param>
 		/// <param name="Password"></param>
 		/// <returns></returns>
-<<<<<<< HEAD
-		//[HttpPost]
-		//public object Confirm([FromBody]ParamLogin userLogin)
-		//{
-		//	try
-		//	{
-		//		LoginManager objLogin = new LoginManager();
-		//		var logindetail = objLogin.GetLoginDetails(userLogin);
-		//		if (logindetail == null)
-		//			return new Error() { IsError = true, Message = "User Name & Passowrd is Incorrect" };
-		//		else
-		//			return logindetail;
-		//	}
-		//	catch (Exception ex)
-		//	{
-		//		return new Error() { IsError = true, Message = ex.Message };
-		//	}   
-		//}
-=======
+
 		[HttpPost]
-		public object Confirm(string UserName,string Password)
+		public object Confirm([FromBody]ParamLogin userLogin)
 		{
-			try
-			{
-				string passecrypt = CryptIt.Encrypt(Password);
-				var logindetail =	db.TBLUSERLOGINs.
-									Where(r => r.UserName == UserName && r.Password == passecrypt && r.STATUS=="ACTIVE")
-									.FirstOrDefault();
-				if (logindetail == null)
-					return new Error() { IsError = true, Message = "User Name & Passowrd is Incorrect" };
-				else
-					return logindetail;
-			}
-			catch (Exception ex)
-			{
-				return new Error() { IsError = true, Message = ex.Message };
-			}
+            try
+            {
+                string TeacherBaseUrl = "";
+                string StudentBaseUrl = "";
 
->>>>>>> 9f4aadd178ab2b1f0954397a0170cdc7f401be82
+                LoginManager objLogin = new LoginManager();
+                var logindetail = objLogin.GetLoginDetails(userLogin);
+                if (logindetail == null)
+                    return new Error() { IsError = true, Message = "User Name & Password is Incorrect" };
+                else
+                {
+                    if (logindetail.UserType == "STUDENT")
+                    {
+                        //VWSTUDENTINFO
+                        STUDENTINFO_BUSINESS StudBL = new STUDENTINFO_BUSINESS();
+                        var result = StudBL.getStudLogo(int.Parse(logindetail.EmpCode),Convert.ToInt16( logindetail.UserId),logindetail.Password);
+                        if (result == null)
+                        {
+                        }
+                        else
+                        {
+                            logindetail.IMAGEPATH = (string)result;
+                        }
+                        if (logindetail.UserName.StartsWith("NKV"))
+                        {
+                            StudentBaseUrl = ConfigurationManager.AppSettings["NkvsBaseUrlStudent"];
+                        }
+                        else if(logindetail.UserName.StartsWith("SXS"))
+                        {
+                            StudentBaseUrl = ConfigurationManager.AppSettings["StxavierBaseUrlStudent"];
+                        }
+                        logindetail.BaseURL = StudentBaseUrl;
+                    }
+                    else
+                    {
+                        //VW_EMPLOYEE
+                        GetTeacherInfoBusiness TeacherBL = new GetTeacherInfoBusiness();
+                        var result=TeacherBL.getTeacherLogo(int.Parse(logindetail.EmpCode),Convert.ToInt16( logindetail.UserId),logindetail.Password);
+                        if (result==null)
+                        {
+                        }
+                        else
+                        {
+                            logindetail.IMAGEPATH = (string)result;
+                        }
+                        if (logindetail.UserName.StartsWith("NKV"))
+                        {
+                            TeacherBaseUrl = ConfigurationManager.AppSettings["NkvsBaseUrlTeacher"];
 
+                        }
+                        else if(logindetail.UserName.StartsWith("SXS"))
+                        {
+                            TeacherBaseUrl = ConfigurationManager.AppSettings["StxavierBaseUrlTeacher"];
+
+                        }
+                        logindetail.BaseURL = TeacherBaseUrl;
+                    }
+                    return logindetail;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return new Error() { IsError = true, Message = ex.Message };
+            }
 		}
+        
 	}
 }

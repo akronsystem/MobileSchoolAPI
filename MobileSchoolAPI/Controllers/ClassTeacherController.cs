@@ -1,6 +1,6 @@
 using MobileSchoolAPI.BusinessLayer;
 using MobileSchoolAPI.Models;
- 
+using MobileSchoolAPI.ResultModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,13 +14,7 @@ namespace MobileSchoolAPI.Controllers
     public class ClassTeacherController : ApiController
     {
         SchoolContext db = new SchoolContext();
-        [HttpPost]
-        public object GetClassTeacher([FromBody]ParamClassTeacher objPC)
-        {
-            ClassTeacherData obVIEW = new ClassTeacherData();
-           var result= obVIEW.GetClassTeacher(objPC);
-            return result;
-        }
+        
 
         /// FOR SELECTING ATTENDANCE ON DATE
         /// 
@@ -31,8 +25,9 @@ namespace MobileSchoolAPI.Controllers
             int days = DateTime.DaysInMonth(year, objPA.MONTH);
             ClassTeacherData objCT = new ClassTeacherData();                
             var result = objCT.GetAttendanceStatus(objPA);
-            return result; 
-     
+            return result;
+           // return new MonthlyAttendanceResult() { IsSuccess = "true", DateWiseStatus = result }; 
+
         }
     }
 }

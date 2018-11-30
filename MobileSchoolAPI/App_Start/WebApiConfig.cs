@@ -10,6 +10,7 @@ namespace MobileSchoolAPI
     {
         public static void Register(HttpConfiguration config)
         {
+		
 			config.Routes.MapHttpRoute("API Default", "api/{controller}/{action}/{id}/{name}",
 			 new { id = RouteParameter.Optional, name = RouteParameter.Optional });
 

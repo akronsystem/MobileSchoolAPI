@@ -1,4 +1,5 @@
-﻿using MobileSchoolAPI.BUSINESSLAYER;
+﻿using MobileSchoolAPI.BusinessLayer;
+using MobileSchoolAPI.BUSINESSLAYER;
 using MobileSchoolAPI.Models;
 using System;
 using System.Collections.Generic;
@@ -11,21 +12,13 @@ namespace MobileSchoolAPI.Controllers
 {
     public class DashboardController : ApiController
     {
+        
         [HttpPost]
-        public object getStudentinfo([FromBody]StudinfoParameters pobj)
+        public object GetDashboard([FromBody]GetUserId UserId)
         {
-            STUDENTINFO_BUSINESS obj = new STUDENTINFO_BUSINESS();
-           var result= obj.objmethod(pobj);
+            GetUserIdBusiness GetUserIdobj = new GetUserIdBusiness();
+            var result = GetUserIdobj.getUserInfo(UserId);
             
-            return result;
-        }
-
-        [HttpPost]
-        public object getTEACHERinfo([FromBody]TeacherInfoParameters pobj)
-        {
-            GetTeacherInfoBusiness obj = new GetTeacherInfoBusiness();
-            var result = obj.objmethod(pobj);
-
             return result;
         }
     }

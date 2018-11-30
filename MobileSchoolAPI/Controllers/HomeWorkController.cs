@@ -1,5 +1,6 @@
 ﻿using MobileSchoolAPI.BusinessLayer;
 using MobileSchoolAPI.Models;
+using MobileSchoolAPI.ParamModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,32 +10,44 @@ using System.Web.Http;
 
 namespace MobileSchoolAPI.Controllers
 {
-    public class HomeWorkController : ApiController
-    {
-        SchoolContext db = new SchoolContext();
+	public class HomeWorkController : ApiController
+	{
+		
+		[HttpPost]
+
+		public object ShowHomeWork([FromBody]ParamHOMEWORKBYUSER objhome)
+		{
+			GETHOMEWORK obj = new GETHOMEWORK();
+            var homemworkresult=obj.ViewHomeWorkbyUser(objhome);
+            //return obj.ViewHomeWorkbyUser(objhome);
+            //return new DivisionListResult() { IsSuccess = true, HomeWork = obj.ViewHomeWorkbyUser(objhome) };
+            return homemworkresult;
+		}
+
+
+
         [HttpPost]
-
-        public object ViewHomework([FromBody] PARAMHOMEWORK obj)
+        public object HomeworkSave([FromBody]homeworkparameters hobj)
         {
 
-            GETHOMEWORK objhome = new GETHOMEWORK();
-           return objhome.GetHomework(obj);
-           
-        }
+            Homeworkbussinesslayer bhobj = new Homeworkbussinesslayer();
 
 
-        public object ViewDivision([FromBody]PARAMSTD objstd)
-        {
-            GETHOMEWORK objhome = new GETHOMEWORK();
-            return objhome.GetStandard(objstd);
-        }
+            bhobj.Savehomework(hobj);
+            //  bhobj.StudentsMethod(hobj);
 
 
-        public object ViewDivisionByEmp([FromBody]PARAMEMP objemp)
-        {
-            GETHOMEWORK objhome = new GETHOMEWORK();
-            return objhome.GetStdByEmp(objemp);
+            return new Results
+            {
+
+                IsSuccess = true,
+                Message = "Homework assign successfully"
+            };
+
+
 
         }
+
+       
     }
 }
