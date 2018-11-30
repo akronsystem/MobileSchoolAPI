@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 
+
 namespace MobileSchoolAPI.BusinessLayer
 {
     public class Homeworkbussinesslayer
@@ -63,6 +64,9 @@ namespace MobileSchoolAPI.BusinessLayer
                     objnotidetails.STATUS = 0;
                     db.TBLNOTIFICATIONDETAILs.Add(objnotidetails);
                     db.SaveChanges();
+                    FCMPushNotification OBJPUSH = new FCMPushNotification();
+                    var getsubjectname = db.VIEWSUBJECTNAMEs.Where(r => r.SUBJECTID == obj.subject).ToList();
+                    OBJPUSH.SendNotification("Homework", obj.homeworkdescription, getsubjectname[0].SUBJECTNAME);
                     SMSSend(objHomework.HOMEWORK, getstudent[i].GMOBILE);
                 }
             }
