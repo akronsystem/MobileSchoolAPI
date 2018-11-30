@@ -198,6 +198,7 @@
     <Compile Include="Models\GetUserId.cs" />
     <Compile Include="Models\Homework.cs" />
     <Compile Include="Models\homeworkparameters.cs" />
+    <Compile Include="Models\Model3.cs" />
     <Compile Include="Models\Result.cs" />
     <Compile Include="Models\Smsparameters.cs" />
     <Compile Include="Models\StudentForSms.cs" />
@@ -225,6 +226,7 @@
     <Compile Include="Models\VIEWNOTIFICATION.cs" />
     <Compile Include="Models\VIEWSTUDENTDIVISION.cs" />
     <Compile Include="Models\VIEWSTUDENTHOMEWORK.cs" />
+    <Compile Include="Models\VIEWSUBJECTNAME.cs" />
     <Compile Include="Models\VIEW_TERMMASTER.cs" />
     <Compile Include="Models\VWATTENDANCEBYDATESTUDENT.cs" />
     <Compile Include="Models\VWATTENDANCEEMPLOYEE.cs" />
