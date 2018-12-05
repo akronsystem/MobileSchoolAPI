@@ -10,14 +10,13 @@ namespace MobileSchoolAPI.BusinessLayer
 {
     public class UserWiseAttendance
     {
-        SchoolContext objSc = new SchoolContext();
-
+        
         public object GetAttendanceByUser(ParamDateWiseAttendance obj)
         {
             try
             {
                 SchoolMainContext db = new ConcreateContext().GetContext(obj.UserId, obj.Password);
-                var usertype= objSc.VW_GET_USER_TYPE.Where(r => r.UserId == obj.UserId).ToList();
+                var usertype= db.VW_GET_USER_TYPE.Where(r => r.UserId == obj.UserId ).ToList();
                 if(usertype.Count()==0)
                 {
                     return new AttendanceResult() { IsSuccess = false, UserWiseAttendanceList = "User Not Found" };
@@ -25,14 +24,14 @@ namespace MobileSchoolAPI.BusinessLayer
 
                 if (usertype[0].UserType == "STUDENT")
                 {
-                    var checkattendace = objSc.VIewAttendaceClasswiseChecks.Where(r => r.UserId == obj.UserId && r.ATTEDANCEDATE == obj.AttendanceDate && r.DISPLAY == 1 && r.EDUCATIONYEAR == "2018-2019" && r.ACADEMICYEAR == "2018-2019").ToList();
+                    var checkattendace = db.VIewAttendaceClasswiseChecks.Where(r => r.UserId == obj.UserId && r.ATTEDANCEDATE == obj.AttendanceDate && r.DISPLAY == 1 && r.EDUCATIONYEAR == "2018-2019" && r.ACADEMICYEAR == "2018-2019").ToList();
                     if (checkattendace.Count() == 0)
                     {
                         return  new AttendanceResult() { IsSuccess = true, UserWiseAttendanceList = "Status : Attendance Is Not Marked By Class Teacher For This Date" };
                     }
                     else
                     { 
-                        var StudentAttendance = objSc.VWATTENDANCEBYDATESTUDENTs.Where(r => r.UserId == obj.UserId && r.ATTEDANCEDATE == obj.AttendanceDate).ToList();
+                        var StudentAttendance = db.VWATTENDANCEBYDATESTUDENTs.Where(r => r.UserId == obj.UserId && r.ATTEDANCEDATE == obj.AttendanceDate).ToList();
                         if (StudentAttendance.Count() == 0)
                         {
                             return new AttendanceResult() { IsSuccess = true, UserWiseAttendanceList = "Status : Present" };
@@ -48,7 +47,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 }
                 else
                 {
-                    var EMPATTENDANCE = objSc.VWATTENDANCEEMPLOYEEs.Where(r => r.UserId == obj.UserId && r.ATTEDANCEDATE == obj.AttendanceDate && r.DISPLAY == 1).ToList();
+                    var EMPATTENDANCE = db.VWATTENDANCEEMPLOYEEs.Where(r => r.UserId == obj.UserId && r.ATTEDANCEDATE == obj.AttendanceDate && r.DISPLAY == 1).ToList();
                     if (usertype[0].UserType == "CLASS TEACHER")
 
                     {
