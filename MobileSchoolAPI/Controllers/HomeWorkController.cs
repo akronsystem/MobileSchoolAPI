@@ -41,16 +41,14 @@ namespace MobileSchoolAPI.Controllers
             Homeworkbussinesslayer bhobj = new Homeworkbussinesslayer();
 
 
-            bhobj.Savehomework(hobj);
+
+
+
+           var result=  bhobj.Savehomework(hobj);
             //  bhobj.StudentsMethod(hobj);
 
-
-            return new Results
-            {
-
-                IsSuccess = true,
-                Message = "Homework assign successfully"
-            };
+            return result;
+            
 
 
 

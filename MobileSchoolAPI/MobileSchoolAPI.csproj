@@ -198,6 +198,7 @@
     <Compile Include="Models\GetUserId.cs" />
     <Compile Include="Models\Homework.cs" />
     <Compile Include="Models\homeworkparameters.cs" />
+    <Compile Include="Models\Model2.cs" />
     <Compile Include="Models\Result.cs" />
     <Compile Include="Models\Smsparameters.cs" />
     <Compile Include="Models\StudentForSms.cs" />
@@ -232,6 +233,7 @@
     <Compile Include="Models\VWSTUDENTINFO.cs" />
     <Compile Include="Models\Vw_ATTENDANCECHECK.cs" />
     <Compile Include="Models\vw_FETCHSTANDARDBYDIVISION.cs" />
+    <Compile Include="Models\VW_GET_STANDARD_BY_DIVISION.cs" />
     <Compile Include="Models\VW_GET_USER_TYPE.cs" />
     <Compile Include="Models\Vw_STANDARDLIST.cs" />
     <Compile Include="Models\Vw_STUDSTANDARD.cs" />
