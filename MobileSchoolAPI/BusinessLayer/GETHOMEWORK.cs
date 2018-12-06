@@ -120,13 +120,13 @@ namespace MobileSchoolAPI.BusinessLayer
             {
 
                 SchoolMainContext db = new ConcreateContext().GetContext(obj.userid, obj.password);
-                var EmpHomework = db.VIEWHOMEWORKs.Where(r => r.UserId == obj.userid && r.HOMEWORKDATE==obj.homeworkdate).ToList();
+                var EmpHomework = db.VIEWHOMEWORKs.Where(r => r.UserId == obj.userid && r.HOMEWORKDATE==obj.homeworkdate).OrderByDescending(r => r.HOMEWORKDATE).ToList(); ;
 
 
 
                 if (EmpHomework.Count() == 0)
                 {
-                    var StudentHomework = db.VIEWSTUDENTHOMEWORKs.Where(r => r.UserId == obj.userid && r.HOMEWORKDATE == obj.homeworkdate).ToList();
+                    var StudentHomework = db.VIEWSTUDENTHOMEWORKs.Where(r => r.UserId == obj.userid && r.HOMEWORKDATE == obj.homeworkdate).OrderByDescending(r => r.HOMEWORKDATE).ToList(); ;
 
                     if (StudentHomework.Count() == 0)
                     {
