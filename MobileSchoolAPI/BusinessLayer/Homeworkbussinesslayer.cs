@@ -17,19 +17,11 @@ namespace MobileSchoolAPI.BusinessLayer
             SchoolMainContext db = new ConcreateContext().GetContext(obj.Userid, obj.Password);
             TBLHOMEWORK objHomework = new TBLHOMEWORK();
             var getUserType = db.VW_GET_USER_TYPE.Where(r => r.UserId == obj.Userid).FirstOrDefault();
-            int divisionid= int.Parse(obj.division);
-            var getstd = db.VW_GET_STANDARD_BY_DIVISION.Where(r => r.DIVISIONID == divisionid).FirstOrDefault();
-            if (getstd == null)
-            {
-                return new Results
-                {
-                    IsSuccess = false,
-                    Message = "Standard Not Found. "
-                };
-            }
-            else
-            {
-                objHomework.STANDARDID = Convert.ToInt64(getstd.STANDARDID);
+           
+           
+          
+           
+                objHomework.STANDARDID = int.Parse(obj.standardid);
 
 
                 objHomework.CREATEDID = int.Parse(getUserType.EmpCode);
@@ -88,7 +80,7 @@ namespace MobileSchoolAPI.BusinessLayer
                     IsSuccess = true,
                     Message = "Homework assign successfully and SMS sent Sucessfully"
                 };
-            }
+            
 
         }
         public object SaveAttendance(AttendanceParameterscs atteobj)
