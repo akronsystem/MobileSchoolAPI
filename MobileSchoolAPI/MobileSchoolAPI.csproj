@@ -198,7 +198,6 @@
     <Compile Include="Models\GetUserId.cs" />
     <Compile Include="Models\Homework.cs" />
     <Compile Include="Models\homeworkparameters.cs" />
-    <Compile Include="Models\Model3.cs" />
     <Compile Include="Models\Result.cs" />
     <Compile Include="Models\Smsparameters.cs" />
     <Compile Include="Models\StudentForSms.cs" />
@@ -244,6 +243,7 @@
     <Compile Include="ParamModel\ParamDIVISIONWISESUBJECT.cs" />
     <Compile Include="ParamModel\PARAMEMP.cs" />
     <Compile Include="ParamModel\PARAMHOMEWORK.cs" />
+    <Compile Include="ParamModel\ParamHomeWorkAll.cs" />
     <Compile Include="ParamModel\ParamHOMEWORKBYUSER.cs" />
     <Compile Include="ParamModel\ParamLogin.cs" />
     <Compile Include="ParamModel\ParamNotification.cs" />

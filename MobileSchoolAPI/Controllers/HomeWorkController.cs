@@ -24,6 +24,14 @@ namespace MobileSchoolAPI.Controllers
             return homemworkresult;
 		}
 
+        [HttpPost]
+        public object ShowHomeWorkAll([FromBody]ParamHomeWorkAll objhome)
+        {
+            GETHOMEWORK obj = new GETHOMEWORK();
+            var homemworkresult = obj.ViewHomeWorkByDates(objhome);
+            return homemworkresult;
+        }
+
 
 
         [HttpPost]
