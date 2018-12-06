@@ -152,5 +152,44 @@ namespace MobileSchoolAPI.BusinessLayer
         }
 
 
+
+
+        public object ViewHomeWorkByDates(ParamHomeWorkAll obj)
+        {
+            try
+            {
+
+                SchoolMainContext db = new ConcreateContext().GetContext(obj.userid, obj.password);
+                var EmpHomework = db.VIEWHOMEWORKs.Where(r => r.UserId == obj.userid && r.HOMEWORKDATE>=obj.FromDate && r.HOMEWORKDATE<=obj.ToDate).OrderByDescending(r=>r.HOMEWORKDATE).ToList();
+
+
+
+                if (EmpHomework.Count() == 0)
+                {
+                    var StudentHomework = db.VIEWSTUDENTHOMEWORKs.Where(r => r.UserId == obj.userid && r.HOMEWORKDATE >= obj.FromDate && r.HOMEWORKDATE<=obj.ToDate).OrderByDescending(r => r.HOMEWORKDATE).ToList();
+
+                    if (StudentHomework.Count() == 0)
+                    {
+                        return new Error() { IsError = true, Message = "HomeWork Not Found." };
+                    }
+                    else
+                    {
+                         return new DivisionListResult() { IsSuccess = true, HomeWork = StudentHomework }; ;
+                    }
+                   
+                }
+                else
+                {
+                    return new DivisionListResult() { IsSuccess = true, HomeWork = EmpHomework }; ;
+
+                }
+            }
+            catch (Exception E)
+            {
+                return new Error() { IsError = true, Message = E.Message };
+
+            }
+        }
+
     }
 }
