@@ -20,11 +20,9 @@ namespace MobileSchoolAPI.Models
             set;
         }
 
-        public string STANDARDID
+        public string standardid
         {
-            get;
-            set;
-
+            get; set;
         }
 
         public string division

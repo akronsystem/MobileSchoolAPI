@@ -16,7 +16,7 @@ namespace MobileSchoolAPI
 			if (username.StartsWith("NKV"))
 				return new NKVSchoolContext();
 
-			return new SchoolContext();
+			return null;
 		}
 
 		public SchoolMainContext GetContext(int UserId, string password)
@@ -29,7 +29,7 @@ namespace MobileSchoolAPI
 			if (contxt1 != null)
 				return new NKVSchoolContext();
 
-            return new SchoolContext();
+            return null;
 		}
 	}
 }

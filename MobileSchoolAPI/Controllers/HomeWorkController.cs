@@ -24,6 +24,14 @@ namespace MobileSchoolAPI.Controllers
             return homemworkresult;
 		}
 
+        [HttpPost]
+        public object ShowHomeWorkAll([FromBody]ParamHomeWorkAll objhome)
+        {
+            GETHOMEWORK obj = new GETHOMEWORK();
+            var homemworkresult = obj.ViewHomeWorkByDates(objhome);
+            return homemworkresult;
+        }
+
 
 
         [HttpPost]
@@ -33,16 +41,14 @@ namespace MobileSchoolAPI.Controllers
             Homeworkbussinesslayer bhobj = new Homeworkbussinesslayer();
 
 
-            bhobj.Savehomework(hobj);
+
+
+
+           var result=  bhobj.Savehomework(hobj);
             //  bhobj.StudentsMethod(hobj);
 
-
-            return new Results
-            {
-
-                IsSuccess = true,
-                Message = "Homework assign successfully"
-            };
+            return result;
+            
 
 
 

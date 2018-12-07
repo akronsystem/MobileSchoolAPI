@@ -15,8 +15,12 @@ namespace MobileSchoolAPI
 
 		}
 
+ 
         public virtual DbSet<TBLDeviceRegistration> TBLDeviceRegistrations { get; set; }
         public virtual DbSet<VW_DEVICE> VW_DEVICE { get; set; }
+ 
+        public virtual DbSet<VW_GET_STANDARD_BY_DIVISION> VW_GET_STANDARD_BY_DIVISION { get; set; }
+ 
         public virtual DbSet<TBLUSERLOGIN> TBLUSERLOGINs { get; set; }
 		public virtual DbSet<VIEWATTENDANCE> VIEWATTENDANCEs { get; set; }
 
@@ -74,6 +78,8 @@ namespace MobileSchoolAPI
         public virtual DbSet<Vw_ATTENDANCECHECK> Vw_ATTENDANCECHECK { get; set; }
         public virtual DbSet<VIEWSUBJECTNAME> VIEWSUBJECTNAMEs { get; set; }
 
+        public virtual DbSet<VIEWGETUSERIDFROMEMPCODE> VIEWGETUSERIDFROMEMPCODEs { get; set; }
+        public virtual DbSet<VW_DEVICE> VW_DEVICE { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
 			modelBuilder.Entity<TBLUSERLOGIN>()
