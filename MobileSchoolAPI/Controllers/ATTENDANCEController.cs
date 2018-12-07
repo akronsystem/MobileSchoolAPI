@@ -26,7 +26,7 @@ namespace MobileSchoolAPI.Controllers
         public object ATTENDANCESTUDENT([FromBody]GETSTUDENTPARAM OBJ)  
         {
             GETSTUDENTATTBL GETOBJ = new GETSTUDENTATTBL();
-           var GETSTUDENTRESULT= GETOBJ.GETSTUDENT(OBJ);
+            var GETSTUDENTRESULT= GETOBJ.GETSTUDENT(OBJ);
             return GETSTUDENTRESULT;
 			//return new STUDENTLISTRESULT() { IsSuccess = true, StudentResult = GETOBJ.GETSTUDENT(OBJ) };
 		}

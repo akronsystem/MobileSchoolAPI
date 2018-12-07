@@ -51,5 +51,10 @@ namespace MobileSchoolAPI.Models
         [NotMapped]
         public string BaseURL { get; set; }
  
+        [NotMapped]
+        public string DeviceId { get; set; }
+
+        [NotMapped]
+        public string DeviceType { get; set; }
     }
 }

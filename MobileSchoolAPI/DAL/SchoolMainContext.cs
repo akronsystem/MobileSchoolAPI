@@ -15,8 +15,12 @@ namespace MobileSchoolAPI
 
 		}
 
-
+ 
+        public virtual DbSet<TBLDeviceRegistration> TBLDeviceRegistrations { get; set; }
+        public virtual DbSet<VW_DEVICE> VW_DEVICE { get; set; }
+ 
         public virtual DbSet<VW_GET_STANDARD_BY_DIVISION> VW_GET_STANDARD_BY_DIVISION { get; set; }
+ 
         public virtual DbSet<TBLUSERLOGIN> TBLUSERLOGINs { get; set; }
 		public virtual DbSet<VIEWATTENDANCE> VIEWATTENDANCEs { get; set; }
 
