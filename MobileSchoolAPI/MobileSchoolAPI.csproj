@@ -154,6 +154,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BusinessLayer\ClassTeacherData.cs" />
     <Compile Include="BusinessLayer\DashboardManager.cs" />
+    <Compile Include="BusinessLayer\DeviceBusinessLayer.cs" />
     <Compile Include="BusinessLayer\GetDivisionInfoBusiness.cs" />
     <Compile Include="BusinessLayer\GETHOMEWORK.cs" />
     <Compile Include="BusinessLayer\GetStandardList.cs" />
@@ -164,7 +165,6 @@
     <Compile Include="BusinessLayer\Homeworkbussinesslayer.cs" />
     <Compile Include="BusinessLayer\LoginManager.cs" />
     <Compile Include="BusinessLayer\NotificationBusiness.cs" />
-    <Compile Include="BusinessLayer\TERMLISTCS.cs" />
     <Compile Include="BusinessLayer\UserWiseAttendance.cs" />
     <Compile Include="Controllers\ATTENDANCEController.cs" />
     <Compile Include="BUSINESSLAYER\GetTeacherInfoBusiness.cs" />
@@ -203,11 +203,13 @@
     <Compile Include="Models\StudentForSms.cs" />
     <Compile Include="Models\TBLATTENDENCE.cs" />
     <Compile Include="Models\TBLATTENDENCEMASTER.cs" />
+    <Compile Include="Models\TBLDeviceRegistration.cs" />
     <Compile Include="Models\TBLHOMEWORK.cs" />
     <Compile Include="Models\TBLMESSAGEHISTORY.cs" />
     <Compile Include="Models\TBLNOTIFICATION.cs" />
     <Compile Include="Models\TBLNOTIFICATIONDETAIL.cs" />
     <Compile Include="Models\TBLUSERLOGIN.cs" />
+    <Compile Include="Models\TERMLISTCS.cs" />
     <Compile Include="Models\TermListResult.cs" />
     <Compile Include="Models\VIewAttendaceClasswiseCheck.cs" />
     <Compile Include="Models\VIEWATTENDANCE.cs" />
@@ -242,6 +244,7 @@
     <Compile Include="ParamModel\ParamClassTeacher.cs" />
     <Compile Include="ParamModel\ParamDashboardStudentInfo.cs" />
     <Compile Include="ParamModel\ParamDateWiseAttendance.cs" />
+    <Compile Include="ParamModel\ParamDevice.cs" />
     <Compile Include="ParamModel\ParamDIVISIONLIST.cs" />
     <Compile Include="ParamModel\ParamDIVISIONWISESUBJECT.cs" />
     <Compile Include="ParamModel\PARAMEMP.cs" />

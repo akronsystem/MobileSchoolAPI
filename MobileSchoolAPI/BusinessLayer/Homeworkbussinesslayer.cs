@@ -69,9 +69,17 @@ namespace MobileSchoolAPI.BusinessLayer
                         db.TBLNOTIFICATIONDETAILs.Add(objnotidetails);
                         db.SaveChanges();
                         FCMPushNotification OBJPUSH = new FCMPushNotification();
-                        var getsubjectname = db.VIEWSUBJECTNAMEs.Where(r => r.SUBJECTID == obj.subject).ToList();
-                        OBJPUSH.SendNotification("Homework", obj.homeworkdescription, getsubjectname[0].SUBJECTNAME);
-                        SMSSend(objHomework.HOMEWORK, getstudent[i].GMOBILE);
+						//var getsubjectname = db.VIEWSUBJECTNAMEs.Where(r => r.SUBJECTID == obj.subject).ToList();
+
+						string studentid = Convert.ToString(getstudent[i].STUDENTID);
+						var userid = db.VIEWGETUSERIDFROMEMPCODEs.Where(r => r.EmpCode == studentid).FirstOrDefault();
+						var device = db.VW_DEVICE.FirstOrDefault(r => r.UserId == userid.UserId);
+						if (device != null)
+						{
+							OBJPUSH.SendNotification("Homework", obj.homeworkdescription, device.DeviceId);
+						}   
+
+					    SMSSend(objHomework.HOMEWORK, getstudent[i].GMOBILE);
                     }
                 }
                 return new Results
@@ -79,39 +87,11 @@ namespace MobileSchoolAPI.BusinessLayer
 
                     IsSuccess = true,
                     Message = "Homework assign successfully and SMS sent Sucessfully"
-                };
+                };  
 
-                    TBLNOTIFICATIONDETAIL objnotidetails = new TBLNOTIFICATIONDETAIL();
-                    objnotidetails.NOTIFICATIONID = objnotification.NOTIFICATIONID;
-                    objnotidetails.STUDENTID = getstudent[i].STUDENTID;
-                    objnotidetails.STATUS = 0;
-                    db.TBLNOTIFICATIONDETAILs.Add(objnotidetails);
-                    db.SaveChanges();
-                    FCMPushNotification OBJPUSH = new FCMPushNotification();
+		}   
 
-                    //var getsubjectname = db.VIEWSUBJECTNAMEs.Where(r => r.SUBJECTID == obj.subject).ToList();
-
-                    string studentid = Convert.ToString(getstudent[i].STUDENTID);
-                    var userid = db.VIEWGETUSERIDFROMEMPCODEs.Where(r => r.EmpCode == studentid).FirstOrDefault();
-                    var deviceid = db.VW_DEVICE.Where(r => r.UserId == userid.UserId).ToList();
-                    if (deviceid.Count > 0)
-                    {
-                        OBJPUSH.SendNotification("Homework", obj.homeworkdescription, deviceid[0].DeviceId);
-                    }
-                    else
-                    {
-                        OBJPUSH.SendNotification("Homework", obj.homeworkdescription, "0");
-                    }
-
-                    
-                    SMSSend(objHomework.HOMEWORK, getstudent[i].GMOBILE);
-                }
-            }
-            return "sms send successfully";
-            
-
-        }
-        public object SaveAttendance(AttendanceParameterscs atteobj)
+	public object SaveAttendance(AttendanceParameterscs atteobj)
         {
             SchoolMainContext db = new ConcreateContext().GetContext(atteobj.Userid, atteobj.Password);
             TBLATTENDENCEMASTER objmster = new TBLATTENDENCEMASTER();
@@ -208,35 +188,8 @@ namespace MobileSchoolAPI.BusinessLayer
 
 
         }
-
-        internal void Students()
-        {
-            throw new NotImplementedException();
-        }
-
-        //public object StudentsMethod(StudentForSms obj)
-        //{
-        //    TBLHOMEWORK objHomework = new TBLHOMEWORK();
-        //    var getstudent = db.VIEWGETSTUDENTATTs.Where(r => r.STANDARDID == obj.STANDARDID && r.DIVISIONID == obj.DIVISIONID).ToList();
-        //    if (getstudent == null)
-        //    {
-        //        return new Error();
-                
-        //    }
-        //    // return getstudent;
-        //    for (int i = 0; i < getstudent.Count; i++)
-        //    {
-        //        SMSSend(objHomework.HOMEWORK, getstudent[i].Gmobile);
-        //    }
-        //    return "sms send successfully";
-        
-
-        //}
-
-        private void SMSSend(string hOMEWORK, object gMOBILE)
-        {
-            throw new NotImplementedException();
-        }
+		    
+			 
 
         public bool SMSSend(string sms,string mobileno)
         {
