@@ -17,47 +17,70 @@ namespace MobileSchoolAPI.BusinessLayer
             SchoolMainContext db = new ConcreateContext().GetContext(obj.Userid, obj.Password);
             TBLHOMEWORK objHomework = new TBLHOMEWORK();
             var getUserType = db.VW_GET_USER_TYPE.Where(r => r.UserId == obj.Userid).FirstOrDefault();
+           
+           
           
-          
-            objHomework.STANDARDID =Convert.ToInt64(obj.STANDARDID);
-            objHomework.CREATEDID = int.Parse(getUserType.EmpCode);
-            objHomework.DIVISIONID =obj.division.ToString();
-            objHomework.SUBJECTID = obj.subject;
-            objHomework.TERMID = obj.term;
-            objHomework.HOMEWORK =obj.homeworkdescription;
-            objHomework.HOMEWORKDATE =Convert.ToDateTime( DateTime.Now.ToShortDateString());
-            objHomework.TIME = DateTime.Now.ToShortTimeString();
-            objHomework.DISPLAY = 1;
-            objHomework.ACADEMICYEAR = "2018-2019";
+           
+                objHomework.STANDARDID = int.Parse(obj.standardid);
 
-            db.TBLHOMEWORKs.Add(objHomework);
-            db.SaveChanges(); 
 
-            TBLNOTIFICATION objnotification = new TBLNOTIFICATION();
-            objnotification.TITLE = obj.homeworkdescription;
-            objnotification.NOTIFICATIONDATE = DateTime.Now;
-            objnotification.NOTIFICATIONTIME = DateTime.Now.ToString("h:mm tt");
-            objnotification.DIVISIONID =int.Parse(obj.division);
-            objnotification.ACADEMICYEAR = "2018-2019";
-            objnotification.NOTIFICATIONTYPE = "Homework";
-            db.TBLNOTIFICATIONs.Add(objnotification);
-            db.SaveChanges();
+                objHomework.CREATEDID = int.Parse(getUserType.EmpCode);
+                objHomework.DIVISIONID = obj.division.ToString();
+                objHomework.SUBJECTID = obj.subject;
+                objHomework.TERMID = obj.term;
+                objHomework.HOMEWORK = obj.homeworkdescription;
+                objHomework.HOMEWORKDATE = Convert.ToDateTime(DateTime.Now.ToShortDateString());
+                objHomework.TIME = DateTime.Now.ToShortTimeString();
+                objHomework.DISPLAY = 1;
+                objHomework.ACADEMICYEAR = "2018-2019";
 
- 
-            string[] divid = objHomework.DIVISIONID.ToString().Split(',');
-            for (int d = 0; d < divid.Length; d++)
-            {
-                int singledivision = Convert.ToInt32(divid[d]);
-                var getstudent = db.VIEWGETSTUDENTATTs.Where(r => r.DIVISIONID == singledivision).ToList();
+                db.TBLHOMEWORKs.Add(objHomework);
+                db.SaveChanges();
 
-                if (getstudent == null)
+                TBLNOTIFICATION objnotification = new TBLNOTIFICATION();
+                objnotification.TITLE = obj.homeworkdescription;
+                objnotification.NOTIFICATIONDATE = DateTime.Now;
+                objnotification.NOTIFICATIONTIME = DateTime.Now.ToString("h:mm tt");
+                objnotification.DIVISIONID = int.Parse(obj.division);
+                objnotification.ACADEMICYEAR = "2018-2019";
+                objnotification.NOTIFICATIONTYPE = "Homework";
+                db.TBLNOTIFICATIONs.Add(objnotification);
+                db.SaveChanges();
+
+
+                string[] divid = objHomework.DIVISIONID.ToString().Split(',');
+                for (int d = 0; d < divid.Length; d++)
                 {
-                    return new Error();
+                    int singledivision = Convert.ToInt32(divid[d]);
+                    var getstudent = db.VIEWGETSTUDENTATTs.Where(r => r.DIVISIONID == singledivision).ToList();
 
+                    if (getstudent == null)
+                    {
+                        return new Error();
+
+                    }
+                    // return getstudent;
+                    for (int i = 0; i < getstudent.Count; i++)
+                    {
+                        TBLNOTIFICATIONDETAIL objnotidetails = new TBLNOTIFICATIONDETAIL();
+                        objnotidetails.NOTIFICATIONID = objnotification.NOTIFICATIONID;
+                        objnotidetails.STUDENTID = getstudent[i].STUDENTID;
+                        objnotidetails.STATUS = 0;
+                        db.TBLNOTIFICATIONDETAILs.Add(objnotidetails);
+                        db.SaveChanges();
+                        FCMPushNotification OBJPUSH = new FCMPushNotification();
+                        var getsubjectname = db.VIEWSUBJECTNAMEs.Where(r => r.SUBJECTID == obj.subject).ToList();
+                        OBJPUSH.SendNotification("Homework", obj.homeworkdescription, getsubjectname[0].SUBJECTNAME);
+                        SMSSend(objHomework.HOMEWORK, getstudent[i].GMOBILE);
+                    }
                 }
-                // return getstudent;
-                for (int i = 0; i < getstudent.Count; i++)
+                return new Results
                 {
+
+                    IsSuccess = true,
+                    Message = "Homework assign successfully and SMS sent Sucessfully"
+                };
+
                     TBLNOTIFICATIONDETAIL objnotidetails = new TBLNOTIFICATIONDETAIL();
                     objnotidetails.NOTIFICATIONID = objnotification.NOTIFICATIONID;
                     objnotidetails.STUDENTID = getstudent[i].STUDENTID;
@@ -86,6 +109,7 @@ namespace MobileSchoolAPI.BusinessLayer
             }
             return "sms send successfully";
             
+
         }
         public object SaveAttendance(AttendanceParameterscs atteobj)
         {
