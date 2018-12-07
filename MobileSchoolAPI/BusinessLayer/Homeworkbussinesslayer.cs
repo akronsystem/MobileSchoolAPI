@@ -80,6 +80,34 @@ namespace MobileSchoolAPI.BusinessLayer
                     IsSuccess = true,
                     Message = "Homework assign successfully and SMS sent Sucessfully"
                 };
+
+                    TBLNOTIFICATIONDETAIL objnotidetails = new TBLNOTIFICATIONDETAIL();
+                    objnotidetails.NOTIFICATIONID = objnotification.NOTIFICATIONID;
+                    objnotidetails.STUDENTID = getstudent[i].STUDENTID;
+                    objnotidetails.STATUS = 0;
+                    db.TBLNOTIFICATIONDETAILs.Add(objnotidetails);
+                    db.SaveChanges();
+                    FCMPushNotification OBJPUSH = new FCMPushNotification();
+
+                    //var getsubjectname = db.VIEWSUBJECTNAMEs.Where(r => r.SUBJECTID == obj.subject).ToList();
+
+                    string studentid = Convert.ToString(getstudent[i].STUDENTID);
+                    var userid = db.VIEWGETUSERIDFROMEMPCODEs.Where(r => r.EmpCode == studentid).FirstOrDefault();
+                    var deviceid = db.VW_DEVICE.Where(r => r.UserId == userid.UserId).ToList();
+                    if (deviceid.Count > 0)
+                    {
+                        OBJPUSH.SendNotification("Homework", obj.homeworkdescription, deviceid[0].DeviceId);
+                    }
+                    else
+                    {
+                        OBJPUSH.SendNotification("Homework", obj.homeworkdescription, "0");
+                    }
+
+                    
+                    SMSSend(objHomework.HOMEWORK, getstudent[i].GMOBILE);
+                }
+            }
+            return "sms send successfully";
             
 
         }
@@ -154,7 +182,7 @@ namespace MobileSchoolAPI.BusinessLayer
                        // objnotidetails.STUDENTID = getstudent[0].STUDENTID;
                        // objnotidetails.STATUS = 0;
                        // db.TBLNOTIFICATIONDETAILs.Add(objnotidetails);
-                      //  db.SaveChanges();
+                       //  db.SaveChanges();
                     }
 
                     return new Results
