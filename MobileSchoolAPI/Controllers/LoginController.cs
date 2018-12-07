@@ -41,7 +41,6 @@ namespace MobileSchoolAPI.Controllers
                 {
                     if (logindetail.UserType == "STUDENT")
                     {
-                        //VWSTUDENTINFO
                         STUDENTINFO_BUSINESS StudBL = new STUDENTINFO_BUSINESS();
                         var result = StudBL.getStudLogo(int.Parse(logindetail.EmpCode),Convert.ToInt16( logindetail.UserId),logindetail.Password);
                         if (result == null)
@@ -63,7 +62,6 @@ namespace MobileSchoolAPI.Controllers
                     }
                     else
                     {
-                        //VW_EMPLOYEE
                         GetTeacherInfoBusiness TeacherBL = new GetTeacherInfoBusiness();
                         var result=TeacherBL.getTeacherLogo(int.Parse(logindetail.EmpCode),Convert.ToInt16( logindetail.UserId),logindetail.Password);
                         if (result==null)
@@ -81,19 +79,26 @@ namespace MobileSchoolAPI.Controllers
                         else if(logindetail.UserName.StartsWith("SXS"))
                         {
                             TeacherBaseUrl = ConfigurationManager.AppSettings["StxavierBaseUrlTeacher"];
-
                         }
                         logindetail.BaseURL = TeacherBaseUrl;
                     }
+                    DeviceBusinessLayer objDeviceBl = new DeviceBusinessLayer();
+                    ParamDevice PDeviceObj = new ParamDevice();
+                    PDeviceObj.UserId = (int)logindetail.UserId;
+                    PDeviceObj.DeviceId = userLogin.DeviceId;
+                    PDeviceObj.DeviceType = userLogin.DeviceType;
+                    objDeviceBl.SaveDevice(PDeviceObj,logindetail.Password);
+
+                    //logindetail.DeviceId = userLogin.DeviceId;
+                    //logindetail.DeviceType = userLogin.DeviceType;
+
                     return logindetail;
                 }
-
             }
             catch (Exception ex)
             {
                 return new Error() { IsError = true, Message = ex.Message };
             }
 		}
-        
 	}
 }
