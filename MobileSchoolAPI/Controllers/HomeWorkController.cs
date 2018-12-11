@@ -39,10 +39,7 @@ namespace MobileSchoolAPI.Controllers
         {
 
             Homeworkbussinesslayer bhobj = new Homeworkbussinesslayer();
-
-
-
-
+			 
 
            var result=  bhobj.Savehomework(hobj);
             //  bhobj.StudentsMethod(hobj);
@@ -53,6 +50,12 @@ namespace MobileSchoolAPI.Controllers
 
 
         }
+
+		public object Test()
+		{																						    
+
+			return null;
+		}
 
        
     }
