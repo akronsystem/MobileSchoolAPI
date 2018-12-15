@@ -80,5 +80,60 @@ namespace MobileSchoolAPI.BusinessLayer
 
             }
         }
+
+
+        public object GetClassWiseStatus(ParamDateWiseAttendance PA)
+        {
+            try
+            {
+
+
+                SchoolMainContext db = new ConcreateContext().GetContext(PA.UserId, PA.Password);
+               
+                var usertype = db.VW_GET_USER_TYPE.Where(r => r.UserId == PA.UserId).ToList();
+                if (usertype.Count() == 0)
+                {
+                    return new Error() { IsError = true, Message = "Incorrect Username." };
+                }
+                var EMPATTENDANCE = db.VWATTENDANCEEMPLOYEEs.Where(r => r.UserId == PA.UserId && r.ATTEDANCEDATE == PA.AttendanceDate && r.DISPLAY == 1).ToList();
+
+                if (EMPATTENDANCE.Count()==0)
+                {
+                    return new Error() { IsError = true, Message = "Attendance Is Not Marked By Class Teacher" };
+                }
+                if (usertype.Count() == 0)
+                {
+                    return new AttendanceResult() { IsSuccess = false, UserWiseAttendanceList = "User Not Found" };
+                }
+                if (usertype[0].UserType != "CLASS TEACHER")
+                {
+                    return new Error() { IsError = true, Message = "User Is Not Class Teacher." };
+
+                }
+                else
+                {
+                    var AttendaceStatus = db.VW_DATEWISECLASSSTATUSATTENDANCE.Where(r => r.ATTEDANCEDATE == PA.AttendanceDate && r.CREATEDID == PA.UserId).ToList();
+                        if (AttendaceStatus.Count() == 0)
+                    {
+                        return new Error() { IsError = true, Message = "No Records Found" };
+
+                    }
+                        else
+                    {
+                        return new AttendanceResult()
+                        {
+                            IsSuccess = true,
+                            UserWiseAttendanceList = AttendaceStatus
+                        };
+                    }
+
+                }
+            }
+            catch(Exception e)
+            {
+                return new Error() { IsError = true, Message = e.Message };
+
+            }
+        }
     }
 }

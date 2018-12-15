@@ -39,5 +39,26 @@ namespace MobileSchoolAPI.Controllers
 
             }
         }
+
+        [HttpPost]
+        public object GetClassWiseAttendanceList([FromBody]ParamDateWiseAttendance PA)
+        {
+            try
+            {
+                UserWiseAttendance objUA = new UserWiseAttendance();
+                var Result = objUA.GetClassWiseStatus(PA);
+                return Result;
+                //return new AttendanceResult()
+                //{
+                //	IsSuccess = true,
+                //	UserWiseAttendanceList = Result
+                //};
+            }
+            catch (Exception ex)
+            {
+                return new Error() { IsError = true, Message = ex.Message };
+
+            }
+        }
     }
 }
