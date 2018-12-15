@@ -37,12 +37,17 @@ namespace MobileSchoolAPI
 
 		public virtual DbSet<VIEWATTENDANCECHECK> VIEWATTENDANCECHECKs { get; set; }
 		public virtual DbSet<VW_GET_USER_TYPE> VW_GET_USER_TYPE { get; set; }
+        public virtual DbSet<VW_DATEWISECLASSSTATUSATTENDANCE> VW_DATEWISECLASSSTATUSATTENDANCE { get; set; }
 
 
 
 
 
-		public virtual DbSet<VWATTENDANCEEMPLOYEE> VWATTENDANCEEMPLOYEEs { get; set; }
+
+
+
+
+        public virtual DbSet<VWATTENDANCEEMPLOYEE> VWATTENDANCEEMPLOYEEs { get; set; }
 
 		public virtual DbSet<VIEWEMPDIVISION> VIEWEMPDIVISIONs { get; set; }
 
