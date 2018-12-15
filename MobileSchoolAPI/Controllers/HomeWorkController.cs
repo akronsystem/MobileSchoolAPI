@@ -51,12 +51,23 @@ namespace MobileSchoolAPI.Controllers
 
         }
 
-		public object Test()
-		{																						    
+        [HttpPost]
+        public object Test()
+        {
+            homeworkparameters obj = new homeworkparameters();
+            try
+            {
+                Homeworkbussinesslayer objp = new Homeworkbussinesslayer();
+                var homemworkresult = objp.FileUpload(obj);
+                return homemworkresult;
+            }
+            catch (Exception e)
+            {
+                return new Error() { IsError = true, Message = e.Message };
+            }
 
-			return null;
-		}
 
-       
+        }
+
     }
 }

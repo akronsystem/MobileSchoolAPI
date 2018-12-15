@@ -19,17 +19,18 @@ namespace AgroApp.App_Start
                     new Parameter
                         {
                             name = "Userid",
-                            @in  = "formData",
+                           @in  = "formData",
                             description = "name of register person",
                             required = false,
                             type = "string",
                             format = "uuid"
 
+
                         },
                         new Parameter
                         {
-                            name = "address",
-                            @in  = "formData",
+                            name = "Password",
+                           @in  = "formData",
                             description = "",
                             required = false,
                             type = "string",
@@ -37,32 +38,56 @@ namespace AgroApp.App_Start
                         },
                         new Parameter
                         {
-                            name = "mobileno",
-                            @in  = "formData",
+                            name = "standardid",
+                          @in  = "formData",
                             description = "",
                             required = true,
                             type = "string"
                         },
                         new Parameter
                         {
-                            name = "farmdetails",
+                            name = "division",
                             @in  = "formData",
                             description = "",
                             required = false,
                             type = "string"
-                        }, 
-                        new Parameter 
-                        { 
-                            name = "file", 
-                            @in = "formData", 
+                        },
+                        new Parameter
+                        {
+                            name = "subject",
+                           @in  = "formData",
+                            description = "",
+                            required = false,
+                            type = "string"
+                        },
+                         new Parameter
+                        {
+                            name = "term",
+                            @in  = "formData",
+                            description = "",
+                            required = false,
+                            type = "string"
+                        },
+                          new Parameter
+                        {
+                            name = "homeworkdescription",
+                            @in  = "formData",
+                            description = "",
+                            required = false,
+                            type = "string"
+                        },
+                        new Parameter
+                        {
+                            name = "file",
+                            @in = "formData",
                             description = "File to upload.",
-                            required = true, 
-                            type = "file" 
+                            required = true,
+                            type = "file"
                         }
                     };
             }
-            
-           
+
+
         }
     }
 }

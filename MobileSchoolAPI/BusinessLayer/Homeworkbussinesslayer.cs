@@ -216,6 +216,65 @@ namespace MobileSchoolAPI.BusinessLayer
                 return false;
             }
         }
+        public object FileUpload(homeworkparameters obj)
+        {
+            int Userid = Convert.ToInt32(HttpContext.Current.Request["Userid"]);
+            var Password = HttpContext.Current.Request["Password"];
+            SchoolMainContext db = new ConcreateContext().GetContext(Userid, Password);
+            var getUserType = db.VW_GET_USER_TYPE.Where(r => r.UserId == Userid).FirstOrDefault();
+            //if (!Request.Content.IsMimeMultipartContent())
+            //{
+            //    throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
+            //}
+            try
+            {
+                var httpRequest = HttpContext.Current.Request;
+                if (httpRequest.Files.Count > 0)
+                {
+                    string fileName = string.Empty;
+                    var filePath = string.Empty;
+                    string savePath = string.Empty;
+                    foreach (string file in httpRequest.Files)
+                    {
+                        var postedFile = httpRequest.Files[file];
+                        fileName = postedFile.FileName;
+                        filePath = "~/Upload/UserPhoto/" + Guid.NewGuid() + fileName;
+                        savePath = HttpContext.Current.Server.MapPath(filePath); postedFile.SaveAs(savePath); // NOTE: To store in memory use postedFile.InputStream }
+                        TBLHOMEWORK upload = new TBLHOMEWORK();
+                        //upload.file_id = Guid.NewGuid().ToString();
+                        //upload.name = fileName;
+                        upload.STANDARDID = Convert.ToInt32(HttpContext.Current.Request["standardid"]);
+                        upload.CREATEDID = int.Parse(getUserType.EmpCode);
+                        upload.DIVISIONID = HttpContext.Current.Request["division"];
+                        upload.SUBJECTID = Convert.ToInt32(HttpContext.Current.Request["subject"]);
+                        upload.TERMID = Convert.ToInt32(HttpContext.Current.Request["term"]);
+                        upload.HOMEWORK = HttpContext.Current.Request["homeworkdescription"];
+                        upload.HOMEWORKDATE = Convert.ToDateTime(DateTime.Now.ToShortDateString());
+                        upload.TIME = DateTime.Now.ToShortTimeString();
+                        upload.DISPLAY = 1;
+                        upload.ACADEMICYEAR = "2018-2019";
+
+                        upload.FILEPATH = filePath;
+
+                        //upload.insert_date = DateTime.Now;
+                        db.TBLHOMEWORKs.Add(upload);
+                        db.SaveChanges();
+
+                        return upload;
+                    }
+
+                    return new Error { IsError = true, Message = "Failed to upload File" };
+                }
+            }
+            catch (Exception ex)
+            {
+                return new Error { IsError = true, Message = "Failed to upload File" }
+            ;
+            }
+
+
+            return null;
+        }
 
 
     }
