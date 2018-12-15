@@ -89,8 +89,8 @@ namespace MobileSchoolAPI.Controllers
                     PDeviceObj.DeviceType = userLogin.DeviceType;
                     objDeviceBl.SaveDevice(PDeviceObj,logindetail.Password);
 
-                    //logindetail.DeviceId = userLogin.DeviceId;
-                    //logindetail.DeviceType = userLogin.DeviceType;
+                    logindetail.DeviceId = userLogin.DeviceId;
+                    logindetail.DeviceType = userLogin.DeviceType;
 
                     return logindetail;
                 }
