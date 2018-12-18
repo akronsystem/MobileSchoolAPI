@@ -54,8 +54,10 @@ namespace MobileSchoolAPI.Models
 
 				var data = new
 				{
-					// to = YOUR_FCM_DEVICE_ID, // Uncoment this if you want to test for single device
-					to = "/topics/" + _topic, // this is for topic 
+					to = _topic, // Uncoment this if you want to test for single device
+					//to = "/topics/" + _topic, // this is for topic 
+					priority = "high",
+					content_available = true,
 					notification = new
 					{
 						title = _title,

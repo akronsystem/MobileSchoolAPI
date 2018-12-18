@@ -52,7 +52,7 @@ namespace MobileSchoolAPI.Controllers
         }
 
         [HttpPost]
-        public object Test()
+        public object TestUpload()
         {
             homeworkparameters obj = new homeworkparameters();
             try
@@ -69,5 +69,7 @@ namespace MobileSchoolAPI.Controllers
 
         }
 
-    }
+		 
+
+	}
 }

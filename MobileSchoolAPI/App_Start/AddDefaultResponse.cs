@@ -11,7 +11,7 @@ namespace AgroApp.App_Start
     {
         public void Apply(Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)
         {
-            if (operation.operationId == "HomeWork_Test")
+            if (operation.operationId == "HomeWork_TestUpload")
             {
                 operation.consumes.Add("multipart/form-data");
                 operation.parameters = new[]

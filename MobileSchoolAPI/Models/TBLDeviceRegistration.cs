@@ -12,8 +12,7 @@ namespace MobileSchoolAPI.Models
         public int Id { get; set; }
 
         public int? UserId { get; set; }
-
-        [StringLength(50)]
+						    
         public string DeviceId { get; set; }
 
         [StringLength(50)]
