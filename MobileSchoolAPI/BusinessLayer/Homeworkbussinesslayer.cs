@@ -1,6 +1,7 @@
 ﻿using MobileSchoolAPI.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -231,6 +232,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 var httpRequest = HttpContext.Current.Request;
                 if (httpRequest.Files.Count > 0)
                 {
+                   string UploadBaseUrl = ConfigurationManager.AppSettings["UploadBaseURL"];
                     string fileName = string.Empty;
                     var filePath = string.Empty;
                     string savePath = string.Empty;
@@ -238,7 +240,7 @@ namespace MobileSchoolAPI.BusinessLayer
                     {
                         var postedFile = httpRequest.Files[file];
                         fileName = postedFile.FileName;
-                        filePath = "~/Upload/UserPhoto/" + Guid.NewGuid() + fileName;
+                        filePath = UploadBaseUrl + Guid.NewGuid() + fileName;
                         savePath = HttpContext.Current.Server.MapPath(filePath); postedFile.SaveAs(savePath); // NOTE: To store in memory use postedFile.InputStream }
                         TBLHOMEWORK upload = new TBLHOMEWORK();
                         //upload.file_id = Guid.NewGuid().ToString();
