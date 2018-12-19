@@ -13,37 +13,52 @@ namespace MobileSchoolAPI.BusinessLayer
 
        public object SaveNotification(ParamNotification objnote)
         {
-            SchoolMainContext db = new ConcreateContext().GetContext(objnote.userid, objnote.password);
-
-            TBLNOTIFICATION objmaster = new TBLNOTIFICATION();
-            TBLNOTIFICATIONDETAIL objdetail = new TBLNOTIFICATIONDETAIL();
-
-            objmaster.TITLE = objnote.Title;
-            objmaster.NOTIFICATIONDATE = objnote.NotificationDate;
-            objmaster.NOTIFICATIONTIME = objnote.Time;
-            objmaster.ACADEMICYEAR = "2018-2019";
-            objmaster.NOTIFICATIONTYPE = objnote.NotificationType;
-            db.TBLNOTIFICATIONs.Add(objmaster);
-            db.SaveChanges();
-
-            objdetail.NOTIFICATIONID = objmaster.NOTIFICATIONID;
-            string studentid = objnote.student;
-            string[] student = studentid.Split(',');
-            if (student.Length > 0)
+            try
             {
-                for (int j = 0; j < student.Length; j++)
+                SchoolMainContext db = new ConcreateContext().GetContext(objnote.userid, objnote.password);
+
+                TBLNOTIFICATION objmaster = new TBLNOTIFICATION();
+                TBLNOTIFICATIONDETAIL objdetail = new TBLNOTIFICATIONDETAIL();
+
+                objmaster.TITLE = objnote.Title;
+                objmaster.NOTIFICATIONDATE = objnote.NotificationDate;
+                objmaster.NOTIFICATIONTIME = objnote.Time;
+                objmaster.ACADEMICYEAR = "2018-2019";
+                objmaster.NOTIFICATIONTYPE = objnote.NotificationType;
+                db.TBLNOTIFICATIONs.Add(objmaster);
+                db.SaveChanges();
+
+                objdetail.NOTIFICATIONID = objmaster.NOTIFICATIONID;
+                string studentid = objnote.student;
+                string[] student = studentid.Split(',');
+                if (student.Length > 0)
                 {
-                    var studid = student[j];
-                    objdetail.STUDENTID =int.Parse(studid);
-                    objdetail.STATUS = 0;
+                    for (int j = 0; j < student.Length; j++)
+                    {
+                        var studid = student[j];
+                        objdetail.STUDENTID = int.Parse(studid);
+                        objdetail.STATUS = 0;
 
-                    db.TBLNOTIFICATIONDETAILs.Add(objdetail);
-                    db.SaveChanges();
-                    
+                        db.TBLNOTIFICATIONDETAILs.Add(objdetail);
+                        db.SaveChanges();
 
+
+                    }
                 }
+
+
+                return new DivisionListResult() { IsSuccess = true, Notification = "Notification Saved successfully" };
+
             }
-            return "Notification Saved successfully";
+            catch (Exception E)
+            {
+                return new Error()
+                {
+                    IsError = true,
+                    Message = E.Message
+
+                };
+            }
 
         }
 
@@ -51,12 +66,14 @@ namespace MobileSchoolAPI.BusinessLayer
         {
             try
             {
+
                 SchoolMainContext db = new ConcreateContext().GetContext(obj.userid, obj.password);
-                var Notification = db.VIEWNOTIFICATIONs.Where(r => r.UserId == obj.userid).ToList();
-                if (Notification.Count == 0)
+                var Notification = db.VIEWNOTIFICATIONs.Where(r => r.UserId == obj.userid).ToList().OrderByDescending(r=>r.NOTIFICATIONID);
+                if (Notification== null)
                 {
 
                     return new Error() { IsError = true, Message = "No Notifications Found" };
+
 
                 }
                 else
@@ -79,6 +96,7 @@ namespace MobileSchoolAPI.BusinessLayer
         {
             try
             {
+
                 SchoolMainContext db = new ConcreateContext().GetContext(obj.userid, obj.password);
                 TBLNOTIFICATIONDETAIL objdetail = db.TBLNOTIFICATIONDETAILs.First(r => r.NOTIFICATIONID == obj.notificationid && r.STUDENTID == obj.studentid);
 
@@ -86,7 +104,10 @@ namespace MobileSchoolAPI.BusinessLayer
 
                 db.SaveChanges();
 
-                return "Notification Updated successfully";
+                return new DivisionListResult() { IsSuccess = true, Notification = "Notification Updated successfully" };
+
+
+            
 
             }
             catch (Exception E)
