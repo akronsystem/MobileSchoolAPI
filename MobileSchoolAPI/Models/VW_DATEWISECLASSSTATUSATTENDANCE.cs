@@ -21,8 +21,8 @@ namespace MobileSchoolAPI.Models
         [StringLength(7)]
         public string STATUS { get; set; }
 
-        [StringLength(50)]
-        public string ROLLNO { get; set; }
+       
+        public int? ROLLNO { get; set; }
 
         public DateTime? ATTEDANCEDATE { get; set; }
 

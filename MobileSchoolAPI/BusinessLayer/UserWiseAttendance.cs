@@ -112,7 +112,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 }
                 else
                 {
-                    var AttendaceStatus = db.VW_DATEWISECLASSSTATUSATTENDANCE.Where(r => r.ATTEDANCEDATE == PA.AttendanceDate && r.CREATEDID == PA.UserId).ToList();
+                    var AttendaceStatus = db.VW_DATEWISECLASSSTATUSATTENDANCE.Where(r => r.ATTEDANCEDATE == PA.AttendanceDate && r.CREATEDID == PA.UserId).ToList().OrderBy(r=>r.ROLLNO);
                         if (AttendaceStatus.Count() == 0)
                     {
                         return new Error() { IsError = true, Message = "No Records Found" };
@@ -123,7 +123,7 @@ namespace MobileSchoolAPI.BusinessLayer
                         return new AttendanceResult()
                         {
                             IsSuccess = true,
-                            UserWiseAttendanceList = AttendaceStatus
+                            UserWiseAttendanceList = AttendaceStatus.ToList().OrderBy(r => r.ROLLNO)
                         };
                     }
 
