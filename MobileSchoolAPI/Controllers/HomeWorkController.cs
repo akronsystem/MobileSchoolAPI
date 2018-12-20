@@ -69,7 +69,25 @@ namespace MobileSchoolAPI.Controllers
 
         }
 
-		 
+		[HttpPost]
+		public object TestNotification(homeworkparameters obj)
+		{
+			 
+			try
+			{
+				Homeworkbussinesslayer objp = new Homeworkbussinesslayer();
+				var homemworkresult = objp.SendNotificaiton(obj);
+				return homemworkresult;
+			}
+			catch (Exception e)
+			{
+				return new Error() { IsError = true, Message = e.Message };
+			}
+
+
+		}
+
+
 
 	}
 }

@@ -75,8 +75,9 @@ namespace MobileSchoolAPI.BusinessLayer
 						string studentid = Convert.ToString(getstudent[i].STUDENTID);
 						var userid = db.VIEWGETUSERIDFROMEMPCODEs.Where(r => r.EmpCode == studentid).FirstOrDefault();
 						var device = db.VW_DEVICE.FirstOrDefault(r => r.UserId == userid.UserId);
-						if (device != null)
+						if (device != null )
 						{
+							if(!string.IsNullOrWhiteSpace( device.DeviceId))
 							OBJPUSH.SendNotification("Homework", obj.homeworkdescription, device.DeviceId);
 						}   
 
@@ -91,6 +92,21 @@ namespace MobileSchoolAPI.BusinessLayer
                 };  
 
 		}   
+
+		public object SendNotificaiton(homeworkparameters obj)
+		{
+			SchoolMainContext db = new ConcreateContext().GetContext(obj.Userid, obj.Password);
+			 
+			var device = db.VW_DEVICE.FirstOrDefault(r => r.UserId == obj.Userid);
+			if (device != null)
+			{
+				FCMPushNotification OBJPUSH = new FCMPushNotification();
+				 return OBJPUSH.SendNotification("Homework", obj.homeworkdescription, device.DeviceId);
+			}
+
+			throw new Exception("Notification Failed");
+			 
+		}
 
 	public object SaveAttendance(AttendanceParameterscs atteobj)
         {
