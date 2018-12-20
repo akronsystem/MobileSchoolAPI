@@ -9,29 +9,32 @@ namespace MobileSchoolAPI.Models
     [Table("VIEWNOTIFICATION")]
     public partial class VIEWNOTIFICATION
     {
-        [StringLength(50)]
-        public string UserType { get; set; }
 
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public long UserId { get; set; }
 
         public string TITLE { get; set; }
+
+
+
+        [Key]
+        [Column(Order = 0)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public long NOTIFICATIONID { get; set; }
 
         public DateTime? NOTIFICATIONDATE { get; set; }
 
         [StringLength(50)]
         public string NOTIFICATIONTIME { get; set; }
 
-        [StringLength(50)]
-        public string NOTIFICATIONTYPE { get; set; }
+        [Key]
+        [Column(Order = 1)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public long UserId { get; set; }
+
+        public long? STUDENTID { get; set; }
 
         public long? STATUS { get; set; }
 
-        public Int64 NOTIFICATIONID { get; set; }
-
-        public Int64 STUDENTID { get; set; }
+        [StringLength(50)]
+        public string UserType { get; set; }
     }
-
-
 }
