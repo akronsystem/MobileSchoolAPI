@@ -14,8 +14,9 @@ namespace MobileSchoolAPI
 		{
 
 		}
+        public virtual DbSet<TBLHOLIDAY> TBLHOLIDAYs { get; set; }
 
- 
+        public virtual DbSet<VIEWALLNOTIFICATION> VIEWALLNOTIFICATIONs { get; set; }
         public virtual DbSet<TBLDeviceRegistration> TBLDeviceRegistrations { get; set; }
         public virtual DbSet<VW_DEVICE> VW_DEVICE { get; set; }
  
