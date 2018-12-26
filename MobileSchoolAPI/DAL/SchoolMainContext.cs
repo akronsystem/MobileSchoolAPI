@@ -84,7 +84,11 @@ namespace MobileSchoolAPI
         public virtual DbSet<Vw_ATTENDANCECHECK> Vw_ATTENDANCECHECK { get; set; }
         public virtual DbSet<VIEWSUBJECTNAME> VIEWSUBJECTNAMEs { get; set; }
 
-        public virtual DbSet<VIEWGETUSERIDFROMEMPCODE> VIEWGETUSERIDFROMEMPCODEs { get; set; }  
+        public virtual DbSet<VIEWGETUSERIDFROMEMPCODE> VIEWGETUSERIDFROMEMPCODEs { get; set; }
+
+        public virtual DbSet<VW_GetGallery> VW_GetGallery { get; set; }
+        public virtual DbSet<VW_EXAMSCHEDULE> VW_EXAMSCHEDULE { get; set; }
+        public virtual DbSet<VW_UNITMASTER> VW_UNITMASTER { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
 			modelBuilder.Entity<TBLUSERLOGIN>()

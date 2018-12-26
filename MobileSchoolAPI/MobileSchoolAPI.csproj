@@ -157,6 +157,8 @@
     <Compile Include="BusinessLayer\DashboardManager.cs" />
     <Compile Include="BusinessLayer\DeviceBusinessLayer.cs" />
     <Compile Include="BusinessLayer\GetDivisionInfoBusiness.cs" />
+    <Compile Include="BusinessLayer\GetExamScheduleBL.cs" />
+    <Compile Include="BusinessLayer\GetGalleryDetailBL.cs" />
     <Compile Include="BusinessLayer\GETHOMEWORK.cs" />
     <Compile Include="BusinessLayer\GetStandardList.cs" />
     <Compile Include="BusinessLayer\GETSTUDENTATTBL.cs" />
@@ -173,6 +175,7 @@
     <Compile Include="Controllers\ClassTeacherController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\DivisionListController.cs" />
+    <Compile Include="Controllers\GalleryController.cs" />
     <Compile Include="Controllers\GetSubjectList.cs" />
     <Compile Include="Controllers\HomeWorkController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
@@ -180,6 +183,7 @@
     <Compile Include="Controllers\TERMLISTController.cs" />
     <Compile Include="Controllers\SubjectListController.cs" />
     <Compile Include="Controllers\UserWiseAttendanceController.cs" />
+    <Compile Include="Controllers\ViewExamScheduleController.cs" />
     <Compile Include="DAL\ConcreateContext.cs" />
     <Compile Include="DAL\NKVSchoolContext.cs" />
     <Compile Include="DAL\SchoolMainContext.cs" />
@@ -237,19 +241,24 @@
     <Compile Include="Models\Vw_ATTENDANCECHECK.cs" />
     <Compile Include="Models\VW_DATEWISECLASSSTATUSATTENDANCE.cs" />
     <Compile Include="Models\VW_DEVICE.cs" />
+    <Compile Include="Models\VW_EXAMSCHEDULE.cs" />
     <Compile Include="Models\vw_FETCHSTANDARDBYDIVISION.cs" />
+    <Compile Include="Models\VW_GetGallery.cs" />
     <Compile Include="Models\VW_GET_STANDARD_BY_DIVISION.cs" />
     <Compile Include="Models\VW_GET_USER_TYPE.cs" />
     <Compile Include="Models\Vw_STANDARDLIST.cs" />
     <Compile Include="Models\Vw_STUDSTANDARD.cs" />
+    <Compile Include="Models\VW_UNITMASTER.cs" />
     <Compile Include="ParamModel\ParamAttendance.cs" />
     <Compile Include="ParamModel\ParamClassTeacher.cs" />
     <Compile Include="ParamModel\ParamDashboardStudentInfo.cs" />
     <Compile Include="ParamModel\ParamDateWiseAttendance.cs" />
+    <Compile Include="ParamModel\ParamDefault.cs" />
     <Compile Include="ParamModel\ParamDevice.cs" />
     <Compile Include="ParamModel\ParamDIVISIONLIST.cs" />
     <Compile Include="ParamModel\ParamDIVISIONWISESUBJECT.cs" />
     <Compile Include="ParamModel\PARAMEMP.cs" />
+    <Compile Include="ParamModel\ParamExamSchedule.cs" />
     <Compile Include="ParamModel\PARAMHOMEWORK.cs" />
     <Compile Include="ParamModel\ParamHomeWorkAll.cs" />
     <Compile Include="ParamModel\ParamHOMEWORKBYUSER.cs" />
@@ -266,6 +275,7 @@
     <Compile Include="ResultHomework\Homework.cs" />
     <Compile Include="ResultModel\AttendanceResult.cs" />
     <Compile Include="ResultModel\ClassTeacherResult.cs" />
+    <Compile Include="ResultModel\GalleryResult.cs" />
     <Compile Include="ResultModel\MonthlyAttendanceResult.cs" />
     <Compile Include="ResultModel\StdListResult.cs" />
     <Compile Include="ResultModel\StudentListResult.cs" />
