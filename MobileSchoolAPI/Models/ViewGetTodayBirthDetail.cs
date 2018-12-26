@@ -34,5 +34,15 @@ namespace MobileSchoolAPI.Models
 
         [StringLength(150)]
         public string DIVISIONNAME { get; set; }
+
+        [Key]
+        [Column(Order = 2)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public long STANDARDID { get; set; }
+
+        [Key]
+        [Column(Order = 3)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public long DIVISIONID { get; set; }
     }
 }
