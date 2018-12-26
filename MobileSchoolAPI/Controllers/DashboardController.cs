@@ -1,6 +1,8 @@
 ﻿using MobileSchoolAPI.BusinessLayer;
 using MobileSchoolAPI.BUSINESSLAYER;
 using MobileSchoolAPI.Models;
+using MobileSchoolAPI.ParamModel;
+using MobileSchoolAPI.ResultModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +22,34 @@ namespace MobileSchoolAPI.Controllers
             var result = GetUserIdobj.getUserInfo(UserId);
             
             return result;
+        }
+        [HttpPost]
+        public object GetTodayBirthDay([FromBody] GetUserId Obj)
+        {
+            try
+            {
+                BirthdayBusiness getBirthDay = new BirthdayBusiness();
+                var result = getBirthDay.GetTodayBirthDay(Obj);
+                return result;
+            }
+           catch(Exception ex)
+            {
+                return new Error { IsError = true, Message = ex.ToString() };
+            }
+        }
+        [HttpPost]
+        public object GetInstituteName([FromBody] GetUserId Obj)
+        {
+            try
+            {
+                InstituteBusiness Ibl = new InstituteBusiness();
+                var result = Ibl.GetInstituteName(Obj);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return new Error { IsError = true, Message = ex.ToString() };
+            }
         }
     }
 }
