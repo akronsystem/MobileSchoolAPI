@@ -14,7 +14,7 @@ namespace MobileSchoolAPI.Controllers
     public class ViewExamScheduleController : ApiController
     {
         [HttpPost]
-        public object GetGallery([FromBody]ParamExamSchedule OBJ)
+        public object GetExamSchedule([FromBody]ParamExamSchedule OBJ)
         {
             GetExamScheduleBL GETOBJ = new GetExamScheduleBL();
             var GetExamScheduleResult = GETOBJ.GetExamSchedule(OBJ);
