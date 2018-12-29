@@ -24,12 +24,12 @@ namespace MobileSchoolAPI.Controllers
             return result;
         }
         [HttpPost]
-        public object GetTodayBirthDay([FromBody] GetUserId Obj)
+        public object GetTodayStudentBirthDay([FromBody] GetUserId Obj)
         {
             try
             {
                 BirthdayBusiness getBirthDay = new BirthdayBusiness();
-                var result = getBirthDay.GetTodayBirthDay(Obj);
+                var result = getBirthDay.GetTodayStudentBirthDay(Obj);
                 return result;
             }
            catch(Exception ex)
@@ -44,6 +44,21 @@ namespace MobileSchoolAPI.Controllers
             {
                 InstituteBusiness Ibl = new InstituteBusiness();
                 var result = Ibl.GetInstituteName(Obj);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return new Error { IsError = true, Message = ex.ToString() };
+            }
+        }
+
+        [HttpPost]
+        public object GetTodayEmployeeBirthDetails([FromBody]GetUserId Obj)
+        {
+            try
+            {
+                BirthdayBusiness getBirthDay = new BirthdayBusiness();
+                var result = getBirthDay.GetTodayEmployeeBirthDay(Obj);
                 return result;
             }
             catch (Exception ex)
