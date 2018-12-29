@@ -168,6 +168,7 @@
     <Compile Include="BusinessLayer\Homeworkbussinesslayer.cs" />
     <Compile Include="BusinessLayer\LoginManager.cs" />
     <Compile Include="BusinessLayer\NotificationBusiness.cs" />
+    <Compile Include="BusinessLayer\TestTypeBL.cs" />
     <Compile Include="BusinessLayer\UserWiseAttendance.cs" />
     <Compile Include="Controllers\ATTENDANCEController.cs" />
     <Compile Include="BUSINESSLAYER\GetTeacherInfoBusiness.cs" />
@@ -182,6 +183,7 @@
     <Compile Include="Controllers\PARAMHOMEWORKBYUSER.cs" />
     <Compile Include="Controllers\TERMLISTController.cs" />
     <Compile Include="Controllers\SubjectListController.cs" />
+    <Compile Include="Controllers\TestTypeController.cs" />
     <Compile Include="Controllers\UserWiseAttendanceController.cs" />
     <Compile Include="Controllers\ViewExamScheduleController.cs" />
     <Compile Include="DAL\ConcreateContext.cs" />
@@ -248,6 +250,7 @@
     <Compile Include="Models\VW_GET_USER_TYPE.cs" />
     <Compile Include="Models\Vw_STANDARDLIST.cs" />
     <Compile Include="Models\Vw_STUDSTANDARD.cs" />
+    <Compile Include="Models\VW_TESTTYPELIST.cs" />
     <Compile Include="Models\VW_UNITMASTER.cs" />
     <Compile Include="ParamModel\ParamAttendance.cs" />
     <Compile Include="ParamModel\ParamClassTeacher.cs" />

@@ -44,7 +44,7 @@ namespace MobileSchoolAPI.BusinessLayer
                         ExamTime=result[i].EXAMTIME
                     });
                 }
-                return new GalleryResult() { IsSuccess = true, GalleryListResults = Details.ToArray() };
+                return new GalleryResult() { IsSuccess = true, Results = Details.ToArray() };
             }
             catch(Exception ex)
             {

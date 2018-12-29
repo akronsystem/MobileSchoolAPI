@@ -30,7 +30,7 @@ namespace MobileSchoolAPI.BusinessLayer
                     str[i,0] = "AlbumName:" + GetGallery[i].ALBUMNAME ;
                     str[i, 1] = strpath;
                 }
-                return new GalleryResult() { IsSuccess = true, GalleryListResults = str };
+                return new GalleryResult() { IsSuccess = true, Results = str };
             }
             catch (Exception ex)
             {
