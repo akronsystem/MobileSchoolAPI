@@ -25,7 +25,7 @@ namespace MobileSchoolAPI.Controllers
         public object ViewNotification([FromBody]ParamNotificationView obj)
         {
             NotificationBusiness objnote = new NotificationBusiness();
-			return new DivisionListResult() { IsSuccess = true, Notification = objnote.ViewNotification(obj) };
+			return  objnote.ViewNotification(obj) ;
 
 		}
 

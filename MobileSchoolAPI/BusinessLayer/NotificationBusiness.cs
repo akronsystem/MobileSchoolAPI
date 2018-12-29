@@ -68,64 +68,73 @@ namespace MobileSchoolAPI.BusinessLayer
             {
 
                 SchoolMainContext db = new ConcreateContext().GetContext(obj.userid, obj.password);
-                var Notification = db.VIEWNOTIFICATIONs.Where(r => r.UserId == obj.userid).ToList().OrderByDescending(r=>r.NOTIFICATIONID);
-                var NotificationAll=db.VIEWALLNOTIFICATIONs.ToList().OrderByDescending(r => r.NOTIFICATIONID);
-                List<Result> lt = new List<Result>();
-
-
-
-                foreach (var att in Notification)
+                if (db == null)
                 {
-
-                  
-                        Result ddl = new Result();
-                        ddl.TITLE = att.TITLE;
-                        ddl.NOTIFICATIONID = att.NOTIFICATIONID;
-                    ddl.NOTIFICATIONDATE = att.NOTIFICATIONDATE.ToString();
-                    ddl.NOTIFICATIONTIME = att.NOTIFICATIONTIME;
-                    ddl.UserId = att.UserId.ToString();
-                    ddl.STUDENTID = att.STUDENTID.ToString();
-                    ddl.STATUS = att.STATUS.ToString();
-                    ddl.UserType = att.UserType;
-
-                     lt.Add(ddl);
-                     
-                    
-
-
-                }
-
-                foreach (var att in NotificationAll)
-                {
-
-
-                    Result ddl = new Result();
-                    ddl.TITLE = att.TITLE;
-                    ddl.NOTIFICATIONID = att.NOTIFICATIONID;
-                    ddl.NOTIFICATIONDATE = att.NOTIFICATIONDATE.ToString();
-                    ddl.NOTIFICATIONTIME = att.NOTIFICATIONTIME;
-                    ddl.UserId = att.UserId.ToString();
-                    ddl.STUDENTID = att.STUDENTID.ToString();
-                    ddl.STATUS = att.STATUS.ToString();
-                    ddl.UserType = att.UserType;
-
-                    lt.Add(ddl);
-
-
-
-
-                }
-
-                if (lt == null)
-                {
-
-                    return new Error() { IsError = true, Message = "No Notifications Found" };
-
-
+                    return new Error() { IsError = true, Message = "Invalid User." };
                 }
                 else
                 {
-                    return lt.ToList().OrderByDescending(r => r.NOTIFICATIONID);
+                    var Notification = db.VIEWNOTIFICATIONs.Where(r => r.UserId == obj.userid).ToList().OrderByDescending(r => r.NOTIFICATIONID);
+                    var NotificationAll = db.VIEWALLNOTIFICATIONs.ToList().OrderByDescending(r => r.NOTIFICATIONID);
+                    List<Result> lt = new List<Result>();
+
+
+
+                    foreach (var att in Notification)
+                    {
+
+
+                        Result ddl = new Result();
+                        ddl.TITLE = att.TITLE;
+                        ddl.NOTIFICATIONID = att.NOTIFICATIONID;
+                        ddl.NOTIFICATIONDATE = att.NOTIFICATIONDATE.ToString();
+                        ddl.NOTIFICATIONTIME = att.NOTIFICATIONTIME;
+                        ddl.UserId = att.UserId.ToString();
+                        ddl.STUDENTID = att.STUDENTID.ToString();
+                        ddl.STATUS = att.STATUS.ToString();
+                        ddl.UserType = att.UserType;
+
+                        lt.Add(ddl);
+
+
+
+
+                    }
+
+                    foreach (var att in NotificationAll)
+                    {
+
+
+                        Result ddl = new Result();
+                        ddl.TITLE = att.TITLE;
+                        ddl.NOTIFICATIONID = att.NOTIFICATIONID;
+                        ddl.NOTIFICATIONDATE = att.NOTIFICATIONDATE.ToString();
+                        ddl.NOTIFICATIONTIME = att.NOTIFICATIONTIME;
+                        ddl.UserId = att.UserId.ToString();
+                        ddl.STUDENTID = att.STUDENTID.ToString();
+                        ddl.STATUS = att.STATUS.ToString();
+                        ddl.UserType = att.UserType;
+
+                        lt.Add(ddl);
+
+
+
+
+                    }
+
+                    if (lt == null)
+                    {
+
+                        return new Error() { IsError = true, Message = "No Notifications Found" };
+
+
+                    }
+                    else
+                    {
+                        return new DivisionListResult() { IsSuccess = true, Notification = lt.ToList().OrderByDescending(r => r.NOTIFICATIONID) };
+
+
+                    }
                 }
             }
             catch (Exception E)
@@ -137,6 +146,7 @@ namespace MobileSchoolAPI.BusinessLayer
 
                 };
             }
+            
         }
 
         public class Result
