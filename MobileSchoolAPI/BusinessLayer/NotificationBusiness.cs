@@ -68,17 +68,73 @@ namespace MobileSchoolAPI.BusinessLayer
             {
 
                 SchoolMainContext db = new ConcreateContext().GetContext(obj.userid, obj.password);
-                var Notification = db.VIEWNOTIFICATIONs.Where(r => r.UserId == obj.userid).ToList().OrderByDescending(r=>r.NOTIFICATIONID);
-                if (Notification== null)
+                if (db == null)
                 {
-
-                    return new Error() { IsError = true, Message = "No Notifications Found" };
-
-
+                    return new Error() { IsError = true, Message = "Invalid User." };
                 }
                 else
                 {
-                    return Notification;
+                    var Notification = db.VIEWNOTIFICATIONs.Where(r => r.UserId == obj.userid).ToList().OrderByDescending(r => r.NOTIFICATIONID);
+                    var NotificationAll = db.VIEWALLNOTIFICATIONs.ToList().OrderByDescending(r => r.NOTIFICATIONID);
+                    List<Result> lt = new List<Result>();
+
+
+
+                    foreach (var att in Notification)
+                    {
+
+
+                        Result ddl = new Result();
+                        ddl.TITLE = att.TITLE;
+                        ddl.NOTIFICATIONID = att.NOTIFICATIONID;
+                        ddl.NOTIFICATIONDATE = att.NOTIFICATIONDATE.ToString();
+                        ddl.NOTIFICATIONTIME = att.NOTIFICATIONTIME;
+                        ddl.UserId = att.UserId.ToString();
+                        ddl.STUDENTID = att.STUDENTID.ToString();
+                        ddl.STATUS = att.STATUS.ToString();
+                        ddl.UserType = att.UserType;
+
+                        lt.Add(ddl);
+
+
+
+
+                    }
+
+                    foreach (var att in NotificationAll)
+                    {
+
+
+                        Result ddl = new Result();
+                        ddl.TITLE = att.TITLE;
+                        ddl.NOTIFICATIONID = att.NOTIFICATIONID;
+                        ddl.NOTIFICATIONDATE = att.NOTIFICATIONDATE.ToString();
+                        ddl.NOTIFICATIONTIME = att.NOTIFICATIONTIME;
+                        ddl.UserId = att.UserId.ToString();
+                        ddl.STUDENTID = att.STUDENTID.ToString();
+                        ddl.STATUS = att.STATUS.ToString();
+                        ddl.UserType = att.UserType;
+
+                        lt.Add(ddl);
+
+
+
+
+                    }
+
+                    if (lt == null)
+                    {
+
+                        return new Error() { IsError = true, Message = "No Notifications Found" };
+
+
+                    }
+                    else
+                    {
+                        return new DivisionListResult() { IsSuccess = true, Notification = lt.ToList().OrderByDescending(r => r.NOTIFICATIONID) };
+
+
+                    }
                 }
             }
             catch (Exception E)
@@ -90,6 +146,23 @@ namespace MobileSchoolAPI.BusinessLayer
 
                 };
             }
+            
+        }
+
+        public class Result
+        {
+            public string TITLE { get; set; }
+            public Int64 NOTIFICATIONID { get; set; }
+
+            public string NOTIFICATIONDATE { get; set; }
+
+            public string NOTIFICATIONTIME { get; set; }
+
+            public string UserId { get; set; }
+
+            public string STUDENTID { get; set; }
+            public string STATUS { get; set; }
+            public string UserType { get; set; }
         }
 
         public object UpdateNotification(ParamNotificationUpdate obj)
@@ -109,6 +182,74 @@ namespace MobileSchoolAPI.BusinessLayer
 
             
 
+            }
+            catch (Exception E)
+            {
+                return new Error()
+                {
+                    IsError = true,
+                    Message = E.Message
+
+                };
+            }
+        }
+
+
+        public object SaveNotificationAll(ParamAllNotification objnote)
+        {
+            try
+            {
+                SchoolMainContext db = new ConcreateContext().GetContext(objnote.userid, objnote.password);
+
+                TBLNOTIFICATION objmaster = new TBLNOTIFICATION();
+                TBLNOTIFICATIONDETAIL objdetail = new TBLNOTIFICATIONDETAIL();
+
+                objmaster.TITLE = objnote.Title;
+                objmaster.NOTIFICATIONDATE = objnote.NotificationDate;
+                objmaster.NOTIFICATIONTIME = objnote.Time;
+                objmaster.ACADEMICYEAR = "2018-2019";
+                objmaster.NOTIFICATIONTYPE = objnote.NotificationType;
+                db.TBLNOTIFICATIONs.Add(objmaster);
+                db.SaveChanges();
+
+             
+
+
+                return new DivisionListResult() { IsSuccess = true, Notification = "Notification Saved successfully" };
+
+            }
+            catch (Exception E)
+            {
+                return new Error()
+                {
+                    IsError = true,
+                    Message = E.Message
+
+                };
+            }
+
+        }
+
+
+        public object ViewEventHoliday(ParamNotificationView obj)
+        {
+            try
+            {
+
+                SchoolMainContext db = new ConcreateContext().GetContext(obj.userid, obj.password);
+                var EventHoliday = db.TBLHOLIDAYs.ToList().OrderBy(r => r.STARTDATE);
+
+                if (EventHoliday == null)
+                {
+
+                    return new Error() { IsError = true, Message = "No Record Found" };
+
+
+                }
+                else
+                {
+                    return EventHoliday;
+                }
             }
             catch (Exception E)
             {

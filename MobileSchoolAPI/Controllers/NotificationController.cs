@@ -25,7 +25,7 @@ namespace MobileSchoolAPI.Controllers
         public object ViewNotification([FromBody]ParamNotificationView obj)
         {
             NotificationBusiness objnote = new NotificationBusiness();
-			return new DivisionListResult() { IsSuccess = true, Notification = objnote.ViewNotification(obj) };
+			return  objnote.ViewNotification(obj) ;
 
 		}
 
@@ -34,5 +34,22 @@ namespace MobileSchoolAPI.Controllers
             NotificationBusiness objnote = new NotificationBusiness();
             return objnote.UpdateNotification(obj);
         }
+
+        [HttpPost]
+        public object SaveAllNotification([FromBody]ParamAllNotification obj)
+        {
+
+            NotificationBusiness objnote = new NotificationBusiness();
+
+            return objnote.SaveNotificationAll(obj);
+        }
+
+        [HttpPost]
+        public object ViewEventHoliday([FromBody]ParamNotificationView obj)
+        {
+            NotificationBusiness objnote = new NotificationBusiness();
+            return objnote.ViewEventHoliday(obj);
+        }
+
     }
 }

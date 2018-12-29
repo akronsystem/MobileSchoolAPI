@@ -153,6 +153,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="BusinessLayer\BirthdayBusiness.cs" />
     <Compile Include="BusinessLayer\ClassTeacherData.cs" />
     <Compile Include="BusinessLayer\DashboardManager.cs" />
     <Compile Include="BusinessLayer\DeviceBusinessLayer.cs" />
@@ -166,6 +167,7 @@
     <Compile Include="BusinessLayer\GetSubjectListBusiness.cs" />
     <Compile Include="BusinessLayer\GetUserIdBusiness.cs" />
     <Compile Include="BusinessLayer\Homeworkbussinesslayer.cs" />
+    <Compile Include="BusinessLayer\InstituteBusiness.cs" />
     <Compile Include="BusinessLayer\LoginManager.cs" />
     <Compile Include="BusinessLayer\NotificationBusiness.cs" />
     <Compile Include="BusinessLayer\TestTypeBL.cs" />
@@ -211,6 +213,7 @@
     <Compile Include="Models\TBLATTENDENCE.cs" />
     <Compile Include="Models\TBLATTENDENCEMASTER.cs" />
     <Compile Include="Models\TBLDeviceRegistration.cs" />
+    <Compile Include="Models\TBLHOLIDAY.cs" />
     <Compile Include="Models\TBLHOMEWORK.cs" />
     <Compile Include="Models\TBLMESSAGEHISTORY.cs" />
     <Compile Include="Models\TBLNOTIFICATION.cs" />
@@ -218,6 +221,7 @@
     <Compile Include="Models\TBLUSERLOGIN.cs" />
     <Compile Include="Models\TERMLISTCS.cs" />
     <Compile Include="Models\TermListResult.cs" />
+    <Compile Include="Models\VIEWALLNOTIFICATION.cs" />
     <Compile Include="Models\VIewAttendaceClasswiseCheck.cs" />
     <Compile Include="Models\VIEWATTENDANCE.cs" />
     <Compile Include="Models\VIEWATTENDANCECHECK.cs" />
@@ -229,7 +233,9 @@
     <Compile Include="Models\VIEWDIVISIONWISESUBJECT.cs" />
     <Compile Include="Models\VIEWDIVISIONWISESUBJECTSTUDENT.cs" />
     <Compile Include="Models\VIEWEMPDIVISION.cs" />
+    <Compile Include="Models\ViewGetInstituteName.cs" />
     <Compile Include="Models\VIEWGETSTUDENTATT.cs" />
+    <Compile Include="Models\ViewGetTodayBirthDetail.cs" />
     <Compile Include="Models\VIEWGETUSERIDFROMEMPCODE.cs" />
     <Compile Include="Models\VIEWHOMEWORK.cs" />
     <Compile Include="Models\VIEWNOTIFICATION.cs" />
@@ -252,6 +258,7 @@
     <Compile Include="Models\Vw_STUDSTANDARD.cs" />
     <Compile Include="Models\VW_TESTTYPELIST.cs" />
     <Compile Include="Models\VW_UNITMASTER.cs" />
+    <Compile Include="ParamModel\ParamAllNotification.cs" />
     <Compile Include="ParamModel\ParamAttendance.cs" />
     <Compile Include="ParamModel\ParamClassTeacher.cs" />
     <Compile Include="ParamModel\ParamDashboardStudentInfo.cs" />
@@ -280,6 +287,7 @@
     <Compile Include="ResultModel\ClassTeacherResult.cs" />
     <Compile Include="ResultModel\GalleryResult.cs" />
     <Compile Include="ResultModel\MonthlyAttendanceResult.cs" />
+    <Compile Include="ResultModel\ResultBirth.cs" />
     <Compile Include="ResultModel\StdListResult.cs" />
     <Compile Include="ResultModel\StudentListResult.cs" />
   </ItemGroup>
