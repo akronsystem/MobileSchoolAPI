@@ -12,11 +12,22 @@ namespace MobileSchoolAPI.BUSINESSLAYER
         public object getTeacherInfo(int empcode, int UserId,string Password)
         {
             SchoolMainContext db = new ConcreateContext().GetContext(UserId, Password);
+            if (db == null)
+            {
+                return new Results() { IsSuccess = false, Message = "Invalid User" };
+            }
             var result = db.VW_EMPLOYEE.Where(r => r.ID == empcode && r.UserId == UserId).FirstOrDefault();
 
             if (result == null)
             {
-                return new Error() { IsError = true, Message = "User Not Found" };
+                return new Results
+                {
+                    IsSuccess = false,
+                    Message = new Error() { IsError = true, Message = "User Not Found" }
+                };
+
+
+               
             }
             else
             {
@@ -28,6 +39,10 @@ namespace MobileSchoolAPI.BUSINESSLAYER
         public object getTeacherLogo(int empcode, int UserId,string Password)
         {
             SchoolMainContext db = new ConcreateContext().GetContext(UserId, Password);
+            if (db == null)
+            {
+                return new Results() { IsSuccess = false, Message = "Invalid User" };
+            }
             var result = db.VW_EMPLOYEE.Where(r => r.ID == empcode && r.UserId == UserId).FirstOrDefault();
 
             if (result == null)

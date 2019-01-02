@@ -14,6 +14,10 @@ namespace MobileSchoolAPI.BusinessLayer
         public object GetStdList(ParamDIVISIONLIST Stdobj)
         {
             SchoolMainContext db = new ConcreateContext().GetContext(Stdobj.userid, Stdobj.password);
+            if (db == null)
+            {
+                return new Results() { IsSuccess = false, Message = "Invalid User" };
+            }
             var UserType = db.VW_GET_USER_TYPE.Where(r => r.UserId == Stdobj.userid).ToList();
             if(UserType[0].UserType=="STUDENT")
             {
@@ -22,7 +26,13 @@ namespace MobileSchoolAPI.BusinessLayer
 
                 if (STDLIST.Count == 0)
                 {
-                    return new Error() { IsError = true, Message = "Standard is not assigned for this user" };
+
+                    return new Results
+                    {
+                        IsSuccess = false,
+                        Message = new Error() { IsError = true, Message = "Standard is not assigned for this user" }
+                    };
+                 
                 }
                 else
                 {
@@ -36,7 +46,14 @@ namespace MobileSchoolAPI.BusinessLayer
                 var STDLIST = db.Vw_STANDARDLIST.Where(r => r.UserId == Stdobj.userid && r.ACADEMICYEAR == "2018-2019" && r.DISPLAY==1).ToList();
                 if (STDLIST.Count == 0)
                 {
-                    return new Error() { IsError = true, Message = "Standard is not assigned for this user" };
+
+                    return new Results
+                    {
+                        IsSuccess = false,
+                        Message = new Error() { IsError = true, Message = "Standard is not assigned for this user" }
+                    };
+
+                   
                 }
                 else
                 {
