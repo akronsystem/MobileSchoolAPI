@@ -22,6 +22,11 @@ namespace MobileSchoolAPI.Controllers
         public object GetAttendanceData([FromBody]ParamAttendance objPA)
         {
             int year = DateTime.Now.Year;
+            if(objPA.MONTH>12 || objPA.MONTH==0)
+            {
+                return new MonthlyAttendanceResult() { IsSuccess = false, DateWiseStatus = "Please Enter Month Between 1 to 12" };
+
+            }
             int days = DateTime.DaysInMonth(year, objPA.MONTH);
             ClassTeacherData objCT = new ClassTeacherData();                
             var result = objCT.GetAttendanceStatus(objPA);

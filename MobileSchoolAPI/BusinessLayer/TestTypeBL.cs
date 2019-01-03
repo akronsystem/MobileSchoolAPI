@@ -13,16 +13,33 @@ namespace MobileSchoolAPI.BusinessLayer
             try
             {
                 SchoolMainContext db = new ConcreateContext().GetContext(tobj.Userid, tobj.Password);
+                if (db == null)
+                {
+                    return new Results() { IsSuccess = false, Message = "Invalid User" };
+                }
                 var getlist = db.VW_TESTTYPELIST.ToList();
 
                 if (getlist == null)
-                    return new Error() { IsError = true, Message = "TEST LIST NOT FOUND." };
+
+                    return new Results
+                    {
+                        IsSuccess = false,
+                        Message = new Error() { IsError = true, Message = "TEST LIST NOT FOUND." }
+                    };
+              
                 else
                     return new TermListResult() { IsSuccess = "true", TermList = getlist }; ;
             }
             catch (Exception ex)
             {
-                return new Error { IsError = true, Message = ex.Message };
+              
+
+
+                return new Results
+                {
+                    IsSuccess = false,
+                    Message = new Error() { IsError = true, Message = ex.Message }
+                };
             }
         }
     }

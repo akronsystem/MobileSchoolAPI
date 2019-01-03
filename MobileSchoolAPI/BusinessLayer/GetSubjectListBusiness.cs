@@ -17,13 +17,24 @@ namespace MobileSchoolAPI.BusinessLayer
             try
             {
                 SchoolMainContext db = new ConcreateContext().GetContext(objdiv.userid, objdiv.password);
+                if (db == null)
+                {
+                    return new Results() { IsSuccess = false, Message = "Invalid User" };
+                }
                 var SubjectList = db.VIEWDIVISIONWISESUBJECTs.Where(r => r.DIVISIONID == objdiv.divisionid &&  r.DISPLAY == 1 && r.UserId==objdiv.userid).ToList();
                 if (SubjectList.Count == 0)
                 {
                 var StudSubjectList = db.VIEWDIVISIONWISESUBJECTSTUDENTs.Where(r => r.DIVISIONID == objdiv.divisionid &&  r.DISPLAY == 1 && r.UserId==objdiv.userid).ToList();
                     if (StudSubjectList.Count == 0)
                     {
-                        return new Error() { IsError = true, Message = "Subject Not Found" };
+
+                        return new Results
+                        {
+                            IsSuccess = false,
+                            Message = new Error() { IsError = true, Message = "Subject Not Found" }
+                        };
+
+                      
 
                     }
                     else
@@ -44,12 +55,14 @@ namespace MobileSchoolAPI.BusinessLayer
             }
             catch (Exception E)
             {
-                return new Error()
-                {
-                    IsError = true,
-                    Message = E.Message
 
+                return new Results
+                {
+                    IsSuccess = false,
+                    Message = new Error() { IsError = true, Message = E.Message }
                 };
+
+             
             }
         }
     }

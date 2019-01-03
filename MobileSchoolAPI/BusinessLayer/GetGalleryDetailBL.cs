@@ -15,7 +15,10 @@ namespace MobileSchoolAPI.BusinessLayer
             try
             {
                 SchoolMainContext db = new ConcreateContext().GetContext(OBJ.USERID, OBJ.PASSWORD);
-
+                if (db == null)
+                {
+                    return new Results() { IsSuccess = false, Message = "Invalid User" };
+                }
                 var GetGallery = db.VW_GetGallery.ToList();
                 object[,] str=new object[ GetGallery.Count,2];
                 for (int i = 0; i < GetGallery.Count; i++)
@@ -34,7 +37,12 @@ namespace MobileSchoolAPI.BusinessLayer
             }
             catch (Exception ex)
             {
-                return new Error() { IsError = true, Message = ex.Message };
+                return new Results
+                {
+                    IsSuccess = false,
+                    Message = new Error() { IsError = true, Message = ex.Message }
+                };
+            
             }
         }
     }

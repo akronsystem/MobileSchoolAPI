@@ -15,6 +15,10 @@ namespace MobileSchoolAPI.BusinessLayer
             try
             {
                 SchoolMainContext db = new ConcreateContext().GetContext(OBJ.USERID, OBJ.PASSWORD);
+                if (db == null)
+                {
+                    return new Results() { IsSuccess = false, Message = "Invalid User" };
+                }
                 var result = db.VW_EXAMSCHEDULE.Where(r=>r.STANDARDID.Contains(""+OBJ.STANDARDID+"") && r.TESTTYPEID==OBJ.TESTID && r.ACADEMICYEAR=="2018-2019" ).ToList();
 
                 List<examclass> Details = new List<examclass>();
@@ -48,7 +52,13 @@ namespace MobileSchoolAPI.BusinessLayer
             }
             catch(Exception ex)
             {
-                return new Error() { IsError = true, Message = ex.Message };
+                return new Results
+                {
+                    IsSuccess = false,
+                    Message = new Error() { IsError = true, Message = ex.Message }
+                };
+
+                
             }
         }
 

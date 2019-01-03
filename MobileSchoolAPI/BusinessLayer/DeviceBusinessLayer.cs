@@ -12,6 +12,10 @@ namespace MobileSchoolAPI.BusinessLayer
         public object SaveDevice(ParamDevice obj,string Password)
         {
             SchoolMainContext db = new ConcreateContext().GetContext(obj.UserId,Password);
+            if (db == null)
+            {
+                return new Results() { IsSuccess = false, Message = "Invalid User" };
+            }
             TBLDeviceRegistration objDR = new TBLDeviceRegistration();
 
             var getUserId = db.VW_DEVICE.Where(r => r.UserId == obj.UserId).FirstOrDefault();
@@ -29,7 +33,9 @@ namespace MobileSchoolAPI.BusinessLayer
                     db.TBLDeviceRegistrations.Add(objDR);
                     db.SaveChanges();
 
-                    return "Device Registration Succesfull!";
+
+                    return new Results() { IsSuccess = true, Message = "Device Registration Succesfull!" };
+                  
                 }
                 else
                 {
@@ -47,14 +53,22 @@ namespace MobileSchoolAPI.BusinessLayer
                     //db.TBLDeviceRegistrations.Add(objdetail);
                     db.SaveChanges();
 
-                    return "Notification Updated successfully";
+                    return new Results() { IsSuccess = true, Message = "Notification Updated successfully" };
+                  
                 }
             }
             catch(Exception ex)
             {
-                ex.ToString();
+
+                return new Results
+                {
+                    IsSuccess = false,
+                    Message = new Error() { IsError = true, Message = ex.ToString() }
+                };
+
+
             }
-            return "";
+           
         }
     }
 }

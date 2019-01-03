@@ -11,6 +11,6 @@ namespace MobileSchoolAPI.Models
         {
             get;set;
         }
-		public String Message { get; set; }
+		public object Message { get; set; }
 	}
 }

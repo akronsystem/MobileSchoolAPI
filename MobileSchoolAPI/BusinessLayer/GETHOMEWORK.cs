@@ -45,6 +45,10 @@ namespace MobileSchoolAPI.BusinessLayer
             try
             {
                 SchoolMainContext db = new ConcreateContext().GetContext(obj.USERID, obj.PASSWORD);
+                if (db == null)
+                {
+                    return new Results() { IsSuccess = false, Message = "Invalid User" };
+                }
 
                 var GETTYPE = db.VW_GET_USER_TYPE.Where(r => r.UserId == obj.USERID).ToList();
 
@@ -54,7 +58,13 @@ namespace MobileSchoolAPI.BusinessLayer
 
                     if (Division.Count==0)
                     {
-                        return new Error() { IsError = true, Message = "Division Not Found" };
+                        return new Results
+                        {
+                            IsSuccess = false,
+                            Message = new Error() { IsError = true, Message = "Division Not Found" }
+                        };
+
+                       
                     }
                     else
                     {
@@ -68,7 +78,13 @@ namespace MobileSchoolAPI.BusinessLayer
 
                     if (Division.Count == 0)
                     {
-                        return new Error() { IsError = true, Message = "Division Not Found" };
+                        return new Results
+                        {
+                            IsSuccess = false,
+                            Message = new Error() { IsError = true, Message = "Division Not Found" }
+                        };
+
+                       
                     }
                     else
                     {
@@ -82,7 +98,13 @@ namespace MobileSchoolAPI.BusinessLayer
             }
             catch (Exception E)
             {
-                return new Error() { IsError = true, Message = E.Message };
+
+                return new Results
+                {
+                    IsSuccess = false,
+                    Message = new Error() { IsError = true, Message = E.Message }
+                };
+            
             }
         }
 
@@ -120,6 +142,10 @@ namespace MobileSchoolAPI.BusinessLayer
             {
 
                 SchoolMainContext db = new ConcreateContext().GetContext(obj.userid, obj.password);
+                if (db == null)
+                {
+                    return new Results() { IsSuccess = false, Message = "Invalid User" };
+                }
                 var EmpHomework = db.VIEWHOMEWORKs.Where(r => r.UserId == obj.userid && r.HOMEWORKDATE==obj.homeworkdate).OrderByDescending(r => r.HOMEWORKDATE).ToList(); ;
 
 
@@ -130,7 +156,13 @@ namespace MobileSchoolAPI.BusinessLayer
 
                     if (StudentHomework.Count() == 0)
                     {
-                        return new Error() { IsError = true, Message = "HomeWork Not Found." };
+
+                        return new Results
+                        {
+                            IsSuccess = false,
+                            Message = new Error() { IsError = true, Message = "HomeWork Not Found." }
+                        };
+                      
                     }
                     else
                     {
@@ -146,7 +178,13 @@ namespace MobileSchoolAPI.BusinessLayer
             }
             catch (Exception E)
             {
-                return new Error() { IsError = true, Message = E.Message };
+
+                return new Results
+                {
+                    IsSuccess = false,
+                    Message = new Error() { IsError = true, Message = E.Message }
+                };
+              
 
             }
         }
@@ -160,6 +198,10 @@ namespace MobileSchoolAPI.BusinessLayer
             {
 
                 SchoolMainContext db = new ConcreateContext().GetContext(obj.userid, obj.password);
+                if (db == null)
+                {
+                    return new Results() { IsSuccess = false, Message = "Invalid User" };
+                }
                 var EmpHomework = db.VIEWHOMEWORKs.Where(r => r.UserId == obj.userid && r.HOMEWORKDATE>=obj.FromDate && r.HOMEWORKDATE<=obj.ToDate).OrderByDescending(r=>r.HOMEWORKDATE).ToList();
 
 
@@ -170,7 +212,13 @@ namespace MobileSchoolAPI.BusinessLayer
 
                     if (StudentHomework.Count() == 0)
                     {
-                        return new Error() { IsError = true, Message = "HomeWork Not Found." };
+                        return new Results
+                        {
+                            IsSuccess = false,
+                            Message = new Error() { IsError = true, Message = "HomeWork Not Found." }
+                        };
+
+                      
                     }
                     else
                     {
@@ -186,7 +234,14 @@ namespace MobileSchoolAPI.BusinessLayer
             }
             catch (Exception E)
             {
-                return new Error() { IsError = true, Message = E.Message };
+
+                return new Results
+                {
+                    IsSuccess = false,
+                    Message = new Error() { IsError = true, Message = E.Message }
+                };
+
+               
 
             }
         }

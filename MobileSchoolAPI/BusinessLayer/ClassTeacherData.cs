@@ -90,7 +90,7 @@ namespace MobileSchoolAPI.BusinessLayer
 
                             }
 
-                            if (flag == 0)
+                            if (flag == 0)                   
                             {
 
                                 Result ddl = new Result();
@@ -102,7 +102,8 @@ namespace MobileSchoolAPI.BusinessLayer
                         }
                     }
                     if (lt == null)
-                        return new Error() { IsError = true, Message = "No Attendance Is Found Of This Date" };
+                        return new ResultBirth { IsSuccess = false, Result = new Error() { IsError = true, Message = "No Attendance Is Found Of This Date" } };
+                
                     else
                         return new MonthlyAttendanceResult() { IsSuccess = true, DateWiseStatus = lt };
                 }
@@ -144,7 +145,13 @@ namespace MobileSchoolAPI.BusinessLayer
                             }
                         }
                         if (lt == null)
-                            return new Error() { IsError = true, Message = "No Attendance Is Found Of This Date" };
+
+                            return new Results
+                            {
+                                IsSuccess = false,
+                                Message = new Error() { IsError = true, Message = " No Attendance Is Found Of This Date" }
+                            };
+                     
                         else
                             // return lt;
                             return new MonthlyAttendanceResult() { IsSuccess = true, DateWiseStatus = lt };
@@ -152,7 +159,14 @@ namespace MobileSchoolAPI.BusinessLayer
                     }
                     else
                     {
-                        return new Error() { IsError = true, Message = " User Is Not Class Teacher" };
+                        
+
+                        return new Results
+                        {
+                            IsSuccess = false,
+                            Message = new Error() { IsError = true, Message = " User Is Not Class Teacher" }
+                        };
+
                     }
                 }	 
                  
@@ -160,7 +174,12 @@ namespace MobileSchoolAPI.BusinessLayer
             }
             catch (Exception ex)
             {
-                return new Error() { IsError = true, Message = ex.Message };
+                return new Results
+                {
+                    IsSuccess = false,
+                    Message = new Error() { IsError = true, Message = ex.Message }
+                };
+
             }
         }
          

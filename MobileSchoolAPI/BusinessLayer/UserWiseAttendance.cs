@@ -16,6 +16,10 @@ namespace MobileSchoolAPI.BusinessLayer
             try
             {
                 SchoolMainContext db = new ConcreateContext().GetContext(obj.UserId, obj.Password);
+                if (db == null)
+                {
+                    return new Results() { IsSuccess = false, Message = "Invalid User" };
+                }
                 var usertype= db.VW_GET_USER_TYPE.Where(r => r.UserId == obj.UserId ).ToList();
                 if(usertype.Count()==0)
                 {
@@ -76,7 +80,13 @@ namespace MobileSchoolAPI.BusinessLayer
             }
             catch(Exception e)
             {
-                return new Error() { IsError = true, Message = e.Message };
+
+                return new Results
+                {
+                    IsSuccess = false,
+                    Message = new Error() { IsError = true, Message = e.Message }
+                };
+            
 
             }
         }
@@ -89,17 +99,33 @@ namespace MobileSchoolAPI.BusinessLayer
 
 
                 SchoolMainContext db = new ConcreateContext().GetContext(PA.UserId, PA.Password);
-               
+                if (db == null)
+                {
+                    return new Results() { IsSuccess = false, Message = "Invalid User" };
+                }
+
                 var usertype = db.VW_GET_USER_TYPE.Where(r => r.UserId == PA.UserId).ToList();
                 if (usertype.Count() == 0)
                 {
-                    return new Error() { IsError = true, Message = "Incorrect Username." };
+
+                    return new Results
+                    {
+                        IsSuccess = false,
+                        Message = new Error() { IsError = true, Message = "Incorrect Username." }
+                    };
+                  
                 }
                 var EMPATTENDANCE = db.VWATTENDANCEEMPLOYEEs.Where(r => r.UserId == PA.UserId && r.ATTEDANCEDATE == PA.AttendanceDate && r.DISPLAY == 1).ToList();
 
                 if (EMPATTENDANCE.Count()==0)
                 {
-                    return new Error() { IsError = true, Message = "Attendance Is Not Marked By Class Teacher" };
+                    return new Results
+                    {
+                        IsSuccess = false,
+                        Message = new Error() { IsError = true, Message = "Attendance Is Not Marked By Class Teacher" }
+                    };
+
+                   
                 }
                 if (usertype.Count() == 0)
                 {
@@ -107,7 +133,12 @@ namespace MobileSchoolAPI.BusinessLayer
                 }
                 if (usertype[0].UserType != "CLASS TEACHER")
                 {
-                    return new Error() { IsError = true, Message = "User Is Not Class Teacher." };
+                    return new Results
+                    {
+                        IsSuccess = false,
+                        Message = new Error() { IsError = true, Message = "User Is Not Class Teacher." }
+                    };
+                 
 
                 }
                 else
@@ -115,7 +146,13 @@ namespace MobileSchoolAPI.BusinessLayer
                     var AttendaceStatus = db.VW_DATEWISECLASSSTATUSATTENDANCE.Where(r => r.ATTEDANCEDATE == PA.AttendanceDate && r.CREATEDID == PA.UserId).ToList().OrderBy(r=>r.ROLLNO);
                         if (AttendaceStatus.Count() == 0)
                     {
-                        return new Error() { IsError = true, Message = "No Records Found" };
+
+                        return new Results
+                        {
+                            IsSuccess = false,
+                            Message = new Error() { IsError = true, Message = "No Records Found" }
+                        };
+                       
 
                     }
                         else
@@ -131,7 +168,13 @@ namespace MobileSchoolAPI.BusinessLayer
             }
             catch(Exception e)
             {
-                return new Error() { IsError = true, Message = e.Message };
+
+                return new Results
+                {
+                    IsSuccess = false,
+                    Message = new Error() { IsError = true, Message = e.Message }
+                };
+           
 
             }
         }

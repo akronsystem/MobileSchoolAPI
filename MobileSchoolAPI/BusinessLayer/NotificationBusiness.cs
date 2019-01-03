@@ -17,6 +17,10 @@ namespace MobileSchoolAPI.BusinessLayer
             {
                 SchoolMainContext db = new ConcreateContext().GetContext(objnote.userid, objnote.password);
 
+                if (db == null)
+                {
+                    return new Results() { IsSuccess = false, Message = "Invalid User" };
+                }
                 TBLNOTIFICATION objmaster = new TBLNOTIFICATION();
                 TBLNOTIFICATIONDETAIL objdetail = new TBLNOTIFICATIONDETAIL();
 
@@ -52,11 +56,10 @@ namespace MobileSchoolAPI.BusinessLayer
             }
             catch (Exception E)
             {
-                return new Error()
+                return new Results
                 {
-                    IsError = true,
-                    Message = E.Message
-
+                    IsSuccess = false,
+                    Message = new Error() { IsError = true, Message = E.Message }
                 };
             }
 
@@ -70,8 +73,12 @@ namespace MobileSchoolAPI.BusinessLayer
                 SchoolMainContext db = new ConcreateContext().GetContext(obj.userid, obj.password);
                 if (db == null)
                 {
-                    return new Error() { IsError = true, Message = "Invalid User." };
+                    return new Results() { IsSuccess = false, Message = "Invalid User" };
                 }
+
+
+
+            
                 else
                 {
                     var Notification = db.VIEWNOTIFICATIONs.Where(r => r.UserId == obj.userid).ToList().OrderByDescending(r => r.NOTIFICATIONID);
@@ -125,7 +132,13 @@ namespace MobileSchoolAPI.BusinessLayer
                     if (lt == null)
                     {
 
-                        return new Error() { IsError = true, Message = "No Notifications Found" };
+                        return new Results
+                        {
+                            IsSuccess = false,
+                            Message = new Error() { IsError = true, Message = " No Notifications Found" }
+                        };
+
+                  
 
 
                     }
@@ -139,12 +152,14 @@ namespace MobileSchoolAPI.BusinessLayer
             }
             catch (Exception E)
             {
-                return new Error()
-                {
-                    IsError = true,
-                    Message = E.Message
 
+                return new Results
+                {
+                    IsSuccess = false,
+                    Message = new Error() { IsError = true, Message =  E.Message }
                 };
+
+               
             }
             
         }
@@ -171,6 +186,10 @@ namespace MobileSchoolAPI.BusinessLayer
             {
 
                 SchoolMainContext db = new ConcreateContext().GetContext(obj.userid, obj.password);
+                if (db == null)
+                {
+                    return new Results() { IsSuccess = false, Message = "Invalid User" };
+                }
                 TBLNOTIFICATIONDETAIL objdetail = db.TBLNOTIFICATIONDETAILs.First(r => r.NOTIFICATIONID == obj.notificationid && r.STUDENTID == obj.studentid);
 
                 objdetail.STATUS = obj.status;
@@ -185,11 +204,10 @@ namespace MobileSchoolAPI.BusinessLayer
             }
             catch (Exception E)
             {
-                return new Error()
+                return new Results
                 {
-                    IsError = true,
-                    Message = E.Message
-
+                    IsSuccess = false,
+                    Message = new Error() { IsError = true, Message = E.Message }
                 };
             }
         }
@@ -201,6 +219,10 @@ namespace MobileSchoolAPI.BusinessLayer
             {
                 SchoolMainContext db = new ConcreateContext().GetContext(objnote.userid, objnote.password);
 
+                if (db == null)
+                {
+                    return new Results() { IsSuccess = false, Message = "Invalid User" };
+                }
                 TBLNOTIFICATION objmaster = new TBLNOTIFICATION();
                 TBLNOTIFICATIONDETAIL objdetail = new TBLNOTIFICATIONDETAIL();
 
@@ -220,11 +242,10 @@ namespace MobileSchoolAPI.BusinessLayer
             }
             catch (Exception E)
             {
-                return new Error()
+                return new Results
                 {
-                    IsError = true,
-                    Message = E.Message
-
+                    IsSuccess = false,
+                    Message = new Error() { IsError = true, Message = E.Message }
                 };
             }
 
@@ -237,13 +258,24 @@ namespace MobileSchoolAPI.BusinessLayer
             {
 
                 SchoolMainContext db = new ConcreateContext().GetContext(obj.userid, obj.password);
+                if (db == null)
+                {
+                    return new Results() { IsSuccess = false, Message = "Invalid User" };
+                }
+
                 var EventHoliday = db.TBLHOLIDAYs.ToList().OrderBy(r => r.STARTDATE);
 
                 if (EventHoliday == null)
                 {
 
-                    return new Error() { IsError = true, Message = "No Record Found" };
+                    return new Results
+                    {
+                        IsSuccess = false,
+                        Message = new Error() { IsError = true, Message = " No Record Found" }
+                    };
 
+
+                   
 
                 }
                 else
@@ -253,12 +285,13 @@ namespace MobileSchoolAPI.BusinessLayer
             }
             catch (Exception E)
             {
-                return new Error()
+                return new Results
                 {
-                    IsError = true,
-                    Message = E.Message
-
+                    IsSuccess = false,
+                    Message = new Error() { IsError = true, Message = E.Message }
                 };
+
+              
             }
         }
 

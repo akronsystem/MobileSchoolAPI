@@ -16,6 +16,10 @@ namespace MobileSchoolAPI.BusinessLayer
         {
 
             SchoolMainContext db = new ConcreateContext().GetContext(obj.Userid, obj.Password);
+            if (db == null)
+            {
+                return new Results() { IsSuccess = false, Message = "Invalid User" };
+            }
             TBLHOMEWORK objHomework = new TBLHOMEWORK();
             var getUserType = db.VW_GET_USER_TYPE.Where(r => r.UserId == obj.Userid).FirstOrDefault();
            
@@ -57,7 +61,14 @@ namespace MobileSchoolAPI.BusinessLayer
 
                     if (getstudent == null)
                     {
-                        return new Error();
+
+                    return new Results
+                    {
+                        IsSuccess = false,
+                        Message = new Error() { IsError = true, Message = "Student Not Found." }
+                    };
+
+                   
 
                     }
                     // return getstudent;
@@ -96,8 +107,13 @@ namespace MobileSchoolAPI.BusinessLayer
 		public object SendNotificaiton(homeworkparameters obj)
 		{
 			SchoolMainContext db = new ConcreateContext().GetContext(obj.Userid, obj.Password);
-			 
-			var device = db.VW_DEVICE.FirstOrDefault(r => r.UserId == obj.Userid);
+            if (db == null)
+            {
+
+
+                return new Results() { IsSuccess = false, Message = "Invalid User" };
+            }
+            var device = db.VW_DEVICE.FirstOrDefault(r => r.UserId == obj.Userid);
 			if (device != null)
 			{
 				FCMPushNotification OBJPUSH = new FCMPushNotification();
@@ -111,6 +127,11 @@ namespace MobileSchoolAPI.BusinessLayer
 	public object SaveAttendance(AttendanceParameterscs atteobj)
         {
             SchoolMainContext db = new ConcreateContext().GetContext(atteobj.Userid, atteobj.Password);
+            if (db == null)
+            {
+                return new Results() { IsSuccess = false, Message = "Invalid User" };
+            }
+
             TBLATTENDENCEMASTER objmster = new TBLATTENDENCEMASTER();
             TBLATTENDENCE objDetail = new TBLATTENDENCE();
 
@@ -190,7 +211,13 @@ namespace MobileSchoolAPI.BusinessLayer
                 }
                 catch (Exception e)
                 {
-                    return new Error() { IsError = true, Message = e.Message };
+                    
+                    return new Results
+                    {
+                        IsSuccess = false,
+                        Message = new Error() { IsError = true, Message = e.Message }
+                    };
+                  
                 }
 
 
@@ -282,13 +309,23 @@ namespace MobileSchoolAPI.BusinessLayer
                         return upload;
                     }
 
-                    return new Error { IsError = true, Message = "Failed to upload File" };
+                    return new Results
+                    {
+                        IsSuccess = false,
+                        Message = new Error() { IsError = true, Message = "Failed to upload File" }
+                    };
+
+
+                 
                 }
             }
             catch (Exception ex)
             {
-                return new Error { IsError = true, Message = "Failed to upload File" }
-            ;
+                return new Results
+                {
+                    IsSuccess = false,
+                    Message = new Error() { IsError = true, Message = ex.ToString() }
+                };
             }
 
 

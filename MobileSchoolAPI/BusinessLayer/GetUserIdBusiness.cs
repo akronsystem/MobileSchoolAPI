@@ -16,6 +16,10 @@ namespace MobileSchoolAPI.BusinessLayer
             try
             {
                 SchoolMainContext db = new ConcreateContext().GetContext(UserId.UserId, UserId.PASSWORD);
+                if (db == null)
+                {
+                    return new Results() { IsSuccess = false, Message = "Invalid User" };
+                }
                 object result = "";
                 var getUserType = db.VW_GET_USER_TYPE.Where(r => r.UserId == UserId.UserId).FirstOrDefault();
 
@@ -38,12 +42,27 @@ namespace MobileSchoolAPI.BusinessLayer
                     }
                     return result;
                 }
-                return new Error() { IsError = true, Message = "User Not Found" };
+
+                return new Results
+                {
+                    IsSuccess = false,
+                    Message = new Error() { IsError = true, Message = " User Not Found" }
+                };
+
+
+            
 
             }
             catch (Exception ex)
             {
-                return new Error() { IsError = true, Message = ex.Message };
+
+
+                return new Results
+                {
+                    IsSuccess = false,
+                    Message = new Error() { IsError = true, Message = ex.Message }
+                };
+               
             }
 
         }

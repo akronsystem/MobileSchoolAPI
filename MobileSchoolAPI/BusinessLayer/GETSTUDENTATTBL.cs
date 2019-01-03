@@ -15,11 +15,21 @@ namespace MobileSchoolAPI.BusinessLayer
             try
             {
                 SchoolMainContext db = new ConcreateContext().GetContext(OBJ.USERID, OBJ.PASSWORD);
-
+                if (db == null)
+                {
+                    return new STUDENTLISTRESULT() { IsSuccess = false, StudentResult = "Invalid User" };
+                }
                 var getstudent = db.VIEWGETSTUDENTATTs.Where(r => r.DIVISIONID == OBJ.DIVISIONID).ToList();
 
                 if (getstudent.Count() == 0)
-                    return new Error() { IsError = true, Message = "STUDENT NOT FOUND." };
+
+                    return new Results
+                    {
+                        IsSuccess = false,
+                        Message = new Error() { IsError = true, Message = "STUDENT NOT FOUND." }
+                    };
+
+               
                 else
                     //return getstudent.OrderBy(r => r.ROLL_NO).ToList();
 
@@ -36,7 +46,13 @@ namespace MobileSchoolAPI.BusinessLayer
             }
             catch (Exception ex)
             {
-                return new Error() { IsError = true, Message = ex.Message };
+
+                return new Results
+                {
+                    IsSuccess = false,
+                    Message = new Error() { IsError = true, Message = ex.Message }
+                };
+               
             }
         }
     }
