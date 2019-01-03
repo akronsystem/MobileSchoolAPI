@@ -42,9 +42,9 @@ namespace MobileSchoolAPI.BusinessLayer
             else
             {
                 //for getting employee todays birthday list
-                var result = db.ViewGetEmployeeBirthDetails.ToList();
+                var result = db.ViewGetEmployeeBirthDetail.ToList();
 
-                if (result.Count==0)
+                if (result.Count()==0)
                 {
                     return new ResultBirth { IsSuccess = false, Result = "No Birthdays Found Today" };
                 }
