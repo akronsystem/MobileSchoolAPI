@@ -82,7 +82,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 else
                 {
                     var Notification = db.VIEWNOTIFICATIONs.Where(r => r.UserId == obj.userid).ToList().OrderByDescending(r => r.NOTIFICATIONID);
-                    var NotificationAll = db.VIEWALLNOTIFICATIONs.ToList().OrderByDescending(r => r.NOTIFICATIONID);
+                    //var NotificationAll = db.VIEWALLNOTIFICATIONs.ToList().OrderByDescending(r => r.NOTIFICATIONID);
                     List<Result> lt = new List<Result>();
 
 
@@ -108,26 +108,26 @@ namespace MobileSchoolAPI.BusinessLayer
 
                     }
 
-                    foreach (var att in NotificationAll)
-                    {
+                    //foreach (var att in NotificationAll)
+                    //{
 
 
-                        Result ddl = new Result();
-                        ddl.TITLE = att.TITLE;
-                        ddl.NOTIFICATIONID = att.NOTIFICATIONID;
-                        ddl.NOTIFICATIONDATE = att.NOTIFICATIONDATE.ToString();
-                        ddl.NOTIFICATIONTIME = att.NOTIFICATIONTIME;
-                        ddl.UserId = att.UserId.ToString();
-                        ddl.STUDENTID = att.STUDENTID.ToString();
-                        ddl.STATUS = att.STATUS.ToString();
-                        ddl.UserType = att.UserType;
+                    //    Result ddl = new Result();
+                    //    ddl.TITLE = att.TITLE;
+                    //    ddl.NOTIFICATIONID = att.NOTIFICATIONID;
+                    //    ddl.NOTIFICATIONDATE = att.NOTIFICATIONDATE.ToString();
+                    //    ddl.NOTIFICATIONTIME = att.NOTIFICATIONTIME;
+                    //    ddl.UserId = att.UserId.ToString();
+                    //    ddl.STUDENTID = att.STUDENTID.ToString();
+                    //    ddl.STATUS = att.STATUS.ToString();
+                    //    ddl.UserType = att.UserType;
 
-                        lt.Add(ddl);
-
-
+                    //    lt.Add(ddl);
 
 
-                    }
+
+
+                    //}
 
                     if (lt == null)
                     {
