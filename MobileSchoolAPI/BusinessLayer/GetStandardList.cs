@@ -16,7 +16,7 @@ namespace MobileSchoolAPI.BusinessLayer
             SchoolMainContext db = new ConcreateContext().GetContext(Stdobj.userid, Stdobj.password);
             if (db == null)
             {
-                return new Results() { IsSuccess = false, Message = "Invalid User" };
+                return new Results() { IsSuccess = false, Message = new InvalidUser() { IsSuccess = false, Result = "Invalid User" } };
             }
             var UserType = db.VW_GET_USER_TYPE.Where(r => r.UserId == Stdobj.userid).ToList();
             if(UserType[0].UserType=="STUDENT")

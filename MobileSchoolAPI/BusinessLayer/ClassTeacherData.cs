@@ -49,7 +49,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 bool iStrue = objUP.ValidateUsernamePassword(PA.UserId, PA.Password);
 				if (iStrue == false)
 				{
-                    return new MonthlyAttendanceResult() { IsSuccess = false, DateWiseStatus = "UserId and Password Do Not Match" };
+                    return new MonthlyAttendanceResult() { IsSuccess = false, DateWiseStatus = new InvalidUser() { IsSuccess = false, Result = "Invalid User" } };
                     
 				}
                 List<Result> lt = new List<Result>();
