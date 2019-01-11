@@ -26,7 +26,7 @@ namespace MobileSchoolAPI.BusinessLayer
                     return new Results
                     {
                         IsSuccess = false,
-                        Message = new Error() { IsError = true, Message = "TERM LIST NOT FOUND." }
+                        Message =   "TERM LIST NOT FOUND." 
                     };
                
                 else
@@ -39,7 +39,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 return new Results
                 {
                     IsSuccess = false,
-                    Message = new Error() { IsError = true, Message = ex.Message }
+                    Message =   ex.Message  
                 };
 
                

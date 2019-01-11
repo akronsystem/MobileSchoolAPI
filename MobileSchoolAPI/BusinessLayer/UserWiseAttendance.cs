@@ -84,7 +84,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 return new Results
                 {
                     IsSuccess = false,
-                    Message = new Error() { IsError = true, Message = e.Message }
+                    Message =   e.Message  
                 };
             
 
@@ -111,7 +111,7 @@ namespace MobileSchoolAPI.BusinessLayer
                     return new Results
                     {
                         IsSuccess = false,
-                        Message = new Error() { IsError = true, Message = "Incorrect Username." }
+                        Message =   "Incorrect Username."  
                     };
                   
                 }
@@ -122,7 +122,7 @@ namespace MobileSchoolAPI.BusinessLayer
                     return new Results
                     {
                         IsSuccess = false,
-                        Message = new Error() { IsError = true, Message = "Attendance Is Not Marked By Class Teacher" }
+                        Message =   "Attendance Is Not Marked By Class Teacher"  
                     };
 
                    
@@ -136,7 +136,7 @@ namespace MobileSchoolAPI.BusinessLayer
                     return new Results
                     {
                         IsSuccess = false,
-                        Message = new Error() { IsError = true, Message = "User Is Not Class Teacher." }
+                        Message =   "User Is Not Class Teacher."  
                     };
                  
 
@@ -150,7 +150,7 @@ namespace MobileSchoolAPI.BusinessLayer
                         return new Results
                         {
                             IsSuccess = false,
-                            Message = new Error() { IsError = true, Message = "No Records Found" }
+                            Message =  "No Records Found" 
                         };
                        
 
@@ -172,7 +172,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 return new Results
                 {
                     IsSuccess = false,
-                    Message = new Error() { IsError = true, Message = e.Message }
+                    Message =  e.Message  
                 };
            
 

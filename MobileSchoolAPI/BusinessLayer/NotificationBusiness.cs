@@ -60,7 +60,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 return new Results
                 {
                     IsSuccess = false,
-                    Message = new Error() { IsError = true, Message = E.Message }
+                    Message =   E.Message  
                 };
             }
 
@@ -134,7 +134,7 @@ namespace MobileSchoolAPI.BusinessLayer
                         return new Results
                         {
                             IsSuccess = false,
-                            Message = new Error() { IsError = true, Message = " No Notifications Found" }
+                            Message =   " No Notifications Found"  
                         };
 
                   
@@ -155,7 +155,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 return new Results
                 {
                     IsSuccess = false,
-                    Message = new Error() { IsError = true, Message =  E.Message }
+                    Message =   E.Message  
                 };
 
                
@@ -206,7 +206,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 return new Results
                 {
                     IsSuccess = false,
-                    Message = new Error() { IsError = true, Message = E.Message }
+                    Message =  E.Message  
                 };
             }
         }
@@ -244,7 +244,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 return new Results
                 {
                     IsSuccess = false,
-                    Message = new Error() { IsError = true, Message = E.Message }
+                    Message =  E.Message  
                 };
             }
 
@@ -270,7 +270,7 @@ namespace MobileSchoolAPI.BusinessLayer
                     return new Results
                     {
                         IsSuccess = false,
-                        Message = new Error() { IsError = true, Message = " No Record Found" }
+                        Message = " No Record Found"  
                     };
 
 
@@ -287,7 +287,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 return new Results
                 {
                     IsSuccess = false,
-                    Message = new Error() { IsError = true, Message = E.Message }
+                    Message =   E.Message  
                 };
 
               

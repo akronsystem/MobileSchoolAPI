@@ -62,7 +62,7 @@ namespace MobileSchoolAPI.BusinessLayer
                         return new Results
                         {
                             IsSuccess = false,
-                            Message = new Error() { IsError = true, Message = "Division Not Found" }
+                            Message =   "Division Not Found" 
                         };
 
                        
@@ -82,7 +82,7 @@ namespace MobileSchoolAPI.BusinessLayer
                         return new Results
                         {
                             IsSuccess = false,
-                            Message = new Error() { IsError = true, Message = "Division Not Found" }
+                            Message = "Division Not Found" 
                         };
 
                        
@@ -103,7 +103,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 return new Results
                 {
                     IsSuccess = false,
-                    Message = new Error() { IsError = true, Message = E.Message }
+                    Message =  E.Message 
                 };
             
             }
@@ -161,7 +161,7 @@ namespace MobileSchoolAPI.BusinessLayer
                         return new Results
                         {
                             IsSuccess = false,
-                            Message = new Error() { IsError = true, Message = "HomeWork Not Found." }
+                            Message =  "HomeWork Not Found." 
                         };
                       
                     }
@@ -183,7 +183,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 return new Results
                 {
                     IsSuccess = false,
-                    Message = new Error() { IsError = true, Message = E.Message }
+                    Message =  E.Message  
                 };
               
 
@@ -216,7 +216,7 @@ namespace MobileSchoolAPI.BusinessLayer
                         return new Results
                         {
                             IsSuccess = false,
-                            Message = new Error() { IsError = true, Message = "HomeWork Not Found." }
+                            Message =   "HomeWork Not Found." 
                         };
 
                       
@@ -239,7 +239,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 return new Results
                 {
                     IsSuccess = false,
-                    Message = new Error() { IsError = true, Message = E.Message }
+                    Message =   E.Message  
                 };
 
                

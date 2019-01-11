@@ -66,7 +66,7 @@ namespace MobileSchoolAPI.BusinessLayer
                     return new Results
                     {
                         IsSuccess = false,
-                        Message = new Error() { IsError = true, Message = "Student Not Found." }
+                        Message =  "Student Not Found."  
                     };
 
                    
@@ -216,7 +216,7 @@ namespace MobileSchoolAPI.BusinessLayer
                     return new Results
                     {
                         IsSuccess = false,
-                        Message = new Error() { IsError = true, Message = e.Message }
+                        Message =   e.Message  
                     };
                   
                 }
@@ -313,7 +313,7 @@ namespace MobileSchoolAPI.BusinessLayer
                     return new Results
                     {
                         IsSuccess = false,
-                        Message = new Error() { IsError = true, Message = "Failed to upload File" }
+                        Message =  "Failed to upload File"  
                     };
 
 
@@ -325,7 +325,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 return new Results
                 {
                     IsSuccess = false,
-                    Message = new Error() { IsError = true, Message = ex.ToString() }
+                    Message =  ex.ToString()  
                 };
             }
 

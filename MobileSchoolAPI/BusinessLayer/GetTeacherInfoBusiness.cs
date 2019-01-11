@@ -24,7 +24,7 @@ namespace MobileSchoolAPI.BUSINESSLAYER
                 return new Results
                 {
                     IsSuccess = false,
-                    Message = new Error() { IsError = true, Message = "User Not Found" }
+                    Message =   "User Not Found"  
                 };
 
 

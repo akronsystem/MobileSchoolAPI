@@ -64,7 +64,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 return new Results
                 {
                     IsSuccess = false,
-                    Message = new Error() { IsError = true, Message = ex.ToString() }
+                    Message =   ex.ToString()
                 };
 
 

@@ -26,7 +26,7 @@ namespace MobileSchoolAPI.BusinessLayer
                     return new Results
                     {
                         IsSuccess = false,
-                        Message = new Error() { IsError = true, Message = "STUDENT NOT FOUND." }
+                        Message =  "STUDENT NOT FOUND."  
                     };
 
                
@@ -50,7 +50,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 return new Results
                 {
                     IsSuccess = false,
-                    Message = new Error() { IsError = true, Message = ex.Message }
+                    Message =   ex.Message  
                 };
                
             }

@@ -149,7 +149,7 @@ namespace MobileSchoolAPI.BusinessLayer
                             return new Results
                             {
                                 IsSuccess = false,
-                                Message = new Error() { IsError = true, Message = " No Attendance Is Found Of This Date" }
+                                Message =  " No Attendance Is Found Of This Date" 
                             };
                      
                         else
@@ -159,12 +159,12 @@ namespace MobileSchoolAPI.BusinessLayer
                     }
                     else
                     {
-                        
 
-                        return new Results
-                        {
-                            IsSuccess = false,
-                            Message = new Error() { IsError = true, Message = " User Is Not Class Teacher" }
+
+						return new Results
+						{
+							IsSuccess = false,
+							Message = " User Is Not Class Teacher" 
                         };
 
                     }
@@ -177,7 +177,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 return new Results
                 {
                     IsSuccess = false,
-                    Message = new Error() { IsError = true, Message = ex.Message }
+                    Message =    ex.Message 
                 };
 
             }
