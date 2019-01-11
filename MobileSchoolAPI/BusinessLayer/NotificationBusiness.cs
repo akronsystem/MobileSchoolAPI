@@ -83,13 +83,11 @@ namespace MobileSchoolAPI.BusinessLayer
                 {
                     var Notification = db.VIEWNOTIFICATIONs.Where(r => r.UserId == obj.userid).ToList().OrderByDescending(r => r.NOTIFICATIONID);
                     //var NotificationAll = db.VIEWALLNOTIFICATIONs.ToList().OrderByDescending(r => r.NOTIFICATIONID);
-                    List<Result> lt = new List<Result>();
-
+                    List<Result> lt = new List<Result>(); 
 
 
                     foreach (var att in Notification)
                     {
-
 
                         Result ddl = new Result();
                         ddl.TITLE = att.TITLE;
