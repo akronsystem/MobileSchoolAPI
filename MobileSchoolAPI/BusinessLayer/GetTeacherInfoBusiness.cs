@@ -15,7 +15,7 @@ namespace MobileSchoolAPI.BUSINESSLAYER
             SchoolMainContext db = new ConcreateContext().GetContext(UserId, Password);
             if (db == null)
             {
-                return new Results() { IsSuccess = false, Message = new InvalidUser() { IsSuccess = false, Result = "Invalid User" } };
+                return new Results() { IsSuccess = false, Message  = "Invalid User" } ;
             }
             var result = db.VW_EMPLOYEE.Where(r => r.ID == empcode && r.UserId == UserId).FirstOrDefault();
 
@@ -42,7 +42,7 @@ namespace MobileSchoolAPI.BUSINESSLAYER
             SchoolMainContext db = new ConcreateContext().GetContext(UserId, Password);
             if (db == null)
             {
-                return new Results() { IsSuccess = false, Message = new InvalidUser() { IsSuccess = false, Result = "Invalid User" } };
+                return new Results() { IsSuccess = false, Message  = "Invalid User" } ;
             }
             var result = db.VW_EMPLOYEE.Where(r => r.ID == empcode && r.UserId == UserId).FirstOrDefault();
 

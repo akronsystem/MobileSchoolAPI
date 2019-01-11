@@ -19,7 +19,7 @@ namespace MobileSchoolAPI.BusinessLayer
             SchoolMainContext db = new ConcreateContext().GetContext(obj.Userid, obj.Password);
             if (db == null)
             {
-                return new Results() { IsSuccess = false, Message = new InvalidUser() { IsSuccess = false, Result = "Invalid User" } };
+                return new Results() { IsSuccess = false, Message  = "Invalid User" } ;
             }
             TBLHOMEWORK objHomework = new TBLHOMEWORK();
             var getUserType = db.VW_GET_USER_TYPE.Where(r => r.UserId == obj.Userid).FirstOrDefault();
@@ -112,7 +112,7 @@ namespace MobileSchoolAPI.BusinessLayer
             {
 
 
-                return new Results() { IsSuccess = false, Message = new InvalidUser() { IsSuccess = false, Result = "Invalid User" } };
+                return new Results() { IsSuccess = false, Message  = "Invalid User" } ;
             }
             var device = db.VW_DEVICE.FirstOrDefault(r => r.UserId == obj.Userid);
 			if (device != null)
@@ -130,7 +130,7 @@ namespace MobileSchoolAPI.BusinessLayer
             SchoolMainContext db = new ConcreateContext().GetContext(atteobj.Userid, atteobj.Password);
             if (db == null)
             {
-                return new Results() { IsSuccess = false, Message = new InvalidUser() { IsSuccess = false, Result = "Invalid User" } };
+                return new Results() { IsSuccess = false, Message  = "Invalid User" } ;
             }
 
             TBLATTENDENCEMASTER objmster = new TBLATTENDENCEMASTER();

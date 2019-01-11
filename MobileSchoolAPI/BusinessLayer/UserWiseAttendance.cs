@@ -18,7 +18,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 SchoolMainContext db = new ConcreateContext().GetContext(obj.UserId, obj.Password);
                 if (db == null)
                 {
-                    return new Results() { IsSuccess = false, Message = new InvalidUser() { IsSuccess = false, Result = "Invalid User" } };
+                    return new Results() { IsSuccess = false, Message  = "Invalid User" } ;
                 }
                 var usertype= db.VW_GET_USER_TYPE.Where(r => r.UserId == obj.UserId ).ToList();
                 if(usertype.Count()==0)
@@ -101,7 +101,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 SchoolMainContext db = new ConcreateContext().GetContext(PA.UserId, PA.Password);
                 if (db == null)
                 {
-                    return new Results() { IsSuccess = false, Message = new InvalidUser() { IsSuccess = false, Result = "Invalid User" } };
+                    return new Results() { IsSuccess = false, Message  = "Invalid User" } ;
                 }
 
                 var usertype = db.VW_GET_USER_TYPE.Where(r => r.UserId == PA.UserId).ToList();

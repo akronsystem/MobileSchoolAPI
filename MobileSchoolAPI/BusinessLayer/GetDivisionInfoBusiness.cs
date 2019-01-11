@@ -20,7 +20,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 SchoolMainContext db = new ConcreateContext().GetContext(objdiv.userid, objdiv.password);
                 if (db == null)
                 {
-                    return new Results() { IsSuccess = false, Message = new InvalidUser() { IsSuccess = false, Result = "Invalid User" } };
+                    return new Results() { IsSuccess = false, Message  = "Invalid User" } ;
                 }
                 var EmpDivision = db.VIEWEMPDIVISIONs.Where(r=>r.UserId==objdiv.userid && r.ACADEMICYEAR=="2018-2019" && r.DISPLAY==1).ToList();
                 if (EmpDivision.Count == 0)

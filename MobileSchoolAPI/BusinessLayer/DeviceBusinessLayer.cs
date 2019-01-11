@@ -15,7 +15,7 @@ namespace MobileSchoolAPI.BusinessLayer
             SchoolMainContext db = new ConcreateContext().GetContext(obj.UserId,Password);
             if (db == null)
             {
-                return new Results() { IsSuccess = false, Message = new InvalidUser() { IsSuccess = false, Result = "Invalid User" } };
+                return new Results() { IsSuccess = false, Message = "Invalid User" } ;
             }
             TBLDeviceRegistration objDR = new TBLDeviceRegistration();
 

@@ -17,7 +17,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 SchoolMainContext db = new ConcreateContext().GetContext(OBJ.USERID, OBJ.PASSWORD);
                 if (db == null)
                 {
-                    return new Results() { IsSuccess = false, Message = new InvalidUser() { IsSuccess = false, Result = "Invalid User" } };
+                    return new Results() { IsSuccess = false, Message  = "Invalid User" } ;
                 }
                 var result = db.VW_EXAMSCHEDULE.Where(r=>r.STANDARDID.Contains(""+OBJ.STANDARDID+"") && r.TESTTYPEID==OBJ.TESTID && r.ACADEMICYEAR=="2018-2019" ).ToList();
 

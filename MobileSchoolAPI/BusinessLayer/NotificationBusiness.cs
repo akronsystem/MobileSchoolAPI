@@ -20,7 +20,7 @@ namespace MobileSchoolAPI.BusinessLayer
 
                 if (db == null)
                 {
-                    return new Results() { IsSuccess = false, Message = new InvalidUser() { IsSuccess = false, Result = "Invalid User" } };
+                    return new Results() { IsSuccess = false, Message  = "Invalid User" } ;
                 }
                 TBLNOTIFICATION objmaster = new TBLNOTIFICATION();
                 TBLNOTIFICATIONDETAIL objdetail = new TBLNOTIFICATIONDETAIL();
@@ -74,7 +74,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 SchoolMainContext db = new ConcreateContext().GetContext(obj.userid, obj.password);
                 if (db == null)
                 {
-                    return new Results() { IsSuccess = false, Message = new InvalidUser() { IsSuccess = false, Result = "Invalid User" } };
+                    return new Results() { IsSuccess = false, Message  = "Invalid User" } ;
                 }
 
 
@@ -187,7 +187,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 SchoolMainContext db = new ConcreateContext().GetContext(obj.userid, obj.password);
                 if (db == null)
                 {
-                    return new Results() { IsSuccess = false, Message = new InvalidUser() { IsSuccess = false, Result = "Invalid User" } };
+                    return new Results() { IsSuccess = false, Message  = "Invalid User" } ;
                 }
                 TBLNOTIFICATIONDETAIL objdetail = db.TBLNOTIFICATIONDETAILs.First(r => r.NOTIFICATIONID == obj.notificationid && r.STUDENTID == obj.studentid);
 
@@ -220,7 +220,7 @@ namespace MobileSchoolAPI.BusinessLayer
 
                 if (db == null)
                 {
-                    return new Results() { IsSuccess = false, Message = new InvalidUser() { IsSuccess = false, Result = "Invalid User" } };
+                    return new Results() { IsSuccess = false, Message  = "Invalid User" } ;
                 }
                 TBLNOTIFICATION objmaster = new TBLNOTIFICATION();
                 TBLNOTIFICATIONDETAIL objdetail = new TBLNOTIFICATIONDETAIL();
@@ -259,7 +259,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 SchoolMainContext db = new ConcreateContext().GetContext(obj.userid, obj.password);
                 if (db == null)
                 {
-                    return new Results() { IsSuccess = false, Message = new InvalidUser() { IsSuccess = false, Result = "Invalid User" } };
+                    return new Results() { IsSuccess = false, Message  = "Invalid User" } ;
                 }
 
                 var EventHoliday = db.TBLHOLIDAYs.ToList().OrderBy(r => r.STARTDATE);
