@@ -14,8 +14,10 @@ namespace MobileSchoolAPI
 		{
 
 		}
-        public virtual DbSet<TBLHOLIDAY> TBLHOLIDAYs { get; set; }
+        public virtual DbSet<ViewGetEmployeeBirthDetail> ViewGetEmployeeBirthDetails { get; set; }
 
+        public virtual DbSet<TBLHOLIDAY> TBLHOLIDAYs { get; set; }
+        public virtual DbSet<ViewGetTodayBirthDetail> ViewGetTodayBirthDetails { get; set; }
         public virtual DbSet<VIEWALLNOTIFICATION> VIEWALLNOTIFICATIONs { get; set; }
         public virtual DbSet<TBLDeviceRegistration> TBLDeviceRegistrations { get; set; }
         public virtual DbSet<VW_DEVICE> VW_DEVICE { get; set; }
@@ -92,9 +94,8 @@ namespace MobileSchoolAPI
 
         public virtual DbSet<VW_TESTTYPELIST> VW_TESTTYPELIST { get; set; }	   
         public virtual DbSet<ViewGetInstituteName> ViewGetInstituteNames { get; set; }
-		public virtual DbSet<ViewGetTodayBirthDetail> ViewGetTodayBirthDetails { get; set; }
-		public virtual DbSet<ViewGetEmployeeBirthDetail> ViewGetEmployeeBirthDetail { get; set; }
-
+	
+		
 		protected override void OnModelCreating(DbModelBuilder modelBuilder) 
 		{
 			modelBuilder.Entity<TBLUSERLOGIN>()
