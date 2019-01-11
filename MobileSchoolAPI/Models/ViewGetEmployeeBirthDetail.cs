@@ -6,8 +6,7 @@ namespace MobileSchoolAPI.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-	[Table("ViewGetEmployeeBirthDetail")]
-	public partial class ViewGetEmployeeBirthDetail
+    public partial class ViewGetEmployeeBirthDetail
     {
         [Key]
         public long EMPLOYEEID { get; set; }

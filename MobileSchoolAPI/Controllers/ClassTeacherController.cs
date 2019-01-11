@@ -24,7 +24,7 @@ namespace MobileSchoolAPI.Controllers
             int year = DateTime.Now.Year;
             if(objPA.MONTH>12 || objPA.MONTH==0)
             {
-                return new MonthlyAttendanceResult() { IsSuccess = false, DateWiseStatus = "Please Enter Month Between 1 to 12" };
+                return new MonthlyAttendanceResult() { IsSuccess = false, DateWiseStatus = new InvalidUser() { IsSuccess = false, Result = "Please Enter Month Between 1 to 12" }  };
 
             }
             int days = DateTime.DaysInMonth(year, objPA.MONTH);

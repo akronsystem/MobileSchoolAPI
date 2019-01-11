@@ -17,7 +17,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 SchoolMainContext db = new ConcreateContext().GetContext(OBJ.USERID, OBJ.PASSWORD);
                 if (db == null)
                 {
-                    return new STUDENTLISTRESULT() { IsSuccess = false, StudentResult = "Invalid User" };
+                    return new STUDENTLISTRESULT() { IsSuccess = false, StudentResult = new InvalidUser(){IsSuccess=false,Result="Invalid User"} };
                 }
                 var getstudent = db.VIEWGETSTUDENTATTs.Where(r => r.DIVISIONID == OBJ.DIVISIONID).ToList();
 

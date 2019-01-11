@@ -13,8 +13,8 @@ namespace MobileSchoolAPI.BusinessLayer
         {
             SchoolMainContext db = new ConcreateContext().GetContext(Obj.UserId, Obj.PASSWORD);
             if (db == null)
-            {
-                return new ResultBirth { IsSuccess = false, Result = "User Id or Password is Incorrect" };
+            { 
+                return new ResultBirth { IsSuccess = false, Result = new InvalidUser() { IsSuccess = false, Result = "Invalid User" } }; 
             }
             else
             {
