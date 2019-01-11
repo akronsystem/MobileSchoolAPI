@@ -287,6 +287,7 @@
     <Compile Include="ResultModel\AttendanceResult.cs" />
     <Compile Include="ResultModel\ClassTeacherResult.cs" />
     <Compile Include="ResultModel\GalleryResult.cs" />
+    <Compile Include="ResultModel\InvalidUser.cs" />
     <Compile Include="ResultModel\MonthlyAttendanceResult.cs" />
     <Compile Include="ResultModel\ResultBirth.cs" />
     <Compile Include="ResultModel\StdListResult.cs" />
