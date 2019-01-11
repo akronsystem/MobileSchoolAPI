@@ -13,8 +13,8 @@ namespace MobileSchoolAPI.BusinessLayer
         {
             SchoolMainContext db = new ConcreateContext().GetContext(Obj.UserId, Obj.PASSWORD);
             if (db == null)
-            {
-                return new ResultBirth { IsSuccess = true, Result = "User Id or Password is Incorrect" };
+            { 
+                return new ResultBirth { IsSuccess = false, Result = new InvalidUser() { IsSuccess = false, Result = "Invalid User" } }; 
             }
             else
             {
@@ -22,8 +22,8 @@ namespace MobileSchoolAPI.BusinessLayer
                 var result = db.ViewGetTodayBirthDetails.ToList();
                 
                 if (result.Count == 0)
-                {
-                    return new ResultBirth { IsSuccess = true, Result = "No Birthdays Found Today" };
+                { 
+                    return new ResultBirth { IsSuccess = false, Result = new InvalidUser() { IsSuccess = false, Result = "No Birthdays Found Today" } }; 
                 }
                 else
                 {
@@ -36,8 +36,8 @@ namespace MobileSchoolAPI.BusinessLayer
         {
             SchoolMainContext db = new ConcreateContext().GetContext(Obj.UserId, Obj.PASSWORD);
             if (db == null)
-            {
-                return new ResultBirth { IsSuccess = true, Result = "User Id or Password is Incorrect" };
+            { 
+                return new ResultBirth { IsSuccess = false, Result = new InvalidUser() { IsSuccess = false, Result = "Invalid User" } }; 
             }
             else
             {
@@ -45,8 +45,8 @@ namespace MobileSchoolAPI.BusinessLayer
                 var result = db.ViewGetEmployeeBirthDetails.ToList();
 
                 if (result.Count()==0)
-                {
-                    return new ResultBirth { IsSuccess = true, Result = "No Birthdays Found Today" };
+                { 
+                    return new ResultBirth { IsSuccess = false, Result = new InvalidUser() { IsSuccess = false, Result = "No Birthdays Found Today" } }; 
                 }
                 else
                 {
