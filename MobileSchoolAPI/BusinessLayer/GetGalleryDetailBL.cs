@@ -20,6 +20,7 @@ namespace MobileSchoolAPI.BusinessLayer
                     return new Results() { IsSuccess = false, Message = new InvalidUser() { IsSuccess = false, Result = "Invalid User" } };
                 }
                 var GetGallery = db.VW_GetGallery.ToList();
+                List<Gallary> Details = new List<Gallary>();
                 object[,] str=new object[ GetGallery.Count,2];
                 for (int i = 0; i < GetGallery.Count; i++)
                 {
@@ -27,13 +28,20 @@ namespace MobileSchoolAPI.BusinessLayer
                     object[] strpath = new object[imgpath.Length];
                     for (int j = 0; j < imgpath.Length; j++)
                     {
-                        strpath[j]= "ImagePath:"+imgpath[j];
+                        strpath[j]= imgpath[j];
                     }
 
-                    str[i,0] = "AlbumName:" + GetGallery[i].ALBUMNAME ;
-                    str[i, 1] = strpath;
+
+                    Details.Add(new Gallary
+                    {
+                        AlbumName = GetGallery[i].ALBUMNAME,
+                        ImageList = strpath
+                    });
+
+                    //str[i,0] = "AlbumName:" + GetGallery[i].ALBUMNAME ;
+                    //str[i, 1] =  strpath;
                 }
-                return new GalleryResult() { IsSuccess = true, Results = str };
+                return new GalleryResult() { IsSuccess = true,URL= "http://www.sxs.akronsystems.com/ALBUMUPLOADS/Original/", GalleryAlbumList = Details.ToArray() };
             }
             catch (Exception ex)
             {
@@ -44,6 +52,12 @@ namespace MobileSchoolAPI.BusinessLayer
                 };
             
             }
+        }
+
+        public class Gallary
+        {
+            public string AlbumName { get; set; }
+            public object ImageList { get; set; }
         }
     }
 }
