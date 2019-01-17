@@ -54,7 +54,44 @@ namespace MobileSchoolAPI.BUSINESSLAYER
                 
             }
         }
+        public object getNotifCount(int empcode, int UserId, string Password)
+        {
+            try
+            {
+                SchoolMainContext db = new ConcreateContext().GetContext(UserId, Password);
+                if (db == null)
+                {
+                    return new Results() { IsSuccess = false, Message = "Invalid User" };
+                }
+                var result = db.View_UnreadNotificationCount.Where(r => r.STUDENTID == empcode && r.STATUS==0).ToList();
+                if (result == null)
+                {
 
+                    return new Results
+                    {
+                        IsSuccess = false,
+                        Message = new InvalidUser() { IsSuccess = false, Result = "Logo Not Found" }
+                    };
+
+                }
+                else
+                {
+                    return result.Count;
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                return new Results
+                {
+                    IsSuccess = false,
+                    Message = ex.Message
+                };
+
+
+            }
+        }
         public object getStudLogo(int empcode, int UserId,string Password)
         {
             try

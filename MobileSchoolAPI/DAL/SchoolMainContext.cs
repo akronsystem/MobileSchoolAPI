@@ -15,7 +15,7 @@ namespace MobileSchoolAPI
 
 		}
         public virtual DbSet<ViewGetEmployeeBirthDetail> ViewGetEmployeeBirthDetails { get; set; }
-
+        public virtual DbSet<View_UnreadNotificationCount> View_UnreadNotificationCount { get; set; }
         public virtual DbSet<TBLHOLIDAY> TBLHOLIDAYs { get; set; }
         public virtual DbSet<ViewGetTodayBirthDetail> ViewGetTodayBirthDetails { get; set; }
         public virtual DbSet<VIEWALLNOTIFICATION> VIEWALLNOTIFICATIONs { get; set; }
