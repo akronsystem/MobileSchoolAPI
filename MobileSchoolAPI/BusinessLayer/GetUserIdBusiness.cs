@@ -34,7 +34,14 @@ namespace MobileSchoolAPI.BusinessLayer
                     }
                     else if (getUserType.UserType == "Alumini")
                     {
-                        return "ALUMINI USER";
+
+                        return new Results
+                        {
+                            IsSuccess = true,
+                            Message = new InvalidUser() { IsSuccess = true, Result = "Alumini User" }
+                        };
+
+                      
                     }
                     else
                     {
@@ -47,7 +54,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 return new Results
                 {
                     IsSuccess = false,
-                    Message =  " User Not Found"  
+                    Message = new InvalidUser() { IsSuccess = false, Result = "User Not Found" } 
                 };
 
 

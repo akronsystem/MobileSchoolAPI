@@ -102,7 +102,7 @@ namespace MobileSchoolAPI.BusinessLayer
                         }
                     }
                     if (lt == null)
-                        return new ResultBirth { IsSuccess = false, Result = new Error() { IsError = true, Message = "No Attendance Is Found Of This Date" } };
+                        return new ResultBirth { IsSuccess = false, Result = new InvalidUser() { IsSuccess = false, Result = "No Attendance Is Found Of This Date" }   };
                 
                     else
                         return new MonthlyAttendanceResult() { IsSuccess = true, DateWiseStatus = lt };
@@ -149,7 +149,7 @@ namespace MobileSchoolAPI.BusinessLayer
                             return new Results
                             {
                                 IsSuccess = false,
-                                Message =  " No Attendance Is Found Of This Date" 
+                                Message = new InvalidUser() { IsSuccess = false, Result = "No Attendance Is Found Of This Date" }
                             };
                      
                         else
@@ -164,7 +164,7 @@ namespace MobileSchoolAPI.BusinessLayer
 						return new Results
 						{
 							IsSuccess = false,
-							Message = " User Is Not Class Teacher" 
+							Message = new InvalidUser() { IsSuccess = false, Result = "User Is Not Class Teacher" }  
                         };
 
                     }
