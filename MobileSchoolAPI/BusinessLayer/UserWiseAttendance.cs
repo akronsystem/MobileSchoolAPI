@@ -23,7 +23,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 var usertype= db.VW_GET_USER_TYPE.Where(r => r.UserId == obj.UserId ).ToList();
                 if(usertype.Count()==0)
                 {
-                    return new AttendanceResult() { IsSuccess = false, UserWiseAttendanceList = "User Not Found" };
+                    return new AttendanceResult() { IsSuccess = false, UserWiseAttendanceList = new InvalidUser() { IsSuccess = false, Result = "User Not Found" }  };
                 }
 
                 if (usertype[0].UserType == "STUDENT")
@@ -31,20 +31,20 @@ namespace MobileSchoolAPI.BusinessLayer
                     var checkattendace = db.VIewAttendaceClasswiseChecks.Where(r => r.UserId == obj.UserId && r.ATTEDANCEDATE == obj.AttendanceDate && r.DISPLAY == 1 && r.EDUCATIONYEAR == "2018-2019" && r.ACADEMICYEAR == "2018-2019").ToList();
                     if (checkattendace.Count() == 0)
                     {
-                        return  new AttendanceResult() { IsSuccess = true, UserWiseAttendanceList = "Status : Attendance Is Not Marked By Class Teacher For This Date" };
+                        return  new AttendanceResult() { IsSuccess = true, UserWiseAttendanceList = new InvalidUser() { IsSuccess = true, Result = "Status : Attendance Is Not Marked By Class Teacher For This Date" } };
                     }
                     else
                     { 
                         var StudentAttendance = db.VWATTENDANCEBYDATESTUDENTs.Where(r => r.UserId == obj.UserId && r.ATTEDANCEDATE == obj.AttendanceDate).ToList();
                         if (StudentAttendance.Count() == 0)
                         {
-                            return new AttendanceResult() { IsSuccess = true, UserWiseAttendanceList = "Status : Present" };
+                            return new AttendanceResult() { IsSuccess = true, UserWiseAttendanceList = new InvalidUser() { IsSuccess = true, Result = "Status : Present" } }; 
                             //EMPLOYEE logic
                             // return new Error() { IsError = true, Message = "Attendance not found" };
                         }
                         else
                         {
-                            return new AttendanceResult() { IsSuccess = true, UserWiseAttendanceList = "Status : Absent" };
+                            return new AttendanceResult() { IsSuccess = true, UserWiseAttendanceList = new InvalidUser() { IsSuccess = true, Result = "Status : Absent" } };
                         }
                     }
 
@@ -57,12 +57,12 @@ namespace MobileSchoolAPI.BusinessLayer
                     {
                         if (EMPATTENDANCE.Count() == 0)
                         {
-                            return new AttendanceResult() { IsSuccess = true, UserWiseAttendanceList = "Status : Attendance Not Completed" };
+                            return new AttendanceResult() { IsSuccess = true, UserWiseAttendanceList = new InvalidUser() { IsSuccess = true, Result = "Status : Attendance Not Completed" }  };
 
                         }
                         else
                         {
-                            return new AttendanceResult() { IsSuccess = true, UserWiseAttendanceList = "Status : Attendance Completed" };
+                            return new AttendanceResult() { IsSuccess = true, UserWiseAttendanceList = new InvalidUser() { IsSuccess = true, Result = "Status : Attendance Completed" }  };
                         }
                     }
                     else
@@ -70,7 +70,7 @@ namespace MobileSchoolAPI.BusinessLayer
                         return new AttendanceResult()
                         {
                             IsSuccess = true,
-                            UserWiseAttendanceList = "Status : User is not class Teacher"
+                            UserWiseAttendanceList = new InvalidUser() { IsSuccess = true, Result = "Status : User is not class Teacher" } 
 
                         };
                     }
@@ -111,7 +111,7 @@ namespace MobileSchoolAPI.BusinessLayer
                     return new Results
                     {
                         IsSuccess = false,
-                        Message =   "Incorrect Username."  
+                        Message = new InvalidUser() { IsSuccess = false, Result = "Incorrect Username" }    
                     };
                   
                 }
@@ -122,21 +122,21 @@ namespace MobileSchoolAPI.BusinessLayer
                     return new Results
                     {
                         IsSuccess = false,
-                        Message =   "Attendance Is Not Marked By Class Teacher"  
+                        Message = new InvalidUser() { IsSuccess = false, Result = "Attendance Is Not Marked By Class Teacher" }   
                     };
 
                    
                 }
                 if (usertype.Count() == 0)
                 {
-                    return new AttendanceResult() { IsSuccess = false, UserWiseAttendanceList = "User Not Found" };
+                    return new AttendanceResult() { IsSuccess = false, UserWiseAttendanceList = new InvalidUser() { IsSuccess = false, Result = "User Not Found" } };
                 }
                 if (usertype[0].UserType != "CLASS TEACHER")
                 {
                     return new Results
                     {
                         IsSuccess = false,
-                        Message =   "User Is Not Class Teacher."  
+                        Message = new InvalidUser() { IsSuccess = false, Result = "User Is Not Class Teacher" }   
                     };
                  
 
@@ -150,7 +150,7 @@ namespace MobileSchoolAPI.BusinessLayer
                         return new Results
                         {
                             IsSuccess = false,
-                            Message =  "No Records Found" 
+                            Message = new InvalidUser() { IsSuccess = false, Result = "No Records Found" }   
                         };
                        
 

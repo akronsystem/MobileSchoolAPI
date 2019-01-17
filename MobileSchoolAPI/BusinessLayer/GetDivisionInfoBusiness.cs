@@ -32,7 +32,7 @@ namespace MobileSchoolAPI.BusinessLayer
                         return new Results
                         {
                             IsSuccess = false,
-                            Message =  " No Attendance Is Found Of This DateDivision is not assigned for this user" 
+                            Message = new InvalidUser() { IsSuccess = false, Result = "No Attendance Is Found Of This DateDivision is not assigned for this user" }   
                         };
                        
                     }

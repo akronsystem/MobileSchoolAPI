@@ -8,6 +8,8 @@ namespace MobileSchoolAPI.ResultModel
     public class GalleryResult
     {
         public bool IsSuccess { get; set; }
-        public object Results { get; set; }
+        public string URL { get; set; }
+        public object GalleryAlbumList { get; set; }
+
     }
 }

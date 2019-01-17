@@ -30,7 +30,7 @@ namespace MobileSchoolAPI.BusinessLayer
                     return new Results
                     {
                         IsSuccess = false,
-                        Message =   "Standard is not assigned for this user"  
+                        Message = new InvalidUser() { IsSuccess = false, Result = "Standard is not assigned for this user" }   
                     };
                  
                 }
@@ -50,7 +50,7 @@ namespace MobileSchoolAPI.BusinessLayer
                     return new Results
                     {
                         IsSuccess = false,
-                        Message =   "Standard is not assigned for this user"  
+                        Message = new InvalidUser() { IsSuccess = false, Result = "Standard is not assigned for this user" }
                     };
 
                    

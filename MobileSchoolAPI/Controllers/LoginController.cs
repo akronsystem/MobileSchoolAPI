@@ -2,6 +2,7 @@
 using MobileSchoolAPI.BUSINESSLAYER;
 using MobileSchoolAPI.Models;
 using MobileSchoolAPI.ParamModel;
+using MobileSchoolAPI.ResultModel;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -36,7 +37,9 @@ namespace MobileSchoolAPI.Controllers
                 LoginManager objLogin = new LoginManager();
                 var logindetail = objLogin.GetLoginDetails(userLogin);
                 if (logindetail == null)
-                    return new Error() { IsError = true, Message = "User Name & Password is Incorrect" };
+                    return new Results() { IsSuccess = false, Message = new InvalidUser() { IsSuccess = false, Result = "User Name & Password is Incorrect" } };
+
+              
                 else
                 {
                     if (logindetail.UserType == "STUDENT")

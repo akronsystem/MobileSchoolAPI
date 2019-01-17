@@ -62,7 +62,7 @@ namespace MobileSchoolAPI.BusinessLayer
                         return new Results
                         {
                             IsSuccess = false,
-                            Message =   "Division Not Found" 
+                            Message = new InvalidUser() { IsSuccess = false, Result = "Division Not Found" }    
                         };
 
                        
@@ -82,7 +82,7 @@ namespace MobileSchoolAPI.BusinessLayer
                         return new Results
                         {
                             IsSuccess = false,
-                            Message = "Division Not Found" 
+                            Message = new InvalidUser() { IsSuccess = false, Result = "Division Not Found" }
                         };
 
                        
@@ -161,7 +161,7 @@ namespace MobileSchoolAPI.BusinessLayer
                         return new Results
                         {
                             IsSuccess = false,
-                            Message =  "HomeWork Not Found." 
+                            Message = new InvalidUser() { IsSuccess = false, Result = "Homework Not Found" }  
                         };
                       
                     }
@@ -216,7 +216,7 @@ namespace MobileSchoolAPI.BusinessLayer
                         return new Results
                         {
                             IsSuccess = false,
-                            Message =   "HomeWork Not Found." 
+                            Message = new InvalidUser() { IsSuccess = false, Result = "Homework Not Found" }
                         };
 
                       

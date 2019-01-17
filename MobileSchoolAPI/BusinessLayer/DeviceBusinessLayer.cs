@@ -35,7 +35,7 @@ namespace MobileSchoolAPI.BusinessLayer
                     db.SaveChanges();
 
 
-                    return new Results() { IsSuccess = true, Message = "Device Registration Succesfull!" };
+                    return new Results() { IsSuccess = true, Message = new InvalidUser() { IsSuccess = true, Result = "Device Registration Succesfull!" } };
                   
                 }
                 else
@@ -54,7 +54,7 @@ namespace MobileSchoolAPI.BusinessLayer
                     //db.TBLDeviceRegistrations.Add(objdetail);
                     db.SaveChanges();
 
-                    return new Results() { IsSuccess = true, Message = "Notification Updated successfully" };
+                    return new Results() { IsSuccess = true,Message= new InvalidUser() { IsSuccess = true, Result = "Notification Updated successfully" } };
                   
                 }
             }
