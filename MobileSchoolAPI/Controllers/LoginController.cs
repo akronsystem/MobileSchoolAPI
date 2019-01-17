@@ -46,12 +46,16 @@ namespace MobileSchoolAPI.Controllers
                     {
                         STUDENTINFO_BUSINESS StudBL = new STUDENTINFO_BUSINESS();
                         var result = StudBL.getStudLogo(int.Parse(logindetail.EmpCode),Convert.ToInt16( logindetail.UserId),logindetail.Password);
+
+                        var notificationUnreadCount = StudBL.getNotifCount(int.Parse(logindetail.EmpCode), Convert.ToInt16(logindetail.UserId), logindetail.Password);
+
                         if (result == null)
                         {
                         }
                         else
                         {
                             logindetail.IMAGEPATH = (string)result;
+                            logindetail.HomeworkNotificationUnreadCount =(int)notificationUnreadCount;
                         }
                         if (logindetail.UserName.StartsWith("NKV"))
                         {
