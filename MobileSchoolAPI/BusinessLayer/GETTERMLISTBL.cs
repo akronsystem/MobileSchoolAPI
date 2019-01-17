@@ -26,7 +26,7 @@ namespace MobileSchoolAPI.BusinessLayer
                     return new Results
                     {
                         IsSuccess = false,
-                        Message =   "TERM LIST NOT FOUND." 
+                        Message = new InvalidUser() { IsSuccess = false, Result = "Term List Not Found" }      
                     };
                
                 else

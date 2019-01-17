@@ -52,7 +52,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 }
 
 
-                return new DivisionListResult() { IsSuccess = true, Notification = "Notification Saved successfully" };
+                return new DivisionListResult() { IsSuccess = true, Notification = new InvalidUser() { IsSuccess = true, Result = "Notification Saved successfully" }};
 
             }
             catch (Exception E)
@@ -134,7 +134,7 @@ namespace MobileSchoolAPI.BusinessLayer
                         return new Results
                         {
                             IsSuccess = false,
-                            Message =   " No Notifications Found"  
+                            Message = new InvalidUser() { IsSuccess = false, Result = "No Notifications Found" }     
                         };
 
                   
@@ -195,7 +195,7 @@ namespace MobileSchoolAPI.BusinessLayer
 
                 db.SaveChanges();
 
-                return new DivisionListResult() { IsSuccess = true, Notification = "Notification Updated successfully" };
+                return new DivisionListResult() { IsSuccess = true, Notification = new InvalidUser() { IsSuccess = false, Result = "Notification Updated successfully" }  };
 
 
             
@@ -236,7 +236,7 @@ namespace MobileSchoolAPI.BusinessLayer
              
 
 
-                return new DivisionListResult() { IsSuccess = true, Notification = "Notification Saved successfully" };
+                return new DivisionListResult() { IsSuccess = true, Notification = new InvalidUser() { IsSuccess = true, Result = "Notification Saved successfully" }   };
 
             }
             catch (Exception E)
@@ -270,7 +270,7 @@ namespace MobileSchoolAPI.BusinessLayer
                     return new Results
                     {
                         IsSuccess = false,
-                        Message = " No Record Found"  
+                        Message = new InvalidUser() { IsSuccess = false, Result = " No Record Found" }   
                     };
 
 

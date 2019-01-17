@@ -25,7 +25,7 @@ namespace MobileSchoolAPI.BusinessLayer
                     return new Results
                     {
                         IsSuccess = false,
-                        Message =   "TEST LIST NOT FOUND."  
+                        Message = new InvalidUser() { IsSuccess = false, Result = "Test List Not Found" }  
                     };
               
                 else
