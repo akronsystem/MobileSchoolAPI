@@ -49,7 +49,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 bool iStrue = objUP.ValidateUsernamePassword(PA.UserId, PA.Password);
 				if (iStrue == false)
 				{
-                    return new MonthlyAttendanceResult() { IsSuccess = false, DateWiseStatus = new InvalidUser() { IsSuccess = false, Result = "Invalid User" } };
+                    return new MonthlyAttendanceResult() { IsSuccess = false, DateWiseStatus = "Invalid User"  };
                     
 				}
                 List<Result> lt = new List<Result>();
@@ -102,7 +102,7 @@ namespace MobileSchoolAPI.BusinessLayer
                         }
                     }
                     if (lt == null)
-                        return new ResultBirth { IsSuccess = false, Result = new InvalidUser() { IsSuccess = false, Result = "No Attendance Is Found Of This Date" }   };
+                        return new ResultBirth { IsSuccess = false, Result ="No Attendance Is Found Of This Date" };
                 
                     else
                         return new MonthlyAttendanceResult() { IsSuccess = true, DateWiseStatus = lt };
@@ -149,7 +149,7 @@ namespace MobileSchoolAPI.BusinessLayer
                             return new Results
                             {
                                 IsSuccess = false,
-                                Message = new InvalidUser() { IsSuccess = false, Result = "No Attendance Is Found Of This Date" }
+                                Message = "No Attendance Is Found Of This Date" 
                             };
                      
                         else
@@ -164,7 +164,7 @@ namespace MobileSchoolAPI.BusinessLayer
 						return new Results
 						{
 							IsSuccess = false,
-							Message = new InvalidUser() { IsSuccess = false, Result = "User Is Not Class Teacher" }  
+							Message = "User Is Not Class Teacher" 
                         };
 
                     }

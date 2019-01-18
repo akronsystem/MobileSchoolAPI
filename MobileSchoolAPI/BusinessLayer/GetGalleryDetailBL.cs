@@ -17,7 +17,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 SchoolMainContext db = new ConcreateContext().GetContext(OBJ.USERID, OBJ.PASSWORD);
                 if (db == null)
                 {
-                    return new Results() { IsSuccess = false, Message  = "Invalid User" } ;
+                    return new Results() { IsSuccess = false, Message = "Invalid User" };
                 }
                 var GetGallery = db.VW_GetGallery.ToList();
                 List<Gallary> Details = new List<Gallary>();

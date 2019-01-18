@@ -29,7 +29,7 @@ namespace MobileSchoolAPI.BUSINESSLAYER
                     return new Results
                     {
                         IsSuccess = false,
-                        Message = new InvalidUser() { IsSuccess = false, Result = "User Not Found" }   
+                        Message = "User Not Found"  
                     };
 
 
@@ -71,7 +71,7 @@ namespace MobileSchoolAPI.BUSINESSLAYER
                     return new Results
                     {
                         IsSuccess = false,
-                        Message = new InvalidUser() { IsSuccess = false, Result = "Logo Not Found" }
+                        Message =  "Logo Not Found" 
                     };
 
                 }
@@ -110,7 +110,7 @@ namespace MobileSchoolAPI.BUSINESSLAYER
                     return new Results
                     {
                         IsSuccess = false,
-                        Message = new InvalidUser() { IsSuccess = false, Result = "Logo Not Found" }   
+                        Message = "Logo Not Found"   
                     };
                 
                 }

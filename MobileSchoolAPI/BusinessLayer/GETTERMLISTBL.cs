@@ -26,11 +26,11 @@ namespace MobileSchoolAPI.BusinessLayer
                     return new Results
                     {
                         IsSuccess = false,
-                        Message = new InvalidUser() { IsSuccess = false, Result = "Term List Not Found" }      
+                        Message = "Term List Not Found"       
                     };
                
                 else
-                    return new TermListResult(){ IsSuccess = "true",TermList = getlist}; ;
+                    return new TermListResult(){ IsSuccess = true,TermList = getlist}; ;
 
             }
             catch (Exception ex)
