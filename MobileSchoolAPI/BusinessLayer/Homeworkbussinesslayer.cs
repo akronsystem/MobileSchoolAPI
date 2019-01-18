@@ -66,7 +66,7 @@ namespace MobileSchoolAPI.BusinessLayer
                     return new Results
                     {
                         IsSuccess = false,
-                        Message = new InvalidUser() { IsSuccess = false, Result = "Student Not Found" }  
+                        Message ="Student Not Found"  
                     };
 
                    
@@ -100,7 +100,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 {
 
                     IsSuccess = true,
-                    Message = new InvalidUser() { IsSuccess = true, Result = "Homework assign successfully and SMS sent Sucessfully" } 
+                    Message =  "Homework assign successfully and SMS sent Sucessfully" 
                 };  
 
 		}   
@@ -207,7 +207,7 @@ namespace MobileSchoolAPI.BusinessLayer
                     return new Results
                     {
                         IsSuccess = true,
-                        Message = new InvalidUser() { IsSuccess = true, Result = "Attendance Save successfully" }  
+                        Message = "Attendance Save successfully"   
                     };
                 }
                 catch (Exception e)
@@ -227,7 +227,7 @@ namespace MobileSchoolAPI.BusinessLayer
             return new Results
             {
                 IsSuccess = false,
-                Message = new InvalidUser() { IsSuccess = false, Result = "Attedance already taken for this Date" }  
+                Message =  "Attedance already taken for this Date"   
             };
 
 
@@ -313,7 +313,7 @@ namespace MobileSchoolAPI.BusinessLayer
                     return new Results
                     {
                         IsSuccess = false,
-                        Message = new InvalidUser() { IsSuccess = false, Result = "Failed to upload File" }   
+                        Message =  "Failed to upload File"  
                     };
 
 

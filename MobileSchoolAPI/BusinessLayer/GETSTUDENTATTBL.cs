@@ -17,7 +17,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 SchoolMainContext db = new ConcreateContext().GetContext(OBJ.USERID, OBJ.PASSWORD);
                 if (db == null)
                 {
-                    return new STUDENTLISTRESULT() { IsSuccess = false, StudentResult = new InvalidUser(){IsSuccess=false,Result="Invalid User"} };
+                    return new Results() { IsSuccess = false, Message = "Invalid User" };
                 }
                 var getstudent = db.VIEWGETSTUDENTATTs.Where(r => r.DIVISIONID == OBJ.DIVISIONID).ToList();
 
@@ -26,7 +26,7 @@ namespace MobileSchoolAPI.BusinessLayer
                     return new Results
                     {
                         IsSuccess = false,
-                        Message = new InvalidUser() { IsSuccess = false, Result = "Student Not Found" }       
+                        Message =  "Student Not Found"       
                     };
 
                

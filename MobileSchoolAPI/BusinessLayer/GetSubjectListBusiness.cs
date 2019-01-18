@@ -32,7 +32,7 @@ namespace MobileSchoolAPI.BusinessLayer
                         return new Results
                         {
                             IsSuccess = false,
-                            Message = new InvalidUser() { IsSuccess = false, Result = "Subject Not Found" }  
+                            Message =  "Subject Not Found" 
                         };
 
                       

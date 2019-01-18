@@ -17,10 +17,13 @@ namespace MobileSchoolAPI.BusinessLayer
                 SchoolMainContext db = new ConcreateContext().GetContext(OBJ.USERID, OBJ.PASSWORD);
                 if (db == null)
                 {
-                    return new Results() { IsSuccess = false, Message  = "Invalid User" } ;
+                    return new Results() { IsSuccess = false, Message = "Invalid User" };
                 }
                 var result = db.VW_EXAMSCHEDULE.Where(r=>r.STANDARDID.Contains(""+OBJ.STANDARDID+"") && r.TESTTYPEID==OBJ.TESTID && r.ACADEMICYEAR=="2018-2019" ).ToList();
-
+                if(result.Count==0)
+                {
+                    return new InvalidUser() { IsSuccess = false, Result = "Record Not Found" };
+                }
                 List<examclass> Details = new List<examclass>();
                 for (int i = 0; i < result.Count; i++)
                 {

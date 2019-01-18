@@ -13,8 +13,8 @@ namespace MobileSchoolAPI.BusinessLayer
         {
             SchoolMainContext db = new ConcreateContext().GetContext(Obj.UserId, Obj.PASSWORD);
             if (db == null)
-            { 
-                return new ResultBirth { IsSuccess = false, Result = new InvalidUser() { IsSuccess = false, Result = "Invalid User" } }; 
+            {
+                return new Results() { IsSuccess = false, Message = "Invalid User" };
             }
             else
             {
@@ -23,7 +23,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 
                 if (result.Count == 0)
                 { 
-                    return new ResultBirth { IsSuccess = false, Result = new InvalidUser() { IsSuccess = false, Result = "No Birthdays Found Today" } }; 
+                    return new ResultBirth { IsSuccess = false, Result = "No Birthdays Found Today" }; 
                 }
                 else
                 {
@@ -36,8 +36,8 @@ namespace MobileSchoolAPI.BusinessLayer
         {
             SchoolMainContext db = new ConcreateContext().GetContext(Obj.UserId, Obj.PASSWORD);
             if (db == null)
-            { 
-                return new ResultBirth { IsSuccess = false, Result = new InvalidUser() { IsSuccess = false, Result = "Invalid User" } }; 
+            {
+                return new Results() { IsSuccess = false, Message = "Invalid User" };
             }
             else
             {
@@ -46,7 +46,7 @@ namespace MobileSchoolAPI.BusinessLayer
 
                 if (result.Count()==0)
                 { 
-                    return new ResultBirth { IsSuccess = false, Result = new InvalidUser() { IsSuccess = false, Result = "No Birthdays Found Today" } }; 
+                    return new ResultBirth { IsSuccess = false, Result ="No Birthdays Found Today"  }; 
                 }
                 else
                 {

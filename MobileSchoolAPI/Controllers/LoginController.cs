@@ -37,9 +37,8 @@ namespace MobileSchoolAPI.Controllers
                 LoginManager objLogin = new LoginManager();
                 var logindetail = objLogin.GetLoginDetails(userLogin);
                 if (logindetail == null)
-                    return new Results() { IsSuccess = false, Message = new InvalidUser() { IsSuccess = false, Result = "User Name & Password is Incorrect" } };
+                    return new Results() { IsSuccess = false, Message = "Invalid User" };
 
-              
                 else
                 {
                     if (logindetail.UserType == "STUDENT")
@@ -104,7 +103,8 @@ namespace MobileSchoolAPI.Controllers
             }
             catch (Exception ex)
             {
-                return new Error() { IsError = true, Message = ex.Message };
+                return new Results() { IsSuccess = false, Message = ex.Message };
+                
             }
 		}
 	}
