@@ -244,6 +244,7 @@
     <Compile Include="Models\VIEWSTUDENTHOMEWORK.cs" />
     <Compile Include="Models\VIEWSUBJECTNAME.cs" />
     <Compile Include="Models\VIEW_TERMMASTER.cs" />
+    <Compile Include="Models\View_UnreadNotificationCount.cs" />
     <Compile Include="Models\VWATTENDANCEBYDATESTUDENT.cs" />
     <Compile Include="Models\VWATTENDANCEEMPLOYEE.cs" />
     <Compile Include="Models\VWSTUDENTINFO.cs" />

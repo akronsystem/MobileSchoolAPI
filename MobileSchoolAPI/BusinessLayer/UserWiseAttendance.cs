@@ -111,7 +111,7 @@ namespace MobileSchoolAPI.BusinessLayer
                     return new Results
                     {
                         IsSuccess = false,
-                        Message = new InvalidUser() { IsSuccess = false, Result = "Incorrect Username" }    
+                        Message = "Incorrect Username"     
                     };
                   
                 }
@@ -122,21 +122,21 @@ namespace MobileSchoolAPI.BusinessLayer
                     return new Results
                     {
                         IsSuccess = false,
-                        Message = new InvalidUser() { IsSuccess = false, Result = "Attendance Is Not Marked By Class Teacher" }   
+                        Message =  "Attendance Is Not Marked By Class Teacher"  
                     };
 
                    
                 }
                 if (usertype.Count() == 0)
                 {
-                    return new AttendanceResult() { IsSuccess = false, UserWiseAttendanceList = new InvalidUser() { IsSuccess = false, Result = "User Not Found" } };
+                    return new Results() { IsSuccess = false, Message = "User Not Found" } ;
                 }
                 if (usertype[0].UserType != "CLASS TEACHER")
                 {
                     return new Results
                     {
                         IsSuccess = false,
-                        Message = new InvalidUser() { IsSuccess = false, Result = "User Is Not Class Teacher" }   
+                        Message =   "User Is Not Class Teacher" 
                     };
                  
 
@@ -150,7 +150,7 @@ namespace MobileSchoolAPI.BusinessLayer
                         return new Results
                         {
                             IsSuccess = false,
-                            Message = new InvalidUser() { IsSuccess = false, Result = "No Records Found" }   
+                            Message = "No Records Found" 
                         };
                        
 
