@@ -48,7 +48,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 SchoolMainContext db = new ConcreateContext().GetContext(obj.USERID, obj.PASSWORD);
                 if (db == null)
                 {
-                    return new Results() { IsSuccess = false, Message  = "Invalid User" } ;
+                    return new Results() { IsSuccess = false, Message = "Invalid User" };
                 }
 
                 var GETTYPE = db.VW_GET_USER_TYPE.Where(r => r.UserId == obj.USERID).ToList();
@@ -62,7 +62,7 @@ namespace MobileSchoolAPI.BusinessLayer
                         return new Results
                         {
                             IsSuccess = false,
-                            Message = new InvalidUser() { IsSuccess = false, Result = "Division Not Found" }    
+                            Message =  "Division Not Found"     
                         };
 
                        
@@ -82,7 +82,7 @@ namespace MobileSchoolAPI.BusinessLayer
                         return new Results
                         {
                             IsSuccess = false,
-                            Message = new InvalidUser() { IsSuccess = false, Result = "Division Not Found" }
+                            Message =  "Division Not Found" 
                         };
 
                        
@@ -145,7 +145,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 SchoolMainContext db = new ConcreateContext().GetContext(obj.userid, obj.password);
                 if (db == null)
                 {
-                    return new Results() { IsSuccess = false, Message  = "Invalid User" } ;
+                    return new Results() { IsSuccess = false, Message = "Invalid User" };
                 }
                 var EmpHomework = db.VIEWHOMEWORKs.Where(r => r.UserId == obj.userid && r.HOMEWORKDATE==obj.homeworkdate).OrderByDescending(r => r.HOMEWORKDATE).ToList(); ;
 
@@ -161,7 +161,7 @@ namespace MobileSchoolAPI.BusinessLayer
                         return new Results
                         {
                             IsSuccess = false,
-                            Message = new InvalidUser() { IsSuccess = false, Result = "Homework Not Found" }  
+                            Message = "Homework Not Found"  
                         };
                       
                     }
@@ -201,7 +201,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 SchoolMainContext db = new ConcreateContext().GetContext(obj.userid, obj.password);
                 if (db == null)
                 {
-                    return new Results() { IsSuccess = false, Message  = "Invalid User" } ;
+                    return new Results() { IsSuccess = false, Message = "Invalid User" };
                 }
                 var EmpHomework = db.VIEWHOMEWORKs.Where(r => r.UserId == obj.userid && r.HOMEWORKDATE>=obj.FromDate && r.HOMEWORKDATE<=obj.ToDate).OrderByDescending(r=>r.HOMEWORKDATE).ToList();
 
@@ -216,7 +216,7 @@ namespace MobileSchoolAPI.BusinessLayer
                         return new Results
                         {
                             IsSuccess = false,
-                            Message = new InvalidUser() { IsSuccess = false, Result = "Homework Not Found" }
+                            Message =  "Homework Not Found" 
                         };
 
                       

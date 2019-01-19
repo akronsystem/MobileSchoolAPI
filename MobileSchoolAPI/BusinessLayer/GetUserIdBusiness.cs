@@ -53,7 +53,7 @@ namespace MobileSchoolAPI.BusinessLayer
                         return new Results
                         {
                             IsSuccess = true,
-                            Message = new InvalidUser() { IsSuccess = true, Result = "Alumini User" }
+                            Message =  "Alumini User" 
                         };
 
                       
@@ -80,7 +80,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 return new Results
                 {
                     IsSuccess = false,
-                    Message = new InvalidUser() { IsSuccess = false, Result = "User Not Found" } 
+                    Message =  "User Not Found" 
                 };
 
 
