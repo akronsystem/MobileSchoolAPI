@@ -33,7 +33,19 @@ namespace MobileSchoolAPI.BusinessLayer
                         result = GetStudobj.getStudInfo(int.Parse(getUserType.EmpCode), UserId.UserId,UserId.PASSWORD);
 						var notificationUnreadCount = GetStudobj.getNotifCount(int.Parse(getUserType.EmpCode), Convert.ToInt16(UserId.UserId), UserId.PASSWORD);
 						if(result!=null && result is VW_STUDENT_INFO)
+						{
 							(result as VW_STUDENT_INFO).HomeworkNotificationUnreadCount = (int)notificationUnreadCount;
+							InstituteBusiness Ibl = new InstituteBusiness();
+							var inresult = Ibl.GetInstituteName(UserId);
+							if (inresult != null && inresult is ResultBirth)
+							{
+								var r = inresult as ResultBirth;
+								var n = r.Result as ViewGetInstituteName;	  
+								(result as VW_STUDENT_INFO).InstituteName =n.INSTITUTE_NAME;
+							}
+								
+						}
+							
 					}
                     else if (getUserType.UserType == "Alumini")
                     {
@@ -50,6 +62,17 @@ namespace MobileSchoolAPI.BusinessLayer
                     {
                         GetTeacherInfoBusiness GetTeacherobj = new GetTeacherInfoBusiness();
                         result = GetTeacherobj.getTeacherInfo(int.Parse(getUserType.EmpCode), UserId.UserId, UserId.PASSWORD);
+						if(result!=null && result is VW_EMPLOYEE)
+						{
+							InstituteBusiness Ibl = new InstituteBusiness();
+							var inresult = Ibl.GetInstituteName(UserId);
+							if (inresult != null && inresult is ResultBirth)
+							{
+								var r = inresult as ResultBirth;
+								var n = r.Result as ViewGetInstituteName;
+								(result as VW_EMPLOYEE).InstituteName = n.INSTITUTE_NAME;
+							}
+						}
                     }
                     return result;
                 }

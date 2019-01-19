@@ -37,5 +37,8 @@ namespace MobileSchoolAPI.Models
         [Column(Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public long UserId { get; set; }
-    }
+
+		[NotMapped]
+		public string InstituteName { get; set; }
+	}
 }

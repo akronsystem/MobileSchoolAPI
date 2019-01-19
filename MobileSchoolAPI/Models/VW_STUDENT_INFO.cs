@@ -43,5 +43,9 @@ namespace MobileSchoolAPI.Models
 
 		[NotMapped]
 		public int HomeworkNotificationUnreadCount { get; set; }
+
+		[NotMapped]
+		public string InstituteName { get; set; }
+
 	}
 }
