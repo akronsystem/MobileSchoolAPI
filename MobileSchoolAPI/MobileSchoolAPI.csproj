@@ -291,6 +291,7 @@
     <Compile Include="ResultModel\InvalidUser.cs" />
     <Compile Include="ResultModel\MonthlyAttendanceResult.cs" />
     <Compile Include="ResultModel\ResultBirth.cs" />
+    <Compile Include="ResultModel\ResultLogin.cs" />
     <Compile Include="ResultModel\StdListResult.cs" />
     <Compile Include="ResultModel\StudentListResult.cs" />
   </ItemGroup>
