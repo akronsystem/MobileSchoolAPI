@@ -64,6 +64,19 @@ namespace MobileSchoolAPI.Controllers
                         {
                             StudentBaseUrl = ConfigurationManager.AppSettings["StxavierBaseUrlStudent"];
                         }
+                        else if (logindetail.UserName.StartsWith("ASM"))
+                        {
+                            StudentBaseUrl = ConfigurationManager.AppSettings["AsmBaseUrlStudent"];
+                        }
+
+                        else if (logindetail.UserName.StartsWith("ASY"))
+                        {
+                            StudentBaseUrl = ConfigurationManager.AppSettings["AsyBaseUrlStudent"];
+                        }
+                        else if (logindetail.UserName.StartsWith("NMS"))
+                        {
+                            StudentBaseUrl = ConfigurationManager.AppSettings["NmsBaseUrlStudent"];
+                        }
                         logindetail.BaseURL = StudentBaseUrl;
                     }
                     else
@@ -86,6 +99,19 @@ namespace MobileSchoolAPI.Controllers
                         {
                             TeacherBaseUrl = ConfigurationManager.AppSettings["StxavierBaseUrlTeacher"];
                         }
+                        else if (logindetail.UserName.StartsWith("ASM"))
+                        {
+                            TeacherBaseUrl = ConfigurationManager.AppSettings["AsmBaseUrlTeacher"];
+                        }
+                        else if (logindetail.UserName.StartsWith("ASY"))
+                        {
+                            TeacherBaseUrl = ConfigurationManager.AppSettings["AsyBaseUrlTeacher"];
+                        }
+                        else if (logindetail.UserName.StartsWith("NMS"))
+                        {
+                            TeacherBaseUrl = ConfigurationManager.AppSettings["NmsBaseUrlTeacher"];
+                        }
+
                         logindetail.BaseURL = TeacherBaseUrl;
                     }
                     DeviceBusinessLayer objDeviceBl = new DeviceBusinessLayer();

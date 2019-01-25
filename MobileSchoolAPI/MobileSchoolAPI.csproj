@@ -188,8 +188,11 @@
     <Compile Include="Controllers\TestTypeController.cs" />
     <Compile Include="Controllers\UserWiseAttendanceController.cs" />
     <Compile Include="Controllers\ViewExamScheduleController.cs" />
+    <Compile Include="DAL\ASMSchoolContext.cs" />
+    <Compile Include="DAL\ASYSCHOOLSchoolContext.cs" />
     <Compile Include="DAL\ConcreateContext.cs" />
     <Compile Include="DAL\NKVSchoolContext.cs" />
+    <Compile Include="DAL\NMESSchoolContext.cs" />
     <Compile Include="DAL\SchoolMainContext.cs" />
     <Compile Include="Models\AttendanceParameterscs.cs" />
     <Compile Include="Models\CheckUsernamePassword.cs" />
