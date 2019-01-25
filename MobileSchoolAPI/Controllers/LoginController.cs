@@ -98,7 +98,8 @@ namespace MobileSchoolAPI.Controllers
                     logindetail.DeviceId = userLogin.DeviceId;
                     logindetail.DeviceType = userLogin.DeviceType;
 
-                    return new ResultLogin() { IsSuccess = true, UserData = logindetail };
+					return new ResultLogin() { IsSuccess = true, UserData = logindetail };
+					//return logindetail;
                 }
             }
             catch (Exception ex)

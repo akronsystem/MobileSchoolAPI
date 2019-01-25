@@ -31,8 +31,8 @@ namespace MobileSchoolAPI.BusinessLayer
                     {
                         STUDENTINFO_BUSINESS GetStudobj = new STUDENTINFO_BUSINESS();
                         result = GetStudobj.getStudInfo(int.Parse(getUserType.EmpCode), UserId.UserId,UserId.PASSWORD);
-						var notificationUnreadCount = GetStudobj.getNotifCount(int.Parse(getUserType.EmpCode), Convert.ToInt16(UserId.UserId), UserId.PASSWORD);
-						if(result!=null && result is VW_STUDENT_INFO)
+						var notificationUnreadCount = GetStudobj.getNotifCount(int.Parse(getUserType.EmpCode), Convert.ToInt16(UserId.UserId), UserId.PASSWORD); 
+						if (result!=null && result is VW_STUDENT_INFO)
 						{
 							(result as VW_STUDENT_INFO).HomeworkNotificationUnreadCount = (int)notificationUnreadCount;
 							InstituteBusiness Ibl = new InstituteBusiness();
