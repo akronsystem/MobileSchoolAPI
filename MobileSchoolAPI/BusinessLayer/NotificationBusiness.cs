@@ -272,15 +272,12 @@ namespace MobileSchoolAPI.BusinessLayer
                     {
                         IsSuccess = false,
                         Message = new InvalidUser() { IsSuccess = false, Result = " No Record Found" }   
-                    };
-
-
-                   
+                    };						    
 
                 }
                 else
                 {
-                    return EventHoliday;
+                    return new DivisionListResult() { IsSuccess = true, EventsList = EventHoliday };
                 }
             }
             catch (Exception E)

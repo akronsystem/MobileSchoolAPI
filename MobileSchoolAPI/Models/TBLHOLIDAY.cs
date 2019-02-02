@@ -38,6 +38,7 @@ namespace MobileSchoolAPI.Models
         [StringLength(50)]
         public string TYPE { get; set; }
 
+		[NotMapped]
         [StringLength(20)]
         public string ACADEMICYEAR { get; set; }
     }
