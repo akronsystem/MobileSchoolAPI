@@ -12,125 +12,127 @@ namespace MobileSchoolAPI.BusinessLayer
 {
     public class Homeworkbussinesslayer
     {
-        
+        string smsstatus = ConfigurationManager.AppSettings["SmsStatus"].ToString();
         public object Savehomework(homeworkparameters obj)
         {
 
             SchoolMainContext db = new ConcreateContext().GetContext(obj.Userid, obj.Password);
             if (db == null)
             {
-                return new Results() { IsSuccess = false, Message  = "Invalid User" } ;
+                return new Results() { IsSuccess = false, Message = "Invalid User" };
             }
             TBLHOMEWORK objHomework = new TBLHOMEWORK();
             var getUserType = db.VW_GET_USER_TYPE.Where(r => r.UserId == obj.Userid).FirstOrDefault();
-           
-           
-          
-           
-                objHomework.STANDARDID = int.Parse(obj.standardid);
 
 
-                objHomework.CREATEDID = int.Parse(getUserType.EmpCode);
-                objHomework.DIVISIONID = obj.division.ToString();
-                objHomework.SUBJECTID = obj.subject;
-                objHomework.TERMID = obj.term;
-                objHomework.HOMEWORK = obj.homeworkdescription;
-                objHomework.HOMEWORKDATE = Convert.ToDateTime(DateTime.Now.ToShortDateString());
-                objHomework.TIME = DateTime.Now.ToShortTimeString();
-                objHomework.DISPLAY = 1;
-                objHomework.ACADEMICYEAR = "2018-2019";
-
-                db.TBLHOMEWORKs.Add(objHomework);
-                db.SaveChanges();
-
-                TBLNOTIFICATION objnotification = new TBLNOTIFICATION();
-                objnotification.TITLE = obj.homeworkdescription;
-                objnotification.NOTIFICATIONDATE = DateTime.Now;
-                objnotification.NOTIFICATIONTIME = DateTime.Now.ToString("h:mm tt");
-                objnotification.DIVISIONID = int.Parse(obj.division);
-                objnotification.ACADEMICYEAR = "2018-2019";
-                objnotification.NOTIFICATIONTYPE = "Homework";
-                db.TBLNOTIFICATIONs.Add(objnotification);
-                db.SaveChanges();
 
 
-                string[] divid = objHomework.DIVISIONID.ToString().Split(',');
-                for (int d = 0; d < divid.Length; d++)
+            objHomework.STANDARDID = int.Parse(obj.standardid);
+
+
+            objHomework.CREATEDID = int.Parse(getUserType.EmpCode);
+            objHomework.DIVISIONID = obj.division.ToString();
+            objHomework.SUBJECTID = obj.subject;
+            objHomework.TERMID = obj.term;
+            objHomework.HOMEWORK = obj.homeworkdescription;
+            objHomework.HOMEWORKDATE = Convert.ToDateTime(DateTime.Now.ToShortDateString());
+            objHomework.TIME = DateTime.Now.ToShortTimeString();
+            objHomework.DISPLAY = 1;
+            objHomework.ACADEMICYEAR = "2018-2019";
+
+            db.TBLHOMEWORKs.Add(objHomework);
+            db.SaveChanges();
+
+            TBLNOTIFICATION objnotification = new TBLNOTIFICATION();
+            objnotification.TITLE = obj.homeworkdescription;
+            objnotification.NOTIFICATIONDATE = DateTime.Now;
+            objnotification.NOTIFICATIONTIME = DateTime.Now.ToString("h:mm tt");
+            objnotification.DIVISIONID = int.Parse(obj.division);
+            objnotification.ACADEMICYEAR = "2018-2019";
+            objnotification.NOTIFICATIONTYPE = "Homework";
+            db.TBLNOTIFICATIONs.Add(objnotification);
+            db.SaveChanges();
+
+
+            string[] divid = objHomework.DIVISIONID.ToString().Split(',');
+            for (int d = 0; d < divid.Length; d++)
+            {
+                int singledivision = Convert.ToInt32(divid[d]);
+                var getstudent = db.VIEWGETSTUDENTATTs.Where(r => r.DIVISIONID == singledivision).ToList();
+
+                if (getstudent == null)
                 {
-                    int singledivision = Convert.ToInt32(divid[d]);
-                    var getstudent = db.VIEWGETSTUDENTATTs.Where(r => r.DIVISIONID == singledivision).ToList();
-
-                    if (getstudent == null)
-                    {
 
                     return new Results
                     {
                         IsSuccess = false,
-                        Message ="Student Not Found"  
+                        Message = "Student Not Found"
                     };
 
-                   
 
-                    }
-                    // return getstudent;
-                    for (int i = 0; i < getstudent.Count; i++)
+
+                }
+                // return getstudent;
+                for (int i = 0; i < getstudent.Count; i++)
+                {
+                    TBLNOTIFICATIONDETAIL objnotidetails = new TBLNOTIFICATIONDETAIL();
+                    objnotidetails.NOTIFICATIONID = objnotification.NOTIFICATIONID;
+                    objnotidetails.STUDENTID = getstudent[i].STUDENTID;
+                    objnotidetails.STATUS = 0;
+                    db.TBLNOTIFICATIONDETAILs.Add(objnotidetails);
+                    db.SaveChanges();
+                    FCMPushNotification OBJPUSH = new FCMPushNotification();
+                    //var getsubjectname = db.VIEWSUBJECTNAMEs.Where(r => r.SUBJECTID == obj.subject).ToList();
+
+                    string studentid = Convert.ToString(getstudent[i].STUDENTID);
+                    var userid = db.VIEWGETUSERIDFROMEMPCODEs.Where(r => r.EmpCode == studentid).FirstOrDefault();
+                    var device = db.VW_DEVICE.FirstOrDefault(r => r.UserId == userid.UserId);
+                    if (device != null)
                     {
-                        TBLNOTIFICATIONDETAIL objnotidetails = new TBLNOTIFICATIONDETAIL();
-                        objnotidetails.NOTIFICATIONID = objnotification.NOTIFICATIONID;
-                        objnotidetails.STUDENTID = getstudent[i].STUDENTID;
-                        objnotidetails.STATUS = 0;
-                        db.TBLNOTIFICATIONDETAILs.Add(objnotidetails);
-                        db.SaveChanges();
-                        FCMPushNotification OBJPUSH = new FCMPushNotification();
-						//var getsubjectname = db.VIEWSUBJECTNAMEs.Where(r => r.SUBJECTID == obj.subject).ToList();
-
-						string studentid = Convert.ToString(getstudent[i].STUDENTID);
-						var userid = db.VIEWGETUSERIDFROMEMPCODEs.Where(r => r.EmpCode == studentid).FirstOrDefault();
-						var device = db.VW_DEVICE.FirstOrDefault(r => r.UserId == userid.UserId);
-						if (device != null )
-						{
-							if(!string.IsNullOrWhiteSpace( device.DeviceId))
-							OBJPUSH.SendNotification("Homework", obj.homeworkdescription, device.DeviceId);
-						}   
-
-					    SMSSend(objHomework.HOMEWORK, getstudent[i].GMOBILE);
+                        if (!string.IsNullOrWhiteSpace(device.DeviceId))
+                            OBJPUSH.SendNotification("Homework", obj.homeworkdescription, device.DeviceId);
+                    }
+                    if (smsstatus == "1")
+                    {
+                        SMSSendTESTDLR(getstudent[i].GMOBILE, objHomework.HOMEWORK);
                     }
                 }
-                return new Results
-                {
+            }
+            return new Results
+            {
 
-                    IsSuccess = true,
-                    Message =  "Homework assign successfully and SMS sent Sucessfully" 
-                };  
+                IsSuccess = true,
+                Message = "Homework assign successfully and SMS sent Sucessfully"
+            };
 
-		}   
+        }
 
-		public object SendNotificaiton(homeworkparameters obj)
-		{
-			SchoolMainContext db = new ConcreateContext().GetContext(obj.Userid, obj.Password);
+        public object SendNotificaiton(homeworkparameters obj)
+        {
+            SchoolMainContext db = new ConcreateContext().GetContext(obj.Userid, obj.Password);
             if (db == null)
             {
 
 
-                return new Results() { IsSuccess = false, Message  = "Invalid User" } ;
+                return new Results() { IsSuccess = false, Message = "Invalid User" };
             }
             var device = db.VW_DEVICE.FirstOrDefault(r => r.UserId == obj.Userid);
-			if (device != null)
-			{
-				FCMPushNotification OBJPUSH = new FCMPushNotification();
-				 return OBJPUSH.SendNotification("Homework", obj.homeworkdescription, device.DeviceId);
-			}
+            if (device != null)
+            {
+                FCMPushNotification OBJPUSH = new FCMPushNotification();
+                return OBJPUSH.SendNotification("Homework", obj.homeworkdescription, device.DeviceId);
+            }
 
-			throw new Exception("Notification Failed");
-			 
-		}
+            throw new Exception("Notification Failed");
 
-	public object SaveAttendance(AttendanceParameterscs atteobj)
+        }
+
+        public object SaveAttendance(AttendanceParameterscs atteobj)
         {
             SchoolMainContext db = new ConcreateContext().GetContext(atteobj.Userid, atteobj.Password);
             if (db == null)
             {
-                return new Results() { IsSuccess = false, Message  = "Invalid User" } ;
+                return new Results() { IsSuccess = false, Message = "Invalid User" };
             }
 
             TBLATTENDENCEMASTER objmster = new TBLATTENDENCEMASTER();
@@ -191,42 +193,52 @@ namespace MobileSchoolAPI.BusinessLayer
                         objDetail.ROLLNO = sbno[i].ToString();
                         objDetail.NAME = getstudent[0].STUDENTNAME;
                         objDetail.STUDENTID = getstudent[0].STUDENTID;
+
                         objDetail.STATUS = "A";
 
-                        db.TBLATTENDENCEs.Add(objDetail);
-                        db.SaveChanges();  
-						 
+                        db.TBLATTENDENCEs.Add(objDetail); 
+                        db.SaveChanges();
+                        string[] splitname = getstudent[0].STUDENTNAME.Split(' ');
+                        TBLNOTIFICATIONDETAIL objnotidetails = new TBLNOTIFICATIONDETAIL();
+                        string txtMessage = "Dear Parent, Your Pupil " + splitname[1] + ", is absent on " + Convert.ToDateTime(atteobj.ATTEDANCEDATE).ToString("dd/MM/yyyy") + ", Kindly note it. See attendance details goo.gl/iTjC9V";
 
-						TBLNOTIFICATIONDETAIL objnotidetails = new TBLNOTIFICATIONDETAIL();
 
-						FCMPushNotification OBJPUSH = new FCMPushNotification();
-						//var getsubjectname = db.VIEWSUBJECTNAMEs.Where(r => r.SUBJECTID == obj.subject).ToList();
+                        if (smsstatus == "1")
+                        {
+                            SMSSendTESTDLR(getstudent[0].GMOBILE, txtMessage);
+                        }
 
-						string studentid = Convert.ToString(getstudent[i].STUDENTID);
-						var userid = db.VIEWGETUSERIDFROMEMPCODEs.Where(r => r.EmpCode == studentid).FirstOrDefault();
-						var device = db.VW_DEVICE.FirstOrDefault(r => r.UserId == userid.UserId);
-						if (device != null)
-						{
-							if (!string.IsNullOrWhiteSpace(device.DeviceId))
-								OBJPUSH.SendNotification("Attendance", string.Format("Dear Parent, Your pupil is absent on dated {0}, kindly note.", objmster.ATTEDANCEDATE.Value.ToString("dd-MM-yyyy")), device.DeviceId);
-						}
-					}
+                      	TBLNOTIFICATIONDETAIL objnotidetails = new TBLNOTIFICATIONDETAIL();
+
+                        FCMPushNotification OBJPUSH = new FCMPushNotification();
+                        //var getsubjectname = db.VIEWSUBJECTNAMEs.Where(r => r.SUBJECTID == obj.subject).ToList();
+
+                        string studentid = Convert.ToString(getstudent[i].STUDENTID);
+                        var userid = db.VIEWGETUSERIDFROMEMPCODEs.Where(r => r.EmpCode == studentid).FirstOrDefault();
+                        var device = db.VW_DEVICE.FirstOrDefault(r => r.UserId == userid.UserId);
+                        if (device != null)
+                        {
+                          if (!string.IsNullOrWhiteSpace(device.DeviceId))
+                            OBJPUSH.SendNotification("Attendance", string.Format("Dear Parent, Your pupil is absent on dated {0}, kindly note.", objmster.ATTEDANCEDATE.Value.ToString("dd-MM-yyyy")), device.DeviceId);
+                        }
+                    }  
+				 
 
                     return new Results
                     {
                         IsSuccess = true,
-                        Message = "Attendance Save successfully"   
+                        Message = "Attendance Save successfully"
                     };
                 }
                 catch (Exception e)
                 {
-                    
+
                     return new Results
                     {
                         IsSuccess = false,
-                        Message =   e.Message  
+                        Message = e.Message
                     };
-                  
+
                 }
 
 
@@ -235,38 +247,32 @@ namespace MobileSchoolAPI.BusinessLayer
             return new Results
             {
                 IsSuccess = false,
-                Message =  "Attedance already taken for this Date"   
+                Message = "Attedance already taken for this Date"
             };
 
 
 
         }
-		    
-			 
 
-        public bool SMSSend(string sms,string mobileno)
+
+
+        public string SMSSendTESTDLR(string MobileNo, string Message)
         {
             try
             {
-               
-                string str = "";
-               
-                str = "http://smsnow.hundiainfosys.com/rest/services/sendSMS/sendGroupSms?AUTH_KEY=7ddc928fc86d2e3adf01010536830d2&message=" + sms + "&senderId=SFNKVS&routeId=1&mobileNos=" + mobileno + "&smsContentType=english";
-
-                //HttpWebRequest myReq = (HttpWebRequest)WebRequest.Create(str);
-
-                //HttpWebResponse myResp = (HttpWebResponse)myReq.GetResponse();
-                //System.IO.StreamReader respStreamReader = new System.IO.StreamReader(myResp.GetResponseStream());
-                //string responseString = respStreamReader.ReadToEnd();
-                //respStreamReader.Close();
-                //myResp.Close();
-
-                return true;
+                string str = ""; string responseString = "";
+                str = "http://smsnow.hundiainfosys.com/rest/services/sendSMS/sendGroupSms?AUTH_KEY=14c07610595093f4d66e18f1aac5ee88&message=" + Message + "&senderId=NMSKOP&routeId=1&mobileNos=" + MobileNo + "&smsContentType=english";
+                HttpWebRequest myReq = (HttpWebRequest)WebRequest.Create(str);
+                HttpWebResponse myResp = (HttpWebResponse)myReq.GetResponse();
+                System.IO.StreamReader respStreamReader = new System.IO.StreamReader(myResp.GetResponseStream());
+                responseString = respStreamReader.ReadToEnd();
+                respStreamReader.Close();
+                myResp.Close();
+                return responseString;
             }
             catch
             {
-                throw;
-                return false;
+                return "";
             }
         }
         public object FileUpload(homeworkparameters obj)
