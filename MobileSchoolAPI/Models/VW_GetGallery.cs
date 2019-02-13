@@ -15,5 +15,7 @@ namespace MobileSchoolAPI.Models
         public string ALBUMNAME { get; set; }
 
         public string IMAGEPATH { get; set; }
-    }
+		public DateTime? CREATEDON { get; set; }
+
+	}
 }
