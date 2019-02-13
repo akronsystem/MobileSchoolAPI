@@ -263,7 +263,7 @@ namespace MobileSchoolAPI.BusinessLayer
                     return new Results() { IsSuccess = false, Message  = "Invalid User" } ;
                 }
 
-                var EventHoliday = db.TBLHOLIDAYs.ToList().OrderBy(r => r.STARTDATE);
+                var EventHoliday = db.TBLHOLIDAYs.ToList().OrderByDescending(r => r.STARTDATE);
 
                 if (EventHoliday == null)
                 {

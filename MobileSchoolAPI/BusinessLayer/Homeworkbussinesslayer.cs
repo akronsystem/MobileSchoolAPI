@@ -161,7 +161,7 @@ namespace MobileSchoolAPI.BusinessLayer
 
                     db.TBLATTENDENCEMASTERs.Add(objmster);
                     db.SaveChanges();
-
+				    
 
                     //TBLNOTIFICATION objnotification = new TBLNOTIFICATION();
                     //objnotification.TITLE = "Daily Attendance";
@@ -196,7 +196,7 @@ namespace MobileSchoolAPI.BusinessLayer
 
                         objDetail.STATUS = "A";
 
-                        db.TBLATTENDENCEs.Add(objDetail);
+                        db.TBLATTENDENCEs.Add(objDetail); 
                         db.SaveChanges();
                         string[] splitname = getstudent[0].STUDENTNAME.Split(' ');
                         TBLNOTIFICATIONDETAIL objnotidetails = new TBLNOTIFICATIONDETAIL();
@@ -208,12 +208,21 @@ namespace MobileSchoolAPI.BusinessLayer
                             SMSSendTESTDLR(getstudent[0].GMOBILE, txtMessage);
                         }
 
-                        // objnotidetails.NOTIFICATIONID = objnotification.NOTIFICATIONID;
-                        // objnotidetails.STUDENTID = getstudent[0].STUDENTID;
-                        // objnotidetails.STATUS = 0;
-                        // db.TBLNOTIFICATIONDETAILs.Add(objnotidetails);
-                        //  db.SaveChanges();
-                    }
+                      	TBLNOTIFICATIONDETAIL objnotidetails = new TBLNOTIFICATIONDETAIL();
+
+                        FCMPushNotification OBJPUSH = new FCMPushNotification();
+                        //var getsubjectname = db.VIEWSUBJECTNAMEs.Where(r => r.SUBJECTID == obj.subject).ToList();
+
+                        string studentid = Convert.ToString(getstudent[i].STUDENTID);
+                        var userid = db.VIEWGETUSERIDFROMEMPCODEs.Where(r => r.EmpCode == studentid).FirstOrDefault();
+                        var device = db.VW_DEVICE.FirstOrDefault(r => r.UserId == userid.UserId);
+                        if (device != null)
+                        {
+                          if (!string.IsNullOrWhiteSpace(device.DeviceId))
+                            OBJPUSH.SendNotification("Attendance", string.Format("Dear Parent, Your pupil is absent on dated {0}, kindly note.", objmster.ATTEDANCEDATE.Value.ToString("dd-MM-yyyy")), device.DeviceId);
+                        }
+                    }  
+				 
 
                     return new Results
                     {

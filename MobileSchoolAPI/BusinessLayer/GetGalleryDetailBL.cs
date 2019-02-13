@@ -19,7 +19,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 {
                     return new Results() { IsSuccess = false, Message = "Invalid User" };
                 }
-                var GetGallery = db.VW_GetGallery.ToList();
+                var GetGallery = db.VW_GetGallery.OrderByDescending(r=>r.CREATEDON).ToList();
                 List<Gallary> Details = new List<Gallary>();
                 object[,] str=new object[ GetGallery.Count,2];
                 for (int i = 0; i < GetGallery.Count; i++)
