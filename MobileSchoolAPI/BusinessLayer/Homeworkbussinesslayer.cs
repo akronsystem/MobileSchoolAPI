@@ -92,10 +92,10 @@ namespace MobileSchoolAPI.BusinessLayer
                         if (!string.IsNullOrWhiteSpace(device.DeviceId))
                             OBJPUSH.SendNotification("Homework", obj.homeworkdescription, device.DeviceId);
                     }
-                    if (smsstatus == "1")
-                    {
-                        SMSSendTESTDLR(getstudent[i].GMOBILE, objHomework.HOMEWORK);
-                    }
+                    //if (smsstatus == "1")
+                    //{
+                    //    SMSSendTESTDLR(getstudent[i].GMOBILE, objHomework.HOMEWORK);
+                    //}
                 }
             }
             return new Results
@@ -208,7 +208,7 @@ namespace MobileSchoolAPI.BusinessLayer
                             SMSSendTESTDLR(getstudent[0].GMOBILE, txtMessage);
                         }
 
-                      	TBLNOTIFICATIONDETAIL objnotidetails = new TBLNOTIFICATIONDETAIL();
+                      	//TBLNOTIFICATIONDETAIL objnotidetails = new TBLNOTIFICATIONDETAIL();
 
                         FCMPushNotification OBJPUSH = new FCMPushNotification();
                         //var getsubjectname = db.VIEWSUBJECTNAMEs.Where(r => r.SUBJECTID == obj.subject).ToList();
@@ -253,7 +253,7 @@ namespace MobileSchoolAPI.BusinessLayer
 
 
         }
-
+									   
 
 
         public string SMSSendTESTDLR(string MobileNo, string Message)
