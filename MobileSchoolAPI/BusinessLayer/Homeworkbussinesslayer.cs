@@ -137,7 +137,11 @@ namespace MobileSchoolAPI.BusinessLayer
 
             TBLATTENDENCEMASTER objmster = new TBLATTENDENCEMASTER();
             TBLATTENDENCE objDetail = new TBLATTENDENCE();
+            var logindetail = db.TBLUSERLOGINs.
+                                Where(r => r.UserId == atteobj.Userid && r.Password == atteobj.Password && r.STATUS == "ACTIVE")
+                                .FirstOrDefault();
 
+            
 
             var checkatt = db.Vw_ATTENDANCECHECK.FirstOrDefault(r => r.DIVISIONID == atteobj.DIVISIONID && r.ATTEDANCEDATE == atteobj.ATTEDANCEDATE);
             //Duplicate Attendance Check
@@ -200,12 +204,34 @@ namespace MobileSchoolAPI.BusinessLayer
                         db.SaveChanges();
                         string[] splitname = getstudent[0].STUDENTNAME.Split(' ');
                         TBLNOTIFICATIONDETAIL objnotidetails = new TBLNOTIFICATIONDETAIL();
-                        string txtMessage = "Dear Parent, Your Pupil " + splitname[1] + ", is absent on " + Convert.ToDateTime(atteobj.ATTEDANCEDATE).ToString("dd/MM/yyyy") + ", Kindly note it. See attendance details goo.gl/iTjC9V";
+                        string str = "";
+                        if (logindetail.UserName.StartsWith("NKV"))
+                        {
+                            str = "goo.gl/NsoiKY";
+                        }
+                        else if (logindetail.UserName.StartsWith("SXS"))
+                        {
+                            str = "goo.gl/zotf13";
+                        }
+                        else if (logindetail.UserName.StartsWith("ASM"))
+                        {
+                            str = "goo.gl/9vNiX8";
+                        }
+
+                        else if (logindetail.UserName.StartsWith("ASY"))
+                        {
+                            str = "goo.gl/SNtreT";
+                        }
+                        else if (logindetail.UserName.StartsWith("NMS"))
+                        {
+                            str = "goo.gl/j7XjCx";
+                        }
+                        string txtMessage = "Dear Parent, Your Pupil " + splitname[1] + ", is absent on " + Convert.ToDateTime(atteobj.ATTEDANCEDATE).ToString("dd/MM/yyyy") + ", Kindly note it. See attendance details "+str;
 
 
                         if (smsstatus == "1")
                         {
-                            SMSSendTESTDLR(getstudent[0].GMOBILE, txtMessage);
+                            SMSSendTESTDLR(getstudent[0].GMOBILE, txtMessage, logindetail.UserName);
                         }
 
                       	//TBLNOTIFICATIONDETAIL objnotidetails = new TBLNOTIFICATIONDETAIL();
@@ -256,12 +282,42 @@ namespace MobileSchoolAPI.BusinessLayer
 									   
 
 
-        public string SMSSendTESTDLR(string MobileNo, string Message)
+        public string SMSSendTESTDLR(string MobileNo, string Message,string UserName)
         {
             try
             {
+
                 string str = ""; string responseString = "";
-                str = "http://smsnow.hundiainfosys.com/rest/services/sendSMS/sendGroupSms?AUTH_KEY=14c07610595093f4d66e18f1aac5ee88&message=" + Message + "&senderId=NMSKOP&routeId=1&mobileNos=" + MobileNo + "&smsContentType=english";
+
+
+                if (UserName.StartsWith("NKV"))
+                {
+                    str = "http://smsnow.hundiainfosys.com/rest/services/sendSMS/sendGroupSms?AUTH_KEY=7ddc928fc86d2e3adf01010536830d2&message=" + Message + "&senderId=SFNKVS&routeId=1&mobileNos=" + MobileNo + "&smsContentType=English";
+                    
+
+                }
+                else if (UserName.StartsWith("SXS"))
+                {
+                    str = "http://smsnow.hundiainfosys.com/rest/services/sendSMS/sendGroupSms?AUTH_KEY=3555f03e24952528d1acba2e3f2e4749&message=" + Message + "&senderId=XAVIER&routeId=1&mobileNos=" + MobileNo + "&smsContentType=english";
+                   
+                }
+                else if (UserName.StartsWith("ASM"))
+                {
+
+                    str = "http://smsnow.hundiainfosys.com/rest/services/sendSMS/sendGroupSms?AUTH_KEY=b963a0f8db5c6b3478df79dee5e5842e&message=" + Message + "&senderId=ALPHOS&routeId=1&mobileNos=" + MobileNo + "&smsContentType=english";
+                }
+
+                else if (UserName.StartsWith("ASY"))
+                {
+                  
+                    str = "http://www.smsidea.co.in/sendsms.aspx?mobile=9923990000&pass=PKIGG&senderid=ALPHON&to=" + MobileNo + "&msg=" + Message + "";
+
+                }
+                else if (UserName.StartsWith("NMS"))
+                {
+                    str = "http://smsnow.hundiainfosys.com/rest/services/sendSMS/sendGroupSms?AUTH_KEY=14c07610595093f4d66e18f1aac5ee88&message=" + Message + "&senderId=NMSKOP&routeId=1&mobileNos=" + MobileNo + "&smsContentType=english";
+
+                }
                 HttpWebRequest myReq = (HttpWebRequest)WebRequest.Create(str);
                 HttpWebResponse myResp = (HttpWebResponse)myReq.GetResponse();
                 System.IO.StreamReader respStreamReader = new System.IO.StreamReader(myResp.GetResponseStream());
