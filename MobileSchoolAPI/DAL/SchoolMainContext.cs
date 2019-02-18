@@ -46,7 +46,7 @@ namespace MobileSchoolAPI
 
 
 
-
+        public virtual DbSet<TBLMSGHISTORY> TBLMSGHISTORies { get; set; }
 
 
 
