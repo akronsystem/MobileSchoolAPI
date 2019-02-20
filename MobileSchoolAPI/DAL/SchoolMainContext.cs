@@ -37,8 +37,8 @@ namespace MobileSchoolAPI
 		public virtual DbSet<VIEWCLASSTEACHER> VIEWCLASSTEACHERs { get; set; }
 
 		public virtual DbSet<VWATTENDANCEBYDATESTUDENT> VWATTENDANCEBYDATESTUDENTs { get; set; }
-
-		public virtual DbSet<VIEWATTENDANCECHECK> VIEWATTENDANCECHECKs { get; set; }
+        public virtual DbSet<Vw_ATTENDANCECHECK> Vw_ATTENDANCECHECK { get; set; }
+        public virtual DbSet<VIEWATTENDANCECHECK> VIEWATTENDANCECHECKs { get; set; }
 		public virtual DbSet<VW_GET_USER_TYPE> VW_GET_USER_TYPE { get; set; }
         public virtual DbSet<VW_DATEWISECLASSSTATUSATTENDANCE> VW_DATEWISECLASSSTATUSATTENDANCE { get; set; }
 
@@ -46,7 +46,7 @@ namespace MobileSchoolAPI
 
 
 
-
+        public virtual DbSet<TBLMSGHISTORY> TBLMSGHISTORies { get; set; }
 
 
 
@@ -83,7 +83,7 @@ namespace MobileSchoolAPI
 		public virtual DbSet<vw_FETCHSTANDARDBYDIVISION> vw_FETCHSTANDARDBYDIVISION { get; set; }
 		public virtual DbSet<VIEWDIVISIONLISTBYSTUDENT> VIEWDIVISIONLISTBYSTUDENTs { get; set; }
         public virtual DbSet<VIEWDIVISIONWISESUBJECTSTUDENT> VIEWDIVISIONWISESUBJECTSTUDENTs { get; set; }
-        public virtual DbSet<Vw_ATTENDANCECHECK> Vw_ATTENDANCECHECK { get; set; }
+      
         public virtual DbSet<VIEWSUBJECTNAME> VIEWSUBJECTNAMEs { get; set; }
 
         public virtual DbSet<VIEWGETUSERIDFROMEMPCODE> VIEWGETUSERIDFROMEMPCODEs { get; set; }

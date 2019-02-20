@@ -1,5 +1,6 @@
 ﻿using MobileSchoolAPI.Models;
 using MobileSchoolAPI.ResultModel;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -231,15 +232,48 @@ namespace MobileSchoolAPI.BusinessLayer
 
                         if (smsstatus == "1")
                         {
-                            SMSSendTESTDLR(getstudent[0].GMOBILE, txtMessage, logindetail.UserName);
+
+                            string responseString =  SMSSendTESTDLR(getstudent[0].GMOBILE, txtMessage, logindetail.UserName);
+                            if(responseString!="")
+                            {
+                                var jObject = JObject.Parse(responseString);
+                                var response = jObject["response"].ToString();
+
+                                TBLMSGHISTORY smshist = new TBLMSGHISTORY();
+                                smshist.DATE = DateTime.Now;
+                                smshist.TIME = DateTime.Now.ToShortTimeString();
+                                smshist.MSG = txtMessage;
+                                smshist.TYPE = "ATT";
+                                smshist.CREATEDID = atteobj.Userid;
+                                smshist.DISPLAY = 1;
+                                smshist.STUDENTID = getstudent[0].STUDENTID;
+                                smshist.FROMEMPID = Convert.ToInt64(logindetail.EmpCode);
+                                smshist.STATUS = "Out";
+                                smshist.InStatus = "In";
+                                smshist.OutStatus = "Out";
+                                smshist.REQUESTID = response;
+                                smshist.EMPLOYEEID = 0;
+                                smshist.TOEMPID = "0";
+                                smshist.ATTACHMENTS = "";
+                                smshist.SUBJECT = "";
+                                smshist.OtherNos = "";
+                                smshist.ALUMNIID = 0;
+                                db.TBLMSGHISTORies.Add(smshist);
+                                db.SaveChanges();
+
+                            }
+
+                           
                         }
 
-                      	//TBLNOTIFICATIONDETAIL objnotidetails = new TBLNOTIFICATIONDETAIL();
+                       
 
-                        FCMPushNotification OBJPUSH = new FCMPushNotification();
+                                    //TBLNOTIFICATIONDETAIL objnotidetails = new TBLNOTIFICATIONDETAIL();
+
+                                    FCMPushNotification OBJPUSH = new FCMPushNotification();
                         //var getsubjectname = db.VIEWSUBJECTNAMEs.Where(r => r.SUBJECTID == obj.subject).ToList();
 
-                        string studentid = Convert.ToString(getstudent[i].STUDENTID);
+                        string studentid = Convert.ToString(getstudent[0].STUDENTID);
                         var userid = db.VIEWGETUSERIDFROMEMPCODEs.Where(r => r.EmpCode == studentid).FirstOrDefault();
                         var device = db.VW_DEVICE.FirstOrDefault(r => r.UserId == userid.UserId);
                         if (device != null)
