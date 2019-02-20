@@ -232,7 +232,7 @@ namespace MobileSchoolAPI.BusinessLayer
 
                         if (smsstatus == "1")
                         {
-                          string responseString= SMSSendTESTDLR(getstudent[0].GMOBILE, txtMessage, logindetail.UserName);
+                            string responseString = SMSSendTESTDLR(getstudent[0].GMOBILE, txtMessage, logindetail.UserName);
                             if(responseString!="")
                             {
                                 var jObject = JObject.Parse(responseString);
@@ -272,7 +272,7 @@ namespace MobileSchoolAPI.BusinessLayer
                                     FCMPushNotification OBJPUSH = new FCMPushNotification();
                         //var getsubjectname = db.VIEWSUBJECTNAMEs.Where(r => r.SUBJECTID == obj.subject).ToList();
 
-                        string studentid = Convert.ToString(getstudent[i].STUDENTID);
+                        string studentid = Convert.ToString(getstudent[0].STUDENTID);
                         var userid = db.VIEWGETUSERIDFROMEMPCODEs.Where(r => r.EmpCode == studentid).FirstOrDefault();
                         var device = db.VW_DEVICE.FirstOrDefault(r => r.UserId == userid.UserId);
                         if (device != null)

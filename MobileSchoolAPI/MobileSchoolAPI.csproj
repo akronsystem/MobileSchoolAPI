@@ -219,6 +219,7 @@
     <Compile Include="Models\TBLHOLIDAY.cs" />
     <Compile Include="Models\TBLHOMEWORK.cs" />
     <Compile Include="Models\TBLMESSAGEHISTORY.cs" />
+    <Compile Include="Models\TBLMSGHISTORY.cs" />
     <Compile Include="Models\TBLNOTIFICATION.cs" />
     <Compile Include="Models\TBLNOTIFICATIONDETAIL.cs" />
     <Compile Include="Models\TBLUSERLOGIN.cs" />
