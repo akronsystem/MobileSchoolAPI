@@ -232,6 +232,7 @@ namespace MobileSchoolAPI.BusinessLayer
 
                         if (smsstatus == "1")
                         {
+
                             string responseString =  SMSSendTESTDLR(getstudent[0].GMOBILE, txtMessage, logindetail.UserName);
                             if(responseString!="")
                             {
