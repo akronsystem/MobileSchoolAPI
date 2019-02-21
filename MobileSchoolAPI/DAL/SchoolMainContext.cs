@@ -42,6 +42,7 @@ namespace MobileSchoolAPI
 		public virtual DbSet<VW_GET_USER_TYPE> VW_GET_USER_TYPE { get; set; }
         public virtual DbSet<VW_DATEWISECLASSSTATUSATTENDANCE> VW_DATEWISECLASSSTATUSATTENDANCE { get; set; }
 
+        public virtual DbSet<TBLASSIGNCLASSTEACHER> TBLASSIGNCLASSTEACHERs { get; set; }
 
 
 
