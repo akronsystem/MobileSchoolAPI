@@ -43,7 +43,7 @@ namespace MobileSchoolAPI
         public virtual DbSet<VW_DATEWISECLASSSTATUSATTENDANCE> VW_DATEWISECLASSSTATUSATTENDANCE { get; set; }
 
 
-
+        public virtual DbSet<TBLASSIGNCLASSTEACHER> TBLASSIGNCLASSTEACHERs { get; set; }
 
 
         public virtual DbSet<TBLMSGHISTORY> TBLMSGHISTORies { get; set; }
