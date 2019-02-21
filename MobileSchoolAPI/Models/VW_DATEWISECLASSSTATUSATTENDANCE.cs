@@ -21,12 +21,13 @@ namespace MobileSchoolAPI.Models
         [StringLength(7)]
         public string STATUS { get; set; }
 
-       
         public int? ROLLNO { get; set; }
 
         public DateTime? ATTEDANCEDATE { get; set; }
 
         public int? CREATEDID { get; set; }
+
+        public int? DIVISIONID { get; set; }
 
         [Key]
         [Column(Order = 2)]

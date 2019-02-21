@@ -143,7 +143,9 @@ namespace MobileSchoolAPI.BusinessLayer
                 }
                 else
                 {
-                    var AttendaceStatus = db.VW_DATEWISECLASSSTATUSATTENDANCE.Where(r => r.ATTEDANCEDATE == PA.AttendanceDate && r.CREATEDID == PA.UserId).ToList().OrderBy(r=>r.ROLLNO);
+                    var EMPID = Convert.ToInt32(usertype[0].EmpCode);
+                    var DivData = db.TBLASSIGNCLASSTEACHERs.Where(r => r.EMPLOYEEID == EMPID && r.ACADEMICYEAR == "2018-2019" && r.DISPLAY == 1).FirstOrDefault();
+                    var AttendaceStatus = db.VW_DATEWISECLASSSTATUSATTENDANCE.Where(r => r.ATTEDANCEDATE == PA.AttendanceDate && r.CREATEDID == PA.UserId &&r.DIVISIONID==DivData.DIVISIONID).ToList().OrderBy(r=>r.ROLLNO);
                         if (AttendaceStatus.Count() == 0)
                     {
 
