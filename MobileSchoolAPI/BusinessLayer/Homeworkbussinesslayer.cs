@@ -234,7 +234,7 @@ namespace MobileSchoolAPI.BusinessLayer
                             if (smsstatus == "1")
                             {
 
-                                string responseString = ""; // SMSSendTESTDLR(getstudent[0].GMOBILE, txtMessage, logindetail.UserName);
+                                string responseString = SMSSendTESTDLR(getstudent[0].GMOBILE, txtMessage, logindetail.UserName);
                                 if (responseString != "")
                                 {
                                     var jObject = JObject.Parse(responseString);
@@ -358,15 +358,18 @@ namespace MobileSchoolAPI.BusinessLayer
                 }
                 else if (UserName.StartsWith("NMS"))
                 {
-                    str = "http://smsnow.hundiainfosys.com/rest/services/sendSMS/sendGroupSms?AUTH_KEY=14c07610595093f4d66e18f1aac5ee88&message=" + Message + "&senderId=NMSKOP&routeId=1&mobileNos=" + MobileNo + "&smsContentType=english";
+                    //str = "http://smsnow.hundiainfosys.com/rest/services/sendSMS/sendGroupSms?AUTH_KEY=14c07610595093f4d66e18f1aac5ee88&message=" + Message + "&senderId=NMSKOP&routeId=1&mobileNos=" + MobileNo + "&smsContentType=english";
 
                 }
-                HttpWebRequest myReq = (HttpWebRequest)WebRequest.Create(str);
-                HttpWebResponse myResp = (HttpWebResponse)myReq.GetResponse();
-                System.IO.StreamReader respStreamReader = new System.IO.StreamReader(myResp.GetResponseStream());
-                responseString = respStreamReader.ReadToEnd();
-                respStreamReader.Close();
-                myResp.Close();
+                if (str != "")
+                {
+                    HttpWebRequest myReq = (HttpWebRequest)WebRequest.Create(str);
+                    HttpWebResponse myResp = (HttpWebResponse)myReq.GetResponse();
+                    System.IO.StreamReader respStreamReader = new System.IO.StreamReader(myResp.GetResponseStream());
+                    responseString = respStreamReader.ReadToEnd();
+                    respStreamReader.Close();
+                    myResp.Close();
+                }
                 return responseString;
             }
             catch
