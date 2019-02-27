@@ -22,12 +22,26 @@ namespace MobileSchoolAPI.Controllers
             return objnote.SaveNotification(obj);
         }
 
-        public object ViewNotification([FromBody]ParamNotificationView obj)
+        public object ViewHomeworkNotification([FromBody]ParamNotificationView obj)
         {
             NotificationBusiness objnote = new NotificationBusiness();
 			return  objnote.ViewNotification(obj) ;
 
 		}
+
+        public object ViewGeneralNotification([FromBody]ParamNotificationView obj)
+        {
+            NotificationBusiness objnote = new NotificationBusiness();
+            return objnote.ViewGeneralNotification(obj);
+
+        }
+
+        public object ViewAllNotification([FromBody]ParamNotificationView obj)
+        {
+            NotificationBusiness objnote = new NotificationBusiness();
+            return objnote.ViewAllNotification(obj);
+
+        }
 
         public object UpdateNotification([FromBody]ParamNotificationUpdate obj)
         {
@@ -51,5 +65,12 @@ namespace MobileSchoolAPI.Controllers
             return objnote.ViewEventHoliday(obj);
         }
 
+
+        [HttpPost]
+        public object ViewEventNotification([FromBody]ParamNotificationView obj)
+        {
+            NotificationBusiness objnote = new NotificationBusiness();
+            return objnote.ViewEventList(obj);
+        }
     }
 }
