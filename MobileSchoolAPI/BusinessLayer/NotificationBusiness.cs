@@ -94,8 +94,9 @@ namespace MobileSchoolAPI.BusinessLayer
                         Result ddl = new Result();
                         ddl.TITLE = att.TITLE;
                         ddl.NOTIFICATIONID = att.NOTIFICATIONID;
-                        ddl.NOTIFICATIONDATE = att.NOTIFICATIONDATE.ToString();
+                        ddl.NOTIFICATIONDATE =Convert.ToDateTime(att.NOTIFICATIONDATE);
                         ddl.NOTIFICATIONTIME = att.NOTIFICATIONTIME;
+                        ddl.NOTIFICATIONTYPE = att.NOTIFICATIONTYPE;
                         ddl.UserId = att.UserId.ToString();
                         ddl.STUDENTID = att.STUDENTID.ToString();
                         ddl.STATUS = att.STATUS.ToString();
@@ -144,7 +145,7 @@ namespace MobileSchoolAPI.BusinessLayer
                     }
                     else
                     {
-                        return new DivisionListResult() { IsSuccess = true, Notification = lt.ToList().OrderByDescending(r => r.NOTIFICATIONID) };
+                        return new DivisionListResult() { IsSuccess = true, HomeworkNotification = lt.OrderByDescending(r => Convert.ToDateTime(r.NOTIFICATIONDATE)).ToList() };
 
 
                     }
@@ -164,15 +165,262 @@ namespace MobileSchoolAPI.BusinessLayer
             
         }
 
+
+
+        public object ViewGeneralNotification(ParamNotificationView obj)
+        {
+            try
+            {
+
+                SchoolMainContext db = new ConcreateContext().GetContext(obj.userid, obj.password);
+                if (db == null)
+                {
+                    return new Results() { IsSuccess = false, Message = "Invalid User" };
+                }
+                else
+                {
+                    var Notification = db.VIEWGENERALNOTIFICATIONs.Where(r => r.UserId == obj.userid).ToList().OrderByDescending(r => r.NOTIFICATIONID);
+                    //var NotificationAll = db.VIEWALLNOTIFICATIONs.ToList().OrderByDescending(r => r.NOTIFICATIONID);
+                    List<Result> lt = new List<Result>();
+
+                    if (Notification.Count() != 0)
+                    {
+                        foreach (var att in Notification)
+                        {
+
+                            Result ddl = new Result();
+                            ddl.TITLE = att.TITLE;
+                            ddl.NOTIFICATIONID = att.NOTIFICATIONID;
+                            ddl.NOTIFICATIONDATE = Convert.ToDateTime(att.NOTIFICATIONDATE);
+                            ddl.NOTIFICATIONTIME = att.NOTIFICATIONTIME;
+                            ddl.NOTIFICATIONTYPE = att.NOTIFICATIONTYPE;
+                            ddl.UserId = att.UserId.ToString();
+                            ddl.STUDENTID = att.STUDENTID.ToString();
+                            ddl.STATUS = att.STATUS.ToString();
+                            ddl.UserType = att.UserType;
+
+                            lt.Add(ddl);
+
+
+
+
+                        }
+                    }
+
+                    var getUserType = db.VW_GET_USER_TYPE.Where(r => r.UserId == obj.userid).FirstOrDefault();
+
+                    var Notificationgen = db.VIEWNOTIFICATIONGENs.Where(r => r.ACADEMICYEAR == "2018-2019").ToList().OrderByDescending(r => r.NOTIFICATIONID);
+
+                    if (Notificationgen.Count() != 0)
+                    {
+                        foreach (var att in Notificationgen)
+                        {
+
+                            Result ddl = new Result();
+                            ddl.TITLE = att.TITLE;
+                            ddl.NOTIFICATIONID = att.NOTIFICATIONID;
+                            ddl.NOTIFICATIONDATE = Convert.ToDateTime(att.NOTIFICATIONDATE);
+                            ddl.NOTIFICATIONTIME = att.NOTIFICATIONTIME;
+                            ddl.NOTIFICATIONTYPE = att.NOTIFICATIONTYPE;
+                            ddl.UserId = obj.userid.ToString();
+                            ddl.STUDENTID = "";
+                            ddl.STATUS ="";
+                            ddl.UserType = getUserType.UserType;
+
+                            lt.Add(ddl);
+
+
+
+
+                        }
+                    }
+
+
+                    if (lt == null)
+                    {
+
+                        return new Results
+                        {
+                            IsSuccess = false,
+                            Message = "No Notifications Found"
+                        };
+
+
+
+
+                    }
+                    else
+                    {
+                        return new DivisionListResult() { IsSuccess = true, GeneralNotification = lt.OrderByDescending(r =>Convert.ToDateTime(r.NOTIFICATIONDATE)).ToList() };
+
+
+                    }
+                }
+            }
+            catch (Exception E)
+            {
+
+                return new Results
+                {
+                    IsSuccess = false,
+                    Message = E.Message
+                };
+
+
+            }
+
+        }
+
+
+
+        public object ViewAllNotification(ParamNotificationView obj)
+        {
+            try
+            {
+
+                SchoolMainContext db = new ConcreateContext().GetContext(obj.userid, obj.password);
+                if (db == null)
+                {
+                    return new Results() { IsSuccess = false, Message = "Invalid User" };
+                }
+                else
+                {
+                    List<Result> lt = new List<Result>();
+                    var NotificationHome = db.VIEWNOTIFICATIONs.Where(r => r.UserId == obj.userid).ToList().OrderByDescending(r => r.NOTIFICATIONID);
+                    //var NotificationAll = db.VIEWALLNOTIFICATIONs.ToList().OrderByDescending(r => r.NOTIFICATIONID);
+
+
+
+                    foreach (var att in NotificationHome)
+                    {
+
+                        Result ddl = new Result();
+                        ddl.TITLE = att.TITLE;
+                        ddl.NOTIFICATIONID = att.NOTIFICATIONID;
+                        ddl.NOTIFICATIONDATE = Convert.ToDateTime(att.NOTIFICATIONDATE);
+                        ddl.NOTIFICATIONTIME = att.NOTIFICATIONTIME;
+                        ddl.NOTIFICATIONTYPE = att.NOTIFICATIONTYPE;
+                        ddl.UserId = att.UserId.ToString();
+                        ddl.STUDENTID = att.STUDENTID.ToString();
+                        ddl.STATUS = att.STATUS.ToString();
+                        ddl.UserType = att.UserType;
+
+                        lt.Add(ddl);
+
+
+
+
+                    }
+
+                    var Notification = db.VIEWGENERALNOTIFICATIONs.Where(r => r.UserId == obj.userid).ToList().OrderByDescending(r => r.NOTIFICATIONID);
+                    //var NotificationAll = db.VIEWALLNOTIFICATIONs.ToList().OrderByDescending(r => r.NOTIFICATIONID);
+                 
+
+                    if (Notification.Count() != 0)
+                    {
+                        foreach (var att in Notification)
+                        {
+
+                            Result ddl = new Result();
+                            ddl.TITLE = att.TITLE;
+                            ddl.NOTIFICATIONID = att.NOTIFICATIONID;
+                            ddl.NOTIFICATIONDATE = Convert.ToDateTime(att.NOTIFICATIONDATE);
+                            ddl.NOTIFICATIONTIME = att.NOTIFICATIONTIME;
+                            ddl.NOTIFICATIONTYPE = att.NOTIFICATIONTYPE;
+                            ddl.UserId = att.UserId.ToString();
+                            ddl.STUDENTID = att.STUDENTID.ToString();
+                            ddl.STATUS = att.STATUS.ToString();
+                            ddl.UserType = att.UserType;
+
+                            lt.Add(ddl);
+
+
+
+
+                        }
+                    }
+
+                    var getUserType = db.VW_GET_USER_TYPE.Where(r => r.UserId == obj.userid).FirstOrDefault();
+
+                    var Notificationgen = db.VIEWNOTIFICATIONGENs.Where(r => r.ACADEMICYEAR == "2018-2019").ToList().OrderByDescending(r => r.NOTIFICATIONID);
+
+                    if (Notificationgen.Count() != 0)
+                    {
+                        foreach (var att in Notificationgen)
+                        {
+
+                            Result ddl = new Result();
+                            ddl.TITLE = att.TITLE;
+                            ddl.NOTIFICATIONID = att.NOTIFICATIONID;
+                            ddl.NOTIFICATIONDATE = Convert.ToDateTime(att.NOTIFICATIONDATE);
+                            ddl.NOTIFICATIONTIME = att.NOTIFICATIONTIME;
+                            ddl.NOTIFICATIONTYPE = att.NOTIFICATIONTYPE;
+                            ddl.UserId = obj.userid.ToString();
+                            ddl.STUDENTID = "";
+                            ddl.STATUS = "";
+                            ddl.UserType = getUserType.UserType;
+
+                            lt.Add(ddl);
+
+
+
+
+                        }
+                    }
+
+
+
+
+                 
+
+
+
+
+                    if (lt == null)
+                    {
+
+                        return new Results
+                        {
+                            IsSuccess = false,
+                            Message = "No Notifications Found"
+                        };
+
+
+
+
+                    }
+                    else
+                    {
+                        return new DivisionListResult() { IsSuccess = true, AllNotification = lt.OrderByDescending(r => Convert.ToDateTime(r.NOTIFICATIONDATE)).ToList() };
+
+
+                    }
+                }
+            }
+            catch (Exception E)
+            {
+
+                return new Results
+                {
+                    IsSuccess = false,
+                    Message = E.Message
+                };
+
+
+            }
+
+        }
+
         public class Result
         {
             public string TITLE { get; set; }
             public Int64 NOTIFICATIONID { get; set; }
 
-            public string NOTIFICATIONDATE { get; set; }
+            public DateTime NOTIFICATIONDATE { get; set; }
 
             public string NOTIFICATIONTIME { get; set; }
 
+            public string NOTIFICATIONTYPE { get; set; }
             public string UserId { get; set; }
 
             public string STUDENTID { get; set; }
@@ -277,7 +525,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 }
                 else
                 {
-                    return new DivisionListResult() { IsSuccess = true, EventsList = EventHoliday };
+                    return new DivisionListResult() { IsSuccess = true, EventHolidayList = EventHoliday};
                 }
             }
             catch (Exception E)
@@ -289,6 +537,49 @@ namespace MobileSchoolAPI.BusinessLayer
                 };
 
               
+            }
+        }
+
+
+
+
+        public object ViewEventList(ParamNotificationView obj)
+        {
+            try
+            {
+
+                SchoolMainContext db = new ConcreateContext().GetContext(obj.userid, obj.password);
+                if (db == null)
+                {
+                    return new Results() { IsSuccess = false, Message = "Invalid User" };
+                }
+
+                var Event = db.TBLNOTIFICATIONs.Where(r=>r.NOTIFICATIONTYPE=="News" && r.ACADEMICYEAR=="2018-2019").ToList().OrderByDescending(r => r.NOTIFICATIONDATE);
+
+                if (Event == null)
+                {
+
+                    return new Results
+                    {
+                        IsSuccess = false,
+                        Message = new InvalidUser() { IsSuccess = false, Result = " No Record Found" }
+                    };
+
+                }
+                else
+                {
+                    return new DivisionListResult() { IsSuccess = true, EventNotification = Event };
+                }
+            }
+            catch (Exception E)
+            {
+                return new Results
+                {
+                    IsSuccess = false,
+                    Message = E.Message
+                };
+
+
             }
         }
 

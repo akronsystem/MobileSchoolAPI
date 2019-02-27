@@ -17,8 +17,14 @@ namespace MobileSchoolAPI.Models
         public object SubjectList { get; set; }
 
         public object Notification { get; set; }
-		public object EventsList { get; set; }
 
+        public object EventHolidayList { get; set; }
+		public object EventNotification { get; set; }
 
-	}
+        public object HomeworkNotification { get; set; }
+
+        public object GeneralNotification { get; set; }
+
+        public object AllNotification { get; set; }
+    }
 }

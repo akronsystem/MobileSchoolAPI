@@ -14,6 +14,9 @@ namespace MobileSchoolAPI
 		{
 
 		}
+        public virtual DbSet<VIEWNOTIFICATIONGEN> VIEWNOTIFICATIONGENs { get; set; }
+        public virtual DbSet<VIEWGENERALNOTIFICATION> VIEWGENERALNOTIFICATIONs { get; set; }
+
         public virtual DbSet<ViewGetEmployeeBirthDetail> ViewGetEmployeeBirthDetails { get; set; }
         public virtual DbSet<View_UnreadNotificationCount> View_UnreadNotificationCount { get; set; }
         public virtual DbSet<TBLHOLIDAY> TBLHOLIDAYs { get; set; }
@@ -44,7 +47,7 @@ namespace MobileSchoolAPI
 
         public virtual DbSet<TBLASSIGNCLASSTEACHER> TBLASSIGNCLASSTEACHERs { get; set; }
 
-        public virtual DbSet<TBLASSIGNCLASSTEACHER> TBLASSIGNCLASSTEACHERs { get; set; }
+       // public virtual DbSet<TBLASSIGNCLASSTEACHER> TBLASSIGNCLASSTEACHERs { get; set; }
 
 
         public virtual DbSet<TBLMSGHISTORY> TBLMSGHISTORies { get; set; }

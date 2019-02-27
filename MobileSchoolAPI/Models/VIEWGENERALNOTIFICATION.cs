@@ -6,29 +6,15 @@ namespace MobileSchoolAPI.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("VIEWNOTIFICATION")]
-    public partial class VIEWNOTIFICATION
+    [Table("VIEWGENERALNOTIFICATION")]
+    public partial class VIEWGENERALNOTIFICATION
     {
-
-
         public string TITLE { get; set; }
-
-
-
-        [Key]
-        [Column(Order = 0)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public long NOTIFICATIONID { get; set; }
 
         public DateTime? NOTIFICATIONDATE { get; set; }
 
         [StringLength(50)]
         public string NOTIFICATIONTIME { get; set; }
-
-        [Key]
-        [Column(Order = 1)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public long UserId { get; set; }
 
         public long? STUDENTID { get; set; }
 
@@ -36,6 +22,13 @@ namespace MobileSchoolAPI.Models
 
         [StringLength(50)]
         public string UserType { get; set; }
+
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public long NOTIFICATIONID { get; set; }
+
+
+        public long UserId { get; set; }
 
         public string NOTIFICATIONTYPE { get; set; }
     }

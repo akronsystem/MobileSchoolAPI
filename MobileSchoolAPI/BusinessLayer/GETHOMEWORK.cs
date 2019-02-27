@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using MobileSchoolAPI.Controllers;
 using MobileSchoolAPI.ResultModel;
+using System.Configuration;
 
 namespace MobileSchoolAPI.BusinessLayer
 {
@@ -148,8 +149,34 @@ namespace MobileSchoolAPI.BusinessLayer
                     return new Results() { IsSuccess = false, Message = "Invalid User" };
                 }
                 var EmpHomework = db.VIEWHOMEWORKs.Where(r => r.UserId == obj.userid && r.HOMEWORKDATE==obj.homeworkdate).OrderByDescending(r => r.HOMEWORKDATE).ToList(); ;
+                string UploadBaseUrl = "";
+                var logindetail = db.TBLUSERLOGINs.
+                             Where(r => r.UserId == obj.userid && r.Password == obj.password && r.STATUS == "ACTIVE")
+                             .FirstOrDefault();
 
+                if (logindetail.UserName.StartsWith("NKV"))
+                {
+                    UploadBaseUrl = ConfigurationManager.AppSettings["NkvsBaseUrlUpload"];
+                }
+                else if (logindetail.UserName.StartsWith("SXS"))
+                {
+                    UploadBaseUrl = ConfigurationManager.AppSettings["StxavierBaseUrlUpload"];
+                }
+                else if (logindetail.UserName.StartsWith("ASM"))
+                {
+                    UploadBaseUrl = ConfigurationManager.AppSettings["AsmBaseUrlUpload"];
+                }
 
+                else if (logindetail.UserName.StartsWith("ASY"))
+                {
+                    UploadBaseUrl = ConfigurationManager.AppSettings["AsyBaseUrlUpload"];
+                }
+                else if (logindetail.UserName.StartsWith("NMS"))
+                {
+                    UploadBaseUrl = ConfigurationManager.AppSettings["NmsBaseUrlUpload"];
+                }
+
+                List<ResultSet> Res = new List<ResultSet>();
 
                 if (EmpHomework.Count() == 0)
                 {
@@ -167,13 +194,75 @@ namespace MobileSchoolAPI.BusinessLayer
                     }
                     else
                     {
-                         return new DivisionListResult() { IsSuccess = true, HomeWork = StudentHomework }; ;
+
+                        for (int i = 0; i < StudentHomework.Count; i++)
+                        {
+                            ResultSet rs = new ResultSet();
+                            rs.UserId = StudentHomework[i].UserId;
+                            rs.UserType = StudentHomework[i].UserType;
+                            rs.HOMEWORKID = StudentHomework[i].HOMEWORKID;
+                            rs.HOMEWORKDATE = Convert.ToDateTime(StudentHomework[i].HOMEWORKDATE);
+                            rs.TIME = StudentHomework[i].TIME;
+                            rs.STANDARDID = Convert.ToInt32(StudentHomework[i].STANDARDID);
+                            rs.DIVISIONID = Convert.ToInt32(StudentHomework[i].DIVISIONID);
+                            rs.HOMEWORK = StudentHomework[i].HOMEWORK;
+                            rs.ACADEMICYEAR = StudentHomework[i].ACADEMICYEAR;
+                            if(StudentHomework[i].FILEPATH!="")
+                            {
+                                rs.FILEPATH = UploadBaseUrl + StudentHomework[i].FILEPATH;
+                            }
+                            else
+                            {
+                                rs.FILEPATH = "";
+                            }
+
+                          
+                            rs.STANDARDNAME = StudentHomework[i].STANDARDNAME;
+                            rs.DIVISIONNAME = StudentHomework[i].DIVISIONNAME;
+                            rs.EMPLOYEENAME = StudentHomework[i].EMPLOYEENAME;
+                            rs.SUBJECTNAME = StudentHomework[i].SUBJECTNAME;
+                            rs.DISPLAY = Convert.ToInt32(StudentHomework[i].DISPLAY);
+                            Res.Add(rs);
+
+                        }
+                        return new DivisionListResult() { IsSuccess = true, HomeWork = Res }; 
                     }
                    
                 }
                 else
                 {
-                    return new DivisionListResult() { IsSuccess = true, HomeWork = EmpHomework }; ;
+                    for(int i=0; i<EmpHomework.Count;i++)
+                    {
+                        ResultSet rs = new ResultSet();
+                        rs.UserId = EmpHomework[i].UserId;
+                        rs.UserType = EmpHomework[i].UserType;
+                        rs.HOMEWORKID = EmpHomework[i].HOMEWORKID;
+                        rs.HOMEWORKDATE =Convert.ToDateTime(EmpHomework[i].HOMEWORKDATE);
+                        rs.TIME = EmpHomework[i].TIME;
+                        rs.STANDARDID =Convert.ToInt32( EmpHomework[i].STANDARDID);
+                        rs.DIVISIONID = Convert.ToInt32(EmpHomework[i].DIVISIONID);
+                        rs.HOMEWORK = EmpHomework[i].HOMEWORK;
+                        rs.ACADEMICYEAR = EmpHomework[i].ACADEMICYEAR;
+                        if (EmpHomework[i].FILEPATH != "")
+                        {
+                            rs.FILEPATH = UploadBaseUrl + EmpHomework[i].FILEPATH;
+                        }
+                        else
+                        {
+                            rs.FILEPATH = "";
+                        }
+
+                           
+                        rs.STANDARDNAME = EmpHomework[i].STANDARDNAME;
+                        rs.DIVISIONNAME = EmpHomework[i].DIVISIONNAME;
+                        rs.EMPLOYEENAME = EmpHomework[i].EMPLOYEENAME;
+                        rs.SUBJECTNAME = EmpHomework[i].SUBJECTNAME;
+                        rs.DISPLAY = Convert.ToInt32(EmpHomework[i].DISPLAY);
+                        Res.Add(rs);
+
+                    }
+
+                    return new DivisionListResult() { IsSuccess = true, HomeWork = Res }; 
 
                 }
             }
@@ -205,8 +294,33 @@ namespace MobileSchoolAPI.BusinessLayer
                 }
                 var EmpHomework = db.VIEWHOMEWORKs.Where(r => r.UserId == obj.userid && r.HOMEWORKDATE>=obj.FromDate && r.HOMEWORKDATE<=obj.ToDate).OrderByDescending(r=>r.HOMEWORKDATE).ToList();
 
+                string UploadBaseUrl = "";
+                var logindetail = db.TBLUSERLOGINs.
+                             Where(r => r.UserId == obj.userid && r.Password == obj.password && r.STATUS == "ACTIVE")
+                             .FirstOrDefault();
 
+                if (logindetail.UserName.StartsWith("NKV"))
+                {
+                    UploadBaseUrl = ConfigurationManager.AppSettings["NkvsBaseUrlUpload"];
+                }
+                else if (logindetail.UserName.StartsWith("SXS"))
+                {
+                    UploadBaseUrl = ConfigurationManager.AppSettings["StxavierBaseUrlUpload"];
+                }
+                else if (logindetail.UserName.StartsWith("ASM"))
+                {
+                    UploadBaseUrl = ConfigurationManager.AppSettings["AsmBaseUrlUpload"];
+                }
 
+                else if (logindetail.UserName.StartsWith("ASY"))
+                {
+                    UploadBaseUrl = ConfigurationManager.AppSettings["AsyBaseUrlUpload"];
+                }
+                else if (logindetail.UserName.StartsWith("NMS"))
+                {
+                    UploadBaseUrl = ConfigurationManager.AppSettings["NmsBaseUrlUpload"];
+                }
+                List<ResultSet> Res = new List<ResultSet>();
                 if (EmpHomework.Count() == 0)
                 {
                     var StudentHomework = db.VIEWSTUDENTHOMEWORKs.Where(r => r.UserId == obj.userid && r.HOMEWORKDATE >= obj.FromDate && r.HOMEWORKDATE<=obj.ToDate).OrderByDescending(r => r.HOMEWORKDATE).ToList();
@@ -223,13 +337,74 @@ namespace MobileSchoolAPI.BusinessLayer
                     }
                     else
                     {
-                         return new DivisionListResult() { IsSuccess = true, HomeWork = StudentHomework }; ;
+                        for (int i = 0; i < StudentHomework.Count; i++)
+                        {
+                            ResultSet rs = new ResultSet();
+                            rs.UserId = StudentHomework[i].UserId;
+                            rs.UserType = StudentHomework[i].UserType;
+                            rs.HOMEWORKID = StudentHomework[i].HOMEWORKID;
+                            rs.HOMEWORKDATE = Convert.ToDateTime(StudentHomework[i].HOMEWORKDATE);
+                            rs.TIME = StudentHomework[i].TIME;
+                            rs.STANDARDID = Convert.ToInt32(StudentHomework[i].STANDARDID);
+                            rs.DIVISIONID = Convert.ToInt32(StudentHomework[i].DIVISIONID);
+                            rs.HOMEWORK = StudentHomework[i].HOMEWORK;
+                            rs.ACADEMICYEAR = StudentHomework[i].ACADEMICYEAR;
+                            if(StudentHomework[i].FILEPATH!="")
+                            {
+                                rs.FILEPATH = UploadBaseUrl + StudentHomework[i].FILEPATH;
+                            }
+                            else
+
+                            {
+                                rs.FILEPATH = "";
+                            }
+                           
+                            rs.STANDARDNAME = StudentHomework[i].STANDARDNAME;
+                            rs.DIVISIONNAME = StudentHomework[i].DIVISIONNAME;
+                            rs.EMPLOYEENAME = StudentHomework[i].EMPLOYEENAME;
+                            rs.SUBJECTNAME = StudentHomework[i].SUBJECTNAME;
+                            rs.DISPLAY = Convert.ToInt32(StudentHomework[i].DISPLAY);
+                            Res.Add(rs);
+
+                        }
+                        return new DivisionListResult() { IsSuccess = true, HomeWork = Res };
                     }
                    
                 }
                 else
                 {
-                    return new DivisionListResult() { IsSuccess = true, HomeWork = EmpHomework }; ;
+                    for (int i = 0; i < EmpHomework.Count; i++)
+                    {
+                        ResultSet rs = new ResultSet();
+                        rs.UserId = EmpHomework[i].UserId;
+                        rs.UserType = EmpHomework[i].UserType;
+                        rs.HOMEWORKID = EmpHomework[i].HOMEWORKID;
+                        rs.HOMEWORKDATE = Convert.ToDateTime(EmpHomework[i].HOMEWORKDATE);
+                        rs.TIME = EmpHomework[i].TIME;
+                        rs.STANDARDID = Convert.ToInt32(EmpHomework[i].STANDARDID);
+                        rs.DIVISIONID = Convert.ToInt32(EmpHomework[i].DIVISIONID);
+                        rs.HOMEWORK = EmpHomework[i].HOMEWORK;
+                        rs.ACADEMICYEAR = EmpHomework[i].ACADEMICYEAR;
+                        if(EmpHomework[i].FILEPATH!="")
+                        {
+                            rs.FILEPATH = UploadBaseUrl + EmpHomework[i].FILEPATH;
+
+                        }
+                        else
+                        {
+                            rs.FILEPATH ="";
+
+                        }
+                        rs.STANDARDNAME = EmpHomework[i].STANDARDNAME;
+                        rs.DIVISIONNAME = EmpHomework[i].DIVISIONNAME;
+                        rs.EMPLOYEENAME = EmpHomework[i].EMPLOYEENAME;
+                        rs.SUBJECTNAME = EmpHomework[i].SUBJECTNAME;
+                        rs.DISPLAY = Convert.ToInt32(EmpHomework[i].DISPLAY);
+                        Res.Add(rs);
+
+                    }
+
+                    return new DivisionListResult() { IsSuccess = true, HomeWork = Res };
 
                 }
             }
@@ -247,5 +422,26 @@ namespace MobileSchoolAPI.BusinessLayer
             }
         }
 
+
+
+        public class ResultSet
+        {
+            public Int64  UserId {get;set;}
+            public string UserType { get; set; }
+            public Int64 HOMEWORKID {get;set;}
+            public DateTime HOMEWORKDATE { get; set; }
+            public string TIME { get; set; }
+            public int STANDARDID { get; set; }
+            public int DIVISIONID { get; set; }
+            public string HOMEWORK { get; set; }
+            public string ACADEMICYEAR { get; set; }
+            public string FILEPATH { get; set; }
+            public string SUBMISSIONDATE { get; set; }
+            public string STANDARDNAME { get; set; }
+            public string DIVISIONNAME { get; set; }
+            public string EMPLOYEENAME { get; set; }
+            public string SUBJECTNAME { get; set; }
+            public Int64 DISPLAY { get; set; }
+        }
     }
 }

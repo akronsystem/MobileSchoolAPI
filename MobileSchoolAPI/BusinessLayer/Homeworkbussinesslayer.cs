@@ -4,8 +4,10 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Web;
 
 
@@ -169,15 +171,19 @@ namespace MobileSchoolAPI.BusinessLayer
                         db.SaveChanges();
 
 
-                        //TBLNOTIFICATION objnotification = new TBLNOTIFICATION();
-                        //objnotification.TITLE = "Daily Attendance";
-                        //objnotification.NOTIFICATIONDATE = DateTime.Now;
-                        //objnotification.NOTIFICATIONTIME = DateTime.Now.ToString("h:mm tt");
-                        //objnotification.DIVISIONID = atteobj.DIVISIONID;
-                        //objnotification.ACADEMICYEAR = "2018-2019";
-                        //objnotification.NOTIFICATIONTYPE = "Attendance";
-                        //db.TBLNOTIFICATIONs.Add(objnotification);
-                        //db.SaveChanges();
+                        TBLNOTIFICATION objnotification = new TBLNOTIFICATION();
+                        objnotification.TITLE = "Daily Attendance";
+                        objnotification.NOTIFICATIONDATE = DateTime.Now;
+                        objnotification.NOTIFICATIONTIME = DateTime.Now.ToString("h:mm tt");
+                        objnotification.DIVISIONID = atteobj.DIVISIONID;
+                        objnotification.ACADEMICYEAR = "2018-2019";
+                        objnotification.NOTIFICATIONTYPE = "Attendance";
+                        db.TBLNOTIFICATIONs.Add(objnotification);
+                        db.SaveChanges();
+
+
+
+
 
                         string absentno = atteobj.Absentno;
                         string[] sbno = absentno.Split(',');
@@ -204,8 +210,16 @@ namespace MobileSchoolAPI.BusinessLayer
 
                             db.TBLATTENDENCEs.Add(objDetail);
                             db.SaveChanges();
+
                             string[] splitname = getstudent[0].STUDENTNAME.Split(' ');
                             TBLNOTIFICATIONDETAIL objnotidetails = new TBLNOTIFICATIONDETAIL();
+                            objnotidetails.NOTIFICATIONID = objnotification.NOTIFICATIONID;
+                            objnotidetails.STUDENTID = getstudent[0].STUDENTID;
+                            objnotidetails.STATUS = 0;
+
+                            db.TBLNOTIFICATIONDETAILs.Add(objnotidetails);
+                            db.SaveChanges();
+
                             string str = "";
                             if (logindetail.UserName.StartsWith("NKV"))
                             {
@@ -269,7 +283,11 @@ namespace MobileSchoolAPI.BusinessLayer
 
 
 
-                            //TBLNOTIFICATIONDETAIL objnotidetails = new TBLNOTIFICATIONDETAIL();
+
+
+                        
+
+
 
                             FCMPushNotification OBJPUSH = new FCMPushNotification();
                             //var getsubjectname = db.VIEWSUBJECTNAMEs.Where(r => r.SUBJECTID == obj.subject).ToList();
@@ -378,62 +396,183 @@ namespace MobileSchoolAPI.BusinessLayer
             }
         }
         public object FileUpload(homeworkparameters obj)
-        {
+       {
+
             int Userid = Convert.ToInt32(HttpContext.Current.Request["Userid"]);
             var Password = HttpContext.Current.Request["Password"];
             SchoolMainContext db = new ConcreateContext().GetContext(Userid, Password);
+            if (db == null)
+            {
+                return new Results() { IsSuccess = false, Message = "Invalid User" };
+            }
+            var logindetail = db.TBLUSERLOGINs.
+                              Where(r => r.UserId == Userid && r.Password == Password && r.STATUS == "ACTIVE")
+                              .FirstOrDefault();
             var getUserType = db.VW_GET_USER_TYPE.Where(r => r.UserId == Userid).FirstOrDefault();
-            //if (!Request.Content.IsMimeMultipartContent())
-            //{
-            //    throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
-            //}
+       
             try
             {
+                ///Base Url
+                string UploadBaseUrl = "";
                 var httpRequest = HttpContext.Current.Request;
                 if (httpRequest.Files.Count > 0)
                 {
-                   string UploadBaseUrl = ConfigurationManager.AppSettings["UploadBaseURL"];
-                    string fileName = string.Empty;
-                    var filePath = string.Empty;
-                    string savePath = string.Empty;
+                    if (logindetail.UserName.StartsWith("NKV"))
+                    {
+                        UploadBaseUrl = ConfigurationManager.AppSettings["NkvsBaseUrl"];
+                    }
+                    else if (logindetail.UserName.StartsWith("SXS"))
+                    {
+                        UploadBaseUrl = ConfigurationManager.AppSettings["StxavierBaseUrl"];
+                    }
+                    else if (logindetail.UserName.StartsWith("ASM"))
+                    {
+                        UploadBaseUrl = ConfigurationManager.AppSettings["AsmBaseUrl"];
+                    }
+
+                    else if (logindetail.UserName.StartsWith("ASY"))
+                    {
+                        UploadBaseUrl = ConfigurationManager.AppSettings["AsyBaseUrl"];
+                    }
+                    else if (logindetail.UserName.StartsWith("NMS"))
+                    {
+                        UploadBaseUrl = ConfigurationManager.AppSettings["NmsBaseUrl"];
+                    }
+                    string ftp = UploadBaseUrl;
+
+                   //Upload File Using FTP
+                    string ftpFolder = "UPLOADFILE/";
+                    byte[] fileBytes = null;
+                    string fileName = "";
                     foreach (string file in httpRequest.Files)
                     {
                         var postedFile = httpRequest.Files[file];
                         fileName = postedFile.FileName;
-                        filePath = ConfigurationManager.AppSettings["UploadDir"] + Guid.NewGuid() + fileName;
-                        savePath = HttpContext.Current.Server.MapPath(filePath); postedFile.SaveAs(savePath); // NOTE: To store in memory use postedFile.InputStream }
-                        TBLHOMEWORK upload = new TBLHOMEWORK();
-                        //upload.file_id = Guid.NewGuid().ToString();
-                        //upload.name = fileName;
-						 
-                        upload.STANDARDID = Convert.ToInt32(HttpContext.Current.Request["standardid"]);
-                        upload.CREATEDID = int.Parse(getUserType.EmpCode);
-                        upload.DIVISIONID = HttpContext.Current.Request["division"];
-                        upload.SUBJECTID = Convert.ToInt32(HttpContext.Current.Request["subject"]);
-                        upload.TERMID = Convert.ToInt32(HttpContext.Current.Request["term"]);
-                        upload.HOMEWORK = HttpContext.Current.Request["homeworkdescription"];
-                        upload.HOMEWORKDATE = Convert.ToDateTime(DateTime.Now.ToShortDateString());
-                        upload.TIME = DateTime.Now.ToShortTimeString();
-                        upload.DISPLAY = 1;
-                        upload.ACADEMICYEAR = "2018-2019";
+                         using (StreamReader fileStream = new StreamReader(httpRequest.Files[file].InputStream))
+                        {
+                            fileBytes = Encoding.UTF8.GetBytes(fileStream.ReadToEnd());
+                            fileStream.Close();
+                        }
 
-                        upload.FILEPATH = UploadBaseUrl + filePath.Replace("~/","");
+                        try
+                        {
+                            //Create FTP Request.
+                            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftp + ftpFolder + fileName);
+                            request.Method = WebRequestMethods.Ftp.UploadFile;
 
-						//upload.insert_date = DateTime.Now;
-						db.TBLHOMEWORKs.Add(upload);
-                        db.SaveChanges();
+                            //Enter FTP Server credentials.
+                            request.Credentials = new NetworkCredential("akronsystems", "Password@123");
+                            request.ContentLength = fileBytes.Length;
+                            request.UsePassive = true;
+                            request.UseBinary = true;
+                            request.ServicePoint.ConnectionLimit = fileBytes.Length;
+                            request.EnableSsl = false;
+                            Stream requestStream = request.GetRequestStream();
+                            requestStream.Write(fileBytes, 0, fileBytes.Length);
+                            requestStream.Close();
+                            FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+                            response.Close();
 
-                        return upload;
+
+                            ////Save HomeWork To the Table
+                            TBLHOMEWORK upload = new TBLHOMEWORK();
+                            upload.STANDARDID = Convert.ToInt32(HttpContext.Current.Request["standardid"]);
+                            upload.CREATEDID = int.Parse(getUserType.EmpCode);
+                            upload.DIVISIONID = HttpContext.Current.Request["division"];
+                            upload.SUBJECTID = Convert.ToInt32(HttpContext.Current.Request["subject"]);
+                            upload.TERMID = Convert.ToInt32(HttpContext.Current.Request["term"]);
+                            upload.HOMEWORK = HttpContext.Current.Request["homeworkdescription"];
+                            upload.HOMEWORKDATE = Convert.ToDateTime(DateTime.Now.ToShortDateString());
+                            upload.CREATEDON = Convert.ToDateTime(DateTime.Now.ToShortDateString());
+                            upload.TIME = DateTime.Now.ToShortTimeString();
+                            upload.DISPLAY = 1;
+                            upload.ACADEMICYEAR = "2018-2019";
+                            upload.FILEPATH = fileName;
+                            db.TBLHOMEWORKs.Add(upload);
+                            db.SaveChanges();
+
+                            ///Save HomeWork Notification
+
+
+
+
+                            TBLNOTIFICATION objmaster = new TBLNOTIFICATION();
+                            TBLNOTIFICATIONDETAIL objdetail = new TBLNOTIFICATIONDETAIL();
+
+                            objmaster.TITLE = HttpContext.Current.Request["homeworkdescription"];
+                            objmaster.NOTIFICATIONDATE = DateTime.Now;
+                            objmaster.NOTIFICATIONTIME = DateTime.Now.ToShortTimeString();
+                            objmaster.ACADEMICYEAR = "2018-2019";
+                            objmaster.DIVISIONID = Convert.ToInt32(HttpContext.Current.Request["division"]);
+                            objmaster.NOTIFICATIONTYPE = "Homework";
+                            db.TBLNOTIFICATIONs.Add(objmaster);
+                            db.SaveChanges();
+                            objdetail.NOTIFICATIONID = objmaster.NOTIFICATIONID;
+
+                            var DivisionId= Convert.ToInt32(HttpContext.Current.Request["division"]);
+                            var getstudent = db.VIEWGETSTUDENTATTs.Where(r => r.DIVISIONID == DivisionId).ToList();
+                            if (getstudent == null)
+                            {
+
+                                return new Results
+                                {
+                                    IsSuccess = false,
+                                    Message = "Student Not Found"
+                                };
+
+
+
+                            }
+                            // return getstudent;
+                            for (int i = 0; i < getstudent.Count; i++)
+                            {
+                                TBLNOTIFICATIONDETAIL objnotidetails = new TBLNOTIFICATIONDETAIL();
+                                objnotidetails.NOTIFICATIONID = objmaster.NOTIFICATIONID;
+                                objnotidetails.STUDENTID = getstudent[i].STUDENTID;
+                                objnotidetails.STATUS = 0;
+                                db.TBLNOTIFICATIONDETAILs.Add(objnotidetails);
+                                db.SaveChanges();
+                                FCMPushNotification OBJPUSH = new FCMPushNotification();
+                                //var getsubjectname = db.VIEWSUBJECTNAMEs.Where(r => r.SUBJECTID == obj.subject).ToList();
+
+                                string studentid = Convert.ToString(getstudent[i].STUDENTID);
+                                var userid = db.VIEWGETUSERIDFROMEMPCODEs.Where(r => r.EmpCode == studentid).FirstOrDefault();
+                                var device = db.VW_DEVICE.FirstOrDefault(r => r.UserId == userid.UserId);
+                                if (device != null)
+                                {
+                                    if (!string.IsNullOrWhiteSpace(device.DeviceId))
+                                        OBJPUSH.SendNotification("Homework", obj.homeworkdescription, device.DeviceId);
+                                }
+                                //if (smsstatus == "1")
+                                //{
+                                //    SMSSendTESTDLR(getstudent[i].GMOBILE, objHomework.HOMEWORK);
+                                //}
+                            }
+                            return new Results
+                            {
+
+                                IsSuccess = true,
+                                Message = "Homework assign successfully"
+                            };
+                        }
+                        catch (WebException ex)
+                        {
+                            return new Results
+                            {
+                                IsSuccess = false,
+                                Message = "Failed to upload File"
+                            };
+                        }
                     }
 
-                    return new Results
-                    {
-                        IsSuccess = false,
-                        Message =  "Failed to upload File"  
-                    };
 
 
-                 
+                   
+
+                
+
+
+
                 }
             }
             catch (Exception ex)
@@ -441,7 +580,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 return new Results
                 {
                     IsSuccess = false,
-                    Message =  ex.ToString()  
+                    Message = ex.ToString()
                 };
             }
 
