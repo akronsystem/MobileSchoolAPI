@@ -81,7 +81,7 @@ namespace AgroApp.App_Start
                             name = "file",
                             @in = "formData",
                             description = "File to upload.",
-                            required = true,
+                            required = false,
                             type = "file"
                         }
                     };

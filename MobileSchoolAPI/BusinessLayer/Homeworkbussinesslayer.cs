@@ -446,34 +446,53 @@ namespace MobileSchoolAPI.BusinessLayer
                     string fileName = "";
                     foreach (string file in httpRequest.Files)
                     {
-                        var postedFile = httpRequest.Files[file];
-                        fileName = postedFile.FileName;
-                         using (StreamReader fileStream = new StreamReader(httpRequest.Files[file].InputStream))
-                        {
-                            fileBytes = Encoding.UTF8.GetBytes(fileStream.ReadToEnd());
-                            fileStream.Close();
-                        }
+                        var postedFile = httpRequest.Files[file];	  
+						var filePath = ConfigurationManager.AppSettings["UploadDir"] + Guid.NewGuid() + fileName;
+						var savePath = HttpContext.Current.Server.MapPath(filePath); postedFile.SaveAs(savePath);
+						fileName = postedFile.FileName;
+						// using (StreamReader fileStream = new StreamReader(httpRequest.Files[file].InputStream))
+						//{
+						//    fileBytes = Encoding.UTF8.GetBytes(fileStream.ReadToEnd());
+						//    fileStream.Close();
 
-                        try
-                        {
-                            //Create FTP Request.
-                            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftp + ftpFolder + fileName);
-                            request.Method = WebRequestMethods.Ftp.UploadFile;
+						//}
 
-                            //Enter FTP Server credentials.
-                            request.Credentials = new NetworkCredential("akronsystems", "Password@123");
-                            request.ContentLength = fileBytes.Length;
-                            request.UsePassive = true;
-                            request.UseBinary = true;
-                            request.ServicePoint.ConnectionLimit = fileBytes.Length;
-                            request.EnableSsl = false;
-                            Stream requestStream = request.GetRequestStream();
-                            requestStream.Write(fileBytes, 0, fileBytes.Length);
-                            requestStream.Close();
-                            FtpWebResponse response = (FtpWebResponse)request.GetResponse();
-                            response.Close();
+						try
+						{
+
+							WebClient client = new WebClient();
+							client.Credentials = new NetworkCredential("akronsystems", "Password@123");
+
+							client.UploadFile(ftp + ftpFolder + fileName, savePath);
+							//Create FTP Request.					   
+							FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftp + ftpFolder + fileName);
+							//request.Method = WebRequestMethods.Ftp.UploadFile;
+
+							////Enter FTP Server credentials.
+							//request.Credentials = new NetworkCredential();
+							//request.ContentLength = fileBytes.Length;
+							//request.UsePassive = true;
+							//request.UseBinary = true;
+							//request.ServicePoint.ConnectionLimit = fileBytes.Length;
+							//request.EnableSsl = false;
+							//Stream requestStream = request.GetRequestStream();
+							//requestStream.Write(fileBytes, 0, fileBytes.Length);
+							//requestStream.Close();
+							//FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+							//response.Close();
 
 
+						}
+						catch(Exception ex)
+						{
+							return new Results
+							{
+								IsSuccess = false,
+								Message = "Failed to Save Homework"
+							};
+						}
+						try
+						{ 
                             ////Save HomeWork To the Table
                             TBLHOMEWORK upload = new TBLHOMEWORK();
                             upload.STANDARDID = Convert.ToInt32(HttpContext.Current.Request["standardid"]);

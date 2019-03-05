@@ -180,7 +180,8 @@ namespace MobileSchoolAPI.BusinessLayer
 
                 if (EmpHomework.Count() == 0)
                 {
-                    var StudentHomework = db.VIEWSTUDENTHOMEWORKs.Where(r => r.UserId == obj.userid && r.HOMEWORKDATE == obj.homeworkdate).OrderByDescending(r => r.HOMEWORKDATE).ToList(); ;
+                    var StudentHomework = db.VIEWSTUDENTHOMEWORKs.Where(r => r.UserId == obj.userid && r.HOMEWORKDATE == obj.homeworkdate).
+						OrderByDescending(r => r.HOMEWORKDATE).OrderByDescending(r=>r.HOMEWORKID).ToList(); ;
 
                     if (StudentHomework.Count() == 0)
                     {
