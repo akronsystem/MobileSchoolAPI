@@ -148,7 +148,8 @@ namespace MobileSchoolAPI.BusinessLayer
                 {
                     return new Results() { IsSuccess = false, Message = "Invalid User" };
                 }
-                var EmpHomework = db.VIEWHOMEWORKs.Where(r => r.UserId == obj.userid && r.HOMEWORKDATE==obj.homeworkdate).OrderByDescending(r => r.HOMEWORKDATE).ToList(); ;
+                var EmpHomework = db.VIEWHOMEWORKs.Where(r => r.UserId == obj.userid && r.HOMEWORKDATE==obj.homeworkdate)
+					.OrderByDescending(r => r.HOMEWORKDATE).OrderByDescending(r=>r.HOMEWORKID).ToList(); ;
                 string UploadBaseUrl = "";
                 var logindetail = db.TBLUSERLOGINs.
                              Where(r => r.UserId == obj.userid && r.Password == obj.password && r.STATUS == "ACTIVE")

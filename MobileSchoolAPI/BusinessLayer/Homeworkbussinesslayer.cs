@@ -444,9 +444,9 @@ namespace MobileSchoolAPI.BusinessLayer
                     string ftpFolder = "UPLOADFILE/";
                     byte[] fileBytes = null;
                     string fileName = "";
-                    foreach (string file in httpRequest.Files)
-                    {
-                        var postedFile = httpRequest.Files[file];	  
+					foreach (string file in httpRequest.Files)
+					{
+						var postedFile = httpRequest.Files[file];
 						var filePath = ConfigurationManager.AppSettings["UploadDir"] + Guid.NewGuid() + fileName;
 						var savePath = HttpContext.Current.Server.MapPath(filePath); postedFile.SaveAs(savePath);
 						fileName = postedFile.FileName;
@@ -483,7 +483,7 @@ namespace MobileSchoolAPI.BusinessLayer
 
 
 						}
-						catch(Exception ex)
+						catch (Exception ex)
 						{
 							return new Results
 							{
@@ -491,6 +491,8 @@ namespace MobileSchoolAPI.BusinessLayer
 								Message = "Failed to Save Homework"
 							};
 						}
+					}
+					{ 
 						try
 						{ 
                             ////Save HomeWork To the Table
