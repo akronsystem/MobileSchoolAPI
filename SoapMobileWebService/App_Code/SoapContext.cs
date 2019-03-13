@@ -18,10 +18,22 @@
     public virtual DbSet<View_GetPaidFees> View_GetPaidFees { get; set; }
 
     public virtual DbSet<View_GetFeeData> View_GetFeeData { get; set; }
+    public virtual DbSet<TBLFEECOLLECTIONNKV> TBLFEECOLLECTIONNKVS { get; set; }
 
     public virtual DbSet<View_GETFEDERALREQUESTID> View_GETFEDERALREQUESTID { get; set; }
 
+    public virtual DbSet<View_GetSudentStandard> View_GetSudentStandard { get; set; }
+
+    public virtual DbSet<View_GetReceiptNo> View_GetReceiptNo { get; set; }
+
     public virtual DbSet<TBLFEDERALREQUESTDETAIL> TBLFEDERALREQUESTDETAILS { get; set; }
+    public virtual DbSet<TBLRECEIPTTABLENEW> TBLRECEIPTTABLENEWs { get; set; }
+
+   
+
+    public virtual DbSet<TBLFEECOLLECTIONNKVSFEDERAL> TBLFEECOLLECTIONNKVSFEDERALs { get; set; }
+    public virtual DbSet<TBLRECEIPTTABLENEWFEDEREAL> TBLRECEIPTTABLENEWFEDEREALs { get; set; }
+
 
     protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
