@@ -22,6 +22,11 @@
         [StringLength(50)]
         public string FEETYPE { get; set; }
 
+        [Key]
+        [Column(Order = 2)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public long FEETYPEID { get; set; }
+
         [Column(TypeName = "numeric")]
         public decimal? AMOUNT { get; set; }
 

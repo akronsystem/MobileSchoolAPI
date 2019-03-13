@@ -17,5 +17,10 @@
         public string ENROLLMENTNO { get; set; }
 
         public DateTime? REQUESTDATE { get; set; }
+
+        [StringLength(10)]
+        public string TRANSACTIONSTATUS { get; set; }
+
+        public DateTime? UPDATEDDATE { get; set; }
     }
 

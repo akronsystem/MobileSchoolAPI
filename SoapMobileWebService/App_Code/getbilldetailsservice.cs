@@ -20,6 +20,10 @@ public class RetType
 
     public string out3 { get; set; }
     public string out4 { get; set; }
+    public string out5 { get; set; }
+    public string out6 { get; set; }
+    public string out7 { get; set; }
+    public string out8 { get; set; }
 
 }
 public class Result
@@ -43,7 +47,7 @@ public class getbilldetailsservice : System.Web.Services.WebService
         SoapContext objSC = new SoapContext();
         TBLFEDERALREQUESTDETAIL objFB = new TBLFEDERALREQUESTDETAIL();
         RetType obj = new RetType();
-
+        string Install1 = "", Install2 = "", Install3 = "", Install4 = "";
         try
         {
             var Concession = objSC.View_GetConcessionDetails.Where(r => r.ENROLLMENTNO == EnrollmentNo.Trim().ToUpper()).FirstOrDefault();
@@ -63,25 +67,26 @@ public class getbilldetailsservice : System.Web.Services.WebService
             {
                 for (int i = 0; i < FeeSetting.Count; i++)
                 {
-                    double Amount = 0;
+                    double Amount = 0,InstPendingAmount=0,InstFine=0;
 
                     string Installment = FeeSetting[i].FEETYPE;
                     var FeesPaid = objSC.View_GetPaidFees.Where(r => r.ENROLLMENTNO == EnrollmentNo.Trim().ToUpper() && r.FEETYPE == Installment).ToList();
                     if (FeesPaid.Count > 0)
                     {
-
-
                         for (int j = 0; j < FeesPaid.Count; j++)
                         {
                             Amount = Amount + Convert.ToDouble(FeesPaid[j].AMOUNT);
                         }
+                        
                         PendingAmount += Convert.ToDouble(FeeSetting[i].AMOUNT) - Amount;
-
+                        InstPendingAmount = Convert.ToDouble(FeeSetting[i].AMOUNT) - Amount;
+                        
                     }
                     else
                     {
                         Amount = Amount + Convert.ToDouble(FeeSetting[i].AMOUNT);
                         PendingAmount += Amount;
+                        InstPendingAmount = Convert.ToDouble(FeeSetting[i].AMOUNT);
 
                     }
                    
@@ -98,11 +103,55 @@ public class getbilldetailsservice : System.Web.Services.WebService
                         {
                             int LATEBYDAYS = (dt1 - duedate).Days;
                             Due += LATEBYDAYS * Convert.ToDouble(FeeSetting[i].INSTALLMENTFINE);
+                            InstFine = LATEBYDAYS * Convert.ToDouble(FeeSetting[i].INSTALLMENTFINE);
+                        }
+                        
+                    }
+                    if (InstPendingAmount == 0)
+                    {
+                        if (Installment == "INSTALLMENT 1")
+                        {
+                            Install1 = "INSTALLMENT 1-PAID";
+                        }
+                        if (Installment == "INSTALLMENT 2")
+                        {
+                            Install2 = "INSTALLMENT 2-PAID";
+                        }
+                        if (Installment == "INSTALLMENT 3")
+                        {
+                            Install3 = "INSTALLMENT 3-PAID";
+                        }
+                        if (Installment == "INSTALLMENT 4")
+                        {
+                            Install4 = "INSTALLMENT 4-PAID";
+                        }
+
+                    }
+                    else
+                    {
+                        if (Installment == "INSTALLMENT 1")
+                        {
+                            Install1 = "INSTALLMENT 1 : " + InstPendingAmount + " - FINE : " + InstFine + "";
+                        }
+                        if (Installment == "INSTALLMENT 2")
+                        {
+                            Install2 = "INSTALLMENT 2 : " + InstPendingAmount + " - FINE : " + InstFine + "";
 
                         }
+                        if (Installment == "INSTALLMENT 3")
+                        {
+                            Install3 = "INSTALLMENT 3 : " + InstPendingAmount + " - FINE : " + InstFine + "";
+
+                        }
+                        if (Installment == "INSTALLMENT 4")
+                        {
+                            Install4 = "INSTALLMENT 4 : " + InstPendingAmount + " - FINE : " + InstFine + "";
+
+                        }
+
                     }
 
-                  
+
                 }
                 string REQID = "", REQUESTID = "";
                 var CurrentRequestId = objSC.View_GETFEDERALREQUESTID.OrderByDescending(r => r.BANKREQUESTID).FirstOrDefault();
@@ -141,6 +190,11 @@ public class getbilldetailsservice : System.Web.Services.WebService
                 obj.out2 = (GrandPending).ToString();
                 obj.out3 = Studentname.ToString();
                 obj.out4 = EnrollmentNo.Trim().ToUpper();
+                obj.out5 = Install1;
+                obj.out6 = Install2;
+                obj.out7 = Install3;
+                obj.out8 = Install4;
+
             }
         }
         catch(Exception e)
