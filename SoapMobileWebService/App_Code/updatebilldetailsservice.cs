@@ -32,7 +32,7 @@ public class updatebilldetailsservice : System.Web.Services.WebService
 	
 
     [WebMethod]
-    public RetType updatebilldetailsoperation(string TransactionId,string TransactionDate,string Amount,string Mode,string RequestId,string EnrollmentNo)
+    public RetType updatebilldetailsoperation(string TransactionId,string TransactionDate,string Amount,string Mode,string RequestId,string SchoolName,string EnrollmentNo)
     {
         SoapContext db = new SoapContext();
         TBLFEECOLLECTIONNKVSFEDERAL objFEE = new TBLFEECOLLECTIONNKVSFEDERAL();
@@ -176,7 +176,7 @@ public class updatebilldetailsservice : System.Web.Services.WebService
         objRET.out1 = Status;
         objRET.out2 = TransactionId;
         objRET.out3 = TransactionDate;
-        return obj;
+        return objRET;
     }
 
 }
