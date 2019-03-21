@@ -242,7 +242,7 @@ namespace MobileSchoolAPI.BusinessLayer
                             {
                                 str = "goo.gl/j7XjCx";
                             }
-                            string txtMessage = "Dear Parent, Your Pupil " + splitname[1] + ", is absent on " + Convert.ToDateTime(atteobj.ATTEDANCEDATE).ToString("dd/MM/yyyy") + ", Kindly note it. See attendance details " + str;
+                            string txtMessage = "Dear Parent, Your Pupil " + splitname[1] + ", is absent on " + Convert.ToDateTime(atteobj.ATTEDANCEDATE).ToString("dd/MM/yyyy") + ", Kindly note. See attendance details " + str;
 
 
                             if (smsstatus == "1")
@@ -364,8 +364,9 @@ namespace MobileSchoolAPI.BusinessLayer
                 }
                 else if (UserName.StartsWith("ASM"))
                 {
+                    // SMS BLOCKED FOR AMS ON 20-03-2019
 
-                    str = "http://smsnow.hundiainfosys.com/rest/services/sendSMS/sendGroupSms?AUTH_KEY=b963a0f8db5c6b3478df79dee5e5842e&message=" + Message + "&senderId=ALPHOS&routeId=1&mobileNos=" + MobileNo + "&smsContentType=english";
+                   // str = "http://smsnow.hundiainfosys.com/rest/services/sendSMS/sendGroupSms?AUTH_KEY=b963a0f8db5c6b3478df79dee5e5842e&message=" + Message + "&senderId=ALPHOS&routeId=1&mobileNos=" + MobileNo + "&smsContentType=english";
                 }
 
                 else if (UserName.StartsWith("ASY"))
@@ -376,7 +377,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 }
                 else if (UserName.StartsWith("NMS"))
                 {
-                    //str = "http://smsnow.hundiainfosys.com/rest/services/sendSMS/sendGroupSms?AUTH_KEY=14c07610595093f4d66e18f1aac5ee88&message=" + Message + "&senderId=NMSKOP&routeId=1&mobileNos=" + MobileNo + "&smsContentType=english";
+                    str = "http://smsnow.hundiainfosys.com/rest/services/sendSMS/sendGroupSms?AUTH_KEY=14c07610595093f4d66e18f1aac5ee88&message=" + Message + "&senderId=NMSKOP&routeId=1&mobileNos=" + MobileNo + "&smsContentType=english";
 
                 }
                 if (str != "")
