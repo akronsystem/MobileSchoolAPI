@@ -15,7 +15,21 @@ namespace MobileSchoolAPI.Models
         [StringLength(50)]
         public string HOLIDAY { get; set; }
 
-        public DateTime? STARTDATE { get; set; }
+		[NotMapped]
+		public string STR_STARTDATE
+		{
+			get { return this.STARTDATE.Value.ToString("yyyy-MM-dd"); }
+		}
+
+		[NotMapped]
+		public string STR_ENDDATE
+		{
+			get { return this.ENDDATE.Value.ToString("yyyy-MM-dd"); }
+		}
+
+
+
+		public DateTime? STARTDATE { get; set; }
 
         public DateTime? ENDDATE { get; set; }
 
