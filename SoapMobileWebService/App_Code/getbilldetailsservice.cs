@@ -42,8 +42,9 @@ public class getbilldetailsservice : System.Web.Services.WebService
 	}
 
 	[WebMethod]
-	public RetType getbilldetailsoperation(string SchoolName,string StudentName,string EnrollmentNo,string Paymentdate)
+	public RetType getbilldetailsoperation(string SchoolName,string StudentName,string EnrollmentNo)
 	{
+        string Paymentdate = DateTime.Now.ToString("dd/MM/yyyy");
         SoapContext objSC = new SoapContext();
         TBLFEDERALREQUESTDETAIL objFB = new TBLFEDERALREQUESTDETAIL();
         RetType obj = new RetType();
