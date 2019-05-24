@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Web;
@@ -200,7 +201,9 @@ public class getbilldetailsservice : System.Web.Services.WebService
         }
         catch(Exception e)
         {
-            obj.out1 = e.ToString();
+            var st = new StackTrace(e, true);
+            obj.out1 =st.ToString();
+
         }
 
         return obj;
