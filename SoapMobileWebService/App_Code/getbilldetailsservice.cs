@@ -94,17 +94,28 @@ public class getbilldetailsservice : System.Web.Services.WebService
                    
 
                     DateTime duedate = Convert.ToDateTime(FeeSetting[i].DUEDATE).Date;
-                    string[] DATESPLIT = Paymentdate.Split('/');
                     DateTime dt1 = new DateTime();
-                    if(DATESPLIT.Length!=3)
+                    string[] DATESPLIT = Paymentdate.Split('/');
+
+                    if (DATESPLIT.Length!=3)
                     {
                         string[] DASHDATESPLIT = Paymentdate.Split('-');
-                        string actualdate = DASHDATESPLIT[1] + "/" + DASHDATESPLIT[0] + "/" + DASHDATESPLIT[2];
-                         dt1 = Convert.ToDateTime(actualdate).Date;
+                       
+                        try
+                        {
+                            string actualdate = DASHDATESPLIT[1] + "/" + DASHDATESPLIT[0] + "/" + DASHDATESPLIT[2];
+                            dt1 = Convert.ToDateTime(actualdate).Date;
+                        }
+                        catch (Exception ex)
+                        {
+                            string actualdate = DASHDATESPLIT[1] + "-" + DASHDATESPLIT[0] + "-" + DASHDATESPLIT[2];
+                            dt1 = Convert.ToDateTime(actualdate).Date;
+                        }
 
                     }
                     else
                     {
+
                         string actualdate = DATESPLIT[1] + "/" + DATESPLIT[0] + "/" + DATESPLIT[2];
                          dt1 = Convert.ToDateTime(actualdate).Date;
 
