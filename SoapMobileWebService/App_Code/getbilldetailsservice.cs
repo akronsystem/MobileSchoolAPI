@@ -202,8 +202,8 @@ public class getbilldetailsservice : System.Web.Services.WebService
         catch(Exception e)
         {
             var st = new StackTrace(e, true);
-            obj.out1 =st.ToString();
-
+            obj.out1 = e.StackTrace;
+            
         }
 
         return obj;
