@@ -94,32 +94,32 @@ public class getbilldetailsservice : System.Web.Services.WebService
                    
 
                     DateTime duedate = Convert.ToDateTime(FeeSetting[i].DUEDATE).Date;
-                    DateTime dt1 = new DateTime();
-                    string[] DATESPLIT = Paymentdate.Split('/');
+                    DateTime dt1 =Convert.ToDateTime( DateTime.Now.ToShortDateString()).Date;
+                    //string[] DATESPLIT = Paymentdate.Split('/');
 
-                    if (DATESPLIT.Length!=3)
-                    {
-                        string[] DASHDATESPLIT = Paymentdate.Split('-');
+                    //if (DATESPLIT.Length!=3)
+                    //{
+                    //    string[] DASHDATESPLIT = Paymentdate.Split('-');
                        
-                        try
-                        {
-                            string actualdate = DASHDATESPLIT[1] + "/" + DASHDATESPLIT[0] + "/" + DASHDATESPLIT[2];
-                            dt1 = Convert.ToDateTime(actualdate).Date;
-                        }
-                        catch (Exception ex)
-                        {
-                            string actualdate = DASHDATESPLIT[1] + "-" + DASHDATESPLIT[0] + "-" + DASHDATESPLIT[2];
-                            dt1 = Convert.ToDateTime(actualdate).Date;
-                        }
+                    //    try
+                    //    {
+                    //        string actualdate = DASHDATESPLIT[1] + "/" + DASHDATESPLIT[0] + "/" + DASHDATESPLIT[2];
+                    //        dt1 = Convert.ToDateTime(actualdate).Date;
+                    //    }
+                    //    catch (Exception ex)
+                    //    {
+                    //        string actualdate = DASHDATESPLIT[1] + "-" + DASHDATESPLIT[0] + "-" + DASHDATESPLIT[2];
+                    //        dt1 = Convert.ToDateTime(actualdate).Date;
+                    //    }
 
-                    }
-                    else
-                    {
+                    //}
+                    //else
+                    //{
 
-                        string actualdate = DATESPLIT[1] + "/" + DATESPLIT[0] + "/" + DATESPLIT[2];
-                         dt1 = Convert.ToDateTime(actualdate).Date;
+                    //    string actualdate = DATESPLIT[1] + "/" + DATESPLIT[0] + "/" + DATESPLIT[2];
+                    //     dt1 = Convert.ToDateTime(actualdate).Date;
 
-                    }
+                    //}
 
 
                     if (PendingAmount != 0)
@@ -224,8 +224,8 @@ public class getbilldetailsservice : System.Web.Services.WebService
         }
         catch(Exception e)
         {
-            var st = new StackTrace(e, true);
-            obj.out1 = e.StackTrace;
+           
+            obj.out1 = Paymentdate+"----"+e.StackTrace;
             
         }
 
