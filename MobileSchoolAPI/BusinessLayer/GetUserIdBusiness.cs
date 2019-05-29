@@ -89,8 +89,6 @@ namespace MobileSchoolAPI.BusinessLayer
             }
             catch (Exception ex)
             {
-
-
                 return new Results
                 {
                     IsSuccess = false,

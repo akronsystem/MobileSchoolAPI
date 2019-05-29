@@ -44,7 +44,7 @@ namespace MobileSchoolAPI
 
         public virtual DbSet<TBLASSIGNCLASSTEACHER> TBLASSIGNCLASSTEACHERs { get; set; }
 
-        public virtual DbSet<TBLASSIGNCLASSTEACHER> TBLASSIGNCLASSTEACHERs { get; set; }
+       // public virtual DbSet<TBLASSIGNCLASSTEACHER> TBLASSIGNCLASSTEACHERs { get; set; }
 
 
         public virtual DbSet<TBLMSGHISTORY> TBLMSGHISTORies { get; set; }
@@ -95,9 +95,9 @@ namespace MobileSchoolAPI
 
         public virtual DbSet<VW_TESTTYPELIST> VW_TESTTYPELIST { get; set; }	   
         public virtual DbSet<ViewGetInstituteName> ViewGetInstituteNames { get; set; }
-	
-		
-		protected override void OnModelCreating(DbModelBuilder modelBuilder) 
+        public virtual DbSet<TBLTIMETABLESCHEDULE> TBLTIMETABLESCHEDULEs { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder) 
 		{
 			modelBuilder.Entity<TBLUSERLOGIN>()
 				.Property(e => e.EmpCode)

@@ -382,6 +382,13 @@ namespace MobileSchoolAPI.BusinessLayer
             int Userid = Convert.ToInt32(HttpContext.Current.Request["Userid"]);
             var Password = HttpContext.Current.Request["Password"];
             SchoolMainContext db = new ConcreateContext().GetContext(Userid, Password);
+            if (db == null)
+            {
+                return new Results() { IsSuccess = false, Message = "Invalid User" };
+            }
+            var logindetail = db.TBLUSERLOGINs.
+                              Where(r => r.UserId == Userid && r.Password == Password && r.STATUS == "ACTIVE")
+                              .FirstOrDefault();
             var getUserType = db.VW_GET_USER_TYPE.Where(r => r.UserId == Userid).FirstOrDefault();
             //if (!Request.Content.IsMimeMultipartContent())
             //{
@@ -389,10 +396,31 @@ namespace MobileSchoolAPI.BusinessLayer
             //}
             try
             {
+                string UploadBaseUrl = "";
                 var httpRequest = HttpContext.Current.Request;
                 if (httpRequest.Files.Count > 0)
                 {
-                   string UploadBaseUrl = ConfigurationManager.AppSettings["UploadBaseURL"];
+                    if (logindetail.UserName.StartsWith("NKV"))
+                    {
+                         UploadBaseUrl = ConfigurationManager.AppSettings["NkvsBaseUrl"];
+                    }
+                    else if (logindetail.UserName.StartsWith("SXS"))
+                    {
+                         UploadBaseUrl = ConfigurationManager.AppSettings["StxavierBaseUrl"];
+                    }
+                    else if (logindetail.UserName.StartsWith("ASM"))
+                    {
+                         UploadBaseUrl = ConfigurationManager.AppSettings["AsmBaseUrl"];
+                    }
+
+                    else if (logindetail.UserName.StartsWith("ASY"))
+                    {
+                         UploadBaseUrl = ConfigurationManager.AppSettings["AsyBaseUrl"];
+                    }
+                    else if (logindetail.UserName.StartsWith("NMS"))
+                    {
+                         UploadBaseUrl = ConfigurationManager.AppSettings["NmsBaseUrl"];
+                    }
                     string fileName = string.Empty;
                     var filePath = string.Empty;
                     string savePath = string.Empty;

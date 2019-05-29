@@ -15,8 +15,6 @@ namespace MobileSchoolAPI.Controllers
         [HttpPost]
         public object SaveNotification([FromBody]ParamNotification obj)
         {
-
-
             NotificationBusiness objnote = new NotificationBusiness();
 
             return objnote.SaveNotification(obj);

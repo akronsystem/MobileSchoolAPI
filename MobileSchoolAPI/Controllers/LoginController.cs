@@ -79,7 +79,16 @@ namespace MobileSchoolAPI.Controllers
                         }
                         logindetail.BaseURL = StudentBaseUrl;
                     }
-                    else
+                    
+                    else if (logindetail.UserType == "PARENT")
+                    {
+
+                    }
+                    else if (logindetail.UserType == "PRINCIPLE")
+                    {
+
+                    }
+                    else if(logindetail.UserType == "TEACHER" || logindetail.UserType == "CLASS TEACHER")
                     {
                         GetTeacherInfoBusiness TeacherBL = new GetTeacherInfoBusiness();
                         var result=TeacherBL.getTeacherLogo(int.Parse(logindetail.EmpCode),Convert.ToInt16( logindetail.UserId),logindetail.Password);
@@ -111,7 +120,7 @@ namespace MobileSchoolAPI.Controllers
                         {
                             TeacherBaseUrl = ConfigurationManager.AppSettings["NmsBaseUrlTeacher"];
                         }
-
+                      
                         logindetail.BaseURL = TeacherBaseUrl;
                     }
                     DeviceBusinessLayer objDeviceBl = new DeviceBusinessLayer();
