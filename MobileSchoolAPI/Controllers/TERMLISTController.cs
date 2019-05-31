@@ -13,7 +13,7 @@ namespace MobileSchoolAPI.Controllers
     {
         [HttpPost]
 
-        public object getTermList(TERMLISTCS tobj)
+        public object GETTERMLIST(TERMLISTCS tobj)
         {
             GETTERMLISTBL ObjTerm = new GETTERMLISTBL();
            
