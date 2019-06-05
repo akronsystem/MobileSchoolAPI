@@ -1,5 +1,7 @@
 ﻿using MobileSchoolAPI.Models;
+
 using MobileSchoolAPI.ParamModel;
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -19,6 +21,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 {
                     return new Results() { IsSuccess = false, Message = "Invalid User" };
                 }
+ 
                 TBLTIMETABLESCHEDULE data = db.TBLTIMETABLESCHEDULEs.Where(r => r.DISPLAY == 1 && r.EMPLOYEEID == tobj.EMPLOYEEID).FirstOrDefault();
                 if(data!=null)
                 {
@@ -59,6 +62,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 }
 
                 return new Results() { IsSuccess = true, Message = "Created Timetable" };
+ 
             }
             catch (Exception ex)
             {
@@ -79,6 +83,7 @@ namespace MobileSchoolAPI.BusinessLayer
             {
                 return new Results() { IsSuccess = false, Message = "Invalid User" };
             }
+ 
 
             if(obj.WORKINGDAYS=="")
             {
@@ -106,6 +111,7 @@ namespace MobileSchoolAPI.BusinessLayer
 
             }
 
+ 
         }
     }
 }

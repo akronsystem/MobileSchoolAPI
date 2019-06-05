@@ -99,6 +99,7 @@ namespace MobileSchoolAPI
         public virtual DbSet<VW_TESTTYPELIST> VW_TESTTYPELIST { get; set; }	   
         public virtual DbSet<ViewGetInstituteName> ViewGetInstituteNames { get; set; }
         public virtual DbSet<TBLTIMETABLESCHEDULE> TBLTIMETABLESCHEDULEs { get; set; }
+ 
         public virtual DbSet<TBLFEECOLLECTIONMASTER> TBLFEECOLLECTIONMASTERs { get; set; }
         public virtual DbSet<TBLSTANDARDMASTER> TBLSTANDARDMASTERs { get; set; }
         public virtual DbSet<View_DisplayFee> View_DisplayFee { get; set; }
@@ -108,6 +109,7 @@ namespace MobileSchoolAPI
         public virtual DbSet<View_RemainingFeeDisplay> View_RemainingFeeDisplay { get; set; }
         public virtual DbSet<View_DisplayStudentDetails> View_DisplayStudentDetails { get; set; }
         public virtual DbSet<View_DisplayPTAMember> View_DisplayPTAMember { get; set; }
+ 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder) 
 		{

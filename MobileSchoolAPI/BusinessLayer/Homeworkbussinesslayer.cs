@@ -402,6 +402,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 {
                     if (logindetail.UserName.StartsWith("NKV"))
                     {
+
                         UploadBaseUrl = ConfigurationManager.AppSettings["NkvsBaseUrl"];
                     }
                     else if (logindetail.UserName.StartsWith("SXS"))
@@ -411,15 +412,18 @@ namespace MobileSchoolAPI.BusinessLayer
                     else if (logindetail.UserName.StartsWith("ASM"))
                     {
                         UploadBaseUrl = ConfigurationManager.AppSettings["AsmBaseUrl"];
+ 
                     }
 
                     else if (logindetail.UserName.StartsWith("ASY"))
                     {
+
                         UploadBaseUrl = ConfigurationManager.AppSettings["AsyBaseUrl"];
                     }
                     else if (logindetail.UserName.StartsWith("NMS"))
                     {
                         UploadBaseUrl = ConfigurationManager.AppSettings["NmsBaseUrl"];
+ 
                     }
                     string fileName = string.Empty;
                     var filePath = string.Empty;
