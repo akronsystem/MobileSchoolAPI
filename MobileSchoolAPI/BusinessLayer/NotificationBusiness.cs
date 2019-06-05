@@ -77,10 +77,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 {
                     return new Results() { IsSuccess = false, Message  = "Invalid User" } ;
                 }
-
-
-
-            
+                            
                 else
                 {
                     var Notification = db.VIEWNOTIFICATIONs.Where(r => r.UserId == obj.userid).ToList().OrderByDescending(r => r.NOTIFICATIONID);
