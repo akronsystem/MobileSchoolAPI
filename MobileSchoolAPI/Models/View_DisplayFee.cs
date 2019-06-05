@@ -6,11 +6,66 @@ namespace MobileSchoolAPI.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("TBLSTUDENTADMISSION")]
-    public partial class TBLSTUDENTADMISSION
+    public partial class View_DisplayFee
     {
         [Key]
+        [Column(Order = 0)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public long TRASFERID { get; set; }
+
+        [Key]
+        [Column(Order = 1)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public long STUDENTID { get; set; }
+
+        [StringLength(15)]
+        public string ACADEMICYEAR { get; set; }
+
+        [StringLength(50)]
+        public string ROLLNO { get; set; }
+
+        [StringLength(25)]
+        public string STANDARDID { get; set; }
+
+        public int? COURSEID { get; set; }
+
+        [StringLength(50)]
+        public string TRANSFERSTATUS { get; set; }
+
+        [StringLength(50)]
+        public string HALLTICKETNO { get; set; }
+
+        [StringLength(10)]
+        public string TRANSFERED { get; set; }
+
+        public int? DIVISIONID { get; set; }
+
+        public short? TRANSPORTSTATUS { get; set; }
+
+        [StringLength(3)]
+        public string HOSTELSTATUS { get; set; }
+
+        [StringLength(50)]
+        public string GRNO { get; set; }
+
+        [StringLength(20)]
+        public string ACADEMICSTATUS { get; set; }
+
+        [StringLength(10)]
+        public string CONCESSION { get; set; }
+
+        public long? CONCESSIONREASON { get; set; }
+
+        [StringLength(100)]
+        public string OTHERREASON { get; set; }
+
+        [Column(TypeName = "numeric")]
+        public decimal? CONCESSIONPERCENTAGE { get; set; }
+
+        [Key]
+        [Column(Order = 2)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public long Expr1 { get; set; }
 
         public DateTime? ADMISSIONDATE { get; set; }
 
@@ -83,16 +138,16 @@ namespace MobileSchoolAPI.Models
         public string EMAIL { get; set; }
 
         [StringLength(30)]
-        public string ACADEMICYEAR { get; set; }
+        public string Expr2 { get; set; }
 
-        public int? COURSEID { get; set; }
+        public int? Expr3 { get; set; }
 
         [StringLength(15)]
         public string JOININGMEDIUM { get; set; }
 
         public int? SECTION { get; set; }
 
-        public int? STANDARDID { get; set; }
+        public int? Expr4 { get; set; }
 
         [StringLength(50)]
         public string GNAME { get; set; }
@@ -205,7 +260,7 @@ namespace MobileSchoolAPI.Models
         public string MEDIUM { get; set; }
 
         [StringLength(25)]
-        public string HALLTICKETNO { get; set; }
+        public string Expr5 { get; set; }
 
         [StringLength(15)]
         public string YEAROFPASSING { get; set; }
@@ -280,7 +335,7 @@ namespace MobileSchoolAPI.Models
         public long? TYFEEID { get; set; }
 
         [StringLength(25)]
-        public string ROLLNO { get; set; }
+        public string Expr6 { get; set; }
 
         public long? FEEID { get; set; }
 
@@ -335,7 +390,7 @@ namespace MobileSchoolAPI.Models
         public long? STOPID { get; set; }
 
         [StringLength(3)]
-        public string HOSTELSTATUS { get; set; }
+        public string Expr7 { get; set; }
 
         [StringLength(550)]
         public string COMPANY { get; set; }
@@ -388,7 +443,7 @@ namespace MobileSchoolAPI.Models
         public string EMERGENCYCONTACTNO { get; set; }
 
         [StringLength(50)]
-        public string GRNO { get; set; }
+        public string Expr8 { get; set; }
 
         public short? PSTATEID { get; set; }
 

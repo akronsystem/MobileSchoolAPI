@@ -88,6 +88,10 @@ namespace MobileSchoolAPI.Controllers
                     {
 
                     }
+                    else if (logindetail.UserType == "MANAGEMENT")
+                    {
+
+                    }
                     else if(logindetail.UserType == "TEACHER" || logindetail.UserType == "CLASS TEACHER")
                     {
                         GetTeacherInfoBusiness TeacherBL = new GetTeacherInfoBusiness();
