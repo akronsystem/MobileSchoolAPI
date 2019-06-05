@@ -142,7 +142,7 @@ namespace MobileSchoolAPI.BusinessLayer
                                 Where(r => r.UserId == atteobj.Userid && r.Password == atteobj.Password && r.STATUS == "ACTIVE")
                                 .FirstOrDefault();
 
-            var ClassTeacherCheck = db.TBLASSIGNCLASSTEACHERs.Where(r => r.DIVISIONID == atteobj.DIVISIONID && r.ACADEMICYEAR=="2018-2019" && r.DISPLAY==1).ToList();
+            var ClassTeacherCheck = db.TBLASSIGNCLASSTEACHERs.Where(r => r.DIVISIONID == atteobj.DIVISIONID && r.ACADEMICYEAR == "2018-2019" && r.DISPLAY == 1).ToList();
             if (ClassTeacherCheck.Count != 0)
             {
                 var checkatt = db.Vw_ATTENDANCECHECK.FirstOrDefault(r => r.DIVISIONID == atteobj.DIVISIONID && r.ATTEDANCEDATE == atteobj.ATTEDANCEDATE);
@@ -322,10 +322,10 @@ namespace MobileSchoolAPI.BusinessLayer
             };
 
         }
-									   
 
 
-        public string SMSSendTESTDLR(string MobileNo, string Message,string UserName)
+
+        public string SMSSendTESTDLR(string MobileNo, string Message, string UserName)
         {
             try
             {
@@ -336,13 +336,13 @@ namespace MobileSchoolAPI.BusinessLayer
                 if (UserName.StartsWith("NKV"))
                 {
                     str = "http://smsnow.hundiainfosys.com/rest/services/sendSMS/sendGroupSms?AUTH_KEY=7ddc928fc86d2e3adf01010536830d2&message=" + Message + "&senderId=SFNKVS&routeId=1&mobileNos=" + MobileNo + "&smsContentType=English";
-                    
+
 
                 }
                 else if (UserName.StartsWith("SXS"))
                 {
                     str = "http://smsnow.hundiainfosys.com/rest/services/sendSMS/sendGroupSms?AUTH_KEY=3555f03e24952528d1acba2e3f2e4749&message=" + Message + "&senderId=XAVIER&routeId=1&mobileNos=" + MobileNo + "&smsContentType=english";
-                   
+
                 }
                 else if (UserName.StartsWith("ASM"))
                 {
@@ -352,7 +352,7 @@ namespace MobileSchoolAPI.BusinessLayer
 
                 else if (UserName.StartsWith("ASY"))
                 {
-                  
+
                     str = "http://www.smsidea.co.in/sendsms.aspx?mobile=9923990000&pass=PKIGG&senderid=ALPHON&to=" + MobileNo + "&msg=" + Message + "";
 
                 }
@@ -402,24 +402,28 @@ namespace MobileSchoolAPI.BusinessLayer
                 {
                     if (logindetail.UserName.StartsWith("NKV"))
                     {
-                         UploadBaseUrl = ConfigurationManager.AppSettings["NkvsBaseUrl"];
+
+                        UploadBaseUrl = ConfigurationManager.AppSettings["NkvsBaseUrl"];
                     }
                     else if (logindetail.UserName.StartsWith("SXS"))
                     {
-                         UploadBaseUrl = ConfigurationManager.AppSettings["StxavierBaseUrl"];
+                        UploadBaseUrl = ConfigurationManager.AppSettings["StxavierBaseUrl"];
                     }
                     else if (logindetail.UserName.StartsWith("ASM"))
                     {
-                         UploadBaseUrl = ConfigurationManager.AppSettings["AsmBaseUrl"];
+                        UploadBaseUrl = ConfigurationManager.AppSettings["AsmBaseUrl"];
+ 
                     }
 
                     else if (logindetail.UserName.StartsWith("ASY"))
                     {
-                         UploadBaseUrl = ConfigurationManager.AppSettings["AsyBaseUrl"];
+
+                        UploadBaseUrl = ConfigurationManager.AppSettings["AsyBaseUrl"];
                     }
                     else if (logindetail.UserName.StartsWith("NMS"))
                     {
-                         UploadBaseUrl = ConfigurationManager.AppSettings["NmsBaseUrl"];
+                        UploadBaseUrl = ConfigurationManager.AppSettings["NmsBaseUrl"];
+ 
                     }
                     string fileName = string.Empty;
                     var filePath = string.Empty;
@@ -433,7 +437,7 @@ namespace MobileSchoolAPI.BusinessLayer
                         TBLHOMEWORK upload = new TBLHOMEWORK();
                         //upload.file_id = Guid.NewGuid().ToString();
                         //upload.name = fileName;
-						 
+
                         upload.STANDARDID = Convert.ToInt32(HttpContext.Current.Request["standardid"]);
                         upload.CREATEDID = int.Parse(getUserType.EmpCode);
                         upload.DIVISIONID = HttpContext.Current.Request["division"];
@@ -445,10 +449,10 @@ namespace MobileSchoolAPI.BusinessLayer
                         upload.DISPLAY = 1;
                         upload.ACADEMICYEAR = "2018-2019";
 
-                        upload.FILEPATH = UploadBaseUrl + filePath.Replace("~/","");
+                        upload.FILEPATH = UploadBaseUrl + filePath.Replace("~/", "");
 
-						//upload.insert_date = DateTime.Now;
-						db.TBLHOMEWORKs.Add(upload);
+                        //upload.insert_date = DateTime.Now;
+                        db.TBLHOMEWORKs.Add(upload);
                         db.SaveChanges();
 
                         return upload;
@@ -457,11 +461,11 @@ namespace MobileSchoolAPI.BusinessLayer
                     return new Results
                     {
                         IsSuccess = false,
-                        Message =  "Failed to upload File"  
+                        Message = "Failed to upload File"
                     };
 
 
-                 
+
                 }
             }
             catch (Exception ex)
@@ -469,7 +473,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 return new Results
                 {
                     IsSuccess = false,
-                    Message =  ex.ToString()  
+                    Message = ex.ToString()
                 };
             }
 

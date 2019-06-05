@@ -34,25 +34,25 @@ namespace MobileSchoolAPI.Controllers
 
 
 
-        [HttpPost]
-        public object HomeworkSave([FromBody]homeworkparameters hobj)
-        {
+        //[HttpPost]
+        //public object HomeworkSave([FromBody]homeworkparameters hobj)
+        //{
 
-            Homeworkbussinesslayer bhobj = new Homeworkbussinesslayer();
+        //    Homeworkbussinesslayer bhobj = new Homeworkbussinesslayer();
            
 
-           var result=  bhobj.Savehomework(hobj);
-            //  bhobj.StudentsMethod(hobj);
+        //   var result=  bhobj.Savehomework(hobj);
+        //    //  bhobj.StudentsMethod(hobj);
 
-            return result;
+        //    return result;
             
 
 
 
-        }
+        //}
 
         [HttpPost]
-        public object TestUpload()
+        public object HomeworkSave()
         {
             homeworkparameters obj = new homeworkparameters();
             try

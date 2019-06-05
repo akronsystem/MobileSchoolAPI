@@ -13,7 +13,9 @@ namespace MobileSchoolAPI.Controllers
     {
         [HttpPost]
 
-        public object CreateTimeTable(TERMLISTCS tobj)
+ 
+        public object GETTERMLIST(TERMLISTCS tobj)
+ 
         {
             GETTERMLISTBL ObjTerm = new GETTERMLISTBL();
            

@@ -36,5 +36,7 @@ namespace MobileSchoolAPI.Models
 
         [StringLength(50)]
         public string UserType { get; set; }
+
+        public string NOTIFICATIONTYPE { get; set; }
     }
 }

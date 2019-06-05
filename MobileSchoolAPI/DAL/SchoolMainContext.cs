@@ -14,6 +14,9 @@ namespace MobileSchoolAPI
 		{
 
 		}
+        public virtual DbSet<VIEWNOTIFICATIONGEN> VIEWNOTIFICATIONGENs { get; set; }
+        public virtual DbSet<VIEWGENERALNOTIFICATION> VIEWGENERALNOTIFICATIONs { get; set; }
+
         public virtual DbSet<ViewGetEmployeeBirthDetail> ViewGetEmployeeBirthDetails { get; set; }
         public virtual DbSet<View_UnreadNotificationCount> View_UnreadNotificationCount { get; set; }
         public virtual DbSet<TBLHOLIDAY> TBLHOLIDAYs { get; set; }
@@ -96,6 +99,17 @@ namespace MobileSchoolAPI
         public virtual DbSet<VW_TESTTYPELIST> VW_TESTTYPELIST { get; set; }	   
         public virtual DbSet<ViewGetInstituteName> ViewGetInstituteNames { get; set; }
         public virtual DbSet<TBLTIMETABLESCHEDULE> TBLTIMETABLESCHEDULEs { get; set; }
+ 
+        public virtual DbSet<TBLFEECOLLECTIONMASTER> TBLFEECOLLECTIONMASTERs { get; set; }
+        public virtual DbSet<TBLSTANDARDMASTER> TBLSTANDARDMASTERs { get; set; }
+        public virtual DbSet<View_DisplayFee> View_DisplayFee { get; set; }
+        public virtual DbSet<TBLSTUDENTADMISSION> TBLSTUDENTADMISSIONs { get; set; }
+
+        public virtual DbSet<View_FeeSetting> View_FeeSetting { get; set; }
+        public virtual DbSet<View_RemainingFeeDisplay> View_RemainingFeeDisplay { get; set; }
+        public virtual DbSet<View_DisplayStudentDetails> View_DisplayStudentDetails { get; set; }
+        public virtual DbSet<View_DisplayPTAMember> View_DisplayPTAMember { get; set; }
+ 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder) 
 		{

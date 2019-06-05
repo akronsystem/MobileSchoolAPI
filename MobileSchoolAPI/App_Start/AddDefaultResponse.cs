@@ -11,7 +11,7 @@ namespace AgroApp.App_Start
     {
         public void Apply(Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)
         {
-            if (operation.operationId == "HomeWork_TestUpload")
+            if (operation.operationId == "HomeWork_HomeworkSave")
             {
                 operation.consumes.Add("multipart/form-data");
                 operation.parameters = new[]
@@ -81,7 +81,7 @@ namespace AgroApp.App_Start
                             name = "file",
                             @in = "formData",
                             description = "File to upload.",
-                            required = true,
+                            required = false,
                             type = "file"
                         }
                     };

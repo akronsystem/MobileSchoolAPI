@@ -272,3 +272,5 @@ MobileSchoolAPI/Web.config
 MobileSchoolAPI/Web.config
 MobileSchoolAPI/MobileSchoolAPI.csproj
 *.jpg
+/MobileSchoolAPI/Upload/UserPhoto
+*.pubxml
