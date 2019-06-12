@@ -19,9 +19,17 @@ namespace MobileSchoolAPI.BusinessLayer
             else
             {
                 var data = db.TBLUSERLOGINs.Where(r => r.UserName == obj.UserName && r.Password == obj.Password).FirstOrDefault();
-                int StudentId = Convert.ToInt32(data.EmpCode);
-                var result = db.View_DisplayStudentDetails.Where(r=>r.STUDENTID== StudentId).FirstOrDefault();
-                return new StudentDetails { IsSuccess = true, StudentInformation = result };
+                if(data!=null)
+                {
+                    int StudentId = Convert.ToInt32(data.EmpCode);
+                    var result = db.View_DisplayStudentDetails.Where(r => r.STUDENTID == StudentId).FirstOrDefault();
+                    return new StudentDetails { IsSuccess = true, StudentInformation = result };
+                }
+                else
+                {
+                    return new StudentDetails { IsSuccess = true, StudentInformation = "Student Not Found" };
+                }
+               
             }
         }
     }

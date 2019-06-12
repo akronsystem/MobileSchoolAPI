@@ -1,7 +1,5 @@
 ﻿using MobileSchoolAPI.Models;
-
 using MobileSchoolAPI.ParamModel;
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -16,30 +14,31 @@ namespace MobileSchoolAPI.BusinessLayer
         {
             try
             {
-                SchoolMainContext db = new ConcreateContext().GetContext(tobj.Userid, tobj.Password);
+                SchoolMainContext db = new ConcreateContext().GetContext(tobj.UserName, tobj.Password);
                 if (db == null)
                 {
                     return new Results() { IsSuccess = false, Message = "Invalid User" };
                 }
- 
-                TBLTIMETABLESCHEDULE data = db.TBLTIMETABLESCHEDULEs.Where(r => r.DISPLAY == 1 && r.EMPLOYEEID == tobj.EMPLOYEEID).FirstOrDefault();
-                if(data!=null)
-                {
-                    var info = db.TBLTIMETABLESCHEDULEs.Where(r => r.DISPLAY == 1  && r.BATCHID == tobj.BATCHID ).FirstOrDefault();
-                         if(info!=null)
-                         {
-                             return new Results() { IsSuccess = false, Message = "Already Time Table Created" };
-                         }
+                var Info = db.TBLUSERLOGINs.Where(r => r.UserName == tobj.UserName && r.Password == tobj.Password).FirstOrDefault();
+                int EmployeeID =Convert.ToInt16(Info.EmpCode);
+
+                TBLTIMETABLESCHEDULE data = db.TBLTIMETABLESCHEDULEs.Where(r => r.DISPLAY == 1 && r.EMPLOYEEID == EmployeeID && r.BATCHID == tobj.BATCHID).FirstOrDefault();
+              
+                    if (data != null)
+                    {
+                        return new Results() { IsSuccess = false, Message = "Already Time Table Created" };
+                    }
                     else
                     {
+                        var AcademicYear = db.View_GETACADEMICYEAR.FirstOrDefault();
                         TBLTIMETABLESCHEDULE obj = new TBLTIMETABLESCHEDULE();
 
-                        obj.EMPLOYEEID = tobj.EMPLOYEEID;
+                        obj.EMPLOYEEID = EmployeeID;
                         obj.STANDARDID = tobj.STANDARDID;
                         obj.SUBJECTID = tobj.SUBJECTID;
                         obj.BATCHID = tobj.BATCHID;
                         obj.WORKINGDAYS = tobj.WORKINGDAYS;
-                        obj.EDUYEAR = tobj.EDUYEAR;
+                        obj.EDUYEAR = AcademicYear.ACADEMICYEAR;
                         obj.DISPLAY = 1;
                         obj.COMPANYID = 1;
                         obj.CREATEDID = 1;
@@ -54,15 +53,9 @@ namespace MobileSchoolAPI.BusinessLayer
                         db.TBLTIMETABLESCHEDULEs.Add(obj);
                         db.SaveChanges();
 
-
                     }
-                    
-
-
-                }
-
+                                    
                 return new Results() { IsSuccess = true, Message = "Created Timetable" };
- 
             }
             catch (Exception ex)
             {
@@ -78,16 +71,28 @@ namespace MobileSchoolAPI.BusinessLayer
         }
         public object GetTimetableInfo(UpdateTimeTableParam obj)
         {
-            SchoolMainContext db = new ConcreateContext().GetContext(obj.Userid, obj.Password);
+            SchoolMainContext db = new ConcreateContext().GetContext(obj.Username, obj.Password);
+            var Password = CryptIt.Encrypt(obj.Password);
+           
+            var Info = db.TBLUSERLOGINs.Where(r => r.UserName == obj.Username && r.Password == Password).FirstOrDefault();
+            
             if (db == null)
             {
                 return new Results() { IsSuccess = false, Message = "Invalid User" };
             }
- 
-
-            if(obj.WORKINGDAYS=="")
+            if (Info == null)
             {
-                var data = db.TBLTIMETABLESCHEDULEs.Where(r => r.DISPLAY == 1 && r.EMPLOYEEID == obj.EMPLOYEEID).ToList();
+                return new Results() { IsSuccess = false, Message = "Invalid User" };
+            }
+            var EmployeeCode = Convert.ToInt16(Info.EmpCode);
+            if (obj.WORKINGDAYS=="string")
+            {
+                obj.WORKINGDAYS= obj.WORKINGDAYS.Replace("string", "");
+            }
+            if(obj.WORKINGDAYS == "")
+            {
+              
+                var data = db.View_Timetable.Where(r =>r.EMPLOYEEID == EmployeeCode).ToList();
                 if (data == null)
                 {
                     return new Results() { IsSuccess = false, Message = "Data Not Found" };
@@ -99,7 +104,7 @@ namespace MobileSchoolAPI.BusinessLayer
             }
             else
             {
-                var data = db.TBLTIMETABLESCHEDULEs.Where(r => r.DISPLAY == 1 && r.EMPLOYEEID == obj.EMPLOYEEID && r.WORKINGDAYS == obj.WORKINGDAYS).ToList();
+                var data = db.View_Timetable.Where(r =>r.EMPLOYEEID == EmployeeCode && r.WORKINGDAYS == obj.WORKINGDAYS).ToList();
                 if (data == null)
                 {
                     return new Results() { IsSuccess = false, Message = "Data Not Found" };
@@ -111,7 +116,6 @@ namespace MobileSchoolAPI.BusinessLayer
 
             }
 
- 
         }
     }
 }

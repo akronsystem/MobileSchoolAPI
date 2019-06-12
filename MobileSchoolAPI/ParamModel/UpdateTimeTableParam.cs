@@ -7,7 +7,7 @@ namespace MobileSchoolAPI.ParamModel
 {
     public class UpdateTimeTableParam
     {
-        public string Userid
+        public string Username
         {
             get;
             set;
@@ -18,12 +18,7 @@ namespace MobileSchoolAPI.ParamModel
             set;
         }
 
-        public int EMPLOYEEID
-        {
-            get;
-            set;
-        }
-
+      
        
 
       

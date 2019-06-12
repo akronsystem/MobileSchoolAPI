@@ -9,7 +9,7 @@ namespace MobileSchoolAPI.ParamModel
 {
     public class TimeTableParam
     {
-        public string Userid
+        public string UserName
         {
             get;
             set;
@@ -20,11 +20,11 @@ namespace MobileSchoolAPI.ParamModel
             set;
         }
       
-        public int EMPLOYEEID
-        {
-            get;
-            set;
-        }
+        //public int EMPLOYEEID
+        //{
+        //    get;
+        //    set;
+        //}
 
       
         public int STANDARDID { get; set; }
@@ -39,20 +39,20 @@ namespace MobileSchoolAPI.ParamModel
         public string WORKINGDAYS { get; set; }
 
       
-        public string EDUYEAR { get; set; }
+        //public string EDUYEAR { get; set; }
 
     
-        public int DISPLAY { get; set; }
+        //public int DISPLAY { get; set; }
 
-        public int COMPANYID { get; set; }
+        //public int COMPANYID { get; set; }
 
-        public int CREATEDID { get; set; }
+       // public int CREATEDID { get; set; }
 
-        public DateTime CREATEDON { get; set; }
+       // public DateTime CREATEDON { get; set; }
 
-        public int UPDATEDID { get; set; }
+       // public int UPDATEDID { get; set; }
 
-        public DateTime UPDATEDON { get; set; }
+       // public DateTime UPDATEDON { get; set; }
 
         public int CLASSROOMID { get; set; }
 

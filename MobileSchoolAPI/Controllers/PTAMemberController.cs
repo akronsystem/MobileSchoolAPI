@@ -11,10 +11,12 @@ namespace MobileSchoolAPI.Controllers
 {
     public class PTAMemberController : ApiController
     {
+        [HttpPost]
         public object GetPTAMember(PTAMemberParam obj)
         {
-
-            return null;
+            GETPTAMEMBER ObjTerm = new GETPTAMEMBER();
+            var GetTermVar = ObjTerm.GetMemberList(obj);
+            return GetTermVar;
         }
     }
 }

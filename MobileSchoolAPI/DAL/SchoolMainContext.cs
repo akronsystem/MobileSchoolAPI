@@ -99,7 +99,6 @@ namespace MobileSchoolAPI
         public virtual DbSet<VW_TESTTYPELIST> VW_TESTTYPELIST { get; set; }	   
         public virtual DbSet<ViewGetInstituteName> ViewGetInstituteNames { get; set; }
         public virtual DbSet<TBLTIMETABLESCHEDULE> TBLTIMETABLESCHEDULEs { get; set; }
- 
         public virtual DbSet<TBLFEECOLLECTIONMASTER> TBLFEECOLLECTIONMASTERs { get; set; }
         public virtual DbSet<TBLSTANDARDMASTER> TBLSTANDARDMASTERs { get; set; }
         public virtual DbSet<View_DisplayFee> View_DisplayFee { get; set; }
@@ -109,8 +108,16 @@ namespace MobileSchoolAPI
         public virtual DbSet<View_RemainingFeeDisplay> View_RemainingFeeDisplay { get; set; }
         public virtual DbSet<View_DisplayStudentDetails> View_DisplayStudentDetails { get; set; }
         public virtual DbSet<View_DisplayPTAMember> View_DisplayPTAMember { get; set; }
- 
+        public virtual DbSet<View_Timetable> View_Timetable { get; set; }
+        public virtual DbSet<View_GetTotalFees> View_GetTotalFees { get; set; }
 
+        public virtual DbSet<View_GetPaidFees> View_GetPaidFees { get; set; }
+        public virtual DbSet<TBLFEEMASTER> TBLFEEMASTERs { get; set; }
+        public virtual DbSet<TBLFEETYPEMASTER> TBLFEETYPEMASTERs { get; set; }
+        public virtual DbSet<View_GetFeeSettings> View_GetFeeSettings { get; set; }
+        public virtual DbSet<TBLTRANSFERSTUDENT> TBLTRANSFERSTUDENTs { get; set; }
+        public virtual DbSet<View_GETACADEMICYEAR> View_GETACADEMICYEAR { get; set; }
+        public virtual DbSet<View_DisplayNotice> View_DisplayNotice { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder) 
 		{
 			modelBuilder.Entity<TBLUSERLOGIN>()
