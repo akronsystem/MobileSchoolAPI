@@ -84,6 +84,11 @@ namespace MobileSchoolAPI.BusinessLayer
             {
                 return new Results() { IsSuccess = false, Message = "Invalid User" };
             }
+            var AcademicYear = db.View_GETACADEMICYEAR.FirstOrDefault();
+            if (AcademicYear == null)
+            {
+                return new Results() { IsSuccess = false, Message = "Academic Year Not Found" };
+            }
             var EmployeeCode = Convert.ToInt16(Info.EmpCode);
             if (obj.WORKINGDAYS=="string")
             {
@@ -91,8 +96,8 @@ namespace MobileSchoolAPI.BusinessLayer
             }
             if(obj.WORKINGDAYS == "")
             {
-              
-                var data = db.View_Timetable.Where(r =>r.EMPLOYEEID == EmployeeCode).ToList();
+               
+                var data = db.View_Timetable.Where(r =>r.EMPLOYEEID == EmployeeCode && r.DISPLAY==1 && r.EDUYEAR==AcademicYear.ACADEMICYEAR).ToList();
                 if (data == null)
                 {
                     return new Results() { IsSuccess = false, Message = "Data Not Found" };
@@ -104,7 +109,7 @@ namespace MobileSchoolAPI.BusinessLayer
             }
             else
             {
-                var data = db.View_Timetable.Where(r =>r.EMPLOYEEID == EmployeeCode && r.WORKINGDAYS == obj.WORKINGDAYS).ToList();
+                var data = db.View_Timetable.Where(r =>r.EMPLOYEEID == EmployeeCode && r.WORKINGDAYS == obj.WORKINGDAYS && r.DISPLAY == 1 && r.EDUYEAR == AcademicYear.ACADEMICYEAR).ToList();
                 if (data == null)
                 {
                     return new Results() { IsSuccess = false, Message = "Data Not Found" };

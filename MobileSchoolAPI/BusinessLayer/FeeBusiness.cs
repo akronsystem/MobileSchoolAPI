@@ -18,6 +18,10 @@ namespace MobileSchoolAPI.BusinessLayer
                     return new Results() { IsSuccess = false, Message = "Invalid User" };
                 }
                 var data = db.TBLUSERLOGINs.Where(r => r.UserName == obj.UserName && r.Password == obj.Password).FirstOrDefault();
+                if(data==null)
+                {
+                    return new Results() { IsSuccess = false, Message = "Invalid User" };
+                }
                 int StudentId = Convert.ToInt32(data.EmpCode);
                 if (obj.UserName.StartsWith("SXS"))
                 {
@@ -53,7 +57,7 @@ namespace MobileSchoolAPI.BusinessLayer
 
                         dateadmission = Convert.ToDateTime(getlist.ADMISSIONDATE).ToShortDateString();
 
-                        string[] admsndate = dateadmission.Split('/');
+                        string[] admsndate = dateadmission.Split('-');
                         int ADMISSIONYEAR = 0, NEXTYEAR = 0;
                         dateadmission = admsndate[2];
                         if (dateadmission != "")
