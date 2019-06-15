@@ -19,7 +19,12 @@ namespace MobileSchoolAPI.BusinessLayer
                 {
                     return new Results() { IsSuccess = false, Message = "Invalid User" };
                 }
-                var Info = db.TBLUSERLOGINs.Where(r => r.UserName == tobj.UserName && r.Password == tobj.Password).FirstOrDefault();
+                var Password = CryptIt.Encrypt(tobj.Password);
+                var Info = db.TBLUSERLOGINs.Where(r => r.UserName == tobj.UserName && r.Password == Password).FirstOrDefault();
+                if(Info==null)
+                {
+                    return new Results() { IsSuccess = false, Message = "Invalid User" };
+                }
                 int EmployeeID =Convert.ToInt16(Info.EmpCode);
 
                 TBLTIMETABLESCHEDULE data = db.TBLTIMETABLESCHEDULEs.Where(r => r.DISPLAY == 1 && r.EMPLOYEEID == EmployeeID && r.BATCHID == tobj.BATCHID).FirstOrDefault();
@@ -71,56 +76,78 @@ namespace MobileSchoolAPI.BusinessLayer
         }
         public object GetTimetableInfo(UpdateTimeTableParam obj)
         {
-            SchoolMainContext db = new ConcreateContext().GetContext(obj.Username, obj.Password);
-            var Password = CryptIt.Encrypt(obj.Password);
-           
-            var Info = db.TBLUSERLOGINs.Where(r => r.UserName == obj.Username && r.Password == Password).FirstOrDefault();
-            
-            if (db == null)
+            try
             {
-                return new Results() { IsSuccess = false, Message = "Invalid User" };
-            }
-            if (Info == null)
-            {
-                return new Results() { IsSuccess = false, Message = "Invalid User" };
-            }
-            var AcademicYear = db.View_GETACADEMICYEAR.FirstOrDefault();
-            if (AcademicYear == null)
-            {
-                return new Results() { IsSuccess = false, Message = "Academic Year Not Found" };
-            }
-            var EmployeeCode = Convert.ToInt16(Info.EmpCode);
-            if (obj.WORKINGDAYS=="string")
-            {
-                obj.WORKINGDAYS= obj.WORKINGDAYS.Replace("string", "");
-            }
-            if(obj.WORKINGDAYS == "")
-            {
-               
-                var data = db.View_Timetable.Where(r =>r.EMPLOYEEID == EmployeeCode && r.DISPLAY==1 && r.EDUYEAR==AcademicYear.ACADEMICYEAR).ToList();
-                if (data == null)
+
+
+                SchoolMainContext db = new ConcreateContext().GetContext(obj.Username, obj.Password);
+                var Password = CryptIt.Encrypt(obj.Password);
+
+                var Info = db.TBLUSERLOGINs.Where(r => r.UserName == obj.Username && r.Password == Password).FirstOrDefault();
+
+                if (db == null)
                 {
-                    return new Results() { IsSuccess = false, Message = "Data Not Found" };
+                    return new Results() { IsSuccess = false, Message = "Invalid User" };
                 }
-                else
+                if (Info == null)
                 {
-                    return new TIMETABLELIST() { IsSuccess = true, TABLELIST = data };
+                    return new Results() { IsSuccess = false, Message = "Invalid User" };
                 }
-            }
-            else
-            {
-                var data = db.View_Timetable.Where(r =>r.EMPLOYEEID == EmployeeCode && r.WORKINGDAYS == obj.WORKINGDAYS && r.DISPLAY == 1 && r.EDUYEAR == AcademicYear.ACADEMICYEAR).ToList();
-                if (data == null)
+                var AcademicYear = db.View_GETACADEMICYEAR.FirstOrDefault();
+                if (AcademicYear == null)
                 {
-                    return new Results() { IsSuccess = false, Message = "Data Not Found" };
+                    return new Results() { IsSuccess = false, Message = "Academic Year Not Found" };
                 }
-                else
+                var EmployeeCode = Convert.ToInt16(Info.EmpCode);
+
+                List<string> WorkingDay = db.TBLTIMETABLESCHEDULEs.Where(r => r.DISPLAY == 1).Select(r => r.WORKINGDAYS).Distinct().ToList();
+                List<Day> lt = new List<Day>();
+
+                foreach (var item in WorkingDay)
                 {
-                    return new TIMETABLELIST() { IsSuccess = true, TABLELIST = data };
+                    item.ToList();
+                    TIMETABLELIST ddl = new TIMETABLELIST();
+                    // var data = db.View_Timetable.Where(r => r.EMPLOYEEID == EmployeeCode && r.WORKINGDAYS == item && r.DISPLAY == 1 && r.EDUYEAR == AcademicYear.ACADEMICYEAR).ToList();
+                    var data_d = from c in db.View_Timetable.Where(r => r.EMPLOYEEID == EmployeeCode && r.WORKINGDAYS == item && r.DISPLAY == 1 && r.EDUYEAR == AcademicYear.ACADEMICYEAR)
+                                 select new { c.DIVISION, c.SUBJECTNAME, c.STANDARDNAME, c.BATCHNAME, c.BATCHTIME };
+
+                    if (data_d.Count() == 0)
+                    {
+
+                        //return new TIMETABLELIST() { IsSuccess = false, TABLELIST = "Not Found Data" };
+                    }
+                    else
+                    {
+                        lt.Add(new Day
+                        {
+
+                            WorkingDayName = item,
+                            TimeTableList = data_d
+                        });
+
+                    }
+
+
                 }
+                return new TIMETABLELIST() { IsSuccess = true, TABLELIST = lt.ToArray() };
 
             }
+            catch (Exception ex)
+            {
+                return new Results
+                {
+                    IsSuccess = false,
+                    Message = ex.Message
+                };
+            }
+
 
         }
+        public class Day
+        {
+            public string WorkingDayName { get; set; }
+            public object TimeTableList { get; set; }
+        }
+
     }
 }

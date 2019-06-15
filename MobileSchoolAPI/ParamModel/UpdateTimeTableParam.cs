@@ -22,7 +22,7 @@ namespace MobileSchoolAPI.ParamModel
        
 
       
-        public string WORKINGDAYS { get; set; }
+      //  public string WORKINGDAYS { get; set; }
 
 
         

@@ -9,6 +9,6 @@ namespace MobileSchoolAPI.Models
     {
         public bool IsSuccess { get; set; }
         public object TotalFee { get; set; }
-        public object RemainingFee { get; set; }
+        public object PaindingFee { get; set; }
     }
 }
