@@ -35,7 +35,7 @@ namespace MobileSchoolAPI.BusinessLayer
                         var data = db.View_DisplayNotice.Where(r => r.STARTDATE >= System.DateTime.Today.Date && r.DISPLAY == 1 && r.ACADEMICYEAR == AcademicYear.ACADEMICYEAR).ToList();
                         if (data != null)
                         {
-                            return new NoticeResult { IsSuccess = false, Result = "Data Not Found" };
+                            return new NoticeResult { IsSuccess = true, Result = data };
                         }
                         else
                         {
