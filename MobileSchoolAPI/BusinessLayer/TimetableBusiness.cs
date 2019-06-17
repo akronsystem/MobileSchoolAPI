@@ -113,8 +113,12 @@ namespace MobileSchoolAPI.BusinessLayer
 
                     if (data_d.Count() == 0)
                     {
+                        lt.Add(new Day
+                        {
 
-                        //return new TIMETABLELIST() { IsSuccess = false, TABLELIST = "Not Found Data" };
+                            WorkingDayName = item,
+                            TimeTableList = data_d
+                        });
                     }
                     else
                     {
