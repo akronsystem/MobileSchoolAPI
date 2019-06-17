@@ -27,7 +27,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 }
                 int EmployeeID =Convert.ToInt16(Info.EmpCode);
 
-                TBLTIMETABLESCHEDULE data = db.TBLTIMETABLESCHEDULEs.Where(r => r.DISPLAY == 1 && r.EMPLOYEEID == EmployeeID && r.BATCHID == tobj.BATCHID).FirstOrDefault();
+                TBLTIMETABLESCHEDULE data = db.TBLTIMETABLESCHEDULEs.Where(r => r.DISPLAY == 1 && r.EMPLOYEEID == EmployeeID && r.BATCHID == tobj.BATCHID && r.WORKINGDAYS==tobj.WORKINGDAYS).FirstOrDefault();
               
                     if (data != null)
                     {

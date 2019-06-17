@@ -94,7 +94,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 {
 
                     double App_fee = 0;
-                   
+                    double PendingFee = 0;
                     var nkTotalFee = db.View_GetTotalFees.Where(r => r.STUDENTID == StudentId).FirstOrDefault();
                     if(nkTotalFee==null)
                     {
@@ -102,7 +102,7 @@ namespace MobileSchoolAPI.BusinessLayer
                         var ApplicableFee = db.View_GetFeeSettings.Where(r => r.ENROLLMENTNO == obj.UserName).ToList();
                         if(ApplicableFee.Count()==0)
                         {
-                            return new FeeList() { IsSuccess = false, TotalFee = "Not Found Applicable Fee",PaindingFee="" };
+                            return new FeeList() { IsSuccess = false, TotalFee = "Not Found Applicable Fee",Concession="",PaindingFee="" };
                         }
                         for(int i=0;i<ApplicableFee.Count;i++)
                         {
@@ -110,12 +110,16 @@ namespace MobileSchoolAPI.BusinessLayer
 
                         }
                         var Concession = db.TBLTRANSFERSTUDENTs.Where(r => r.STUDENTID == StudentId).FirstOrDefault();
+                        //if(Concession.CONCESSIONPERCENTAGE== null)
+                        //{
+                        //    Concession.CONCESSIONPERCENTAGE = 0;
+                        //}
                         if (Concession.CONCESSIONPERCENTAGE != null)
                         {
-                            App_fee = App_fee - Convert.ToDouble(Concession.CONCESSIONPERCENTAGE);
+                            PendingFee = App_fee - Convert.ToDouble(Concession.CONCESSIONPERCENTAGE);
                         }
 
-                        return new FeeList() { IsSuccess = true, TotalFee = App_fee, PaindingFee = App_fee };
+                        return new FeeList() { IsSuccess = true, TotalFee = App_fee,Concession=Concession.CONCESSIONPERCENTAGE, PaindingFee = PendingFee };
 
                     }
                     else
@@ -131,7 +135,7 @@ namespace MobileSchoolAPI.BusinessLayer
 
                        // var nkpendingfee = db.View_GetPaidFees.Where(r => r.STUDENTID == StudentId).FirstOrDefault();
                         var Remaining_fee = nkTotalFee.TOTALFEES - nkTotalFee.PAID;
-                        return new FeeList() { IsSuccess = true, TotalFee = nkTotalFee.TOTALFEES, PaindingFee = Remaining_fee };
+                        return new FeeList() { IsSuccess = true, TotalFee = nkTotalFee.TOTALFEES,Concession= nkTotalFee.CONCESSIONPERCENTAGE, PaindingFee = Remaining_fee };
                     }
                  
                 }
