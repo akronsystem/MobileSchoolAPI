@@ -23,8 +23,8 @@ namespace MobileSchoolAPI.BusinessLayer
             }
             else
             {
-                var password = CryptIt.Encrypt(obj.Password);
-                var data = db.TBLUSERLOGINs.Where(r => r.UserName == obj.UserName && r.Password == password).FirstOrDefault();
+                
+                var data = db.TBLUSERLOGINs.Where(r => r.UserName == obj.UserName && r.Password == obj.Password).FirstOrDefault();
                 if (data == null)
                 {
                     return new Results { IsSuccess = false, Message = "Invalid User" };

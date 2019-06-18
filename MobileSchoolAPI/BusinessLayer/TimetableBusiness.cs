@@ -19,8 +19,8 @@ namespace MobileSchoolAPI.BusinessLayer
                 {
                     return new Results() { IsSuccess = false, Message = "Invalid User" };
                 }
-                var Password = CryptIt.Encrypt(tobj.Password);
-                var Info = db.TBLUSERLOGINs.Where(r => r.UserName == tobj.UserName && r.Password == Password).FirstOrDefault();
+                
+                var Info = db.TBLUSERLOGINs.Where(r => r.UserName == tobj.UserName && r.Password == tobj.Password).FirstOrDefault();
                 if(Info==null)
                 {
                     return new Results() { IsSuccess = false, Message = "Invalid User" };
@@ -81,9 +81,8 @@ namespace MobileSchoolAPI.BusinessLayer
 
 
                 SchoolMainContext db = new ConcreateContext().GetContext(obj.Username, obj.Password);
-                var Password = CryptIt.Encrypt(obj.Password);
-
-                var Info = db.TBLUSERLOGINs.Where(r => r.UserName == obj.Username && r.Password == Password).FirstOrDefault();
+              
+                var Info = db.TBLUSERLOGINs.Where(r => r.UserName == obj.Username && r.Password == obj.Password).FirstOrDefault();
 
                 if (db == null)
                 {
