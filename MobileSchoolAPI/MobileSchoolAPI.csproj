@@ -170,6 +170,7 @@
     <Compile Include="BusinessLayer\GetUserIdBusiness.cs" />
     <Compile Include="BusinessLayer\Homeworkbussinesslayer.cs" />
     <Compile Include="BusinessLayer\InstituteBusiness.cs" />
+    <Compile Include="BusinessLayer\LeaveBusiness.cs" />
     <Compile Include="BusinessLayer\LoginManager.cs" />
     <Compile Include="BusinessLayer\NoticeBusinessLayer.cs" />
     <Compile Include="BusinessLayer\NotificationBusiness.cs" />
@@ -299,6 +300,7 @@
     <Compile Include="Models\VW_TESTTYPELIST.cs" />
     <Compile Include="Models\VW_UNITMASTER.cs" />
     <Compile Include="ParamModel\FeePram.cs" />
+    <Compile Include="ParamModel\LeaveParam.cs" />
     <Compile Include="ParamModel\NoticeParam.cs" />
     <Compile Include="ParamModel\ParamAllNotification.cs" />
     <Compile Include="ParamModel\ParamAttendance.cs" />
