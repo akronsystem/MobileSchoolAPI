@@ -98,8 +98,8 @@ namespace MobileSchoolAPI.BusinessLayer
                     return new Results() { IsSuccess = false, Message = "Academic Year Not Found" };
                 }
                 var EmployeeCode = Convert.ToInt16(Info.EmpCode);
-
-                List<string> WorkingDay = db.TBLTIMETABLESCHEDULEs.Where(r => r.DISPLAY == 1).Select(r => r.WORKINGDAYS).Distinct().ToList();
+                // var days = db.View_DisplayWeekDay.ToList();
+                List<string> WorkingDay = db.View_DisplayWeekDay.OrderBy(r => r.DayNo).Select(r => r.WORKINGDAYS).ToList();
                 List<Day> lt = new List<Day>();
 
                 foreach (var item in WorkingDay)
@@ -116,7 +116,7 @@ namespace MobileSchoolAPI.BusinessLayer
                         {
 
                             WorkingDayName = item,
-                            TimeTableList = data_d
+                            TimeTableList = "TimeTable Not Scheduled"
                         });
                     }
                     else
