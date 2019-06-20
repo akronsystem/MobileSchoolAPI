@@ -116,7 +116,7 @@ namespace MobileSchoolAPI.BusinessLayer
                         {
 
                             WorkingDayName = item,
-                            TimeTableList = "TimeTable Not Scheduled"
+                            TimeTableList = data_d
                         });
                     }
                     else

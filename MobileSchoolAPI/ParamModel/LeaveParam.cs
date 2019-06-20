@@ -26,6 +26,9 @@ namespace MobileSchoolAPI.ParamModel
         //[StringLength(20)]
         public string ACADEMICYEAR { get; set; }
 
+       // [StringLength(30)]
+        public string SUBSTITUTEID { get; set; }
+
         //public int CREATEDID { get; set; }
 
         //public DateTime CREATEDON { get; set; }

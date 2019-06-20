@@ -17,7 +17,7 @@ namespace MobileSchoolAPI.Controllers
 
             var GetTermVar = ObjTerm.CreateLeave(obj);
             return GetTermVar;
-            
+
         }
         public object ShowLeave(GetLeaveParam obj)
         {
