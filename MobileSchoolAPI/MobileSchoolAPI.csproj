@@ -236,6 +236,8 @@
     <Compile Include="Models\TBLFEETYPEMASTER.cs" />
     <Compile Include="Models\TBLHOLIDAY.cs" />
     <Compile Include="Models\TBLHOMEWORK.cs" />
+    <Compile Include="Models\TBLLEAVEMASTER.cs" />
+    <Compile Include="Models\TBLLEAVETYPEMASTER.cs" />
     <Compile Include="Models\TBLMESSAGEHISTORY.cs" />
     <Compile Include="Models\TBLMSGHISTORY.cs" />
     <Compile Include="Models\TBLNOTIFICATION.cs" />
@@ -275,6 +277,7 @@
     <Compile Include="Models\View_DisplayNotice.cs" />
     <Compile Include="Models\View_DisplayPTAMember.cs" />
     <Compile Include="Models\View_DisplayStudentDetails.cs" />
+    <Compile Include="Models\View_DisplayWeekDay.cs" />
     <Compile Include="Models\View_FeeSetting.cs" />
     <Compile Include="Models\View_GETACADEMICYEAR.cs" />
     <Compile Include="Models\View_GetFeeSettings.cs" />
@@ -300,6 +303,7 @@
     <Compile Include="Models\VW_TESTTYPELIST.cs" />
     <Compile Include="Models\VW_UNITMASTER.cs" />
     <Compile Include="ParamModel\FeePram.cs" />
+    <Compile Include="ParamModel\GetLeaveParam.cs" />
     <Compile Include="ParamModel\LeaveParam.cs" />
     <Compile Include="ParamModel\NoticeParam.cs" />
     <Compile Include="ParamModel\ParamAllNotification.cs" />
@@ -336,6 +340,7 @@
     <Compile Include="ResultModel\ClassTeacherResult.cs" />
     <Compile Include="ResultModel\GalleryResult.cs" />
     <Compile Include="ResultModel\InvalidUser.cs" />
+    <Compile Include="ResultModel\LeaveList.cs" />
     <Compile Include="ResultModel\MonthlyAttendanceResult.cs" />
     <Compile Include="ResultModel\NoticeResult.cs" />
     <Compile Include="ResultModel\ResultBirth.cs" />
