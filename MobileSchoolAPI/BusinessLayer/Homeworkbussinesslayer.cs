@@ -433,7 +433,7 @@ namespace MobileSchoolAPI.BusinessLayer
                         var postedFile = httpRequest.Files[file];
                         fileName = postedFile.FileName;
                         filePath = ConfigurationManager.AppSettings["UploadDir"] + Guid.NewGuid() + fileName;
-                        savePath = HttpContext.Current.Server.MapPath(filePath); postedFile.SaveAs(savePath); // NOTE: To store in memory use postedFile.InputStream }
+                        savePath = HttpContext.Current.Server.MapPath(filePath); //postedFile.SaveAs(savePath); // NOTE: To store in memory use postedFile.InputStream }
                         TBLHOMEWORK upload = new TBLHOMEWORK();
                         //upload.file_id = Guid.NewGuid().ToString();
                         //upload.name = fileName;

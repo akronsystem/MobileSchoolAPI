@@ -32,18 +32,31 @@ namespace MobileSchoolAPI.BusinessLayer
                 var GetStatus = db.TBLLEAVEMASTERs.Where(r => r.EMPLOYEEID == EmployeeID && r.DISPLAY == 1 && r.LEAVETYPE == tobj.LEAVETYPE && r.ACADEMICYEAR == academicyear.ACADEMICYEAR).OrderByDescending(r=>r.LEAVEID).FirstOrDefault();
                 if(GetStatus!=null)
                 {
-                    if(GetStatus.SUBSTITUTESTATUS=="DisApproved" || GetStatus.SUBSTITUTESTATUS == "Pending")
+                    if(tobj.SUBSTITUTEID=="No Load")
                     {
-                        return new LeaveInfo() { Issucess = false, Status= "Your Fisrt Leave are not Approved By SUBSTITUTE" };
+                        //
                     }
                     else
                     {
-                        if(GetStatus.PRINCIPALSTATUS == "DisApproved" || GetStatus.PRINCIPALSTATUS == "Pending")
+                        string[] subID = tobj.SUBSTITUTEID.Split(',');
+
+                        for (int i = 0; i < subID.Count(); i++)
                         {
-                            return new LeaveInfo() { Issucess = false, Status = "Your Fisrt Leave are not Approved By PRINCIPAL " };
+                            var ID = int.Parse(subID[i]);
+                            var substitute = db.TBLEMPLOYEEMASTERs.Where(r => r.EMPLOYEEID == ID && r.DEPARTMENTID == 24 && r.DISPLAY == 1 && r.EDUYEAR == academicyear.ACADEMICYEAR).ToList();
+                            if (substitute.Count == 0)
+                            {
+                                return new LeaveInfo() { Issucess = false, Status = "Not Found SUBSTITUTEID" };
+                            }
                         }
-                        else
-                        {
+                    }                  
+                   
+                    if(GetStatus.PRINCIPALSTATUS == "DisApproved" || GetStatus.PRINCIPALSTATUS == "Pending")
+                    {
+                            return new LeaveInfo() { Issucess = false, Status = "Your Fisrt Leave are not Approved By PRINCIPAL " };
+                    }
+                    else
+                    {
                             for (int i = 0; i < GetInfo.Count(); i++)
                             {
                                 SactionDays += Convert.ToDouble(GetInfo[i].SANCTIONEDNOOFDAYS);
@@ -51,17 +64,17 @@ namespace MobileSchoolAPI.BusinessLayer
                             var GetTotalLeave = db.TBLLEAVETYPEMASTERs.Where(r => r.EMPLOYEETYPEID == EmployeeID && r.LEAVETYPEID == tobj.LEAVETYPE && r.DISPLAY == 1 && r.ACADEMICYEAR == academicyear.ACADEMICYEAR).FirstOrDefault();
                             AvailableDays = Convert.ToDouble(GetTotalLeave.DAYS - SactionDays);
 
-                            string[] subID = tobj.SUBSTITUTEID.Split(',');
+                            //string[] subID = tobj.SUBSTITUTEID.Split(',');
 
-                            for (int i = 0; i < subID.Count(); i++)
-                            {
-                                var ID = int.Parse(subID[i]);
-                                var substitute = db.TBLEMPLOYEEMASTERs.Where(r => r.EMPLOYEEID == ID && r.DEPARTMENTID == 24 && r.DISPLAY==1 && r.EDUYEAR == academicyear.ACADEMICYEAR).ToList();
-                                if (substitute.Count == 0)
-                                {
-                                    return new LeaveInfo() { Issucess = false, Status = "Not Found SUBSTITUTEID" };
-                                }
-                            }
+                            //for (int i = 0; i < subID.Count(); i++)
+                            //{
+                            //    var ID = int.Parse(subID[i]);
+                            //    var substitute = db.TBLEMPLOYEEMASTERs.Where(r => r.EMPLOYEEID == ID && r.DEPARTMENTID == 24 && r.DISPLAY==1 && r.EDUYEAR == academicyear.ACADEMICYEAR).ToList();
+                            //    if (substitute.Count == 0)
+                            //    {
+                            //        return new LeaveInfo() { Issucess = false, Status = "Not Found SUBSTITUTEID" };
+                            //    }
+                            //}
                             if(AvailableDays<SactionDays || AvailableDays==0)
                             {
                                 return new LeaveList() { IsSuccess = false, ApplicableLeaves = GetTotalLeave.DAYS, RemainingLeaves = AvailableDays };
@@ -73,7 +86,7 @@ namespace MobileSchoolAPI.BusinessLayer
                             obj.TODATE = tobj.TODATE;
                             obj.REASON = tobj.REASON;
                             obj.NOOFDAYS = tobj.NOOFDAYS;
-                            obj.ACADEMICYEAR = tobj.ACADEMICYEAR;
+                            obj.ACADEMICYEAR = academicyear.ACADEMICYEAR;
                             obj.CREATEDID = 1;
                             obj.CREATEDON = System.DateTime.Today.Date;
                             obj.CreationTime = System.DateTime.Today.TimeOfDay.ToString();
@@ -85,9 +98,9 @@ namespace MobileSchoolAPI.BusinessLayer
                             db.TBLLEAVEMASTERs.Add(obj);
                             db.SaveChanges();
                             
-                        }
-                        return new LeaveInfo() { Issucess = true, Status = "Apply Leave Successfully" };
                     }
+                    return new LeaveInfo() { Issucess = true, Status = "Apply Leave Successfully" };
+                    
                 }
                
 
@@ -122,7 +135,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 obj.TODATE = tobj.TODATE;
                 obj.REASON = tobj.REASON;
                 obj.NOOFDAYS = tobj.NOOFDAYS;
-                obj.ACADEMICYEAR = tobj.ACADEMICYEAR;
+                obj.ACADEMICYEAR = academicyear.ACADEMICYEAR;
                 obj.CREATEDID = 1;
                 obj.CREATEDON = System.DateTime.Today.Date;
                 obj.CreationTime = System.DateTime.Today.TimeOfDay.ToString();

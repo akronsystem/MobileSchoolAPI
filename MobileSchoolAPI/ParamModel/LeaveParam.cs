@@ -24,7 +24,7 @@ namespace MobileSchoolAPI.ParamModel
         public string REASON { get; set; }
 
         //[StringLength(20)]
-        public string ACADEMICYEAR { get; set; }
+       // public string ACADEMICYEAR { get; set; }
 
        // [StringLength(30)]
         public string SUBSTITUTEID { get; set; }
