@@ -188,6 +188,7 @@
     <Compile Include="Controllers\GalleryController.cs" />
     <Compile Include="Controllers\GetSubjectList.cs" />
     <Compile Include="Controllers\HomeWorkController.cs" />
+    <Compile Include="Controllers\LeaveController.cs" />
     <Compile Include="Controllers\NoticeController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\PARAMHOMEWORKBYUSER.cs" />
@@ -231,6 +232,7 @@
     <Compile Include="Models\TBLATTENDENCE.cs" />
     <Compile Include="Models\TBLATTENDENCEMASTER.cs" />
     <Compile Include="Models\TBLDeviceRegistration.cs" />
+    <Compile Include="Models\TBLEMPLOYEEMASTER.cs" />
     <Compile Include="Models\TBLFEECOLLECTIONMASTER.cs" />
     <Compile Include="Models\TBLFEEMASTER.cs" />
     <Compile Include="Models\TBLFEETYPEMASTER.cs" />
@@ -340,6 +342,7 @@
     <Compile Include="ResultModel\ClassTeacherResult.cs" />
     <Compile Include="ResultModel\GalleryResult.cs" />
     <Compile Include="ResultModel\InvalidUser.cs" />
+    <Compile Include="ResultModel\LeaveInfo.cs" />
     <Compile Include="ResultModel\LeaveList.cs" />
     <Compile Include="ResultModel\MonthlyAttendanceResult.cs" />
     <Compile Include="ResultModel\NoticeResult.cs" />
