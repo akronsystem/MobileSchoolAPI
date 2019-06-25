@@ -286,6 +286,7 @@
     <Compile Include="Models\View_GetPaidFees.cs" />
     <Compile Include="Models\View_GetTotalFees.cs" />
     <Compile Include="Models\View_RemainingFeeDisplay.cs" />
+    <Compile Include="Models\View_StudentTimeTable.cs" />
     <Compile Include="Models\VIEW_TERMMASTER.cs" />
     <Compile Include="Models\View_Timetable.cs" />
     <Compile Include="Models\View_UnreadNotificationCount.cs" />
