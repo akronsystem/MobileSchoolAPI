@@ -53,10 +53,18 @@ namespace MobileSchoolAPI.BusinessLayer
                 }
 
                 var GETTYPE = db.VW_GET_USER_TYPE.Where(r => r.UserId == obj.USERID).ToList();
-
+                var AcadamicYear = db.View_GETACADEMICYEAR.FirstOrDefault();
+                if (AcadamicYear == null)
+                {
+                    return new Results
+                    {
+                        IsSuccess = false,
+                        Message = "Not Found Academic Year"
+                    };
+                }
                 if (GETTYPE[0].UserType != "STUDENT")
                 {
-                    var Division = db.VIEWDIVISIONLISTs.Where(r => r.STANDARDID == obj.STANDARDID && r.UserId == obj.USERID && r.ACADEMICYEAR=="2018-2019").ToList();
+                    var Division = db.VIEWDIVISIONLISTs.Where(r => r.STANDARDID == obj.STANDARDID && r.UserId == obj.USERID && r.ACADEMICYEAR==AcadamicYear.ACADEMICYEAR).ToList();
 
                     if (Division.Count==0)
                     {
@@ -76,7 +84,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 }
                 else
                 {
-                    var Division = db.VIEWDIVISIONLISTBYSTUDENTs.Where(r => r.STANDARDID == obj.STANDARDID && r.UserId == obj.USERID && r.ACADEMICYEAR=="2018-2019").ToList();
+                    var Division = db.VIEWDIVISIONLISTBYSTUDENTs.Where(r => r.STANDARDID == obj.STANDARDID && r.UserId == obj.USERID && r.ACADEMICYEAR==AcadamicYear.ACADEMICYEAR).ToList();
 
                     if (Division.Count == 0)
                     {

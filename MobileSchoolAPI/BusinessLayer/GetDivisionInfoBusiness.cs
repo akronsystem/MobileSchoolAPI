@@ -22,10 +22,19 @@ namespace MobileSchoolAPI.BusinessLayer
                 {
                     return new Results() { IsSuccess = false, Message = "Invalid User" };
                 }
-                var EmpDivision = db.VIEWEMPDIVISIONs.Where(r=>r.UserId==objdiv.userid && r.ACADEMICYEAR=="2018-2019" && r.DISPLAY==1).ToList();
+                var AcadamicYear = db.View_GETACADEMICYEAR.FirstOrDefault();
+                if (AcadamicYear == null)
+                {
+                    return new Results
+                    {
+                        IsSuccess = false,
+                        Message = "Not Found Academic Year"
+                    };
+                }
+                var EmpDivision = db.VIEWEMPDIVISIONs.Where(r=>r.UserId==objdiv.userid && r.ACADEMICYEAR==AcadamicYear.ACADEMICYEAR && r.DISPLAY==1).ToList();
                 if (EmpDivision.Count == 0)
                 {
-                    var StudentDivision = db.VIEWSTUDENTDIVISIONs.Where(r => r.UserId == objdiv.userid && r.ACADEMICYEAR == "2018-2019" && r.DISPLAY == 1).ToList();
+                    var StudentDivision = db.VIEWSTUDENTDIVISIONs.Where(r => r.UserId == objdiv.userid && r.ACADEMICYEAR == AcadamicYear.ACADEMICYEAR && r.DISPLAY == 1).ToList();
                     if (StudentDivision.Count == 0)
                     {
 

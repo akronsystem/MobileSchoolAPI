@@ -122,7 +122,8 @@ namespace MobileSchoolAPI
         public virtual DbSet<TBLLEAVETYPEMASTER> TBLLEAVETYPEMASTERs { get; set; }
         public virtual DbSet<View_DisplayWeekDay> View_DisplayWeekDay { get; set; }
         public virtual DbSet<TBLEMPLOYEEMASTER> TBLEMPLOYEEMASTERs { get; set; }
-
+        public virtual DbSet<View_StudentTimeTable> View_StudentTimeTable { get; set; }
+      //  public virtual DbSet<TBLTRANSFERSTUDENT> TBLTRANSFERSTUDENTs { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder) 
 		{
 			modelBuilder.Entity<TBLUSERLOGIN>()

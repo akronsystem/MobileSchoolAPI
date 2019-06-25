@@ -55,7 +55,15 @@ namespace MobileSchoolAPI.BusinessLayer
                 List<Result> lt = new List<Result>();
                 SchoolMainContext db = new ConcreateContext().GetContext(PA.UserId, PA.Password);
                 var USERTYPE = db.VW_GET_USER_TYPE.Where(r => r.UserId == PA.UserId).ToList();
-
+                var AcadamicYear = db.View_GETACADEMICYEAR.FirstOrDefault();
+                if (AcadamicYear == null)
+                {
+                    return new Results
+                    {
+                        IsSuccess = false,
+                        Message = "Not Found Academic Year"
+                    };
+                }
                 if (USERTYPE[0].UserType == "STUDENT")
                 {
                     var ATTENDANCEDATA = db.VWATTENDANCEBYDATESTUDENTs.Where(r => r.ATTMONTH == PA.MONTH && r.UserId == PA.UserId).ToList();
@@ -64,7 +72,7 @@ namespace MobileSchoolAPI.BusinessLayer
                     int flag = 0;
                     foreach (var item in li)
                     {
-                        var checkattendace = db.VIewAttendaceClasswiseChecks.Where(r => r.UserId == PA.UserId && r.ATTEDANCEDATE == item && r.DISPLAY == 1 && r.EDUCATIONYEAR == "2018-2019" && r.ACADEMICYEAR == "2018-2019").ToList();
+                        var checkattendace = db.VIewAttendaceClasswiseChecks.Where(r => r.UserId == PA.UserId && r.ATTEDANCEDATE == item && r.DISPLAY == 1 && r.EDUCATIONYEAR == AcadamicYear.ACADEMICYEAR && r.ACADEMICYEAR == AcadamicYear.ACADEMICYEAR).ToList();
                         if (checkattendace.Count == 0)
                         {
                             Result ddl = new Result();

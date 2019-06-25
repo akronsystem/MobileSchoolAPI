@@ -19,7 +19,16 @@ namespace MobileSchoolAPI.BusinessLayer
                 {
                     return new Results() { IsSuccess = false, Message = "Invalid User" };
                 }
-                var result = db.VW_EXAMSCHEDULE.Where(r=>r.STANDARDID.Contains(""+OBJ.STANDARDID+"") && r.TESTTYPEID==OBJ.TESTID && r.ACADEMICYEAR=="2018-2019" ).ToList();
+                var AcadamicYear = db.View_GETACADEMICYEAR.FirstOrDefault();
+                if (AcadamicYear == null)
+                {
+                    return new Results
+                    {
+                        IsSuccess = false,
+                        Message = "Not Found Academic Year"
+                    };
+                }
+                var result = db.VW_EXAMSCHEDULE.Where(r=>r.STANDARDID.Contains(""+OBJ.STANDARDID+"") && r.TESTTYPEID==OBJ.TESTID && r.ACADEMICYEAR==AcadamicYear.ACADEMICYEAR ).ToList();
                 if(result.Count==0)
                 {
                     return new InvalidUser() { IsSuccess = false, Result = "Record Not Found" };

@@ -25,10 +25,18 @@ namespace MobileSchoolAPI.BusinessLayer
                 {
                     return new AttendanceResult() { IsSuccess = false, UserWiseAttendanceList = "User Not Found"   };
                 }
-
+                var AcadamicYear = db.View_GETACADEMICYEAR.FirstOrDefault();
+                if (AcadamicYear == null)
+                {
+                    return new Results
+                    {
+                        IsSuccess = false,
+                        Message = "Not Found Academic Year"
+                    };
+                }
                 if (usertype[0].UserType == "STUDENT")
                 {
-                    var checkattendace = db.VIewAttendaceClasswiseChecks.Where(r => r.UserId == obj.UserId && r.ATTEDANCEDATE == obj.AttendanceDate && r.DISPLAY == 1 && r.EDUCATIONYEAR == "2018-2019" && r.ACADEMICYEAR == "2018-2019").ToList();
+                    var checkattendace = db.VIewAttendaceClasswiseChecks.Where(r => r.UserId == obj.UserId && r.ATTEDANCEDATE == obj.AttendanceDate && r.DISPLAY == 1 && r.EDUCATIONYEAR == AcadamicYear.ACADEMICYEAR && r.ACADEMICYEAR == AcadamicYear.ACADEMICYEAR).ToList();
                     if (checkattendace.Count() == 0)
                     {
                         return  new AttendanceResult() { IsSuccess = true, UserWiseAttendanceList =  "Status : Attendance Is Not Marked By Class Teacher For This Date"   };
@@ -115,6 +123,15 @@ namespace MobileSchoolAPI.BusinessLayer
                     };
                   
                 }
+                var AcadamicYear = db.View_GETACADEMICYEAR.FirstOrDefault();
+                if (AcadamicYear == null)
+                {
+                    return new Results
+                    {
+                        IsSuccess = false,
+                        Message = "Not Found Academic Year"
+                    };
+                }
                 var EMPATTENDANCE = db.VWATTENDANCEEMPLOYEEs.Where(r => r.UserId == PA.UserId && r.ATTEDANCEDATE == PA.AttendanceDate && r.DISPLAY == 1).ToList();
 
                 if (EMPATTENDANCE.Count()==0)
@@ -144,7 +161,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 else
                 {
                     var EMPID = Convert.ToInt32(usertype[0].EmpCode);
-                    var DivData = db.TBLASSIGNCLASSTEACHERs.Where(r => r.EMPLOYEEID == EMPID && r.ACADEMICYEAR == "2018-2019" && r.DISPLAY == 1).FirstOrDefault();
+                    var DivData = db.TBLASSIGNCLASSTEACHERs.Where(r => r.EMPLOYEEID == EMPID && r.ACADEMICYEAR == AcadamicYear.ACADEMICYEAR && r.DISPLAY == 1).FirstOrDefault();
                     var AttendaceStatus = db.VW_DATEWISECLASSSTATUSATTENDANCE.Where(r => r.ATTEDANCEDATE == PA.AttendanceDate && r.CREATEDID == PA.UserId &&r.DIVISIONID==DivData.DIVISIONID).ToList().OrderBy(r=>r.ROLLNO);
                         if (AttendaceStatus.Count() == 0)
                     {

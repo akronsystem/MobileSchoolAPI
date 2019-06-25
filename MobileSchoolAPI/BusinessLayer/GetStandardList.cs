@@ -19,9 +19,18 @@ namespace MobileSchoolAPI.BusinessLayer
                 return new Results() { IsSuccess = false, Message  = "Invalid User" } ;
             }
             var UserType = db.VW_GET_USER_TYPE.Where(r => r.UserId == Stdobj.userid).ToList();
-            if(UserType[0].UserType=="STUDENT")
+            var AcadamicYear = db.View_GETACADEMICYEAR.FirstOrDefault();
+            if (AcadamicYear == null)
             {
-                var STDLIST = db.Vw_STUDSTANDARD.Where(r => r.USERID == Stdobj.userid && r.ACADEMICYEAR=="2018-2019" ).ToList();
+                return new Results
+                {
+                    IsSuccess = false,
+                    Message = "Not Found Academic Year"
+                };
+            }
+            if (UserType[0].UserType=="STUDENT")
+            {
+                var STDLIST = db.Vw_STUDSTANDARD.Where(r => r.USERID == Stdobj.userid && r.ACADEMICYEAR==AcadamicYear.ACADEMICYEAR ).ToList();
 
 
                 if (STDLIST.Count == 0)
@@ -43,7 +52,7 @@ namespace MobileSchoolAPI.BusinessLayer
             }
             else
             {
-                var STDLIST = db.Vw_STANDARDLIST.Where(r => r.UserId == Stdobj.userid && r.ACADEMICYEAR == "2018-2019" && r.DISPLAY==1).ToList();
+                var STDLIST = db.Vw_STANDARDLIST.Where(r => r.UserId == Stdobj.userid && r.ACADEMICYEAR == AcadamicYear.ACADEMICYEAR && r.DISPLAY==1).ToList();
                 if (STDLIST.Count == 0)
                 {
 

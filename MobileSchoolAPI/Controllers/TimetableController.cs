@@ -29,5 +29,14 @@ namespace MobileSchoolAPI.Controllers
             var GetTermVar = ObjTerm.GetTimetableInfo(obj);
             return GetTermVar;
         }
+        [HttpPost]
+        public object GETSTUDENTTIMETABLE(UpdateTimeTableParam obj)
+        {
+            TimetableBusiness ObjTerm = new TimetableBusiness();
+
+            var GetTermVar = ObjTerm.GetStudentTime(obj);
+            return GetTermVar;
+        }
+
     }
 }

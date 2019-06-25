@@ -59,9 +59,13 @@ namespace MobileSchoolAPI.BusinessLayer
                     {
                             for (int i = 0; i < GetInfo.Count(); i++)
                             {
-                                SactionDays += Convert.ToDouble(GetInfo[i].SANCTIONEDNOOFDAYS);
+                                SactionDays += Convert.ToDouble(GetInfo[i].NOOFDAYS);
                             }
                             var GetTotalLeave = db.TBLLEAVETYPEMASTERs.Where(r => r.EMPLOYEETYPEID == EmployeeID && r.LEAVETYPEID == tobj.LEAVETYPE && r.DISPLAY == 1 && r.ACADEMICYEAR == academicyear.ACADEMICYEAR).FirstOrDefault();
+                           if(GetTotalLeave==null)
+                           {
+                            return new Results() { IsSuccess = false, Message = "Does Not Created Department.Please Contact Admin" };
+                           }
                             AvailableDays = Convert.ToDouble(GetTotalLeave.DAYS - SactionDays);
 
                             //string[] subID = tobj.SUBSTITUTEID.Split(',');
@@ -75,9 +79,14 @@ namespace MobileSchoolAPI.BusinessLayer
                             //        return new LeaveInfo() { Issucess = false, Status = "Not Found SUBSTITUTEID" };
                             //    }
                             //}
-                            if(AvailableDays<SactionDays || AvailableDays==0)
+                            if(AvailableDays>=SactionDays || AvailableDays==0)
                             {
                                 return new LeaveList() { IsSuccess = false, ApplicableLeaves = GetTotalLeave.DAYS, RemainingLeaves = AvailableDays };
+                            }
+                            if(tobj.DayType=="Half Day")
+                            {
+                            var DayType = 0.5;
+                            tobj.NOOFDAYS = Convert.ToDecimal(DayType);
                             }
                             TBLLEAVEMASTER obj = new TBLLEAVEMASTER();
                             obj.LEAVETYPE = tobj.LEAVETYPE;
@@ -109,25 +118,47 @@ namespace MobileSchoolAPI.BusinessLayer
             else
             {
 
-                SactionDays =Convert.ToDouble( tobj.NOOFDAYS);
+                
                 var GetTotalLeave = db.TBLLEAVETYPEMASTERs.Where(r => r.EMPLOYEETYPEID == EmployeeID && r.LEAVETYPEID == tobj.LEAVETYPE && r.DISPLAY == 1 && r.ACADEMICYEAR == academicyear.ACADEMICYEAR).FirstOrDefault();
 
-                
-                  string[] subID = tobj.SUBSTITUTEID.Split(',');
-               
-                for(int i=0;i<subID.Count();i++)
+                if (GetTotalLeave == null)
                 {
-                    var ID = int.Parse(subID[i]);
-                    var substitute = db.TBLEMPLOYEEMASTERs.Where(r => r.EMPLOYEEID == ID && r.DEPARTMENTID == 24 && r.DISPLAY==1 && r.EDUYEAR == academicyear.ACADEMICYEAR).ToList();
-                    if(substitute.Count==0)
+                    return new Results() { IsSuccess = false, Message = "Does Not Created Department.Please Contact Admin" };
+                }
+                if (tobj.SUBSTITUTEID == "No Load")
+                {
+                    //
+                }
+                else
+                {
+                    string[] subID = tobj.SUBSTITUTEID.Split(',');
+
+                    for (int i = 0; i < subID.Count(); i++)
                     {
-                        return new LeaveInfo() { Issucess = false, Status = "Not Found SUBSTITUTEID" };
+                        var ID = int.Parse(subID[i]);
+                        var substitute = db.TBLEMPLOYEEMASTERs.Where(r => r.EMPLOYEEID == ID && r.DEPARTMENTID == 24 && r.DISPLAY == 1 && r.EDUYEAR == academicyear.ACADEMICYEAR).ToList();
+                        if (substitute.Count == 0)
+                        {
+                            return new LeaveInfo() { Issucess = false, Status = "Not Found SUBSTITUTEID" };
+                        }
                     }
                 }
-                if (AvailableDays < SactionDays || AvailableDays == 0)
+                for (int i = 0; i < GetInfo.Count(); i++)
+                {
+                    SactionDays += Convert.ToDouble(GetInfo[i].NOOFDAYS);
+                }
+                // var GetTotalLeave = db.TBLLEAVETYPEMASTERs.Where(r => r.EMPLOYEETYPEID == EmployeeID && r.LEAVETYPEID == tobj.LEAVETYPE && r.DISPLAY == 1 && r.ACADEMICYEAR == academicyear.ACADEMICYEAR).FirstOrDefault();
+                AvailableDays = Convert.ToDouble(GetTotalLeave.DAYS - SactionDays);
+                if (AvailableDays >= SactionDays || AvailableDays == 0)
                 {
                     return new LeaveList() { IsSuccess = false, ApplicableLeaves = GetTotalLeave.DAYS, RemainingLeaves = AvailableDays };
                 }
+                if (tobj.DayType == "Half Day")
+                {
+                    var DayType = 0.5;
+                    tobj.NOOFDAYS = Convert.ToDecimal(DayType);
+                }
+                SactionDays = Convert.ToDouble(tobj.NOOFDAYS);
                 TBLLEAVEMASTER obj = new TBLLEAVEMASTER();
                 obj.LEAVETYPE = tobj.LEAVETYPE;
                 obj.EMPLOYEEID = EmployeeID;

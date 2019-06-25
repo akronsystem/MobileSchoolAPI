@@ -108,7 +108,7 @@ namespace MobileSchoolAPI.BusinessLayer
                     TIMETABLELIST ddl = new TIMETABLELIST();
                     // var data = db.View_Timetable.Where(r => r.EMPLOYEEID == EmployeeCode && r.WORKINGDAYS == item && r.DISPLAY == 1 && r.EDUYEAR == AcademicYear.ACADEMICYEAR).ToList();
                     var data_d = from c in db.View_Timetable.Where(r => r.EMPLOYEEID == EmployeeCode && r.WORKINGDAYS == item && r.DISPLAY == 1 && r.EDUYEAR == AcademicYear.ACADEMICYEAR)
-                                 select new { c.DIVISION, c.SUBJECTNAME, c.STANDARDNAME, c.BATCHNAME, c.BATCHTIME };
+                                 select new { c.DIVISIONNAME, c.SUBJECTNAME, c.STANDARDNAME, c.BATCHNAME, c.BATCHTIME };
 
                     if (data_d.Count() == 0)
                     {
@@ -145,6 +145,90 @@ namespace MobileSchoolAPI.BusinessLayer
             }
 
 
+        }
+        public object GetStudentTime(UpdateTimeTableParam obj)
+        {
+            try
+            {
+
+
+                SchoolMainContext db = new ConcreateContext().GetContext(obj.Username, obj.Password);
+
+                var Info = db.TBLUSERLOGINs.Where(r => r.UserName == obj.Username && r.Password == obj.Password).FirstOrDefault();
+
+                if (db == null)
+                {
+                    return new Results() { IsSuccess = false, Message = "Invalid User" };
+                }
+                if (Info == null)
+                {
+                    return new Results() { IsSuccess = false, Message = "Invalid User" };
+                }
+                var AcademicYear = db.View_GETACADEMICYEAR.FirstOrDefault();
+                if (AcademicYear == null)
+                {
+                    return new Results() { IsSuccess = false, Message = "Academic Year Not Found" };
+                }
+                var EmployeeCode = Convert.ToInt16(Info.EmpCode);
+                var Data = db.TBLTRANSFERSTUDENTs.Where(r => r.STUDENTID == EmployeeCode && r.ACADEMICYEAR == AcademicYear.ACADEMICYEAR).FirstOrDefault();
+                if (Data == null)
+                {
+                    return new Results() { IsSuccess = false, Message = "Student Not Found" };
+                }
+                else
+                {
+                    //var StandardId =Convert.ToInt32(Data.STANDARDID);
+                    //var Get_data =// db.View_StudentTimeTable.Where(r => r.STANDARDID == StandardId && r.DIVISION == Data.DIVISIONID).ToList();
+                    //from c in db.View_StudentTimeTable.Where(r => r.STANDARDID == StandardId && r.DIVISION == Data.DIVISIONID && r.DISPLAY == 1 && r.EDUYEAR == AcademicYear.ACADEMICYEAR)
+                    //select new { c.WORKINGDAYS, c.BATCHNAME, c.BATCHTIME, c.SUBJECTNAME };
+                    //return new TIMETABLELIST() { IsSuccess = true, TABLELIST = Get_data };
+                    var StandardId = Convert.ToInt32(Data.STANDARDID);
+                    List<string> WorkingDay = db.View_DisplayWeekDay.OrderBy(r => r.DayNo).Select(r => r.WORKINGDAYS).ToList();
+                    List<Day> lt = new List<Day>();
+
+                    foreach (var item in WorkingDay)
+                    {
+                        item.ToList();
+                        TIMETABLELIST ddl = new TIMETABLELIST();
+                        var Get_data =// db.View_StudentTimeTable.Where(r => r.STANDARDID == StandardId && r.DIVISION == Data.DIVISIONID).ToList();
+                    from c in db.View_StudentTimeTable.Where(r => r.STANDARDID == StandardId && r.DIVISION == Data.DIVISIONID && r.WORKINGDAYS == item && r.DISPLAY == 1 && r.EDUYEAR == AcademicYear.ACADEMICYEAR)
+                    select new {c.EMPLOYEENAME, c.BATCHNAME, c.BATCHTIME, c.SUBJECTNAME };
+
+                        if (Get_data.Count() == 0)
+                        {
+                            lt.Add(new Day
+                            {
+
+                                WorkingDayName = item,
+                                TimeTableList = Get_data
+                            });
+                        }
+                        else
+                        {
+                            lt.Add(new Day
+                            {
+
+                                WorkingDayName = item,
+                                TimeTableList = Get_data
+                            });
+
+                        }
+
+
+                    }
+                    return new TIMETABLELIST() { IsSuccess = true, TABLELIST = lt.ToArray() };
+                }
+               
+            }
+            catch (Exception ex)
+            {
+                return new Results
+                {
+                    IsSuccess = false,
+                    Message = ex.Message
+                };
+            }
+            
         }
         public class Day
         {

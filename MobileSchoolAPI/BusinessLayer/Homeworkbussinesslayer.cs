@@ -25,7 +25,15 @@ namespace MobileSchoolAPI.BusinessLayer
             TBLHOMEWORK objHomework = new TBLHOMEWORK();
             var getUserType = db.VW_GET_USER_TYPE.Where(r => r.UserId == obj.Userid).FirstOrDefault();
 
-
+            var AcadamicYear = db.View_GETACADEMICYEAR.FirstOrDefault();
+            if (AcadamicYear == null)
+            {
+                return new Results
+                {
+                    IsSuccess = false,
+                    Message = "Not Found Academic Year"
+                };
+            }
 
 
             objHomework.STANDARDID = int.Parse(obj.standardid);
@@ -39,7 +47,7 @@ namespace MobileSchoolAPI.BusinessLayer
             objHomework.HOMEWORKDATE = Convert.ToDateTime(DateTime.Now.ToShortDateString());
             objHomework.TIME = DateTime.Now.ToShortTimeString();
             objHomework.DISPLAY = 1;
-            objHomework.ACADEMICYEAR = "2018-2019";
+            objHomework.ACADEMICYEAR = AcadamicYear.ACADEMICYEAR;
 
             db.TBLHOMEWORKs.Add(objHomework);
             db.SaveChanges();
@@ -49,7 +57,7 @@ namespace MobileSchoolAPI.BusinessLayer
             objnotification.NOTIFICATIONDATE = DateTime.Now;
             objnotification.NOTIFICATIONTIME = DateTime.Now.ToString("h:mm tt");
             objnotification.DIVISIONID = int.Parse(obj.division);
-            objnotification.ACADEMICYEAR = "2018-2019";
+            objnotification.ACADEMICYEAR = AcadamicYear.ACADEMICYEAR;
             objnotification.NOTIFICATIONTYPE = "Homework";
             db.TBLNOTIFICATIONs.Add(objnotification);
             db.SaveChanges();
@@ -110,6 +118,7 @@ namespace MobileSchoolAPI.BusinessLayer
 
         public object SendNotificaiton(homeworkparameters obj)
         {
+
             SchoolMainContext db = new ConcreateContext().GetContext(obj.Userid, obj.Password);
             if (db == null)
             {
@@ -135,14 +144,22 @@ namespace MobileSchoolAPI.BusinessLayer
             {
                 return new Results() { IsSuccess = false, Message = "Invalid User" };
             }
-
+            var AcadamicYear = db.View_GETACADEMICYEAR.FirstOrDefault();
+            if (AcadamicYear == null)
+            {
+                return new Results
+                {
+                    IsSuccess = false,
+                    Message = "Not Found Academic Year"
+                };
+            }
             TBLATTENDENCEMASTER objmster = new TBLATTENDENCEMASTER();
             TBLATTENDENCE objDetail = new TBLATTENDENCE();
             var logindetail = db.TBLUSERLOGINs.
                                 Where(r => r.UserId == atteobj.Userid && r.Password == atteobj.Password && r.STATUS == "ACTIVE")
                                 .FirstOrDefault();
 
-            var ClassTeacherCheck = db.TBLASSIGNCLASSTEACHERs.Where(r => r.DIVISIONID == atteobj.DIVISIONID && r.ACADEMICYEAR == "2018-2019" && r.DISPLAY == 1).ToList();
+            var ClassTeacherCheck = db.TBLASSIGNCLASSTEACHERs.Where(r => r.DIVISIONID == atteobj.DIVISIONID && r.ACADEMICYEAR == AcadamicYear.ACADEMICYEAR && r.DISPLAY == 1).ToList();
             if (ClassTeacherCheck.Count != 0)
             {
                 var checkatt = db.Vw_ATTENDANCECHECK.FirstOrDefault(r => r.DIVISIONID == atteobj.DIVISIONID && r.ATTEDANCEDATE == atteobj.ATTEDANCEDATE);
@@ -157,8 +174,8 @@ namespace MobileSchoolAPI.BusinessLayer
 
                         objmster.DIVISIONID = atteobj.DIVISIONID;
                         objmster.DISPLAY = 1;
-                        objmster.EDUCATIONYEAR = "2018-2019";
-                        var std = db.vw_FETCHSTANDARDBYDIVISION.Where(r => r.DIVISIONID == atteobj.DIVISIONID && r.DISPLAY == 1 && r.ACADEMICYEAR == "2018-2019").ToList();
+                        objmster.EDUCATIONYEAR = AcadamicYear.ACADEMICYEAR;
+                        var std = db.vw_FETCHSTANDARDBYDIVISION.Where(r => r.DIVISIONID == atteobj.DIVISIONID && r.DISPLAY == 1 && r.ACADEMICYEAR == AcadamicYear.ACADEMICYEAR).ToList();
 
                         objmster.STANDARDID = Convert.ToInt32(std[0].STANDARDID);
                         objmster.CREATEDON = DateTime.Now;
@@ -398,6 +415,15 @@ namespace MobileSchoolAPI.BusinessLayer
             {
                 string UploadBaseUrl = "";
                 var httpRequest = HttpContext.Current.Request;
+                var AcadamicYear = db.View_GETACADEMICYEAR.FirstOrDefault();
+                if(AcadamicYear==null)
+                {
+                    return new Results
+                    {
+                        IsSuccess = false,
+                        Message = "Not Found Academic Year"
+                    };
+                }
                 if (httpRequest.Files.Count > 0)
                 {
                     if (logindetail.UserName.StartsWith("NKV"))
@@ -447,7 +473,7 @@ namespace MobileSchoolAPI.BusinessLayer
                         upload.HOMEWORKDATE = Convert.ToDateTime(DateTime.Now.ToShortDateString());
                         upload.TIME = DateTime.Now.ToShortTimeString();
                         upload.DISPLAY = 1;
-                        upload.ACADEMICYEAR = "2018-2019";
+                        upload.ACADEMICYEAR = AcadamicYear.ACADEMICYEAR;
 
                         upload.FILEPATH = UploadBaseUrl + filePath.Replace("~/", "");
 
@@ -467,6 +493,31 @@ namespace MobileSchoolAPI.BusinessLayer
 
 
                 }
+                else
+                {
+                    TBLHOMEWORK upload = new TBLHOMEWORK();
+                    //upload.file_id = Guid.NewGuid().ToString();
+                    //upload.name = fileName;
+
+                    upload.STANDARDID = Convert.ToInt32(HttpContext.Current.Request["standardid"]);
+                    upload.CREATEDID = int.Parse(getUserType.EmpCode);
+                    upload.DIVISIONID = HttpContext.Current.Request["division"];
+                    upload.SUBJECTID = Convert.ToInt32(HttpContext.Current.Request["subject"]);
+                    upload.TERMID = Convert.ToInt32(HttpContext.Current.Request["term"]);
+                    upload.HOMEWORK = HttpContext.Current.Request["homeworkdescription"];
+                    upload.HOMEWORKDATE = Convert.ToDateTime(DateTime.Now.ToShortDateString());
+                    upload.TIME = DateTime.Now.ToShortTimeString();
+                    upload.DISPLAY = 1;
+                    upload.ACADEMICYEAR = AcadamicYear.ACADEMICYEAR;
+
+                    upload.FILEPATH = null;
+
+                    //upload.insert_date = DateTime.Now;
+                    db.TBLHOMEWORKs.Add(upload);
+                    db.SaveChanges();
+
+                    return upload;
+                }
             }
             catch (Exception ex)
             {
@@ -478,7 +529,7 @@ namespace MobileSchoolAPI.BusinessLayer
             }
 
 
-            return null;
+           
         }
 
 

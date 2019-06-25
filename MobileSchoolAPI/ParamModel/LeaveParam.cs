@@ -28,6 +28,7 @@ namespace MobileSchoolAPI.ParamModel
 
        // [StringLength(30)]
         public string SUBSTITUTEID { get; set; }
+        public string DayType { get; set; }
 
         //public int CREATEDID { get; set; }
 

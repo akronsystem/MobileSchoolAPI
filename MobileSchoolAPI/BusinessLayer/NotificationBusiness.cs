@@ -22,14 +22,22 @@ namespace MobileSchoolAPI.BusinessLayer
                 {
                     return new Results() { IsSuccess = false, Message = "Invalid User" };
                 }
-
+                var AcadamicYear = db.View_GETACADEMICYEAR.FirstOrDefault();
+                if (AcadamicYear == null)
+                {
+                    return new Results
+                    {
+                        IsSuccess = false,
+                        Message = "Not Found Academic Year"
+                    };
+                }
                 TBLNOTIFICATION objmaster = new TBLNOTIFICATION();
                 TBLNOTIFICATIONDETAIL objdetail = new TBLNOTIFICATIONDETAIL();
 
                 objmaster.TITLE = objnote.Title;
                 objmaster.NOTIFICATIONDATE = objnote.NotificationDate;
                 objmaster.NOTIFICATIONTIME = objnote.Time;
-                objmaster.ACADEMICYEAR = "2018-2019";
+                objmaster.ACADEMICYEAR = AcadamicYear.ACADEMICYEAR;
                 objmaster.NOTIFICATIONTYPE = objnote.NotificationType;
                 db.TBLNOTIFICATIONs.Add(objmaster);
                 db.SaveChanges();
@@ -205,8 +213,17 @@ namespace MobileSchoolAPI.BusinessLayer
                     }
 
                     var getUserType = db.VW_GET_USER_TYPE.Where(r => r.UserId == obj.userid).FirstOrDefault();
+                    var AcadamicYear = db.View_GETACADEMICYEAR.FirstOrDefault();
+                    if (AcadamicYear == null)
+                    {
+                        return new Results
+                        {
+                            IsSuccess = false,
+                            Message = "Not Found Academic Year"
+                        };
+                    }
 
-                    var Notificationgen = db.VIEWNOTIFICATIONGENs.Where(r => r.ACADEMICYEAR == "2018-2019").ToList().OrderByDescending(r => r.NOTIFICATIONID);
+                    var Notificationgen = db.VIEWNOTIFICATIONGENs.Where(r => r.ACADEMICYEAR == AcadamicYear.ACADEMICYEAR).ToList().OrderByDescending(r => r.NOTIFICATIONID);
 
                     if (Notificationgen.Count() != 0)
                     {
@@ -338,8 +355,16 @@ namespace MobileSchoolAPI.BusinessLayer
                     }
 
                     var getUserType = db.VW_GET_USER_TYPE.Where(r => r.UserId == obj.userid).FirstOrDefault();
-
-                    var Notificationgen = db.VIEWNOTIFICATIONGENs.Where(r => r.ACADEMICYEAR == "2018-2019").ToList().OrderByDescending(r => r.NOTIFICATIONID);
+                    var AcadamicYear = db.View_GETACADEMICYEAR.FirstOrDefault();
+                    if (AcadamicYear == null)
+                    {
+                        return new Results
+                        {
+                            IsSuccess = false,
+                            Message = "Not Found Academic Year"
+                        };
+                    }
+                    var Notificationgen = db.VIEWNOTIFICATIONGENs.Where(r => r.ACADEMICYEAR == AcadamicYear.ACADEMICYEAR).ToList().OrderByDescending(r => r.NOTIFICATIONID);
 
                     if (Notificationgen.Count() != 0)
                     {
@@ -468,13 +493,22 @@ namespace MobileSchoolAPI.BusinessLayer
                 {
                     return new Results() { IsSuccess = false, Message  = "Invalid User" } ;
                 }
+                var AcadamicYear = db.View_GETACADEMICYEAR.FirstOrDefault();
+                if (AcadamicYear == null)
+                {
+                    return new Results
+                    {
+                        IsSuccess = false,
+                        Message = "Not Found Academic Year"
+                    };
+                }
                 TBLNOTIFICATION objmaster = new TBLNOTIFICATION();
                 TBLNOTIFICATIONDETAIL objdetail = new TBLNOTIFICATIONDETAIL();
 
                 objmaster.TITLE = objnote.Title;
                 objmaster.NOTIFICATIONDATE = objnote.NotificationDate;
                 objmaster.NOTIFICATIONTIME = objnote.Time;
-                objmaster.ACADEMICYEAR = "2018-2019";
+                objmaster.ACADEMICYEAR = AcadamicYear.ACADEMICYEAR;
                 objmaster.NOTIFICATIONTYPE = objnote.NotificationType;
                 db.TBLNOTIFICATIONs.Add(objmaster);
                 db.SaveChanges();
@@ -550,8 +584,16 @@ namespace MobileSchoolAPI.BusinessLayer
                 {
                     return new Results() { IsSuccess = false, Message = "Invalid User" };
                 }
-
-                var Event = db.TBLNOTIFICATIONs.Where(r=>r.NOTIFICATIONTYPE=="News" && r.ACADEMICYEAR=="2018-2019").ToList().OrderByDescending(r => r.NOTIFICATIONDATE);
+                var AcadamicYear = db.View_GETACADEMICYEAR.FirstOrDefault();
+                if (AcadamicYear == null)
+                {
+                    return new Results
+                    {
+                        IsSuccess = false,
+                        Message = "Not Found Academic Year"
+                    };
+                }
+                var Event = db.TBLNOTIFICATIONs.Where(r=>r.NOTIFICATIONTYPE=="News" && r.ACADEMICYEAR==AcadamicYear.ACADEMICYEAR).ToList().OrderByDescending(r => r.NOTIFICATIONDATE);
 
                 if (Event == null)
                 {
