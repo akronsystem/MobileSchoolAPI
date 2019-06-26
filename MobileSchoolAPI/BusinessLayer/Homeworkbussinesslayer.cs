@@ -481,7 +481,11 @@ namespace MobileSchoolAPI.BusinessLayer
                         db.TBLHOMEWORKs.Add(upload);
                         db.SaveChanges();
 
-                        return upload;
+                        return new Results
+                        {
+                            IsSuccess = true,
+                            Message = "HomeWork Save Successfully"
+                        };
                     }
 
                     return new Results
@@ -516,7 +520,11 @@ namespace MobileSchoolAPI.BusinessLayer
                     db.TBLHOMEWORKs.Add(upload);
                     db.SaveChanges();
 
-                    return upload;
+                    return new Results
+                    {
+                        IsSuccess = true,
+                        Message = "HomeWork Save Successfully"
+                    };
                 }
             }
             catch (Exception ex)
