@@ -17,7 +17,14 @@ namespace MobileSchoolAPI.Controllers
 
 		public object ShowHomeWork([FromBody]ParamHOMEWORKBYUSER objhome)
 		{
-			GETHOMEWORK obj = new GETHOMEWORK();
+            int year = DateTime.Now.Year;
+            if (objhome.Month > 12 || objhome.Month == 0)
+            {
+                return new Results() { IsSuccess = false, Message = "Please Enter Month Between 1 to 12" };
+
+            }
+            int days = DateTime.DaysInMonth(year, objhome.Month);
+            GETHOMEWORK obj = new GETHOMEWORK();
             var homemworkresult=obj.ViewHomeWorkbyUser(objhome);
             //return obj.ViewHomeWorkbyUser(objhome);
             //return new DivisionListResult() { IsSuccess = true, HomeWork = obj.ViewHomeWorkbyUser(objhome) };

@@ -197,111 +197,114 @@ namespace MobileSchoolAPI.BusinessLayer
                         //db.SaveChanges();
 
                         string absentno = atteobj.Absentno;
-                        string[] sbno = absentno.Split(',');
-                        objDetail.ATTEDANCEMID = objmster.ATTEDANCEMID;
-                        for (int i = 0; i < sbno.Length; i++)
+                        if (absentno != "")
                         {
+                            string[] sbno = absentno.Split(',');
 
-                            string abno = sbno[i].ToString();
-
-                            int rollno = Convert.ToInt32(abno);
-
-                            var getstudent = db.VIEWGETSTUDENTATTs.Where(r => r.DIVISIONID == atteobj.DIVISIONID && r.ROLL_NO == rollno).ToList();
-                            if (getstudent.Count == 0)
-                            {
-                                return new Results() { IsSuccess = false, Message = "No students found for this division " };
-
-                            }
                             objDetail.ATTEDANCEMID = objmster.ATTEDANCEMID;
-                            objDetail.ROLLNO = sbno[i].ToString();
-                            objDetail.NAME = getstudent[0].STUDENTNAME;
-                            objDetail.STUDENTID = getstudent[0].STUDENTID;
-
-                            objDetail.STATUS = "A";
-
-                            db.TBLATTENDENCEs.Add(objDetail);
-                            db.SaveChanges();
-                            string[] splitname = getstudent[0].STUDENTNAME.Split(' ');
-                            TBLNOTIFICATIONDETAIL objnotidetails = new TBLNOTIFICATIONDETAIL();
-                            string str = "";
-                            if (logindetail.UserName.StartsWith("NKV"))
-                            {
-                                str = "goo.gl/NsoiKY";
-                            }
-                            else if (logindetail.UserName.StartsWith("SXS"))
-                            {
-                                str = "goo.gl/zotf13";
-                            }
-                            else if (logindetail.UserName.StartsWith("ASM"))
-                            {
-                                str = "goo.gl/9vNiX8";
-                            }
-
-                            else if (logindetail.UserName.StartsWith("ASY"))
-                            {
-                                str = "goo.gl/SNtreT";
-                            }
-                            else if (logindetail.UserName.StartsWith("NMS"))
-                            {
-                                str = "goo.gl/j7XjCx";
-                            }
-                            string txtMessage = "Dear Parent, Your Pupil " + splitname[1] + ", is absent on " + Convert.ToDateTime(atteobj.ATTEDANCEDATE).ToString("dd/MM/yyyy") + ", Kindly note it. See attendance details " + str;
-
-
-                            if (smsstatus == "1")
+                            for (int i = 0; i < sbno.Length; i++)
                             {
 
-                                string responseString = SMSSendTESTDLR(getstudent[0].GMOBILE, txtMessage, logindetail.UserName);
-                                if (responseString != "")
+                                string abno = sbno[i].ToString();
+
+                                int rollno = Convert.ToInt32(abno);
+
+                                var getstudent = db.VIEWGETSTUDENTATTs.Where(r => r.DIVISIONID == atteobj.DIVISIONID && r.ROLL_NO == rollno).ToList();
+                                if (getstudent.Count == 0)
                                 {
-                                    var jObject = JObject.Parse(responseString);
-                                    var response = jObject["response"].ToString();
+                                    return new Results() { IsSuccess = false, Message = "No students found for this division " };
 
-                                    TBLMSGHISTORY smshist = new TBLMSGHISTORY();
-                                    smshist.DATE = DateTime.Now;
-                                    smshist.TIME = DateTime.Now.ToShortTimeString();
-                                    smshist.MSG = txtMessage;
-                                    smshist.TYPE = "ATT";
-                                    smshist.CREATEDID = atteobj.Userid;
-                                    smshist.DISPLAY = 1;
-                                    smshist.STUDENTID = getstudent[0].STUDENTID;
-                                    smshist.FROMEMPID = Convert.ToInt64(logindetail.EmpCode);
-                                    smshist.STATUS = "Out";
-                                    smshist.InStatus = "In";
-                                    smshist.OutStatus = "Out";
-                                    smshist.REQUESTID = response;
-                                    smshist.EMPLOYEEID = 0;
-                                    smshist.TOEMPID = "0";
-                                    smshist.ATTACHMENTS = "";
-                                    smshist.SUBJECT = "";
-                                    smshist.OtherNos = "";
-                                    smshist.ALUMNIID = 0;
-                                    db.TBLMSGHISTORies.Add(smshist);
-                                    db.SaveChanges();
+                                }
+                                objDetail.ATTEDANCEMID = objmster.ATTEDANCEMID;
+                                objDetail.ROLLNO = sbno[i].ToString();
+                                objDetail.NAME = getstudent[0].STUDENTNAME;
+                                objDetail.STUDENTID = getstudent[0].STUDENTID;
+
+                                objDetail.STATUS = "A";
+
+                                db.TBLATTENDENCEs.Add(objDetail);
+                                db.SaveChanges();
+                                string[] splitname = getstudent[0].STUDENTNAME.Split(' ');
+                                TBLNOTIFICATIONDETAIL objnotidetails = new TBLNOTIFICATIONDETAIL();
+                                string str = "";
+                                if (logindetail.UserName.StartsWith("NKV"))
+                                {
+                                    str = "goo.gl/NsoiKY";
+                                }
+                                else if (logindetail.UserName.StartsWith("SXS"))
+                                {
+                                    str = "goo.gl/zotf13";
+                                }
+                                else if (logindetail.UserName.StartsWith("ASM"))
+                                {
+                                    str = "goo.gl/9vNiX8";
+                                }
+
+                                else if (logindetail.UserName.StartsWith("ASY"))
+                                {
+                                    str = "goo.gl/SNtreT";
+                                }
+                                else if (logindetail.UserName.StartsWith("NMS"))
+                                {
+                                    str = "goo.gl/j7XjCx";
+                                }
+                                string txtMessage = "Dear Parent, Your Pupil " + splitname[1] + ", is absent on " + Convert.ToDateTime(atteobj.ATTEDANCEDATE).ToString("dd/MM/yyyy") + ", Kindly note it. See attendance details " + str;
+
+
+                                if (smsstatus == "1")
+                                {
+
+                                    string responseString = SMSSendTESTDLR(getstudent[0].GMOBILE, txtMessage, logindetail.UserName);
+                                    if (responseString != "")
+                                    {
+                                        var jObject = JObject.Parse(responseString);
+                                        var response = jObject["response"].ToString();
+
+                                        TBLMSGHISTORY smshist = new TBLMSGHISTORY();
+                                        smshist.DATE = DateTime.Now;
+                                        smshist.TIME = DateTime.Now.ToShortTimeString();
+                                        smshist.MSG = txtMessage;
+                                        smshist.TYPE = "ATT";
+                                        smshist.CREATEDID = atteobj.Userid;
+                                        smshist.DISPLAY = 1;
+                                        smshist.STUDENTID = getstudent[0].STUDENTID;
+                                        smshist.FROMEMPID = Convert.ToInt64(logindetail.EmpCode);
+                                        smshist.STATUS = "Out";
+                                        smshist.InStatus = "In";
+                                        smshist.OutStatus = "Out";
+                                        smshist.REQUESTID = response;
+                                        smshist.EMPLOYEEID = 0;
+                                        smshist.TOEMPID = "0";
+                                        smshist.ATTACHMENTS = "";
+                                        smshist.SUBJECT = "";
+                                        smshist.OtherNos = "";
+                                        smshist.ALUMNIID = 0;
+                                        db.TBLMSGHISTORies.Add(smshist);
+                                        db.SaveChanges();
+
+                                    }
+
 
                                 }
 
 
+
+                                //TBLNOTIFICATIONDETAIL objnotidetails = new TBLNOTIFICATIONDETAIL();
+
+                                FCMPushNotification OBJPUSH = new FCMPushNotification();
+                                //var getsubjectname = db.VIEWSUBJECTNAMEs.Where(r => r.SUBJECTID == obj.subject).ToList();
+
+                                string studentid = Convert.ToString(getstudent[0].STUDENTID);
+                                var userid = db.VIEWGETUSERIDFROMEMPCODEs.Where(r => r.EmpCode == studentid).FirstOrDefault();
+                                var device = db.VW_DEVICE.FirstOrDefault(r => r.UserId == userid.UserId);
+                                if (device != null)
+                                {
+                                    if (!string.IsNullOrWhiteSpace(device.DeviceId))
+                                        OBJPUSH.SendNotification("Attendance", string.Format("Dear Parent, Your pupil is absent on dated {0}, kindly note.", objmster.ATTEDANCEDATE.Value.ToString("dd-MM-yyyy")), device.DeviceId);
+                                }
                             }
 
-
-
-                            //TBLNOTIFICATIONDETAIL objnotidetails = new TBLNOTIFICATIONDETAIL();
-
-                            FCMPushNotification OBJPUSH = new FCMPushNotification();
-                            //var getsubjectname = db.VIEWSUBJECTNAMEs.Where(r => r.SUBJECTID == obj.subject).ToList();
-
-                            string studentid = Convert.ToString(getstudent[0].STUDENTID);
-                            var userid = db.VIEWGETUSERIDFROMEMPCODEs.Where(r => r.EmpCode == studentid).FirstOrDefault();
-                            var device = db.VW_DEVICE.FirstOrDefault(r => r.UserId == userid.UserId);
-                            if (device != null)
-                            {
-                                if (!string.IsNullOrWhiteSpace(device.DeviceId))
-                                    OBJPUSH.SendNotification("Attendance", string.Format("Dear Parent, Your pupil is absent on dated {0}, kindly note.", objmster.ATTEDANCEDATE.Value.ToString("dd-MM-yyyy")), device.DeviceId);
-                            }
                         }
-
-
                         return new Results
                         {
                             IsSuccess = true,

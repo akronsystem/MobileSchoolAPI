@@ -7,9 +7,9 @@ namespace MobileSchoolAPI.ParamModel
 {
     public class ParamHOMEWORKBYUSER
     {
-											    
-        public DateTime homeworkdate { get; set; }
-		public int userid { get; set; }
+
+        public int Month { get; set; }
+        public int userid { get; set; }
 
 		public String password { get; set; }
 	}

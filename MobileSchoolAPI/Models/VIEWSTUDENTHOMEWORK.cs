@@ -16,6 +16,8 @@ namespace MobileSchoolAPI.Models
 
         public DateTime? HOMEWORKDATE { get; set; }
 
+        public int? HMMONTH { get; set; }
+
         [StringLength(50)]
         public string TIME { get; set; }
 
