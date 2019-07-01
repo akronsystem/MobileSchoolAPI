@@ -33,7 +33,7 @@ namespace MobileSchoolAPI.BusinessLayer
             List<Mark> lt = new List<Mark>();
             var StandardId =Convert.ToInt32(GetStudentInfo.STANDARDID);
             var DivisionId = GetStudentInfo.DIVISIONID;
-            var GetTerm = db.View_GetTermwise_Cycle.Where(r => r.Term_ID == tobj.TermId && r.DISPLAY==1 && r.TESTNAME.StartsWith("Cycle")).ToList();
+            var GetTerm = db.View_GetTermwise_Cycle.Where(r => r.Term_ID == tobj.TermId && r.DISPLAY==1 && r.TESTNAME.StartsWith("Terminal")).ToList();
 
            
             for (int j = 0; j < GetTerm.Count(); j++)
@@ -58,6 +58,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 lt.Add(new Mark
                 {
 
+             
                     SubjectName = Subject.SUBJECTNAME,
                     Grade = totmark,
 

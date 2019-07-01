@@ -32,7 +32,9 @@ namespace MobileSchoolAPI.BusinessLayer
                     var AcademicYear = db.View_GETACADEMICYEAR.FirstOrDefault();
                     if (obj.EventType == "" || obj.EventType == "string")
                     {
-                        var data = db.View_DisplayNotice.Where(r => r.STARTDATE >= System.DateTime.Today.Date && r.DISPLAY == 1 && r.ACADEMICYEAR == AcademicYear.ACADEMICYEAR).ToList();
+                        var data = //db.View_DisplayNotice.Where(r => r.STARTDATE >= System.DateTime.Today.Date && r.DISPLAY == 1 && r.ACADEMICYEAR == AcademicYear.ACADEMICYEAR).ToList();
+                               from c in db.View_DisplayNotice.Where(r => r.STARTDATE >= System.DateTime.Today.Date && r.DISPLAY == 1 && r.ACADEMICYEAR == AcademicYear.ACADEMICYEAR)
+                               select new { c.TYPE, c.HOLIDAY, c.STARTDATE, c.ENDDATE,c.NUMBEROFDAYS };
                         if (data != null)
                         {
                             return new NoticeResult { IsSuccess = true, Result = data };
@@ -45,7 +47,9 @@ namespace MobileSchoolAPI.BusinessLayer
                     }
                     else
                     {
-                        var data = db.View_DisplayNotice.Where(r => r.STARTDATE >= System.DateTime.Today.Date && r.DISPLAY == 1 && r.TYPE == obj.EventType && r.ACADEMICYEAR == AcademicYear.ACADEMICYEAR).ToList();
+                        var data = //db.View_DisplayNotice.Where(r => r.STARTDATE >= System.DateTime.Today.Date && r.DISPLAY == 1 && r.TYPE == obj.EventType && r.ACADEMICYEAR == AcademicYear.ACADEMICYEAR).ToList();
+                             from c in db.View_DisplayNotice.Where(r => r.STARTDATE >= System.DateTime.Today.Date && r.DISPLAY == 1 && r.TYPE == obj.EventType && r.ACADEMICYEAR == AcademicYear.ACADEMICYEAR)
+                             select new { c.TYPE, c.HOLIDAY, c.STARTDATE, c.ENDDATE, c.NUMBEROFDAYS };
                         if (data != null)
                         {
                             return new NoticeResult { IsSuccess = true, Result = data };
