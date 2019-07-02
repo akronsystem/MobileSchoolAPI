@@ -156,7 +156,16 @@ namespace MobileSchoolAPI.BusinessLayer
                 {
                     return new Results() { IsSuccess = false, Message = "Invalid User" };
                 }
-                var EmpHomework = db.VIEWHOMEWORKs.Where(r => r.UserId == obj.userid && r.HMMONTH==obj.Month)
+                var AcadamicYear = db.View_GETACADEMICYEAR.FirstOrDefault();
+                if (AcadamicYear == null)
+                {
+                    return new Results
+                    {
+                        IsSuccess = false,
+                        Message = "Not Found Academic Year"
+                    };
+                }
+                var EmpHomework = db.VIEWHOMEWORKs.Where(r => r.UserId == obj.userid && r.HMMONTH==obj.Month && r.ACADEMICYEAR==AcadamicYear.ACADEMICYEAR)
 					.OrderByDescending(r => r.HOMEWORKDATE).OrderByDescending(r=>r.HOMEWORKID).ToList(); ;
                 string UploadBaseUrl = "";
                 var logindetail = db.TBLUSERLOGINs.
@@ -189,7 +198,7 @@ namespace MobileSchoolAPI.BusinessLayer
 
                 if (EmpHomework.Count() == 0)
                 {
-                    var StudentHomework = db.VIEWSTUDENTHOMEWORKs.Where(r => r.UserId == obj.userid && r.HMMONTH == obj.Month).
+                    var StudentHomework = db.VIEWSTUDENTHOMEWORKs.Where(r => r.UserId == obj.userid && r.HMMONTH == obj.Month && r.ACADEMICYEAR==AcadamicYear.ACADEMICYEAR).
 						OrderByDescending(r => r.HOMEWORKDATE).OrderByDescending(r=>r.HOMEWORKID).ToList(); ;
 
                     if (StudentHomework.Count() == 0)
