@@ -11,11 +11,13 @@ namespace MobileSchoolAPI.Models
         [Key]
         public long MYALBUMID { get; set; }
 
-        [StringLength(50)]
         public string ALBUMNAME { get; set; }
 
         public string IMAGEPATH { get; set; }
 
         public DateTime? CREATEDON { get; set; }
+
+        [StringLength(50)]
+        public string EDUYEAR { get; set; }
     }
 }

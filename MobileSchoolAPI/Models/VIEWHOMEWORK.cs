@@ -22,6 +22,9 @@ namespace MobileSchoolAPI.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public long HOMEWORKID { get; set; }
 
+        [StringLength(30)]
+        public string HMDATE { get; set; }
+
         public DateTime? HOMEWORKDATE { get; set; }
 
         public int? HMMONTH { get; set; }

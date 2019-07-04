@@ -13,13 +13,14 @@ namespace MobileSchoolAPI.Models
         [StringLength(200)]
         public string STUDENTNAME { get; set; }
 
-        //[StringLength(200)]
-        //public string FATHERNAME { get; set; }
+        [StringLength(200)]
+        public string FATHERNAME { get; set; }
 
-        //[StringLength(200)]
-        //public string MOTHERNAME { get; set; }
+        [StringLength(200)]
+        public string MOTHERNAME { get; set; }
 
-        public DateTime? DOB { get; set; }
+        [StringLength(30)]
+        public string DOB { get; set; }
 
         [StringLength(15)]
         public string GENDER { get; set; }
@@ -33,5 +34,8 @@ namespace MobileSchoolAPI.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public long STUDENTID { get; set; }
+
+        [StringLength(15)]
+        public string GMOBILE { get; set; }
     }
 }

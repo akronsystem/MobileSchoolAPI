@@ -18,6 +18,12 @@ namespace MobileSchoolAPI.Models
 
         public DateTime? ENDDATE { get; set; }
 
+        [StringLength(30)]
+        public string SDATE { get; set; }
+
+        [StringLength(30)]
+        public string EDATE { get; set; }
+
         public string STANDARDNAME { get; set; }
 
         public short? NUMBEROFDAYS { get; set; }

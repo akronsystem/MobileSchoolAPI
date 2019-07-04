@@ -19,7 +19,16 @@ namespace MobileSchoolAPI.BusinessLayer
                 {
                     return new Results() { IsSuccess = false, Message = "Invalid User" };
                 }
-                var GetGallery = db.VW_GetGallery.OrderByDescending(r=>r.CREATEDON).ToList();
+                var AcadamicYear = db.View_GETACADEMICYEAR.FirstOrDefault();
+                if (AcadamicYear == null)
+                {
+                    return new Results
+                    {
+                        IsSuccess = false,
+                        Message = "Not Found Academic Year"
+                    };
+                }
+                var GetGallery = db.VW_GetGallery.Where(r=>r.EDUYEAR == AcadamicYear.ACADEMICYEAR).OrderByDescending(r=>r.CREATEDON).ToList();
                 List<Gallary> Details = new List<Gallary>();
                 object[,] str=new object[ GetGallery.Count,2];
                 for (int i = 0; i < GetGallery.Count; i++)

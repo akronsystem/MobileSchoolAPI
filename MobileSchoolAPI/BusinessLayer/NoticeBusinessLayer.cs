@@ -34,7 +34,7 @@ namespace MobileSchoolAPI.BusinessLayer
                     {
                         var data = //db.View_DisplayNotice.Where(r => r.STARTDATE >= System.DateTime.Today.Date && r.DISPLAY == 1 && r.ACADEMICYEAR == AcademicYear.ACADEMICYEAR).ToList();
                                from c in db.View_DisplayNotice.Where(r => r.STARTDATE >= System.DateTime.Today.Date && r.DISPLAY == 1 && r.ACADEMICYEAR == AcademicYear.ACADEMICYEAR)
-                               select new { c.TYPE, c.HOLIDAY, c.STARTDATE, c.ENDDATE,c.NUMBEROFDAYS };
+                               select new { c.TYPE, c.HOLIDAY, c.SDATE, c.EDATE,c.NUMBEROFDAYS };
                         if (data != null)
                         {
                             return new NoticeResult { IsSuccess = true, Result = data };
@@ -49,7 +49,7 @@ namespace MobileSchoolAPI.BusinessLayer
                     {
                         var data = //db.View_DisplayNotice.Where(r => r.STARTDATE >= System.DateTime.Today.Date && r.DISPLAY == 1 && r.TYPE == obj.EventType && r.ACADEMICYEAR == AcademicYear.ACADEMICYEAR).ToList();
                              from c in db.View_DisplayNotice.Where(r => r.STARTDATE >= System.DateTime.Today.Date && r.DISPLAY == 1 && r.TYPE == obj.EventType && r.ACADEMICYEAR == AcademicYear.ACADEMICYEAR)
-                             select new { c.TYPE, c.HOLIDAY, c.STARTDATE, c.ENDDATE, c.NUMBEROFDAYS };
+                             select new { c.TYPE, c.HOLIDAY, c.SDATE, c.EDATE, c.NUMBEROFDAYS };
                         if (data != null)
                         {
                             return new NoticeResult { IsSuccess = true, Result = data };

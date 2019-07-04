@@ -311,8 +311,10 @@ namespace MobileSchoolAPI.BusinessLayer
                 {
                     return new Results() { IsSuccess = false, Message = "Invalid User" };
                 }
-                var EmpHomework = db.VIEWHOMEWORKs.Where(r => r.UserId == obj.userid && r.HOMEWORKDATE>=obj.FromDate && r.HOMEWORKDATE<=obj.ToDate).OrderByDescending(r=>r.HOMEWORKDATE).ToList();
 
+                var EmpHomework = db.VIEWHOMEWORKs.Where(r => r.UserId == obj.userid && r.HOMEWORKDATE>=obj.FromDate && r.HOMEWORKDATE<=obj.ToDate).OrderByDescending(r=>r.HOMEWORKDATE).ToList();
+                //from c in db.VIEWHOMEWORKs.Where(r => r.UserId == obj.userid && r.HOMEWORKDATE>=obj.FromDate && r.HOMEWORKDATE<=obj.ToDate)
+                //select new { c.UserId, c.HOMEWORKID, c.HOMEWORKDATE.tostr, c.SUBJECTNAME };
                 string UploadBaseUrl = "";
                 var logindetail = db.TBLUSERLOGINs.
                              Where(r => r.UserId == obj.userid && r.Password == obj.password && r.STATUS == "ACTIVE")
@@ -358,11 +360,13 @@ namespace MobileSchoolAPI.BusinessLayer
                     {
                         for (int i = 0; i < StudentHomework.Count; i++)
                         {
+                            string HOMEWORKDATE = Convert.ToDateTime(StudentHomework[i].HOMEWORKDATE).ToString("MM/dd/yyyy");
                             ResultSet rs = new ResultSet();
                             rs.UserId = StudentHomework[i].UserId;
                             rs.UserType = StudentHomework[i].UserType;
                             rs.HOMEWORKID = StudentHomework[i].HOMEWORKID;
-                            rs.HOMEWORKDATE = Convert.ToDateTime(StudentHomework[i].HOMEWORKDATE);
+                            //rs.HOMEWORKDATE = Convert.ToDateTime(StudentHomework[i].HMDATE);
+                            rs.HOMEWORKDATE =Convert.ToDateTime( HOMEWORKDATE);
                             rs.TIME = StudentHomework[i].TIME;
                             rs.STANDARDID = Convert.ToInt32(StudentHomework[i].STANDARDID);
                             rs.DIVISIONID = Convert.ToInt32(StudentHomework[i].DIVISIONID);
@@ -394,11 +398,13 @@ namespace MobileSchoolAPI.BusinessLayer
                 {
                     for (int i = 0; i < EmpHomework.Count; i++)
                     {
+                        string HOMEWORKDATE = Convert.ToDateTime(EmpHomework[i].HOMEWORKDATE).ToString("MM/dd/yyyy");
                         ResultSet rs = new ResultSet();
                         rs.UserId = EmpHomework[i].UserId;
                         rs.UserType = EmpHomework[i].UserType;
                         rs.HOMEWORKID = EmpHomework[i].HOMEWORKID;
-                        rs.HOMEWORKDATE = Convert.ToDateTime(EmpHomework[i].HOMEWORKDATE);
+                       // rs.HOMEWORKDATE = DateTime.ParseExact(EmpHomework[i].HMDATE, "dd/MM/yyyy", null);//DateTime.Parse(EmpHomework[i].HMDATE);
+                        rs.HOMEWORKDATE =Convert.ToDateTime(HOMEWORKDATE);
                         rs.TIME = EmpHomework[i].TIME;
                         rs.STANDARDID = Convert.ToInt32(EmpHomework[i].STANDARDID);
                         rs.DIVISIONID = Convert.ToInt32(EmpHomework[i].DIVISIONID);

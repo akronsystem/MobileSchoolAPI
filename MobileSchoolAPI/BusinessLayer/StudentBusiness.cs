@@ -36,7 +36,9 @@ namespace MobileSchoolAPI.BusinessLayer
                     if (data != null)
                     {
                         int StudentId = Convert.ToInt32(data.EmpCode);
-                        var result = db.View_DisplayStudentDetails.Where(r => r.STUDENTID == StudentId && r.ACADEMICYEAR == academicyear.ACADEMICYEAR).FirstOrDefault();
+                        var result = //db.View_DisplayStudentDetails.Where(r => r.STUDENTID == StudentId && r.ACADEMICYEAR == academicyear.ACADEMICYEAR).FirstOrDefault();
+                          from c in db.View_DisplayStudentDetails.Where(r => r.STUDENTID == StudentId && r.ACADEMICYEAR == academicyear.ACADEMICYEAR)
+                          select new { c.STUDENTNAME, c.GENDER, c.DOB, c.GMOBILE };
                         return new StudentDetails { IsSuccess = true, StudentInformation = result };
                     }
                     else
