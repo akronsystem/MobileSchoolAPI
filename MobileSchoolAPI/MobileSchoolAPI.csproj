@@ -225,7 +225,6 @@
     <Compile Include="Models\GetUserId.cs" />
     <Compile Include="Models\Homework.cs" />
     <Compile Include="Models\homeworkparameters.cs" />
-    <Compile Include="Models\Model1.cs" />
     <Compile Include="Models\Result.cs" />
     <Compile Include="Models\ResultList.cs" />
     <Compile Include="Models\Smsparameters.cs" />
