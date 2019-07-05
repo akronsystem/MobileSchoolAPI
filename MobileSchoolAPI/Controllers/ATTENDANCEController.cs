@@ -45,6 +45,10 @@ namespace MobileSchoolAPI.Controllers
 
 			return result;
         }
+        public object SelfAttendance()
+        {
+            return null;
+        }
 
     }
 }

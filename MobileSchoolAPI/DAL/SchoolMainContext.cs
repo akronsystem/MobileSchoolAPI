@@ -130,6 +130,7 @@ namespace MobileSchoolAPI
         public virtual DbSet<TBLSUBJECTMASTER> TBLSUBJECTMASTERs { get; set; }
         public virtual DbSet<TBLASSIGNCOMPETENCy> TBLASSIGNCOMPETENCIES { get; set; }
         public virtual DbSet<TBLGRADEMASTER> TBLGRADEMASTERs { get; set; }
+        public virtual DbSet<View_EventHolidayNotification> View_EventHolidayNotification { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder) 
 		{

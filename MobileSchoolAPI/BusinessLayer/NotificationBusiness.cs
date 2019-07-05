@@ -593,9 +593,16 @@ namespace MobileSchoolAPI.BusinessLayer
                         Message = "Not Found Academic Year"
                     };
                 }
-                var Event = db.TBLNOTIFICATIONs.Where(r=>r.NOTIFICATIONTYPE=="News" && r.ACADEMICYEAR==AcadamicYear.ACADEMICYEAR).ToList().OrderByDescending(r => r.NOTIFICATIONDATE);
-
-                if (Event == null)
+               // var Event = db.TBLHOLIDAYs.Where(r=>r.TYPE=="Event" && r.DISPLAY==1).ToList();
+                DateTime TodayDate = DateTime.Now.Date;
+                DateTime Remaining;
+                Remaining = TodayDate.AddDays(+1);
+                var Data = db.View_EventHolidayNotification.Where(r =>r.ACADEMICYEAR==AcadamicYear.ACADEMICYEAR && r.STARTDATE == Remaining).ToList();
+                //if(Data!=null)
+                //{
+                //    return new DivisionListResult() { IsSuccess = true, EventNotification = Data };
+                //}
+                if (Data == null)
                 {
 
                     return new Results
@@ -607,7 +614,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 }
                 else
                 {
-                    return new DivisionListResult() { IsSuccess = true, EventNotification = Event };
+                    return new DivisionListResult() { IsSuccess = true, EventNotification = Data };
                 }
             }
             catch (Exception E)
