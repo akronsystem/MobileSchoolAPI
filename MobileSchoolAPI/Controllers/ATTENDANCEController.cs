@@ -45,10 +45,12 @@ namespace MobileSchoolAPI.Controllers
 
 			return result;
         }
-        public object SelfAttendance()
-        {
-            return null;
-        }
+        //public object SelfAttendance(GETSTUDENTPARAM OBJ)
+        //{
+        //    SelfAttendanceBusiness GETOBJ = new SelfAttendanceBusiness();
+        //    var GETSTUDENTRESULT = GETOBJ.GETSTUDENT(OBJ);
+        //    return GETSTUDENTRESULT;
+        //}
 
     }
 }

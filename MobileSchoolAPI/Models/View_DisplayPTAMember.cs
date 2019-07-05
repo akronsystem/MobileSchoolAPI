@@ -25,5 +25,8 @@ namespace MobileSchoolAPI.Models
 
         [StringLength(50)]
         public string NOMINEEFROM { get; set; }
+
+        [StringLength(100)]
+        public string IMAGEPATH { get; set; }
     }
 }

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 
+using Newtonsoft.Json;
 
 namespace MobileSchoolAPI.BusinessLayer
 {
@@ -111,7 +112,7 @@ namespace MobileSchoolAPI.BusinessLayer
             {
 
                 IsSuccess = true,
-                Message = "Homework assign successfully and SMS sent Sucessfully"
+                Message = "Homework Assigned Successfully!"
             };
 
         }
@@ -248,41 +249,41 @@ namespace MobileSchoolAPI.BusinessLayer
                                 {
                                     str = "goo.gl/j7XjCx";
                                 }
-                                string txtMessage = "Dear Parent, Your Pupil " + splitname[1] + ", is absent on " + Convert.ToDateTime(atteobj.ATTEDANCEDATE).ToString("dd/MM/yyyy") + ", Kindly note it. See attendance details " + str;
+                                string txtMessage = "Dear Parent, Your Pupil " + splitname[1] + ", is absent on " + Convert.ToDateTime(atteobj.ATTEDANCEDATE).ToString("dd/MM/yyyy") + ", Kindly note. See attendance details " + str;
 
 
                                 if (smsstatus == "1")
                                 {
-                                   /* uncomment on final launch */
-                                    //string responseString = SMSSendTESTDLR(getstudent[0].GMOBILE, txtMessage, logindetail.UserName);
-                                    //if (responseString != "")
-                                    //{
-                                    //    var jObject = JObject.Parse(responseString);
-                                    //    var response = jObject["response"].ToString();
+                                    /* uncomment on final launch */
+                                    string responseString = SMSSendTESTDLR(getstudent[0].GMOBILE, txtMessage, logindetail.UserName);
+                                    if (responseString != "")
+                                    {
+                                        // var jObject = JObject.Parse(responseString);
+                                        //var response = jObject["response"].ToString();
+                                        string RequestId = getRequestID(responseString);
+                                        TBLMSGHISTORY smshist = new TBLMSGHISTORY();
+                                        smshist.DATE = DateTime.Now;
+                                        smshist.TIME = DateTime.Now.ToShortTimeString();
+                                        smshist.MSG = txtMessage;
+                                        smshist.TYPE = "ATT";
+                                        smshist.CREATEDID = atteobj.Userid;
+                                        smshist.DISPLAY = 1;
+                                        smshist.STUDENTID = getstudent[0].STUDENTID;
+                                        smshist.FROMEMPID = Convert.ToInt64(logindetail.EmpCode);
+                                        smshist.STATUS = "Out";
+                                        smshist.InStatus = "In";
+                                        smshist.OutStatus = "Out";
+                                        smshist.REQUESTID = RequestId;
+                                        smshist.EMPLOYEEID = 0;
+                                        smshist.TOEMPID = "0";
+                                        smshist.ATTACHMENTS = "";
+                                        smshist.SUBJECT = "";
+                                        smshist.OtherNos = "";
+                                        smshist.ALUMNIID = 0;
+                                        db.TBLMSGHISTORies.Add(smshist);
+                                        db.SaveChanges();
 
-                                    //    TBLMSGHISTORY smshist = new TBLMSGHISTORY();
-                                    //    smshist.DATE = DateTime.Now;
-                                    //    smshist.TIME = DateTime.Now.ToShortTimeString();
-                                    //    smshist.MSG = txtMessage;
-                                    //    smshist.TYPE = "ATT";
-                                    //    smshist.CREATEDID = atteobj.Userid;
-                                    //    smshist.DISPLAY = 1;
-                                    //    smshist.STUDENTID = getstudent[0].STUDENTID;
-                                    //    smshist.FROMEMPID = Convert.ToInt64(logindetail.EmpCode);
-                                    //    smshist.STATUS = "Out";
-                                    //    smshist.InStatus = "In";
-                                    //    smshist.OutStatus = "Out";
-                                    //    smshist.REQUESTID = response;
-                                    //    smshist.EMPLOYEEID = 0;
-                                    //    smshist.TOEMPID = "0";
-                                    //    smshist.ATTACHMENTS = "";
-                                    //    smshist.SUBJECT = "";
-                                    //    smshist.OtherNos = "";
-                                    //    smshist.ALUMNIID = 0;
-                                    //    db.TBLMSGHISTORies.Add(smshist);
-                                    //    db.SaveChanges();
-
-                                    //}
+                                    }
 
 
                                 }
@@ -308,7 +309,7 @@ namespace MobileSchoolAPI.BusinessLayer
                         return new Results
                         {
                             IsSuccess = true,
-                            Message = "Attendance Save successfully"
+                            Message = "Attendance Saved Successfully!"
                         };
 
                     }
@@ -355,29 +356,34 @@ namespace MobileSchoolAPI.BusinessLayer
 
                 if (UserName.StartsWith("NKV"))
                 {
-                    str = "http://smsnow.hundiainfosys.com/rest/services/sendSMS/sendGroupSms?AUTH_KEY=7ddc928fc86d2e3adf01010536830d2&message=" + Message + "&senderId=SFNKVS&routeId=1&mobileNos=" + MobileNo + "&smsContentType=English";
+                    str = "http://sms.akronsystems.com/vendorsms/pushsms.aspx?user=nkvschool&password=Server@7&msisdn=" + MobileNo + "&sid=SFNKVS&msg=" + Message + "&fl=0&gwid=2";
 
 
                 }
                 else if (UserName.StartsWith("SXS"))
                 {
-                    str = "http://smsnow.hundiainfosys.com/rest/services/sendSMS/sendGroupSms?AUTH_KEY=3555f03e24952528d1acba2e3f2e4749&message=" + Message + "&senderId=XAVIER&routeId=1&mobileNos=" + MobileNo + "&smsContentType=english";
+                    str = "http://sms.akronsystems.com/vendorsms/pushsms.aspx?user=xavier&password=Server@7&msisdn=" + MobileNo + "&sid=XAVIER&msg=" + Message + "&fl=0&gwid=2";
+
+                    //str = "http://smsnow.hundiainfosys.com/rest/services/sendSMS/sendGroupSms?AUTH_KEY=3555f03e24952528d1acba2e3f2e4749&message=" + Message + "&senderId=XAVIER&routeId=1&mobileNos=" + MobileNo + "&smsContentType=english";
 
                 }
                 else if (UserName.StartsWith("ASM"))
                 {
-
-                    str = "http://smsnow.hundiainfosys.com/rest/services/sendSMS/sendGroupSms?AUTH_KEY=b963a0f8db5c6b3478df79dee5e5842e&message=" + Message + "&senderId=ALPHOS&routeId=1&mobileNos=" + MobileNo + "&smsContentType=english";
+                    str = "http://sms.akronsystems.com/vendorsms/pushsms.aspx?user=asmmiraj&password=Server@7&msisdn=" + MobileNo + "&sid=ALPHOS&msg=" + Message + "&fl=0&gwid=2";
+                    //str = "http://smsnow.hundiainfosys.com/rest/services/sendSMS/sendGroupSms?AUTH_KEY=b963a0f8db5c6b3478df79dee5e5842e&message=" + Message + "&senderId=ALPHOS&routeId=1&mobileNos=" + MobileNo + "&smsContentType=english";
                 }
 
                 else if (UserName.StartsWith("ASY"))
                 {
+                    str = "http://sms.akronsystems.com/vendorsms/pushsms.aspx?user=asyich&password=Server@7&msisdn=" + MobileNo + "&sid=ALPHON&msg=" + Message + "&fl=0&gwid=2";
 
-                    str = "http://www.smsidea.co.in/sendsms.aspx?mobile=9923990000&pass=PKIGG&senderid=ALPHON&to=" + MobileNo + "&msg=" + Message + "";
+                    //str = "http://www.smsidea.co.in/sendsms.aspx?mobile=9923990000&pass=PKIGG&senderid=ALPHON&to=" + MobileNo + "&msg=" + Message + "";
 
                 }
                 else if (UserName.StartsWith("NMS"))
                 {
+                    str = "http://sms.akronsystems.com/vendorsms/pushsms.aspx?user=nnskop&password=Server@7&msisdn=" + MobileNo + "&sid=NMSKOP&msg=" + Message + "&fl=0&gwid=2";
+
                     //str = "http://smsnow.hundiainfosys.com/rest/services/sendSMS/sendGroupSms?AUTH_KEY=14c07610595093f4d66e18f1aac5ee88&message=" + Message + "&senderId=NMSKOP&routeId=1&mobileNos=" + MobileNo + "&smsContentType=english";
 
                 }
@@ -396,6 +402,33 @@ namespace MobileSchoolAPI.BusinessLayer
             {
                 return "";
             }
+        }
+        public class ResponseData
+        {
+            public List<MessageData> MessageData { get; set; }
+        }
+        public class MessageData
+        {
+            public List<MessageParts> MessageParts { get; set; }
+        }
+        public class MessageParts
+        {
+            public string MsgId { get; set; }
+
+        }
+        public string getRequestID(string responseString)
+        {
+            string MsgID = "";
+            // string responseString = @"{""ErrorCode"":""000"",""ErrorMessage"":""Success"",""JobId"":""3368673"",""MessageData"":[{""Number"":""919158704048"",""MessageParts"":[{""MsgId"":""919158704048 - 7a17b74a1ba2467cae04db7c310d1629"",""PartId"":1,""Text"":""Test SMS from Akron""}]}]}";
+            var myModel = JsonConvert.DeserializeObject<ResponseData>(responseString);
+            foreach (var fac in myModel.MessageData)
+            {
+                foreach (var fc in fac.MessageParts)
+                {
+                    MsgID = fc.MsgId;
+                }
+            }
+            return MsgID;
         }
         public object FileUpload(homeworkparameters obj)
         {
