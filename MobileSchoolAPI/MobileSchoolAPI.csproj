@@ -288,6 +288,7 @@
     <Compile Include="Models\View_DisplayPTAMember.cs" />
     <Compile Include="Models\View_DisplayStudentDetails.cs" />
     <Compile Include="Models\View_DisplayWeekDay.cs" />
+    <Compile Include="Models\View_EventHolidayNotification.cs" />
     <Compile Include="Models\View_FeeSetting.cs" />
     <Compile Include="Models\View_GETACADEMICYEAR.cs" />
     <Compile Include="Models\View_GetFeeSettings.cs" />
