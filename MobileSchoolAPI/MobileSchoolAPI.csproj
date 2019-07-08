@@ -175,6 +175,7 @@
     <Compile Include="BusinessLayer\NoticeBusinessLayer.cs" />
     <Compile Include="BusinessLayer\NotificationBusiness.cs" />
     <Compile Include="BusinessLayer\ResultBusiness.cs" />
+    <Compile Include="BusinessLayer\SelfAttendanceBusiness.cs" />
     <Compile Include="BusinessLayer\StudentBusiness.cs" />
     <Compile Include="BusinessLayer\TestTypeBL.cs" />
     <Compile Include="BusinessLayer\TimetableBusiness.cs" />
