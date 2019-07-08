@@ -23,7 +23,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 
                 if (result.Count == 0)
                 { 
-                    return new ResultBirth { IsSuccess = false, Result = "No Birthdays Found Today" }; 
+                    return new ResultBirth { IsSuccess = false, Result = result }; 
                 }
                 else
                 {

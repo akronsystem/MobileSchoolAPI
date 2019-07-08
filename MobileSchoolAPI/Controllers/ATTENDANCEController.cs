@@ -45,12 +45,12 @@ namespace MobileSchoolAPI.Controllers
 
 			return result;
         }
-        //public object SelfAttendance(GETSTUDENTPARAM OBJ)
-        //{
-        //    SelfAttendanceBusiness GETOBJ = new SelfAttendanceBusiness();
-        //    var GETSTUDENTRESULT = GETOBJ.GETSTUDENT(OBJ);
-        //    return GETSTUDENTRESULT;
-        //}
+        public object SelfAttendance(GETSTUDENTPARAM OBJ)
+        {
+            SelfAttendanceBusiness GETOBJ = new SelfAttendanceBusiness();
+            var GETSTUDENTRESULT = GETOBJ.MarkSelfAttendace(OBJ);
+            return GETSTUDENTRESULT;
+        }
 
     }
 }
