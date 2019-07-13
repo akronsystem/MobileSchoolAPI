@@ -131,7 +131,8 @@ namespace MobileSchoolAPI
         public virtual DbSet<TBLASSIGNCOMPETENCy> TBLASSIGNCOMPETENCIES { get; set; }
         public virtual DbSet<TBLGRADEMASTER> TBLGRADEMASTERs { get; set; }
         public virtual DbSet<View_EventHolidayNotification> View_EventHolidayNotification { get; set; }
-
+        public virtual DbSet<View_GetEmployee> View_GetEmployee { get; set; }
+        public virtual DbSet<View_GetEmployeeWiseData> View_GetEmployeeWiseData { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder) 
 		{
 			modelBuilder.Entity<TBLUSERLOGIN>()
