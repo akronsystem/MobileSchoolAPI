@@ -19,7 +19,16 @@ namespace MobileSchoolAPI.BusinessLayer
                 {
                     return new Results() { IsSuccess = false, Message = "Invalid User" };
                 }
-                var getstudent = db.VIEWGETSTUDENTATTs.Where(r => r.DIVISIONID == OBJ.DIVISIONID).ToList();
+                var AcadamicYear = db.View_GETACADEMICYEAR.FirstOrDefault();
+                if (AcadamicYear == null)
+                {
+                    return new Results
+                    {
+                        IsSuccess = false,
+                        Message = "Not Found Academic Year"
+                    };
+                }
+                var getstudent = db.VIEWGETSTUDENTATTs.Where(r => r.DIVISIONID == OBJ.DIVISIONID && r.ACADEMICYEAR==AcadamicYear.ACADEMICYEAR).ToList();
 
                 if (getstudent.Count() == 0)
 

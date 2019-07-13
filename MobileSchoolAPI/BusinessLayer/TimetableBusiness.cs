@@ -107,7 +107,7 @@ namespace MobileSchoolAPI.BusinessLayer
                     item.ToList();
                     TIMETABLELIST ddl = new TIMETABLELIST();
                     // var data = db.View_Timetable.Where(r => r.EMPLOYEEID == EmployeeCode && r.WORKINGDAYS == item && r.DISPLAY == 1 && r.EDUYEAR == AcademicYear.ACADEMICYEAR).ToList();
-                    var data_d = from c in db.View_Timetable.Where(r => r.EMPLOYEEID == EmployeeCode && r.WORKINGDAYS == item && r.DISPLAY == 1 && r.EDUYEAR == AcademicYear.ACADEMICYEAR)
+                    var data_d = from c in db.View_Timetable.Where(r => r.EMPLOYEEID == EmployeeCode && r.WORKINGDAYS == item && r.DISPLAY == 1 && r.EDUYEAR == AcademicYear.ACADEMICYEAR).OrderBy(R=>R.BATCHID)
                                  select new { c.DIVISIONNAME, c.SUBJECTNAME, c.STANDARDNAME, c.BATCHNAME, c.BATCHTIME };
 
                     if (data_d.Count() == 0)
@@ -191,7 +191,7 @@ namespace MobileSchoolAPI.BusinessLayer
                         item.ToList();
                         TIMETABLELIST ddl = new TIMETABLELIST();
                         var Get_data =// db.View_StudentTimeTable.Where(r => r.STANDARDID == StandardId && r.DIVISION == Data.DIVISIONID).ToList();
-                    from c in db.View_StudentTimeTable.Where(r => r.STANDARDID == StandardId && r.DIVISION == Data.DIVISIONID && r.WORKINGDAYS == item && r.DISPLAY == 1 && r.EDUYEAR == AcademicYear.ACADEMICYEAR)
+                    from c in db.View_StudentTimeTable.Where(r => r.STANDARDID == StandardId && r.DIVISION == Data.DIVISIONID && r.WORKINGDAYS == item && r.DISPLAY == 1 && r.EDUYEAR == AcademicYear.ACADEMICYEAR).OrderBy(R=>R.BATCHID)
                     select new {c.EMPLOYEENAME, c.BATCHNAME, c.BATCHTIME, c.SUBJECTNAME };
 
                         if (Get_data.Count() == 0)

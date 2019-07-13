@@ -26,6 +26,7 @@ namespace MobileSchoolAPI.Models
         [StringLength(15)]
         public string GMOBILE { get; set; }
 
-        
+        [StringLength(15)]
+        public string ACADEMICYEAR { get; set; }
     }
 }

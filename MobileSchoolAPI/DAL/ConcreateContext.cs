@@ -46,9 +46,9 @@ namespace MobileSchoolAPI
             if (contxt3 != null)
                 return new ASYSCHOOLSchoolContext();
 
-            var contxt4 = new NMESSchoolContext().TBLUSERLOGINs.FirstOrDefault(r => r.UserId == UserId && r.Password == password);
-            if (contxt4 != null)
-                return new NMESSchoolContext();
+            //var contxt4 = new NMESSchoolContext().TBLUSERLOGINs.FirstOrDefault(r => r.UserId == UserId && r.Password == password);
+            //if (contxt4 != null)
+            //    return new NMESSchoolContext();
 
 
             return null;
