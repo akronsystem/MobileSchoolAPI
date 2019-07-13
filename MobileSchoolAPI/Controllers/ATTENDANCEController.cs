@@ -1,5 +1,6 @@
 ﻿using MobileSchoolAPI.BusinessLayer;
 using MobileSchoolAPI.Models;
+using MobileSchoolAPI.ParamModel;
 using MobileSchoolAPI.ResultModel;
 using System;
 using System.Collections.Generic;
@@ -45,10 +46,10 @@ namespace MobileSchoolAPI.Controllers
 
 			return result;
         }
-        public object SelfAttendance(GETSTUDENTPARAM OBJ)
+        public object TeacherAttendance(GetTeacherParam OBJ)
         {
             SelfAttendanceBusiness GETOBJ = new SelfAttendanceBusiness();
-            var GETSTUDENTRESULT = GETOBJ.MarkSelfAttendace(OBJ);
+            var GETSTUDENTRESULT = GETOBJ.DisplayAttendace(OBJ);
             return GETSTUDENTRESULT;
         }
 
