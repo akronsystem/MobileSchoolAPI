@@ -174,6 +174,7 @@
     <Compile Include="BusinessLayer\LoginManager.cs" />
     <Compile Include="BusinessLayer\NoticeBusinessLayer.cs" />
     <Compile Include="BusinessLayer\NotificationBusiness.cs" />
+    <Compile Include="BusinessLayer\RatingBusiness.cs" />
     <Compile Include="BusinessLayer\ResultBusiness.cs" />
     <Compile Include="BusinessLayer\SelfAttendanceBusiness.cs" />
     <Compile Include="BusinessLayer\StudentBusiness.cs" />
@@ -195,6 +196,7 @@
     <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\PARAMHOMEWORKBYUSER.cs" />
     <Compile Include="Controllers\PTAMemberController.cs" />
+    <Compile Include="Controllers\RatingController.cs" />
     <Compile Include="Controllers\ResultController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\TERMLISTController.cs" />
@@ -229,6 +231,7 @@
     <Compile Include="Models\GetUserId.cs" />
     <Compile Include="Models\Homework.cs" />
     <Compile Include="Models\homeworkparameters.cs" />
+    <Compile Include="Models\RateParameterList.cs" />
     <Compile Include="Models\Result.cs" />
     <Compile Include="Models\ResultList.cs" />
     <Compile Include="Models\Smsparameters.cs" />
@@ -237,6 +240,7 @@
     <Compile Include="Models\TBLASSIGNCLASSMASTER.cs" />
     <Compile Include="Models\TBLASSIGNCLASSTEACHER.cs" />
     <Compile Include="Models\TBLASSIGNCOMPETENCy.cs" />
+    <Compile Include="Models\TBLASSIGNSTAFF.cs" />
     <Compile Include="Models\TBLATTENDENCE.cs" />
     <Compile Include="Models\TBLATTENDENCEMASTER.cs" />
     <Compile Include="Models\TBLDeviceRegistration.cs" />
@@ -253,6 +257,8 @@
     <Compile Include="Models\TBLMSGHISTORY.cs" />
     <Compile Include="Models\TBLNOTIFICATION.cs" />
     <Compile Include="Models\TBLNOTIFICATIONDETAIL.cs" />
+    <Compile Include="Models\TBLRATINGDETAIL.cs" />
+    <Compile Include="Models\TBLRATINGMASTER.cs" />
     <Compile Include="Models\TBLSTANDARDMASTER.cs" />
     <Compile Include="Models\TBLSUBJECTMASTER.cs" />
     <Compile Include="Models\TBLTERMMASTERNEW.cs" />
@@ -290,6 +296,7 @@
     <Compile Include="Models\View_DisplayMark_CycleTest.cs" />
     <Compile Include="Models\View_DisplayNotice.cs" />
     <Compile Include="Models\View_DisplayPTAMember.cs" />
+    <Compile Include="Models\View_DisplayRate.cs" />
     <Compile Include="Models\View_DisplayStudentDetails.cs" />
     <Compile Include="Models\View_DisplayWeekDay.cs" />
     <Compile Include="Models\View_EventHolidayNotification.cs" />
@@ -321,6 +328,7 @@
     <Compile Include="Models\Vw_STUDSTANDARD.cs" />
     <Compile Include="Models\VW_TESTTYPELIST.cs" />
     <Compile Include="Models\VW_UNITMASTER.cs" />
+    <Compile Include="ParamModel\DatewiseAttendace.cs" />
     <Compile Include="ParamModel\DevicesParam.cs" />
     <Compile Include="ParamModel\FeePram.cs" />
     <Compile Include="ParamModel\GetLeaveParam.cs" />
@@ -347,9 +355,11 @@
     <Compile Include="ParamModel\ParamNotificationView.cs" />
     <Compile Include="ParamModel\PARAMSTD.cs" />
     <Compile Include="ParamModel\PTAMemberParam.cs" />
+    <Compile Include="ParamModel\RatingParam.cs" />
     <Compile Include="ParamModel\Result.cs" />
     <Compile Include="ParamModel\ResultParam.cs" />
     <Compile Include="ParamModel\StudentParam.cs" />
+    <Compile Include="ParamModel\TeacherRatingParam.cs" />
     <Compile Include="ParamModel\TimeTableParam.cs" />
     <Compile Include="ParamModel\UpdateTimeTableParam.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
