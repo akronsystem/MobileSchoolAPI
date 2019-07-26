@@ -255,35 +255,35 @@ namespace MobileSchoolAPI.BusinessLayer
                                 if (smsstatus == "1")
                                 {
                                     /* uncomment on final launch */
-                                    string responseString = SMSSendTESTDLR(getstudent[0].GMOBILE, txtMessage, logindetail.UserName);
-                                    if (responseString != "")
-                                    {
-                                        var jObject = JObject.Parse(responseString);
-                                        var response = jObject["response"].ToString();
-                                        string RequestId = getRequestID(responseString);
-                                        TBLMSGHISTORY smshist = new TBLMSGHISTORY();
-                                        smshist.DATE = DateTime.Now;
-                                        smshist.TIME = DateTime.Now.ToShortTimeString();
-                                        smshist.MSG = txtMessage;
-                                        smshist.TYPE = "ATT";
-                                        smshist.CREATEDID = atteobj.Userid;
-                                        smshist.DISPLAY = 1;
-                                        smshist.STUDENTID = getstudent[0].STUDENTID;
-                                        smshist.FROMEMPID = Convert.ToInt64(logindetail.EmpCode);
-                                        smshist.STATUS = "Out";
-                                        smshist.InStatus = "In";
-                                        smshist.OutStatus = "Out";
-                                        smshist.REQUESTID = RequestId;
-                                        smshist.EMPLOYEEID = 0;
-                                        smshist.TOEMPID = "0";
-                                        smshist.ATTACHMENTS = "";
-                                        smshist.SUBJECT = "";
-                                        smshist.OtherNos = "";
-                                        smshist.ALUMNIID = 0;
-                                        db.TBLMSGHISTORies.Add(smshist);
-                                        db.SaveChanges();
+                                    //string responseString = SMSSendTESTDLR(getstudent[0].GMOBILE, txtMessage, logindetail.UserName);
+                                    //if (responseString != "")
+                                    //{
+                                    //    var jObject = JObject.Parse(responseString);
+                                    //    var response = jObject["response"].ToString();
+                                    //    string RequestId = getRequestID(responseString);
+                                    //    TBLMSGHISTORY smshist = new TBLMSGHISTORY();
+                                    //    smshist.DATE = DateTime.Now;
+                                    //    smshist.TIME = DateTime.Now.ToShortTimeString();
+                                    //    smshist.MSG = txtMessage;
+                                    //    smshist.TYPE = "ATT";
+                                    //    smshist.CREATEDID = atteobj.Userid;
+                                    //    smshist.DISPLAY = 1;
+                                    //    smshist.STUDENTID = getstudent[0].STUDENTID;
+                                    //    smshist.FROMEMPID = Convert.ToInt64(logindetail.EmpCode);
+                                    //    smshist.STATUS = "Out";
+                                    //    smshist.InStatus = "In";
+                                    //    smshist.OutStatus = "Out";
+                                    //    smshist.REQUESTID = RequestId;
+                                    //    smshist.EMPLOYEEID = 0;
+                                    //    smshist.TOEMPID = "0";
+                                    //    smshist.ATTACHMENTS = "";
+                                    //    smshist.SUBJECT = "";
+                                    //    smshist.OtherNos = "";
+                                    //    smshist.ALUMNIID = 0;
+                                    //    db.TBLMSGHISTORies.Add(smshist);
+                                    //    db.SaveChanges();
 
-                                    }
+                                    //}
 
 
                                 }

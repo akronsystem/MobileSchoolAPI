@@ -32,6 +32,7 @@ namespace MobileSchoolAPI.Models
         public string CONCESSION { get; set; }
 
         [Key]
+        [Column(Order = 0)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public long STUDENTID { get; set; }
 
@@ -40,5 +41,19 @@ namespace MobileSchoolAPI.Models
 
         [StringLength(200)]
         public string IMAGEPATH { get; set; }
+
+        [StringLength(50)]
+        public string SARALNO { get; set; }
+
+        [StringLength(300)]
+        public string ADDRESS { get; set; }
+
+        [Key]
+        [Column(Order = 1)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public long Expr1 { get; set; }
+
+        [StringLength(300)]
+        public string PADDRESS { get; set; }
     }
 }

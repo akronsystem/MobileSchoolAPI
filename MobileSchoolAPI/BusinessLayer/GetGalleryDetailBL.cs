@@ -50,7 +50,7 @@ namespace MobileSchoolAPI.BusinessLayer
                     //str[i,0] = "AlbumName:" + GetGallery[i].ALBUMNAME ;
                     //str[i, 1] =  strpath;
                 }
-                return new GalleryResult() { IsSuccess = true,URL= "http://www.sxs.akronsystems.com/ALBUMUPLOADS/Original/", GalleryAlbumList = Details.ToArray() };
+                return new GalleryResult() { IsSuccess = true,URL= "http://www.nkvsem.akronsystems.com/ALBUMUPLOADS/Original/", GalleryAlbumList = Details.ToArray() };
             }
             catch (Exception ex)
             {

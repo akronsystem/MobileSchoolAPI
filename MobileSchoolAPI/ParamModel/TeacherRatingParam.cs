@@ -5,11 +5,9 @@ using System.Web;
 
 namespace MobileSchoolAPI.ParamModel
 {
-    public class GetTeacherParam
+    public class TeacherRatingParam
     {
-        public int Month { get; set; }
-        public int USERID { get; set; }
-
+        public string UserName { get; set; }
         public string Password { get; set; }
     }
 }

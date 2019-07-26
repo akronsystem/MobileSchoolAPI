@@ -360,7 +360,7 @@ namespace MobileSchoolAPI.Models
         [StringLength(50)]
         public string SECTION { get; set; }
 
-        public long? EMPLOYEETYPEID { get; set; }
+        //public long? EMPLOYEETYPEID { get; set; }
 
         [Key]
         [Column(Order = 1)]

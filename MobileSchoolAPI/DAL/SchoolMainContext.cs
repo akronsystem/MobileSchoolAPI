@@ -133,6 +133,11 @@ namespace MobileSchoolAPI
         public virtual DbSet<View_EventHolidayNotification> View_EventHolidayNotification { get; set; }
         public virtual DbSet<View_GetEmployee> View_GetEmployee { get; set; }
         public virtual DbSet<View_GetEmployeeWiseData> View_GetEmployeeWiseData { get; set; }
+
+        public virtual DbSet<TBLRATINGDETAIL> TBLRATINGDETAILS { get; set; }
+        public virtual DbSet<TBLRATINGMASTER> TBLRATINGMASTERs { get; set; }
+        public virtual DbSet<TBLASSIGNSTAFF> TBLASSIGNSTAFFs { get; set; }
+        public virtual DbSet<View_DisplayRate> View_DisplayRate { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder) 
 		{
 			modelBuilder.Entity<TBLUSERLOGIN>()
