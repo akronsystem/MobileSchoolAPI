@@ -138,6 +138,7 @@ namespace MobileSchoolAPI
         public virtual DbSet<TBLRATINGMASTER> TBLRATINGMASTERs { get; set; }
         public virtual DbSet<TBLASSIGNSTAFF> TBLASSIGNSTAFFs { get; set; }
         public virtual DbSet<View_DisplayRate> View_DisplayRate { get; set; }
+        public virtual DbSet<View_Communiation> View_Communiation { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder) 
 		{
 			modelBuilder.Entity<TBLUSERLOGIN>()

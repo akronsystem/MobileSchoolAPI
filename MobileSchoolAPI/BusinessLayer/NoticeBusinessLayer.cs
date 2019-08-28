@@ -33,7 +33,7 @@ namespace MobileSchoolAPI.BusinessLayer
                     if (obj.EventType == "" || obj.EventType == "string")
                     {
                         var data = //db.View_DisplayNotice.Where(r => r.STARTDATE >= System.DateTime.Today.Date && r.DISPLAY == 1 && r.ACADEMICYEAR == AcademicYear.ACADEMICYEAR).ToList();
-                               from c in db.View_DisplayNotice.Where(r => r.STARTDATE >= System.DateTime.Today.Date && r.DISPLAY == 1 && r.ACADEMICYEAR == AcademicYear.ACADEMICYEAR)
+                               from c in db.View_DisplayNotice.Where(r => r.STARTDATE >= System.DateTime.Today.Date && r.DISPLAY == 1 && r.ACADEMICYEAR == AcademicYear.ACADEMICYEAR).OrderBy(r => r.STARTDATE)
                                select new { c.TYPE, c.HOLIDAY, c.SDATE, c.EDATE,c.NUMBEROFDAYS };
                         if (data != null)
                         {
@@ -48,7 +48,7 @@ namespace MobileSchoolAPI.BusinessLayer
                     else
                     {
                         var data = //db.View_DisplayNotice.Where(r => r.STARTDATE >= System.DateTime.Today.Date && r.DISPLAY == 1 && r.TYPE == obj.EventType && r.ACADEMICYEAR == AcademicYear.ACADEMICYEAR).ToList();
-                             from c in db.View_DisplayNotice.Where(r => r.STARTDATE >= System.DateTime.Today.Date && r.DISPLAY == 1 && r.TYPE == obj.EventType && r.ACADEMICYEAR == AcademicYear.ACADEMICYEAR)
+                             from c in db.View_DisplayNotice.Where(r => r.STARTDATE >= System.DateTime.Today.Date && r.DISPLAY == 1 && r.TYPE == obj.EventType && r.ACADEMICYEAR == AcademicYear.ACADEMICYEAR).OrderBy(r=>r.STARTDATE)
                              select new { c.TYPE, c.HOLIDAY, c.SDATE, c.EDATE, c.NUMBEROFDAYS };
                         if (data != null)
                         {

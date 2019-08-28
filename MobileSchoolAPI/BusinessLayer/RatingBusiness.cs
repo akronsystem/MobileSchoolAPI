@@ -57,6 +57,7 @@ namespace MobileSchoolAPI.BusinessLayer
                 tblobj.AcademicYear = AcademicYear.ACADEMICYEAR;
                 tblobj.CreatedId = EmployeeCode;
                 tblobj.CreatedOn = System.DateTime.Today.Date;
+                tblobj.Display = 1;
                 db.TBLRATINGDETAILS.Add(tblobj);
                 db.SaveChanges();
                 return new Results() { IsSuccess = true, Message = "Rating Sucessfully" };
@@ -192,6 +193,11 @@ namespace MobileSchoolAPI.BusinessLayer
                 }
             }
             return new RateParameterList() { IsSuccess = true, GetStars = lt.ToArray() };
+        }
+        public class RateItem
+        {
+            public string PrameterName { get; set; }
+
         }
         public class Rate
         {

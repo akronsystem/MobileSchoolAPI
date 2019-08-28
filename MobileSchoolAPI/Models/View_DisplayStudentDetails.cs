@@ -55,5 +55,18 @@ namespace MobileSchoolAPI.Models
 
         [StringLength(300)]
         public string PADDRESS { get; set; }
+
+        [StringLength(25)]
+        public string STANDARDID { get; set; }
+
+        public int? DIVISIONID { get; set; }
+
+        [StringLength(100)]
+        public string STANDARDNAME { get; set; }
+
+        public int? DIRECTSECONDYEARSTATUS { get; set; }
+
+        [StringLength(10)]
+        public string BLOOGGROUP { get; set; }
     }
 }

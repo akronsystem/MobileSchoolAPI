@@ -30,6 +30,13 @@ namespace MobileSchoolAPI.BusinessLayer
                     return new Results { IsSuccess = false, Message = "Invalid User" };
                 }
                 var result = db.View_DisplayPTAMember.ToList();
+                    for(int i=0;i<result.Count();i++)
+                    {
+                        if(result[i].MOBILENO.Length<10 || result[i].MOBILENO=="0000000000")
+                        {
+                            result[i].MOBILENO = "Not Available";
+                        }
+                    }
                 return new StudentDetails { IsSuccess = true, StudentInformation = result };
             }
             }
