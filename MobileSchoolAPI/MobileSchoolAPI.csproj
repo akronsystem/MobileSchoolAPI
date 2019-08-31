@@ -155,6 +155,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BusinessLayer\BirthdayBusiness.cs" />
     <Compile Include="BusinessLayer\ClassTeacherData.cs" />
+    <Compile Include="BusinessLayer\CommunicationBusiness.cs" />
     <Compile Include="BusinessLayer\DashboardManager.cs" />
     <Compile Include="BusinessLayer\DeviceBusinessLayer.cs" />
     <Compile Include="BusinessLayer\FeeBusiness.cs" />
@@ -185,6 +186,7 @@
     <Compile Include="BUSINESSLAYER\GetTeacherInfoBusiness.cs" />
     <Compile Include="BUSINESSLAYER\STUDENTINFO_BUSINESS.cs" />
     <Compile Include="Controllers\ClassTeacherController.cs" />
+    <Compile Include="Controllers\CommunicationController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\DivisionListController.cs" />
     <Compile Include="Controllers\FeesController.cs" />
@@ -292,6 +294,7 @@
     <Compile Include="Models\VIEWSTUDENTDIVISION.cs" />
     <Compile Include="Models\VIEWSTUDENTHOMEWORK.cs" />
     <Compile Include="Models\VIEWSUBJECTNAME.cs" />
+    <Compile Include="Models\View_Communiation.cs" />
     <Compile Include="Models\View_DisplayFee.cs" />
     <Compile Include="Models\View_DisplayMark_CycleTest.cs" />
     <Compile Include="Models\View_DisplayNotice.cs" />
